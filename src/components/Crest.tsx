@@ -20,7 +20,7 @@ export function Wordmark({ small = false }: { small?: boolean }) {
   return (
     <span className="flex items-center gap-2">
       <Crest className={small ? "h-7 w-7" : "h-9 w-9"} />
-      <span className="leading-none">
+      <span className="whitespace-nowrap leading-none">
         <span className={`block font-display font-bold tracking-[0.2em] text-gold-light ${small ? "text-base" : "text-lg"}`}>EVERBOUND</span>
         {!small && <span className="block text-[10px] uppercase tracking-[0.3em] text-parchment/60">Adventurers Guild</span>}
       </span>

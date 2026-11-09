@@ -31,8 +31,8 @@ export default function Inventory() {
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {data.inv.map((r) => (
             <div key={r.item.id} className="panel">
-              <div className="flex items-center justify-between"><span className="eyebrow">{r.item.item_type}</span><StatusPill status={r.item.rarity === "common" ? "draft" : "unassigned"} label={r.item.rarity} /></div>
-              <p className="mt-2 font-display text-lg text-gold-light">{r.item.name} <span className="text-parchment/60">×{r.quantity}</span></p>
+              <div className="flex items-center justify-between"><span className="eyebrow">{r.item.item_type}</span><StatusPill status={r.item.rarity} /></div>
+              <p className={`mt-2 font-display text-lg rarity-${r.item.rarity}`}>{r.item.name} <span className="hud-num text-parchment/60">×{r.quantity}</span></p>
               <p className="muted text-sm">{r.item.description}</p>
             </div>
           ))}

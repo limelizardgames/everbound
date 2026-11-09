@@ -60,7 +60,7 @@ function Supply() {
             <h2 className="mt-2 font-display text-xl text-gold-light">{p.name}</h2>
             <p className="muted mt-1 flex-1 text-sm">{p.description}</p>
             <div className="mt-4 flex items-center justify-between">
-              <span className="font-display text-2xl">{money(p.price_cents)}</span>
+              <span className="hud-num text-2xl text-parchment">{money(p.price_cents)}</span>
               {p.stock !== null && p.stock <= 0 ? <StatusPill status="canceled" label="sold out" /> : p.stock !== null && p.stock < 10 ? <span className="text-xs text-gold">Only {p.stock} left</span> : null}
             </div>
             {viewer ? (
@@ -92,12 +92,12 @@ function Exchange() {
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((i) => (
           <div key={i.id} className="panel-arcane flex flex-col">
-            <div className="flex items-center justify-between"><p className="eyebrow">{i.item_type}</p><StatusPill status={i.rarity === "common" ? "draft" : "unassigned"} label={i.rarity} /></div>
-            <h2 className="mt-2 font-display text-xl text-gold-light">{i.name}</h2>
+            <div className="flex items-center justify-between"><p className="eyebrow">{i.item_type}</p><StatusPill status={i.rarity} /></div>
+            <h2 className={`mt-2 font-display text-xl rarity-${i.rarity}`}>{i.name}</h2>
             <p className="muted mt-1 flex-1 text-sm">{i.description}</p>
             {i.requires_flag && <p className="mt-2 text-xs text-gold">Availability depends on events in the world.</p>}
             <div className="mt-4 flex items-center justify-between">
-              <span className="font-display text-2xl text-arcane-light">{i.gold_price} g</span>
+              <span className="hud-num text-2xl text-gold-light">{i.gold_price} <span className="text-base">G</span></span>
               {charId ? (
                 <form action={act(() => buyWithGold(i.id, charId), { after: refresh })}>
                   <SubmitButton className="btn-arcane btn-sm" pendingText="…">Trade</SubmitButton>

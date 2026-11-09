@@ -16,7 +16,7 @@ export function GmNav() {
           const active = href === "/gm" ? path === "/gm" : path.startsWith(href.replace(/s$/, ""));
           return (
             <li key={href}>
-              <Link href={href} aria-current={active ? "page" : undefined} className={`inline-flex min-h-[44px] items-center border-b-2 px-3 text-sm ${active ? "border-gold text-gold-light" : "border-transparent text-parchment/70 hover:text-parchment"}`}>
+              <Link href={href} aria-current={active ? "page" : undefined} className={`inline-flex min-h-[44px] items-center border-b-2 px-3 font-ui text-[14px] font-bold uppercase tracking-[0.14em] ${active ? "border-gold text-gold-light" : "border-transparent text-parchment/70 hover:text-parchment"}`}>
                 {label}
               </Link>
             </li>

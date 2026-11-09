@@ -6,6 +6,7 @@ import { useAct } from "@/lib/toast";
 import { isSupabaseConfigured } from "@/lib/env";
 import { registerForRaid } from "@/lib/actions";
 import { Crest } from "@/components/Crest";
+import { MagicCircle } from "@/components/MagicCircle";
 import { Loading, useTitle } from "@/components/Guard";
 import { PageHeader, StatusPill } from "@/components/ui";
 import { SubmitButton } from "@/components/SubmitButton";
@@ -40,7 +41,10 @@ export default function RaidsPage() {
           const sealed = r.state === "dormant" || r.state === "foreshadowed";
           return (
             <section key={r.id} className={`${sealed ? "panel" : "panel-arcane arcane-shimmer"} text-center sm:p-10`}>
-              <Crest className={`mx-auto h-24 w-24 ${sealed ? "opacity-70 rune-pulse" : ""}`} glow={!sealed} />
+              <div className="relative mx-auto h-48 w-48">
+                <MagicCircle className="absolute inset-0" tone={sealed ? "#B07CFF" : "#E0533D"} />
+                <Crest className={`absolute inset-[30%] h-[40%] w-[40%] ${sealed ? "opacity-80 rune-pulse" : ""}`} glow={!sealed} />
+              </div>
               <h2 className="heading mt-4 text-3xl">{r.name}</h2>
               <div className="mt-2 flex justify-center gap-2">
                 <StatusPill status={sealed ? "locked" : r.state === "registration" ? "open" : "completed"} label={r.state} />
@@ -82,7 +86,7 @@ export default function RaidsPage() {
                   )}
                 </div>
               )}
-              <ol className="mx-auto mt-8 flex max-w-lg justify-between text-[10px] uppercase tracking-wider text-parchment/40" aria-label="Raid progress">
+              <ol className="mx-auto mt-8 flex max-w-lg flex-wrap justify-center gap-x-4 gap-y-1 font-ui text-[11px] font-bold uppercase tracking-[0.14em] text-parchment/40" aria-label="Raid progress">
                 {STAGES.map((s) => (
                   <li key={s} className={s === r.state ? "font-bold text-arcane-light" : ""}>{s}</li>
                 ))}

@@ -5,6 +5,7 @@ import type { PublicCharacter } from "@/lib/types";
 export function CharacterProfile({ c, cardNumber }: { c: PublicCharacter; cardNumber: string }) {
   return (
     <div className="panel-arcane sm:p-8">
+      <p className="mb-4 font-ui text-[13px] font-bold uppercase tracking-[0.3em] text-arcane-light">【 System · Inspect Adventurer 】</p>
       <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-start">
         <Portrait url={c.portrait_url} name={c.name} className="h-32 w-32" />
         <div className="flex-1 text-center sm:text-left">
@@ -27,7 +28,7 @@ export function CharacterProfile({ c, cardNumber }: { c: PublicCharacter; cardNu
           <h2 className="font-display text-lg text-gold-light">Titles &amp; Achievements</h2>
           <ul className="mt-3 flex flex-wrap gap-2">
             {c.achievements.map((a) => (
-              <li key={a.name} className="rounded-full border border-gold/40 bg-gold/10 px-3 py-1 text-sm text-gold-light" title={a.description}>{a.name}</li>
+              <li key={a.name} className="rounded-sm border border-epic/50 bg-epic/10 px-3 py-1 font-ui text-sm font-bold uppercase tracking-wider text-epic-light" title={a.description}>★ {a.name}</li>
             ))}
           </ul>
         </div>

@@ -26,7 +26,7 @@ export default function NewCharacter() {
   const def = rs.definition;
   return (
     <div className="mx-auto max-w-3xl">
-      <PageHeader eyebrow={`${rs.name} · v${rs.version}`} title="Register your adventurer">
+      <PageHeader eyebrow={`Character Creation · ${rs.name} v${rs.version}`} title="Create Your Adventurer">
         Choose who you will be. You can change your story any time; your Guild Master handles the numbers at the table.
       </PageHeader>
       <form action={act((fd) => createCharacter(fd, def.attributes.map((a) => a.key)), { after: refresh })} className="panel grid gap-6">
@@ -59,7 +59,7 @@ export default function NewCharacter() {
         <AttributeAllocator attributes={def.attributes} min={def.attribute_min} max={def.attribute_max} points={def.starting_attribute_points} />
         <div><label className="label" htmlFor="backstory">Backstory (optional)</label><textarea className="input min-h-[120px]" id="backstory" name="backstory" maxLength={4000} placeholder="Where do you come from? Why did you join the Guild?" /></div>
         <label className="flex items-center gap-3 text-sm"><input type="checkbox" name="is_public" defaultChecked className="h-5 w-5 accent-gold" />Show my adventurer on my public guild card page and leaderboards</label>
-        <SubmitButton pendingText="Inscribing…">Register with the Guild</SubmitButton>
+        <SubmitButton pendingText="Inscribing…">▸ Begin My Adventure</SubmitButton>
       </form>
     </div>
   );

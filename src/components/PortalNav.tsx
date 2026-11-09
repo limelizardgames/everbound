@@ -17,7 +17,7 @@ export function PortalNav({ unread }: { unread: number }) {
           const active = href === "/portal" ? path === "/portal" : path.startsWith(href);
           return (
             <li key={href}>
-              <Link href={href} aria-current={active ? "page" : undefined} className={`inline-flex min-h-[44px] items-center border-b-2 px-3 text-sm ${active ? "border-arcane text-arcane-light" : "border-transparent text-parchment/70 hover:text-parchment"}`}>
+              <Link href={href} aria-current={active ? "page" : undefined} className={`inline-flex min-h-[44px] items-center border-b-2 px-3 font-ui text-[14px] font-bold uppercase tracking-[0.14em] ${active ? "border-arcane text-arcane-light" : "border-transparent text-parchment/70 hover:text-parchment"}`}>
                 {label}
                 {href === "/portal/notifications" && unread > 0 && <span className="ml-1.5 rounded-full bg-arcane px-1.5 text-[10px] font-bold text-midnight">{unread}</span>}
               </Link>

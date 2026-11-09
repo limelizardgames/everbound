@@ -4,7 +4,7 @@ import { sb, must } from "@/lib/supabase";
 import { useViewer } from "@/lib/viewer";
 import { useData } from "@/lib/useData";
 import { Loading, useTitle } from "@/components/Guard";
-import { Meter, Portrait, RankBadge, Stat, StatusPill } from "@/components/ui";
+import { Meter, Portrait, RankBadge, Stat, StatusPill, SystemWindow } from "@/components/ui";
 import { dateTime, relative } from "@/lib/format";
 import { ROLE_LABEL, roleAtLeast } from "@/lib/types";
 
@@ -31,9 +31,9 @@ export default function Dashboard() {
     return (
       <div className="mx-auto max-w-2xl">
         <div className="panel-arcane text-center sm:p-10">
-          <p className="eyebrow">Everbound Guild System</p>
+          <p className="font-ui text-[13px] font-bold uppercase tracking-[0.3em] text-arcane-light">【 System · Registration 】</p>
           <h1 className="heading mt-2 text-3xl">Welcome, {profile.display_name}</h1>
-          <p className="muted mt-3">Your Guild account is ready. Complete your registration in two steps:</p>
+          <p className="muted mt-3">Your Guild account is ready, Traveler. Complete these quests to finish registering:</p>
           <ol className="mx-auto mt-6 grid max-w-md gap-3 text-left">
             <li className="flex items-center justify-between rounded-lg border border-midnight-600 p-3">
               <span>1. Bind your physical guild card</span>
@@ -58,35 +58,41 @@ export default function Dashboard() {
 
   return (
     <div>
-      <div className="panel-arcane arcane-shimmer sm:p-8">
-        <div className="flex items-center justify-between">
-          <p className="eyebrow">Everbound Guild System</p>
-          {profile.role !== "adventurer" && <StatusPill status="unassigned" label={ROLE_LABEL[profile.role]} />}
-        </div>
-        <h1 className="heading mt-1 text-2xl">Adventurer Status</h1>
-        <div className="mt-6 grid gap-6 md:grid-cols-[auto,1fr]">
+      <h1 className="sr-only">Adventurer Status</h1>
+      <SystemWindow title="Status" right={profile.role !== "adventurer" ? <StatusPill status="unassigned" label={ROLE_LABEL[profile.role]} /> : <span className="hud-num text-[13px] uppercase tracking-[0.2em] text-parchment/60">{card ? card.card_number : "Unbound"}</span>}>
+        <div className="grid gap-6 md:grid-cols-[auto,1fr]">
           <div className="flex flex-col items-center gap-3">
-            <Portrait url={c.portrait_url} name={c.name} className="h-36 w-36" />
+            <Portrait url={c.portrait_url} name={c.name} className="h-40 w-40" />
             <RankBadge code={t.rank_code} title={`Rank ${t.rank_code} · ${t.rank_title}`} />
           </div>
           <div>
-            <h2 className="font-display text-3xl font-bold text-parchment sm:text-4xl">{c.name}</h2>
-            <p className="muted mt-1 capitalize">{c.species.replace("_", " ")} · {c.class} · Level {t.level}</p>
-            <p className="mt-1 font-mono text-sm text-gold-light">{card ? `Guild No. ${card.card_number}` : <Link className="link" href="/portal/card/">No guild card bound</Link>}</p>
-            <div className="mt-5 grid gap-4">
-              <Meter label="XP" value={t.xp} max={t.next_level_xp} tone="arcane" />
-              <Meter label="HP" value={c.hp_current} max={c.hp_max} tone={c.hp_current / c.hp_max < 0.35 ? "ember" : "forest"} />
-              {t.next_rank_renown && <Meter label="Renown to next rank" value={t.renown} max={t.next_rank_renown} tone="gold" />}
+            <div className="flex flex-wrap items-end gap-x-4 gap-y-1">
+              <h2 className="font-display text-3xl font-bold text-parchment sm:text-4xl" style={{ textShadow: "0 0 18px rgba(143,227,242,.35)" }}>{c.name}</h2>
+              <span className="hud-num pb-1 text-2xl text-gold-light">Lv. {t.level}</span>
             </div>
-            {c.conditions && <p className="mt-3 text-sm text-ember">Conditions: {c.conditions}</p>}
+            <dl className="mt-3 grid grid-cols-2 gap-x-6 gap-y-1 font-ui text-[15px] sm:grid-cols-3">
+              {([["Race", c.species.replace("_", "-")], ["Class", c.class], ["Title", t.rank_title]] as const).map(([k, v]) => (
+                <div key={k} className="flex justify-between gap-2 border-b border-arcane/15 py-1">
+                  <dt className="font-bold uppercase tracking-[0.16em] text-arcane-light/70">{k}</dt>
+                  <dd className="font-semibold capitalize text-parchment">{v}</dd>
+                </div>
+              ))}
+            </dl>
+            {!card && <p className="mt-2 text-sm"><Link className="link" href="/portal/card/">⚠ No guild card bound — bind yours</Link></p>}
+            <div className="mt-5 grid gap-4">
+              <Meter label="HP" value={c.hp_current} max={c.hp_max} tone="hp" />
+              <Meter label="EXP" value={t.xp} max={t.next_level_xp} tone="xp" />
+              {t.next_rank_renown && <Meter label={`Renown → Rank ${nextRank(t.rank_code)}`} value={t.renown} max={t.next_rank_renown} tone="gold" />}
+            </div>
+            {c.conditions && <p className="mt-3 font-ui text-sm font-bold uppercase tracking-wider text-ember-light">⚠ Status effects: {c.conditions}</p>}
           </div>
         </div>
         <div className="mt-6 grid grid-cols-3 gap-3">
-          <Stat label="HP" value={`${c.hp_current}/${c.hp_max}`} tone="arcane" />
           <Stat label="Gold" value={t.gold.toLocaleString()} />
           <Stat label="Renown" value={t.renown.toLocaleString()} />
+          <Stat label="Total EXP" value={t.xp.toLocaleString()} tone="arcane" />
         </div>
-      </div>
+      </SystemWindow>
 
       <div className="mt-6 grid gap-6 lg:grid-cols-2">
         <section className="panel">
@@ -146,4 +152,9 @@ export default function Dashboard() {
       )}
     </div>
   );
+}
+
+const RANKS = ["F", "E", "D", "C", "B", "A", "S"];
+function nextRank(code: string) {
+  return RANKS[Math.min(RANKS.indexOf(code) + 1, RANKS.length - 1)];
 }

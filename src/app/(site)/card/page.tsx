@@ -10,6 +10,7 @@ import { useAct } from "@/lib/toast";
 import { claimCard } from "@/lib/actions";
 import { CharacterProfile } from "@/components/CharacterProfile";
 import { Crest } from "@/components/Crest";
+import { MagicCircle } from "@/components/MagicCircle";
 import { SubmitButton } from "@/components/SubmitButton";
 import { SetupNotice } from "@/components/SetupNotice";
 import { Loading, useTitle } from "@/components/Guard";
@@ -43,8 +44,12 @@ function CardPage() {
         <Notice title={`Card ${card.card_number} has been retired`}>This guild card is no longer active. It may have been replaced or upgraded. Its holder&apos;s record is safe.</Notice>
       ) : card.status === "unassigned" ? (
         <div className="panel-arcane text-center sm:p-10">
-          <Crest className="rune-pulse mx-auto h-20 w-20" glow />
-          <p className="eyebrow mt-4">Unclaimed guild card</p>
+          <div className="relative mx-auto h-40 w-40">
+            <MagicCircle className="absolute inset-0" tone="#F0D79A" />
+            <Crest className="rune-pulse absolute inset-[28%] h-[44%] w-[44%]" glow />
+          </div>
+          <p className="mt-3 font-ui text-[13px] font-bold uppercase tracking-[0.3em] text-arcane-light">【 System · Item Detected 】</p>
+          <p className="eyebrow mt-2">Unclaimed guild card</p>
           <h1 className="heading mt-2 text-3xl">{card.card_number}</h1>
           {card.personalized_name && <p className="mt-1 text-gold-light">Inscribed for {card.personalized_name}</p>}
           <p className="muted mx-auto mt-3 max-w-md">This card has not yet been bound to an adventurer. Whoever holds it may claim it. Once claimed, it is yours alone.</p>
@@ -57,7 +62,7 @@ function CardPage() {
             <p className="mt-6 rounded-lg border border-gold/40 p-3 text-sm">You already hold card <strong>{viewer.card.card_number}</strong>. If this is an upgrade or replacement, a Guild Master can transfer it for you.</p>
           ) : (
             <form action={act(() => claimCard(token), { after: refresh })} className="mt-6">
-              <SubmitButton pendingText="Binding…">Bind this card to {viewer.profile.display_name}</SubmitButton>
+              <SubmitButton pendingText="Binding…">▸ Bind card to {viewer.profile.display_name}</SubmitButton>
             </form>
           )}
         </div>

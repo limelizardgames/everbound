@@ -8,6 +8,7 @@ import { useViewer } from "@/lib/viewer";
 import { isSupabaseConfigured } from "@/lib/env";
 import { safeNext } from "@/lib/format";
 import { Crest } from "@/components/Crest";
+import { MagicCircle } from "@/components/MagicCircle";
 import { SubmitButton } from "@/components/SubmitButton";
 import { SetupNotice } from "@/components/SetupNotice";
 import { Loading, useTitle } from "@/components/Guard";
@@ -36,8 +37,8 @@ function JoinPage() {
     <div className="container-eb py-12">
       <div className="mx-auto max-w-md">
         <div className="text-center">
-          <Crest className="mx-auto h-16 w-16" glow />
-          <p className="eyebrow mt-4">{mode === "signup" ? "Guild registration" : "Welcome back"}</p>
+          <div className="relative mx-auto h-32 w-32"><MagicCircle className="absolute inset-0" /><Crest className="absolute inset-[28%] h-[44%] w-[44%]" glow /></div>
+          <p className="mt-3 font-ui text-[13px] font-bold uppercase tracking-[0.3em] text-arcane-light">{mode === "signup" ? "【 System · New Traveler Detected 】" : "【 System · Welcome Back 】"}</p>
           <h1 className="heading mt-2 text-3xl">{mode === "signup" ? "Join the Guild" : "Sign in"}</h1>
           {fromCard && <p className="mt-3 rounded-lg border border-arcane/40 bg-arcane/10 p-3 text-sm text-arcane-light">Sign in or create an account to bind the guild card you just scanned.</p>}
         </div>
@@ -59,7 +60,7 @@ function JoinPage() {
               <input type="checkbox" name="age_attested" className="mt-1 h-5 w-5 accent-gold" required />
               <span className="muted">I am 18 or older, or I have permission from a parent or guardian who has read the Guild&apos;s privacy policy.</span>
             </label>
-            <SubmitButton pendingText="Registering…">Create my Guild account</SubmitButton>
+            <SubmitButton pendingText="Registering…">▸ Register with the Guild</SubmitButton>
           </form>
         ) : (
           <>
@@ -67,7 +68,7 @@ function JoinPage() {
               <input type="hidden" name="next" value={next} />
               <div><label className="label" htmlFor="email">Email</label><input className="input" id="email" name="email" type="email" required autoComplete="email" /></div>
               <div><label className="label" htmlFor="password">Password</label><input className="input" id="password" name="password" type="password" required autoComplete="current-password" /></div>
-              <SubmitButton pendingText="Opening the gates…">Sign in</SubmitButton>
+              <SubmitButton pendingText="Opening the gates…">▸ Log in</SubmitButton>
             </form>
             <form action={act(sendMagicLink)} className="mt-4 grid gap-2 rounded-xl border border-midnight-600 p-4">
               <input type="hidden" name="next" value={next} />

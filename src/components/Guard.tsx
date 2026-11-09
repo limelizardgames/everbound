@@ -6,12 +6,17 @@ import { isSupabaseConfigured } from "@/lib/env";
 import { roleAtLeast, type Role } from "@/lib/types";
 import { SetupNotice } from "@/components/SetupNotice";
 import { Crest } from "@/components/Crest";
+import { MagicCircle } from "@/components/MagicCircle";
 
 export function Loading({ label = "Consulting the Guild ledgers…" }: { label?: string }) {
   return (
-    <div className="flex min-h-[40vh] flex-col items-center justify-center gap-3 text-parchment/60" role="status">
-      <Crest className="rune-pulse h-12 w-12" />
-      <p className="text-sm">{label}</p>
+    <div className="flex min-h-[40vh] flex-col items-center justify-center gap-4 text-parchment/60" role="status">
+      <div className="relative h-24 w-24">
+        <MagicCircle className="absolute inset-0" />
+        <Crest className="absolute inset-[30%] h-[40%] w-[40%] rune-pulse" />
+      </div>
+      <p className="font-ui text-[13px] font-bold uppercase tracking-[0.3em] text-arcane-light">Now Loading</p>
+      <p className="-mt-3 text-sm">{label}</p>
     </div>
   );
 }
@@ -32,7 +37,8 @@ export function Guard({ min = "adventurer", children }: { min?: Role; children: 
   if (!roleAtLeast(viewer.profile.role, min)) {
     return (
       <div className="panel mx-auto my-10 max-w-md text-center">
-        <p className="heading text-xl">Guild staff only</p>
+        <p className="font-ui text-[13px] font-bold uppercase tracking-[0.3em] text-ember-light">【 Access Denied 】</p>
+        <p className="heading mt-1 text-xl">Guild staff only</p>
         <p className="muted mt-2 text-sm">This area is reserved for Game Masters.</p>
       </div>
     );

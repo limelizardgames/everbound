@@ -18,8 +18,14 @@ export function ToastProvider({ children }: { children: ReactNode }) {
       {children}
       <div className="no-print pointer-events-none fixed inset-x-0 bottom-4 z-50 flex flex-col items-center gap-2 px-4" role="status" aria-live="polite">
         {toasts.map((t) => (
-          <div key={t.id} className={`pointer-events-auto max-w-lg rounded-lg border px-4 py-3 text-sm shadow-2xl ${t.kind === "error" ? "border-ember/70 bg-[#2a1414] text-parchment" : "border-forest/70 bg-[#10241f] text-parchment"}`}>
-            {t.text}
+          <div
+            key={t.id}
+            className={`animate-popin pointer-events-auto relative w-full max-w-md overflow-hidden rounded-sm border px-4 py-3 text-sm shadow-2xl backdrop-blur ${t.kind === "error" ? "border-ember/70 bg-[#2a1018]/95 shadow-[0_0_24px_-6px_rgba(224,83,61,.6)]" : "border-arcane/70 bg-[#0c2236]/95 shadow-[0_0_24px_-6px_rgba(70,189,214,.6)]"}`}
+          >
+            <p className={`font-ui text-[12px] font-bold uppercase tracking-[0.28em] ${t.kind === "error" ? "text-ember-light" : "text-arcane-light"}`}>
+              【 {t.kind === "error" ? "Warning" : "System"} 】
+            </p>
+            <p className="mt-0.5 text-parchment">{t.text}</p>
           </div>
         ))}
       </div>
