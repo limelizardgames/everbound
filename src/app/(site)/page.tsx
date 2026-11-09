@@ -9,7 +9,7 @@ import { Loading } from "@/components/Guard";
 import { QuestCard } from "@/components/QuestCard";
 import { Crest } from "@/components/Crest";
 import { MagicCircle } from "@/components/MagicCircle";
-import { SkyScene } from "@/components/SkyScene";
+import { HeroAtlas } from "@/components/HeroAtlas";
 import { StatusPill, SystemWindow } from "@/components/ui";
 import { SetupNotice } from "@/components/SetupNotice";
 import { CHRONICLE_LABEL, shortDate } from "@/lib/format";
@@ -150,7 +150,7 @@ function Hero({ stats }: { stats: Stats | null }) {
   const pad = (n: number) => String(n).padStart(3, "0");
   return (
     <section className="relative overflow-hidden border-b border-arcane/20">
-      <SkyScene />
+      <HeroAtlas />
       <div className="container-eb relative grid items-center gap-10 py-16 sm:py-24 lg:grid-cols-[1.1fr,1fr]">
         <div className="text-center lg:text-left">
           <p className="eyebrow">Everbound · The Living Adventurers Guild</p>
