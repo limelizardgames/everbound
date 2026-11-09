@@ -4,6 +4,9 @@
 
 :root {
   color-scheme: dark;
+  /* Fonts are bundled locally (@fontsource), so builds never depend on a font download. */
+  --font-display: "Cinzel";
+  --font-body: "Inter Variable";
 }
 
 body {

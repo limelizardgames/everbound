@@ -11,6 +11,8 @@
     "db:test": "bash supabase/tests/run.sh"
   },
   "dependencies": {
+    "@fontsource-variable/inter": "^5.2.6",
+    "@fontsource/cinzel": "^5.2.6",
     "@supabase/supabase-js": "^2.119.0",
     "next": "^15.5.29",
     "qrcode": "^1.5.4",
