@@ -26,6 +26,16 @@ jobs:
       - id: pages
         uses: actions/configure-pages@v5
       - run: npm ci
+      - name: Work out the public site URL (always https)
+        id: site
+        run: |
+          url="${{ vars.NEXT_PUBLIC_SITE_URL || steps.pages.outputs.base_url }}"
+          echo "url=${url/http:\/\//https://}" >> "$GITHUB_OUTPUT"
+      - name: Check Supabase variables
+        run: |
+          if [ -z "${{ vars.NEXT_PUBLIC_SUPABASE_URL }}" ] || [ -z "${{ vars.NEXT_PUBLIC_SUPABASE_ANON_KEY }}" ]; then
+            echo "::warning title=Supabase not connected::Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY under Settings → Secrets and variables → Actions → Variables (not Secrets), then re-run this workflow."
+          fi
       - name: Build static site
         run: npm run build
         env:
@@ -34,8 +44,8 @@ jobs:
           NEXT_PUBLIC_SUPABASE_URL: ${{ vars.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ vars.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
           NEXT_PUBLIC_TIMEZONE: ${{ vars.NEXT_PUBLIC_TIMEZONE || 'America/New_York' }}
-          # Defaults to the Pages URL (https://limelizardgames.github.io/everbound) or your custom domain.
-          NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL || steps.pages.outputs.base_url }}
+          # Your custom domain (or https://limelizardgames.github.io/everbound). QR codes use this.
+          NEXT_PUBLIC_SITE_URL: ${{ steps.site.outputs.url }}
           NEXT_PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
       - run: touch out/.nojekyll
       - uses: actions/upload-pages-artifact@v3

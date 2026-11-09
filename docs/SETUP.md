@@ -9,7 +9,7 @@ Everbound is a **static website hosted on GitHub Pages**, backed by **Supabase**
 | Stripe *(optional)* | Online payment for sessions and store | 2.9% + 30¢ per charge |
 | Custom domain *(optional, recommended before printing cards)* | QR codes encode the site address | ~$12/yr |
 
-Your site address will be **https://limelizardgames.github.io/everbound/** unless you add a custom domain.
+Your site address is **https://everbound.limelizardgames.com** (custom domain, set up in step 6). Without a custom domain it would be https://limelizardgames.github.io/everbound/.
 
 ---
 
@@ -22,8 +22,8 @@ Your site address will be **https://limelizardgames.github.io/everbound/** unles
    - The setup runs as one transaction: if it fails, nothing is applied and you can simply run it again.
    - If you see **`type "user_role" already exists`** (or any "already exists" error), an earlier attempt left pieces behind. Run [`supabase/reset.sql`](../supabase/reset.sql) the same way (Copy raw file → empty query → Run), then run `setup.sql` again. The reset deletes all Everbound data, which is fine before launch.
 4. **Authentication → URL Configuration**:
-   - *Site URL*: `https://limelizardgames.github.io/everbound/`
-   - *Redirect URLs*: add `https://limelizardgames.github.io/everbound/**` (and `http://localhost:3000/**` for local testing)
+   - *Site URL*: `https://everbound.limelizardgames.com`
+   - *Redirect URLs*: add `https://everbound.limelizardgames.com/**` (and `http://localhost:3000/**` for local testing)
 5. **Authentication → Sign In / Providers → Email**: for quick testing, turn **Confirm email** off so testers can sign up and play immediately. Turn it back on before a public launch.
 6. **Project Settings → API**: copy the **Project URL** and the **anon public** key. The anon key is designed to be public, so it's safe in a website.
 
@@ -31,8 +31,8 @@ Your site address will be **https://limelizardgames.github.io/everbound/** unles
 
 ## 2. GitHub Pages (website hosting)
 
-1. In the repo: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-2. **Settings → Secrets and variables → Actions → Variables tab → New repository variable**. Add:
+1. In the repo: **Settings → Pages → Build and deployment → Source: GitHub Actions**. Not *Deploy from a branch*: that mode publishes the raw source code instead of the site.
+2. **Settings → Secrets and variables → Actions → Variables tab → New repository variable**. These must be *Variables*, not *Secrets*. Add:
 
    | Name | Value |
    | --- | --- |
@@ -89,7 +89,7 @@ Online payments run in two **Supabase Edge Functions** (in `supabase/functions/`
 
 3. In Supabase → **Edge Functions → Secrets**, add:
    - `STRIPE_SECRET_KEY`: from Stripe → Developers → API keys. Start with the **test** key.
-   - `SITE_URL`: `https://limelizardgames.github.io/everbound`
+   - `SITE_URL`: `https://everbound.limelizardgames.com`
    - `STRIPE_WEBHOOK_SECRET`: from the next step
 4. Stripe → **Developers → Webhooks → Add endpoint**: `https://YOUR-PROJECT-REF.supabase.co/functions/v1/stripe-webhook`, with events `checkout.session.completed` and `checkout.session.async_payment_succeeded`. Copy the signing secret into `STRIPE_WEBHOOK_SECRET`.
 5. **Command Center → Settings & Orders**: switch *Session payments* and/or *Store payments* to Stripe.
@@ -99,7 +99,8 @@ Booking places a 30-minute seat hold. Payment is confirmed **only** by the signe
 
 ## 6. Custom domain (optional)
 
-1. Repo **Settings → Pages → Custom domain**: enter e.g. `everbound.limelizardgames.com` and add the DNS record GitHub shows (a `CNAME` to `limelizardgames.github.io`). Tick **Enforce HTTPS**.
+1. At your domain's DNS provider, add a record: type **CNAME**, name **everbound**, value **limelizardgames.github.io**.
+   Then in repo **Settings → Pages → Custom domain**, enter `everbound.limelizardgames.com` and wait for *DNS check successful*. Tick **Enforce HTTPS** once it's available (this can take up to an hour).
 2. Set the repo variable `NEXT_PUBLIC_SITE_URL` to `https://everbound.limelizardgames.com` and re-run the workflow.
 3. Update Supabase **Site URL / Redirect URLs** and the `SITE_URL` function secret to match.
 
