@@ -1,17 +1,21 @@
-import { saveQuestTemplate } from "@/app/actions/gm";
+"use client";
+import { saveQuestTemplate } from "@/lib/actions";
+import { useAct } from "@/lib/toast";
 import { SubmitButton } from "@/components/SubmitButton";
 import { QUEST_TYPE_LABEL } from "@/lib/format";
 import type { QuestTemplate } from "@/lib/types";
 
 type Secrets = { gm_notes: string | null; npcs: string | null; encounter_notes: string | null; consequence_hooks: string | null } | null;
 
-export function QuestForm({ quest, secrets, objectives, locations, ranks }: {
+export function QuestForm({ quest, secrets, objectives, locations, ranks, onSaved }: {
+  onSaved?: () => unknown;
   quest?: QuestTemplate; secrets?: Secrets; objectives?: { description: string; is_secret: boolean }[];
   locations: { id: string; name: string }[]; ranks: string[];
 }) {
+  const act = useAct();
   const f = (k: keyof QuestTemplate) => (quest ? String(quest[k] ?? "") : "");
   return (
-    <form action={saveQuestTemplate} className="grid gap-6">
+    <form action={act(saveQuestTemplate, { after: onSaved })} className="grid gap-6">
       {quest && <input type="hidden" name="id" value={quest.id} />}
       <section className="panel grid gap-4">
         <h2 className="heading text-lg">Player-facing (spoiler-safe)</h2>

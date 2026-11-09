@@ -1,31 +1,34 @@
-import { createClient } from "@/lib/supabase/server";
-import { getViewer } from "@/lib/auth";
+"use client";
+import { sb, must } from "@/lib/supabase";
+import { useViewer } from "@/lib/viewer";
+import { useData } from "@/lib/useData";
+import { useAct } from "@/lib/toast";
 import { isSupabaseConfigured } from "@/lib/env";
-import { registerForRaid } from "@/app/actions/raids";
+import { registerForRaid } from "@/lib/actions";
 import { Crest } from "@/components/Crest";
-import { Flash, PageHeader, StatusPill, type SP } from "@/components/ui";
+import { Loading, useTitle } from "@/components/Guard";
+import { PageHeader, StatusPill } from "@/components/ui";
 import { SubmitButton } from "@/components/SubmitButton";
 import { SetupNotice } from "@/components/SetupNotice";
 import { dateTime } from "@/lib/format";
 import type { PublicRaid } from "@/lib/types";
 
-export const metadata = { title: "Raid Center" };
-export const dynamic = "force-dynamic";
 
 const STAGES = ["dormant", "foreshadowed", "unlocked", "registration", "active", "resolved"];
 
-export default async function RaidsPage({ searchParams }: { searchParams: SP }) {
+export default function RaidsPage() {
+  useTitle("Raid Center");
+  const { viewer } = useViewer();
+  const act = useAct();
+  const { data, reload } = useData(async () => (await must(sb().rpc("get_raids_public"))) as PublicRaid[], [viewer?.userId]);
   if (!isSupabaseConfigured) return <SetupNotice />;
-  const query = await searchParams;
-  const supabase = await createClient();
-  const [{ data }, viewer] = await Promise.all([supabase.rpc("get_raids_public"), getViewer()]);
-  const raids = (data ?? []) as PublicRaid[];
+  if (!data) return <Loading />;
+  const raids = data;
   return (
     <div className="container-eb max-w-4xl py-12">
       <PageHeader eyebrow="Everbound · Raid Center" title="The Sealed Gate">
         The Raid Center sleeps until something in the world awakens it. Raids run in scheduled windows with alternates, so you never need to drop everything.
       </PageHeader>
-      <Flash ok={query.ok} error={query.error} />
       {raids.length === 0 && (
         <div className="panel text-center sm:p-12">
           <Crest className="mx-auto h-24 w-24 opacity-60" />
@@ -68,7 +71,7 @@ export default async function RaidsPage({ searchParams }: { searchParams: SP }) 
                   {r.my_registration && r.my_registration !== "canceled" ? (
                     <StatusPill status={r.my_registration === "registered" ? "confirmed" : "waitlisted"} label={`You are ${r.my_registration}`} />
                   ) : viewer?.character ? (
-                    <form action={registerForRaid} className="mx-auto grid max-w-sm gap-2">
+                    <form action={act((fd) => registerForRaid(fd, viewer!.character!.id), { after: reload })} className="mx-auto grid max-w-sm gap-2">
                       <input type="hidden" name="raid_id" value={r.id} />
                       <label className="label text-left" htmlFor={`w-${r.id}`}>Preferred window (optional)</label>
                       <input id={`w-${r.id}`} name="window" className="input" placeholder="e.g. Friday evening or Saturday afternoon" />

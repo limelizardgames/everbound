@@ -1,17 +1,14 @@
-import { requireRole } from "@/lib/auth";
-import { isSupabaseConfigured } from "@/lib/env";
+"use client";
+import { Guard } from "@/components/Guard";
 import { GmNav } from "@/components/GmNav";
-import { SetupNotice } from "@/components/SetupNotice";
 
-export const dynamic = "force-dynamic";
-
-export default async function GmLayout({ children }: { children: React.ReactNode }) {
-  if (!isSupabaseConfigured) return <SetupNotice />;
-  await requireRole("game_master");
+export default function GmLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="container-eb py-8">
-      <GmNav />
-      {children}
-    </div>
+    <Guard min="game_master">
+      <div className="container-eb py-8">
+        <GmNav />
+        {children}
+      </div>
+    </Guard>
   );
 }

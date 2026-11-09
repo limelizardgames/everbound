@@ -53,10 +53,10 @@ select cron.schedule('purge-tavern', '0 4 * * *', $$select public.purge_old_mess
   pg_restore --no-owner --clean -d "postgresql://postgres:PASSWORD@db.SCRATCH.supabase.co:5432/postgres" everbound-YYYY-MM-DD.dump
   ```
 
-  Sign in on a local build pointed at the scratch project and confirm characters, ledgers and cards look right.
+  Sign in on a local build (`npm run dev`) pointed at the scratch project and confirm characters, ledgers and cards look right.
 
 ## Investigating problems
 
 - **Audit Log** (admins): every reward approval, card change, role change, raid override and correction.
 - **World Editor → World history**: every world-state change, with source session and GM.
-- Supabase → **Logs** for API and auth errors. Vercel → **Logs** for server errors. Add Sentry (`npx @sentry/wizard -i nextjs`) before public launch.
+- Supabase → **Logs** for API and auth errors. GitHub → **Actions** for failed deploys. Consider adding browser error monitoring (e.g. Sentry) before public launch.

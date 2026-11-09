@@ -626,7 +626,7 @@ begin
   update public.reservations set status = 'canceled', updated_at = now() where id = p_reservation;
   if v_res.payment_status = 'paid' then
     insert into public.notifications (profile_id, title, body, link)
-    select id, 'Refund review needed', 'A paid reservation was canceled.', '/gm/sessions/' || v_res.session_id
+    select id, 'Refund review needed', 'A paid reservation was canceled.', '/gm/session?id=' || v_res.session_id
     from public.profiles where role >= 'admin';
   end if;
   perform public.write_audit('reservation.canceled', 'reservation', p_reservation::text, jsonb_build_object('by_staff', v_res.profile_id <> auth.uid()));
@@ -658,7 +658,7 @@ begin
   end if;
   update public.reservations set status = 'waitlisted', payment_status = 'paid', stripe_checkout_id = p_checkout_id, updated_at = now() where id = p_reservation;
   insert into public.notifications (profile_id, title, body, link)
-  select id, 'Paid reservation on waitlist', 'A payment arrived after the table filled. Refund or add a seat.', '/gm/sessions/' || v_sess.id
+  select id, 'Paid reservation on waitlist', 'A payment arrived after the table filled. Refund or add a seat.', '/gm/session?id=' || v_sess.id
   from public.profiles where role >= 'admin';
   return 'waitlisted_paid';
 end $$;

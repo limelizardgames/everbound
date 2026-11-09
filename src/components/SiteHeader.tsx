@@ -1,55 +1,42 @@
+"use client";
 import Link from "next/link";
-import { getViewer, isStaff } from "@/lib/auth";
+import { useViewer, isStaff } from "@/lib/viewer";
 import { Wordmark } from "@/components/Crest";
 import { MobileMenu } from "@/components/MobileMenu";
 
 export const PUBLIC_NAV = [
-  { href: "/how-it-works", label: "How It Works" },
-  { href: "/world", label: "The World" },
-  { href: "/quests", label: "Quest Board" },
-  { href: "/calendar", label: "Calendar" },
-  { href: "/chronicle", label: "Chronicle" },
-  { href: "/raids", label: "Raids" },
-  { href: "/leaderboards", label: "Hall of Legends" },
-  { href: "/store", label: "Store" },
+  { href: "/how-it-works/", label: "How It Works" },
+  { href: "/world/", label: "The World" },
+  { href: "/quests/", label: "Quest Board" },
+  { href: "/calendar/", label: "Calendar" },
+  { href: "/chronicle/", label: "Chronicle" },
+  { href: "/raids/", label: "Raids" },
+  { href: "/leaderboards/", label: "Hall of Legends" },
+  { href: "/store/", label: "Store" },
 ];
 
-export async function SiteHeader() {
-  const viewer = await getViewer();
+export function SiteHeader() {
+  const { viewer, loading } = useViewer();
   const staff = isStaff(viewer);
   return (
     <header className="no-print sticky top-0 z-40 border-b border-gold/20 bg-midnight-950/90 backdrop-blur">
       <div className="container-eb flex h-16 items-center justify-between gap-4">
-        <Link href="/" aria-label="Everbound home">
-          <Wordmark />
-        </Link>
+        <Link href="/" aria-label="Everbound home"><Wordmark /></Link>
         <nav className="hidden items-center gap-5 text-sm lg:flex" aria-label="Main">
           {PUBLIC_NAV.map((n) => (
-            <Link key={n.href} href={n.href} className="text-parchment/80 hover:text-gold-light">
-              {n.label}
-            </Link>
+            <Link key={n.href} href={n.href} className="text-parchment/80 hover:text-gold-light">{n.label}</Link>
           ))}
         </nav>
-        <div className="hidden items-center gap-2 lg:flex">
+        <div className={`hidden items-center gap-2 lg:flex ${loading ? "invisible" : ""}`}>
           {viewer ? (
             <>
-              {staff && (
-                <Link href="/gm" className="btn-arcane btn-sm">
-                  Command Center
-                </Link>
-              )}
-              <Link href="/portal" className="btn-gold btn-sm">
-                My Guild Status{viewer.unread > 0 ? ` · ${viewer.unread}` : ""}
-              </Link>
+              {staff && <Link href="/gm/" className="btn-arcane btn-sm">Command Center</Link>}
+              <Link href="/portal/" className="btn-gold btn-sm">My Guild Status{viewer.unread > 0 ? ` · ${viewer.unread}` : ""}</Link>
             </>
           ) : (
             <>
-              <Link href="/join?mode=signin" className="btn-ghost btn-sm">
-                Sign in
-              </Link>
-              <Link href="/join" className="btn-gold btn-sm">
-                Join the Guild
-              </Link>
+              <Link href="/join/?mode=signin" className="btn-ghost btn-sm">Sign in</Link>
+              <Link href="/join/" className="btn-gold btn-sm">Join the Guild</Link>
             </>
           )}
         </div>

@@ -1,44 +1,49 @@
+"use client";
 import Link from "next/link";
-import { createClient } from "@/lib/supabase/server";
+import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
+import { sb, must } from "@/lib/supabase";
 import { isSupabaseConfigured } from "@/lib/env";
-import { Empty, PageHeader, sp, type SP } from "@/components/ui";
+import { useData } from "@/lib/useData";
+import { Empty, PageHeader } from "@/components/ui";
 import { SetupNotice } from "@/components/SetupNotice";
+import { Loading, useTitle } from "@/components/Guard";
 import { CHRONICLE_LABEL, shortDate } from "@/lib/format";
 import type { ChroniclePost } from "@/lib/types";
 
-export const metadata = { title: "The Everbound Chronicle" };
-export const dynamic = "force-dynamic";
+export default function Page() {
+  return <Suspense fallback={<Loading />}><ChroniclePage /></Suspense>;
+}
 
-export default async function ChroniclePage({ searchParams }: { searchParams: SP }) {
+function ChroniclePage() {
+  useTitle("The Everbound Chronicle");
+  const cat = useSearchParams().get("category");
+  const { data } = useData(async () => {
+    let q = sb().from("chronicle_posts").select("*").eq("published", true).order("published_at", { ascending: false }).limit(50);
+    if (cat) q = q.eq("category", cat);
+    return (await must(q)) as ChroniclePost[];
+  }, [cat]);
   if (!isSupabaseConfigured) return <SetupNotice />;
-  const cat = sp((await searchParams).category);
-  const supabase = await createClient();
-  let q = supabase.from("chronicle_posts").select("*").eq("published", true).order("published_at", { ascending: false }).limit(50);
-  if (cat) q = q.eq("category", cat);
-  const { data } = await q;
-  const posts = (data ?? []) as ChroniclePost[];
-  const [lead, ...rest] = posts;
+  const [lead, ...rest] = data ?? [];
   return (
     <div className="container-eb py-12">
       <PageHeader eyebrow="The Everbound Chronicle" title="News From the Realm">World news, adventure outcomes, discoveries, NPC announcements and guild proclamations.</PageHeader>
       <nav className="mb-6 flex flex-wrap gap-2" aria-label="Categories">
-        <Link href="/chronicle" className={`btn-sm ${!cat ? "btn-gold" : "btn-ghost"}`}>All</Link>
+        <Link href="/chronicle/" className={`btn-sm ${!cat ? "btn-gold" : "btn-ghost"}`}>All</Link>
         {Object.entries(CHRONICLE_LABEL).map(([k, v]) => (
-          <Link key={k} href={`/chronicle?category=${k}`} className={`btn-sm ${cat === k ? "btn-gold" : "btn-ghost"}`}>{v}</Link>
+          <Link key={k} href={`/chronicle/?category=${k}`} className={`btn-sm ${cat === k ? "btn-gold" : "btn-ghost"}`}>{v}</Link>
         ))}
       </nav>
-      {!lead ? (
-        <Empty title="No dispatches yet" />
-      ) : (
+      {!data ? <Loading /> : !lead ? <Empty title="No dispatches yet" /> : (
         <>
-          <Link href={`/chronicle/${lead.slug}`} className="parchment-card block p-6 sm:p-10">
+          <Link href={`/story/?s=${lead.slug}`} className="parchment-card block p-6 sm:p-10">
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-forest">{CHRONICLE_LABEL[lead.category]} · {lead.published_at && shortDate(lead.published_at)}</p>
             <h2 className="mt-2 font-display text-3xl font-bold sm:text-4xl">{lead.title}</h2>
             <p className="mt-3 max-w-3xl text-midnight/80">{lead.excerpt}</p>
           </Link>
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {rest.map((p) => (
-              <Link key={p.id} href={`/chronicle/${p.slug}`} className="panel block hover:border-gold/60">
+              <Link key={p.id} href={`/story/?s=${p.slug}`} className="panel block hover:border-gold/60">
                 <p className="eyebrow">{CHRONICLE_LABEL[p.category]}</p>
                 <h3 className="mt-2 font-display text-lg text-gold-light">{p.title}</h3>
                 <p className="muted mt-1 line-clamp-3 text-sm">{p.excerpt}</p>

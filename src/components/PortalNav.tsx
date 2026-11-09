@@ -9,7 +9,7 @@ const ITEMS = [
 ] as const;
 
 export function PortalNav({ unread }: { unread: number }) {
-  const path = usePathname();
+  const path = usePathname().replace(/\/$/, "") || "/";
   return (
     <nav className="no-print -mx-4 mb-8 overflow-x-auto border-b border-gold/20 px-4" aria-label="Adventurer portal">
       <ul className="flex min-w-max gap-1">

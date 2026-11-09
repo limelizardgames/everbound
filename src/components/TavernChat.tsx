@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { createClient } from "@/lib/supabase/client";
+import { sb } from "@/lib/supabase";
 
 export type ChatMessage = { id: string; profile_id: string; author_name: string; author_role: string; body: string; created_at: string; deleted_at: string | null };
 
@@ -13,7 +13,7 @@ export function TavernChat({ channel, initial, me, staff, muted }: {
   const [notice, setNotice] = useState<string | null>(null);
   const [sending, setSending] = useState(false);
   const bottom = useRef<HTMLDivElement>(null);
-  const supabase = useRef(createClient()).current;
+  const supabase = useRef(sb()).current;
 
   useEffect(() => {
     const sub = supabase

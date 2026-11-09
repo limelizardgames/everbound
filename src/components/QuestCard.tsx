@@ -11,7 +11,7 @@ export function QuestCard({ quest }: { quest: QuestCardData }) {
   const locked = quest.status === "locked";
   const availability = locked ? "locked" : !quest.next ? "no dates" : quest.next.seats_left > 0 ? "open" : "full";
   return (
-    <Link href={`/quests/${quest.slug}`} className={`group block rounded-xl border p-5 transition ${locked ? "border-midnight-600 bg-midnight-900/50" : "border-gold/30 bg-gradient-to-b from-parchment/[0.06] to-transparent hover:border-gold/70 hover:shadow-gold"}`}>
+    <Link href={`/quest/?s=${quest.slug}`} className={`group block rounded-xl border p-5 transition ${locked ? "border-midnight-600 bg-midnight-900/50" : "border-gold/30 bg-gradient-to-b from-parchment/[0.06] to-transparent hover:border-gold/70 hover:shadow-gold"}`}>
       <div className="flex items-center justify-between gap-2">
         <span className="eyebrow">{QUEST_TYPE_LABEL[quest.quest_type]}</span>
         <StatusPill status={availability === "no dates" ? "draft" : availability} label={availability} />

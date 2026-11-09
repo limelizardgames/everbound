@@ -105,17 +105,6 @@ export function Empty({ title, children, action }: { title: string; children?: R
   );
 }
 
-export function Flash({ ok, error }: { ok?: string | string[]; error?: string | string[] }) {
-  const o = Array.isArray(ok) ? ok[0] : ok;
-  const e = Array.isArray(error) ? error[0] : error;
-  if (!o && !e) return null;
-  return (
-    <div role="status" className={`mb-6 rounded-lg border px-4 py-3 text-sm ${e ? "border-ember/60 bg-ember/10 text-parchment" : "border-forest/60 bg-forest/15 text-parchment"}`}>
-      {e ?? o}
-    </div>
-  );
-}
-
 export function Portrait({ url, name, className = "h-24 w-24" }: { url: string | null; name: string; className?: string }) {
   if (url) {
     // eslint-disable-next-line @next/next/no-img-element
@@ -135,9 +124,4 @@ export function CTA({ href, children, variant = "gold" }: { href: string; childr
       {children}
     </Link>
   );
-}
-
-export type SP = Promise<Record<string, string | string[] | undefined>>;
-export function sp(v: string | string[] | undefined) {
-  return Array.isArray(v) ? v[0] : v;
 }

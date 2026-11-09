@@ -1,24 +1,17 @@
-import "server-only";
-import { createClient } from "@/lib/supabase/server";
+"use client";
+import { sb, must } from "@/lib/supabase";
 import type { QuestSession, QuestTemplate } from "@/lib/types";
 import type { QuestCardData } from "@/components/QuestCard";
 
 export type SessionWithSeats = QuestSession & { taken: number; waitlisted: number; seats_left: number; template?: QuestTemplate };
 
 export async function upcomingSessions(opts: { templateId?: string; limit?: number } = {}): Promise<SessionWithSeats[]> {
-  const supabase = await createClient();
-  let q = supabase
-    .from("quest_sessions")
-    .select("*, template:quest_templates(*)")
-    .eq("status", "scheduled")
-    .gt("starts_at", new Date().toISOString())
-    .order("starts_at")
-    .limit(opts.limit ?? 50);
+  let q = sb().from("quest_sessions").select("*, template:quest_templates(*)").eq("status", "scheduled")
+    .gt("starts_at", new Date().toISOString()).order("starts_at").limit(opts.limit ?? 50);
   if (opts.templateId) q = q.eq("template_id", opts.templateId);
-  const { data: sessions } = await q;
-  const list = (sessions ?? []) as (QuestSession & { template: QuestTemplate })[];
+  const list = (await must(q)) as unknown as (QuestSession & { template: QuestTemplate })[];
   if (!list.length) return [];
-  const { data: seats } = await supabase.from("session_seats").select("*").in("session_id", list.map((s) => s.id));
+  const seats = await must(sb().from("session_seats").select("*").in("session_id", list.map((s) => s.id)));
   const map = new Map((seats ?? []).map((s: { session_id: string; taken: number; waitlisted: number }) => [s.session_id, s]));
   return list.map((s) => {
     const seat = map.get(s.id);
@@ -28,9 +21,8 @@ export async function upcomingSessions(opts: { templateId?: string; limit?: numb
 }
 
 export async function questBoard(): Promise<QuestCardData[]> {
-  const supabase = await createClient();
-  const [{ data: templates }, sessions] = await Promise.all([
-    supabase.from("quest_templates").select("*").in("status", ["published", "locked"]).order("created_at"),
+  const [templates, sessions] = await Promise.all([
+    must(sb().from("quest_templates").select("*").in("status", ["published", "locked"]).order("created_at")),
     upcomingSessions(),
   ]);
   return ((templates ?? []) as QuestTemplate[])
@@ -42,10 +34,7 @@ export async function questBoard(): Promise<QuestCardData[]> {
     .sort((a, b) => (a.status === "locked" ? 1 : 0) - (b.status === "locked" ? 1 : 0));
 }
 
-export async function guildStats() {
-  const supabase = await createClient();
-  const { data } = await supabase.rpc("get_guild_stats");
-  return (data ?? { adventurers: 0, open_quests: 0, world_events: 0, sessions_completed: 0 }) as {
-    adventurers: number; open_quests: number; world_events: number; sessions_completed: number;
-  };
+export async function myReservations(userId: string) {
+  const data = await must(sb().from("reservations").select("session_id, status").eq("profile_id", userId).neq("status", "canceled"));
+  return new Map((data ?? []).map((r: { session_id: string; status: string }) => [r.session_id, r.status]));
 }

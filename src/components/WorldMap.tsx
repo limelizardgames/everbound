@@ -25,7 +25,7 @@ export function WorldMap({ locations }: { locations: Location[] }) {
       {locations.map((l) => (
         <Link
           key={l.id}
-          href={`/world/${l.slug}`}
+          href={`/place/?s=${l.slug}`}
           className="group absolute -translate-x-1/2 -translate-y-1/2 focus:outline-none"
           style={{ left: `${l.map_x}%`, top: `${l.map_y}%` }}
           aria-label={`${l.name} — ${l.status}`}

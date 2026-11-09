@@ -25,13 +25,13 @@ export function MobileMenu({ nav, signedIn, staff, unread }: { nav: { href: stri
           <div className="mt-4 grid gap-2">
             {signedIn ? (
               <>
-                <Link href="/portal" className="btn-gold">My Guild Status{unread > 0 ? ` · ${unread} new` : ""}</Link>
-                {staff && <Link href="/gm" className="btn-arcane">Command Center</Link>}
+                <Link href="/portal/" className="btn-gold">My Guild Status{unread > 0 ? ` · ${unread} new` : ""}</Link>
+                {staff && <Link href="/gm/" className="btn-arcane">Command Center</Link>}
               </>
             ) : (
               <>
-                <Link href="/join" className="btn-gold">Join the Guild</Link>
-                <Link href="/join?mode=signin" className="btn-ghost">Sign in</Link>
+                <Link href="/join/" className="btn-gold">Join the Guild</Link>
+                <Link href="/join/?mode=signin" className="btn-ghost">Sign in</Link>
               </>
             )}
           </div>

@@ -1,24 +1,16 @@
-import { createClient } from "@/lib/supabase/server";
-import { isSupabaseConfigured } from "@/lib/env";
 import { CTA, PageHeader, RankBadge } from "@/components/ui";
 
 export const metadata = { title: "How It Works" };
-export const dynamic = "force-dynamic";
 
-const FALLBACK_RANKS = [
+const RANKS = [
   { code: "F", title: "Initiate", renown_required: 0 }, { code: "E", title: "Explorer", renown_required: 100 },
   { code: "D", title: "Pathfinder", renown_required: 300 }, { code: "C", title: "Vanguard", renown_required: 750 },
   { code: "B", title: "Champion", renown_required: 1500 }, { code: "A", title: "Hero", renown_required: 3000 },
   { code: "S", title: "Legend", renown_required: 6000 },
 ];
 
-export default async function HowItWorks() {
-  let ranks = FALLBACK_RANKS;
-  if (isSupabaseConfigured) {
-    const supabase = await createClient();
-    const { data } = await supabase.from("rank_definitions").select("code, title, renown_required").order("sort");
-    if (data?.length) ranks = data;
-  }
+export default function HowItWorks() {
+  const ranks = RANKS;
   return (
     <div className="container-eb py-12">
       <PageHeader eyebrow="The Guild handbook" title="How Everbound works">
@@ -86,7 +78,7 @@ export default async function HowItWorks() {
       </div>
 
       <div className="mt-10 text-center">
-        <CTA href="/join">Join the Guild</CTA>
+        <CTA href="/join/">Join the Guild</CTA>
       </div>
     </div>
   );

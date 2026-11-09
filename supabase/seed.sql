@@ -4,6 +4,7 @@
 
 insert into public.admin_settings (key, value, description) values
   ('payments_mode', '"pay_at_table"', 'pay_at_table = seats confirm instantly and are paid at the store; stripe = Stripe Checkout required'),
+  ('store_payments', '"pay_at_pickup"', 'pay_at_pickup = store orders are reserved and paid at pickup; stripe = Stripe Checkout'),
   ('chat_retention_days', '180', 'Tavern messages older than this are purged by purge_old_messages()'),
   ('season_start', to_jsonb(date_trunc('month', now())), 'Seasonal leaderboards count from this timestamp'),
   ('season_name', '"Season of the Wyrm"', 'Display name of the current season'),

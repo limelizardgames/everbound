@@ -1,15 +1,16 @@
+"use client";
 import Link from "next/link";
 import { isSupabaseConfigured } from "@/lib/env";
-import { createClient } from "@/lib/supabase/server";
-import { guildStats, questBoard } from "@/lib/queries";
+import { sb, must } from "@/lib/supabase";
+import { questBoard } from "@/lib/queries";
+import { useData } from "@/lib/useData";
+import { Loading } from "@/components/Guard";
 import { QuestCard } from "@/components/QuestCard";
 import { Crest } from "@/components/Crest";
 import { CTA, StatusPill } from "@/components/ui";
 import { SetupNotice } from "@/components/SetupNotice";
 import { CHRONICLE_LABEL, shortDate } from "@/lib/format";
 import type { ChroniclePost, PublicRaid } from "@/lib/types";
-
-export const dynamic = "force-dynamic";
 
 const STEPS = [
   ["Obtain guild card", "Pick up your physical guild card at the store. Its QR code binds it to you."],
@@ -20,15 +21,19 @@ const STEPS = [
   ["Change the world", "Every party's choices shape the shared world for everyone."],
 ];
 
-export default async function Home() {
+export default function Home() {
+  const { data } = useData(async () => {
+    const [stats, quests, posts, raids] = await Promise.all([
+      must(sb().rpc("get_guild_stats")),
+      questBoard(),
+      must(sb().from("chronicle_posts").select("*").eq("published", true).order("is_featured", { ascending: false }).order("published_at", { ascending: false }).limit(4)),
+      must(sb().rpc("get_raids_public")),
+    ]);
+    return { stats: stats as { adventurers: number; open_quests: number; world_events: number }, quests, posts, raids };
+  }, []);
   if (!isSupabaseConfigured) return <Hero stats={null} />;
-  const supabase = await createClient();
-  const [stats, quests, { data: posts }, { data: raids }] = await Promise.all([
-    guildStats(),
-    questBoard(),
-    supabase.from("chronicle_posts").select("*").eq("published", true).order("is_featured", { ascending: false }).order("published_at", { ascending: false }).limit(4),
-    supabase.rpc("get_raids_public"),
-  ]);
+  if (!data) return (<><Hero stats={{ adventurers: 0, open_quests: 0, world_events: 0 }} /><Loading /></>);
+  const { stats, quests, posts, raids } = data;
   const [featured, ...recent] = (posts ?? []) as ChroniclePost[];
   const raid = ((raids ?? []) as PublicRaid[])[0];
 
@@ -38,7 +43,7 @@ export default async function Home() {
 
       {featured && (
         <section className="container-eb -mt-10 relative z-10">
-          <Link href={`/chronicle/${featured.slug}`} className="panel-arcane arcane-shimmer block sm:p-8">
+          <Link href={`/story/?s=${featured.slug}`} className="panel-arcane arcane-shimmer block sm:p-8">
             <p className="eyebrow">The world is changing · {CHRONICLE_LABEL[featured.category]}</p>
             <h2 className="heading mt-2 text-2xl sm:text-3xl">{featured.title}</h2>
             <p className="muted mt-2 max-w-3xl">{featured.excerpt}</p>
@@ -100,7 +105,7 @@ export default async function Home() {
           </div>
           <div className="grid gap-3">
             {recent.map((p) => (
-              <Link key={p.id} href={`/chronicle/${p.slug}`} className="panel block hover:border-gold/50">
+              <Link key={p.id} href={`/story/?s=${p.slug}`} className="panel block hover:border-gold/50">
                 <div className="flex items-center justify-between text-xs">
                   <span className="eyebrow">{CHRONICLE_LABEL[p.category]}</span>
                   {p.published_at && <span className="muted">{shortDate(p.published_at)}</span>}

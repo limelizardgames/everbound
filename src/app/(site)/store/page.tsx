@@ -1,48 +1,60 @@
+"use client";
 import Link from "next/link";
-import { createClient } from "@/lib/supabase/server";
-import { getViewer } from "@/lib/auth";
-import { isSupabaseConfigured, isStripeConfigured } from "@/lib/env";
-import { buyWithGold, orderProduct } from "@/app/actions/store";
-import { Flash, PageHeader, StatusPill, sp, type SP } from "@/components/ui";
+import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
+import { sb, must } from "@/lib/supabase";
+import { isSupabaseConfigured } from "@/lib/env";
+import { useData } from "@/lib/useData";
+import { useViewer } from "@/lib/viewer";
+import { useAct } from "@/lib/toast";
+import { buyWithGold, orderProduct } from "@/lib/actions";
+import { PageHeader, StatusPill } from "@/components/ui";
 import { SubmitButton } from "@/components/SubmitButton";
 import { SetupNotice } from "@/components/SetupNotice";
+import { Loading, useTitle } from "@/components/Guard";
 import { money } from "@/lib/format";
 
-export const metadata = { title: "Guild Store" };
-export const dynamic = "force-dynamic";
+export default function Page() {
+  return <Suspense fallback={<Loading />}><StorePage /></Suspense>;
+}
 
-export default async function StorePage({ searchParams }: { searchParams: SP }) {
+function StorePage() {
+  useTitle("Guild Store");
+  const tab = useSearchParams().get("tab") === "exchange" ? "exchange" : "supply";
   if (!isSupabaseConfigured) return <SetupNotice />;
-  const q = await searchParams;
-  const tab = sp(q.tab) === "exchange" ? "exchange" : "supply";
-  const supabase = await createClient();
-  const viewer = await getViewer();
   return (
     <div className="container-eb py-12">
       <PageHeader eyebrow="Guild Store" title={tab === "supply" ? "Guild Supply Shop" : "Arcane Exchange"}>
-        {tab === "supply"
-          ? "Physical goods, collectibles and card upgrades. Pick up at the partner store."
-          : "Spend in-world gold on equipment and cosmetics. Gold is earned at the table — it can never be bought."}
+        {tab === "supply" ? "Physical goods, collectibles and card upgrades. Pick up at the partner store." : "Spend in-world gold on equipment and cosmetics. Gold is earned at the table — it can never be bought."}
       </PageHeader>
-      <Flash ok={q.ok} error={q.error} />
       <div className="mb-8 grid max-w-md grid-cols-2 rounded-lg border border-gold/30 p-1 text-sm">
-        <Link href="/store" className={`rounded-md py-2 text-center ${tab === "supply" ? "bg-gold font-semibold text-midnight" : "text-parchment/70"}`}>Supply Shop · $</Link>
-        <Link href="/store?tab=exchange" className={`rounded-md py-2 text-center ${tab === "exchange" ? "bg-arcane font-semibold text-midnight" : "text-parchment/70"}`}>Arcane Exchange · Gold</Link>
+        <Link href="/store/" className={`rounded-md py-2 text-center ${tab === "supply" ? "bg-gold font-semibold text-midnight" : "text-parchment/70"}`}>Supply Shop · $</Link>
+        <Link href="/store/?tab=exchange" className={`rounded-md py-2 text-center ${tab === "exchange" ? "bg-arcane font-semibold text-midnight" : "text-parchment/70"}`}>Arcane Exchange · Gold</Link>
       </div>
-      {tab === "supply" ? <Supply signedIn={!!viewer} supabase={supabase} /> : <Exchange gold={viewer?.totals?.gold ?? null} hasChar={!!viewer?.character} supabase={supabase} />}
+      {tab === "supply" ? <Supply /> : <Exchange />}
     </div>
   );
 }
 
-type DB = Awaited<ReturnType<typeof createClient>>;
+type Product = { id: string; name: string; description: string; category: string; price_cents: number; stock: number | null };
+type Item = { id: string; name: string; description: string; item_type: string; rarity: string; gold_price: number; requires_flag: string | null };
 
-async function Supply({ signedIn, supabase }: { signedIn: boolean; supabase: DB }) {
-  const { data } = await supabase.from("products").select("*").eq("is_active", true).order("price_cents");
+function Supply() {
+  const { viewer } = useViewer();
+  const act = useAct();
+  const { data } = useData(async () => {
+    const [products, mode] = await Promise.all([
+      must(sb().from("products").select("*").eq("is_active", true).order("price_cents")),
+      must(sb().from("admin_settings").select("value").eq("key", "store_payments").maybeSingle()),
+    ]);
+    return { products: products as Product[], online: mode?.value === "stripe" };
+  }, []);
+  if (!data) return <Loading />;
   return (
     <>
-      {!isStripeConfigured && <p className="muted mb-4 text-sm">Online payment is not enabled yet — orders are reserved and paid at pickup.</p>}
+      {!data.online && <p className="muted mb-4 text-sm">Orders are reserved online and paid when you pick them up at the store.</p>}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {(data ?? []).map((p) => (
+        {data.products.map((p) => (
           <div key={p.id} className="panel flex flex-col">
             <p className="eyebrow">{p.category}</p>
             <h2 className="mt-2 font-display text-xl text-gold-light">{p.name}</h2>
@@ -51,15 +63,15 @@ async function Supply({ signedIn, supabase }: { signedIn: boolean; supabase: DB 
               <span className="font-display text-2xl">{money(p.price_cents)}</span>
               {p.stock !== null && p.stock <= 0 ? <StatusPill status="canceled" label="sold out" /> : p.stock !== null && p.stock < 10 ? <span className="text-xs text-gold">Only {p.stock} left</span> : null}
             </div>
-            {signedIn ? (
-              <form action={orderProduct} className="mt-3 flex gap-2">
+            {viewer ? (
+              <form action={act(orderProduct)} className="mt-3 flex gap-2">
                 <input type="hidden" name="product_id" value={p.id} />
                 <label className="sr-only" htmlFor={`q-${p.id}`}>Quantity</label>
                 <input id={`q-${p.id}`} name="quantity" type="number" min={1} max={10} defaultValue={1} className="input w-20" />
-                <SubmitButton className="btn-gold flex-1" pendingText="…">{isStripeConfigured ? "Buy" : "Reserve"}</SubmitButton>
+                <SubmitButton className="btn-gold flex-1" pendingText="…">{data.online ? "Buy" : "Reserve"}</SubmitButton>
               </form>
             ) : (
-              <Link href="/join?next=/store" className="btn-ghost mt-3">Sign in to order</Link>
+              <Link href="/join/?next=/store/" className="btn-ghost mt-3">Sign in to order</Link>
             )}
           </div>
         ))}
@@ -68,13 +80,17 @@ async function Supply({ signedIn, supabase }: { signedIn: boolean; supabase: DB 
   );
 }
 
-async function Exchange({ gold, hasChar, supabase }: { gold: number | null; hasChar: boolean; supabase: DB }) {
-  const { data: items } = await supabase.from("items").select("*").eq("is_active", true).not("gold_price", "is", null).order("gold_price");
+function Exchange() {
+  const { viewer, refresh } = useViewer();
+  const act = useAct();
+  const { data: items } = useData(async () => (await must(sb().from("items").select("*").eq("is_active", true).not("gold_price", "is", null).order("gold_price"))) as Item[], []);
+  if (!items) return <Loading />;
+  const charId = viewer?.character?.id;
   return (
     <>
-      {gold !== null && <p className="mb-4 text-sm">Your purse: <span className="font-display text-xl text-gold-light">{gold}</span> gold</p>}
+      {viewer?.totals && <p className="mb-4 text-sm">Your purse: <span className="font-display text-xl text-gold-light">{viewer.totals.gold}</span> gold</p>}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {(items ?? []).map((i) => (
+        {items.map((i) => (
           <div key={i.id} className="panel-arcane flex flex-col">
             <div className="flex items-center justify-between"><p className="eyebrow">{i.item_type}</p><StatusPill status={i.rarity === "common" ? "draft" : "unassigned"} label={i.rarity} /></div>
             <h2 className="mt-2 font-display text-xl text-gold-light">{i.name}</h2>
@@ -82,9 +98,8 @@ async function Exchange({ gold, hasChar, supabase }: { gold: number | null; hasC
             {i.requires_flag && <p className="mt-2 text-xs text-gold">Availability depends on events in the world.</p>}
             <div className="mt-4 flex items-center justify-between">
               <span className="font-display text-2xl text-arcane-light">{i.gold_price} g</span>
-              {hasChar ? (
-                <form action={buyWithGold}>
-                  <input type="hidden" name="item_id" value={i.id} />
+              {charId ? (
+                <form action={act(() => buyWithGold(i.id, charId), { after: refresh })}>
                   <SubmitButton className="btn-arcane btn-sm" pendingText="…">Trade</SubmitButton>
                 </form>
               ) : (

@@ -1,17 +1,16 @@
-import { requireViewer } from "@/lib/auth";
-import { isSupabaseConfigured } from "@/lib/env";
+"use client";
+import { Guard } from "@/components/Guard";
 import { PortalNav } from "@/components/PortalNav";
-import { SetupNotice } from "@/components/SetupNotice";
+import { useViewer } from "@/lib/viewer";
 
-export const dynamic = "force-dynamic";
-
-export default async function PortalLayout({ children }: { children: React.ReactNode }) {
-  if (!isSupabaseConfigured) return <SetupNotice />;
-  const viewer = await requireViewer();
+export default function PortalLayout({ children }: { children: React.ReactNode }) {
+  const { viewer } = useViewer();
   return (
-    <div className="container-eb py-8">
-      <PortalNav unread={viewer.unread} />
-      {children}
-    </div>
+    <Guard>
+      <div className="container-eb py-8">
+        <PortalNav unread={viewer?.unread ?? 0} />
+        {children}
+      </div>
+    </Guard>
   );
 }
