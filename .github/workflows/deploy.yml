@@ -31,18 +31,14 @@ jobs:
         run: |
           url="${{ vars.NEXT_PUBLIC_SITE_URL || steps.pages.outputs.base_url }}"
           echo "url=${url/http:\/\//https://}" >> "$GITHUB_OUTPUT"
-      - name: Check Supabase variables
-        run: |
-          if [ -z "${{ vars.NEXT_PUBLIC_SUPABASE_URL }}" ] || [ -z "${{ vars.NEXT_PUBLIC_SUPABASE_ANON_KEY }}" ]; then
-            echo "::warning title=Supabase not connected::Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY under Settings → Secrets and variables → Actions → Variables (not Secrets), then re-run this workflow."
-          fi
       - name: Build static site
         run: npm run build
         env:
-          # Set these under Settings → Secrets and variables → Actions → Variables.
-          # The anon key is public by design; never put the service_role key here.
-          NEXT_PUBLIC_SUPABASE_URL: ${{ vars.NEXT_PUBLIC_SUPABASE_URL }}
-          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ vars.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          # Everbound's Supabase project. The anon key is public by design (it ships in
+          # every page); row-level security protects the data. Override with repository
+          # Variables if you move projects. NEVER put the service_role key here.
+          NEXT_PUBLIC_SUPABASE_URL: ${{ vars.NEXT_PUBLIC_SUPABASE_URL || 'https://jaugxlhggxnsqmgdcvta.supabase.co' }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ vars.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImphdWd4bGhnZ3huc3FtZ2RjdnRhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQyNDE1NDAsImV4cCI6MjEwOTgxNzU0MH0.HhBHUiTyB_YR50CG53-_aokEaNbd2vB0k1VP088e2ME' }}
           NEXT_PUBLIC_TIMEZONE: ${{ vars.NEXT_PUBLIC_TIMEZONE || 'America/New_York' }}
           # Your custom domain (or https://limelizardgames.github.io/everbound). QR codes use this.
           NEXT_PUBLIC_SITE_URL: ${{ steps.site.outputs.url }}
