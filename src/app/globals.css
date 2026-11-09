@@ -3,19 +3,58 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  color-scheme: dark;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply bg-midnight-950 text-parchment font-body antialiased;
+  background-image:
+    radial-gradient(1200px 600px at 50% -200px, rgba(70, 189, 214, 0.08), transparent 70%),
+    radial-gradient(800px 400px at 100% 0%, rgba(212, 170, 90, 0.06), transparent 70%);
+  background-attachment: fixed;
+}
+
+@layer components {
+  .container-eb { @apply mx-auto w-full max-w-6xl px-4 sm:px-6; }
+  .heading { @apply font-display tracking-wide text-gold-light; }
+  .eyebrow { @apply text-xs font-semibold uppercase tracking-[0.25em] text-arcane; }
+  .panel { @apply rounded-xl border border-gold/25 bg-midnight-900/80 p-5 shadow-[0_10px_40px_-20px_rgba(0,0,0,.8)] backdrop-blur; }
+  .panel-arcane { @apply rounded-xl border border-arcane/30 bg-midnight-900/85 p-5 shadow-glow; }
+  .parchment-card { @apply rounded-xl bg-parchment text-midnight shadow-gold; }
+  .btn { @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-arcane disabled:cursor-not-allowed disabled:opacity-50; }
+  .btn-gold { @apply btn bg-gold text-midnight hover:bg-gold-light; }
+  .btn-ghost { @apply btn border border-gold/40 text-gold-light hover:bg-gold/10; }
+  .btn-arcane { @apply btn bg-arcane/15 text-arcane-light border border-arcane/40 hover:bg-arcane/25; }
+  .btn-danger { @apply btn border border-ember/60 text-ember hover:bg-ember/10; }
+  .btn-sm { @apply min-h-[36px] px-3 py-1.5 text-xs; }
+  .input { @apply w-full min-h-[44px] rounded-lg border border-midnight-600 bg-midnight-950/70 px-3 py-2 text-parchment placeholder:text-parchment/40 focus:border-arcane focus:outline-none focus:ring-1 focus:ring-arcane; }
+  .label { @apply mb-1 block text-xs font-semibold uppercase tracking-wider text-parchment/70; }
+  .muted { @apply text-parchment/65; }
+  .link { @apply text-arcane-light underline-offset-4 hover:underline; }
+  .table-eb { @apply w-full text-left text-sm; }
+  .table-eb th { @apply border-b border-gold/20 px-3 py-2 text-xs font-semibold uppercase tracking-wider text-parchment/60; }
+  .table-eb td { @apply border-b border-midnight-700 px-3 py-2 align-top; }
+  .divider-ornament { @apply my-8 flex items-center gap-4 text-gold/60; }
+  .divider-ornament::before, .divider-ornament::after { content: ""; @apply h-px flex-1 bg-gradient-to-r from-transparent via-gold/40 to-transparent; }
+}
+
+.arcane-shimmer { position: relative; overflow: hidden; }
+.arcane-shimmer::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgba(126, 211, 228, 0.12) 50%, transparent 70%);
+  transform: translateX(-100%); animation: shimmer 6s ease-in-out infinite;
+}
+@keyframes shimmer { 0%, 60% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+.rune-pulse { animation: rune 3.2s ease-in-out infinite; }
+@keyframes rune { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+
+/* Motion reduction: OS preference or the in-site "Calm mode" toggle. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+html.calm *, html.calm *::before, html.calm *::after { animation: none !important; transition: none !important; }
+
+@media print {
+  body { background: white !important; color: black; }
+  .no-print { display: none !important; }
 }
