@@ -6,7 +6,7 @@ A Lime Lizard Games concept.
 
 **To get a live demo running, see [docs/SETUP.md](docs/SETUP.md)** (Supabase + GitHub Pages, about 30 minutes; Stripe optional).
 
-Live site (once deployed): https://limelizardgames.github.io/everbound/
+Live site: https://everbound.limelizardgames.com
 
 ## What's in the pilot ("Founding Guild")
 
