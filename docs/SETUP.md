@@ -19,7 +19,8 @@ Your site address will be **https://limelizardgames.github.io/everbound/** unles
 2. Open the setup file on GitHub: <https://github.com/limelizardgames/everbound/blob/main/supabase/setup.sql>. Click the **Copy raw file** button (the two-squares icon at the top right of the file). Don't select the text by hand.
 3. In Supabase, open **SQL Editor → New query**. Make sure the editor is completely empty, paste, make sure no text is highlighted, and click **Run**. You should see *Success. No rows returned*.
    - This creates every table, security rule and game function, and seeds the starting world: 10 locations, 5 quests, 6 upcoming sessions, the Crimson Wyrm raid at 3/5 sigils, the store, and **12 unclaimed founding guild cards**.
-   - If you get an error, run `select count(*) from pg_tables where schemaname = 'public';`. If it says **0**, nothing was applied and you can simply try again.
+   - The setup runs as one transaction: if it fails, nothing is applied and you can simply run it again.
+   - If you see **`type "user_role" already exists`** (or any "already exists" error), an earlier attempt left pieces behind. Run [`supabase/reset.sql`](../supabase/reset.sql) the same way (Copy raw file → empty query → Run), then run `setup.sql` again. The reset deletes all Everbound data, which is fine before launch.
 4. **Authentication → URL Configuration**:
    - *Site URL*: `https://limelizardgames.github.io/everbound/`
    - *Redirect URLs*: add `https://limelizardgames.github.io/everbound/**` (and `http://localhost:3000/**` for local testing)

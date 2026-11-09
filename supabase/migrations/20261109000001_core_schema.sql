@@ -109,6 +109,13 @@ create trigger on_auth_user_created
   after insert on auth.users
   for each row execute function public.handle_new_user();
 
+-- Accounts created before this schema existed (e.g. after a reset) get profiles too.
+insert into public.profiles (id, display_name)
+select x.id, left(case when char_length(x.n) < 2 then x.n || '__' else x.n end, 40)
+from (select u.id, coalesce(nullif(trim(u.raw_user_meta_data ->> 'display_name'), ''), nullif(split_part(u.email, '@', 1), ''), 'Adventurer') as n
+      from auth.users u) x
+on conflict (id) do nothing;
+
 -- Players may edit their display name and privacy flags; only admins change roles / bans.
 create or replace function public.protect_profile_columns()
 returns trigger

@@ -6,12 +6,16 @@ begin
     values ('portraits', 'portraits', true, 2097152, array['image/png', 'image/jpeg', 'image/webp'])
     on conflict (id) do nothing;
 
+    drop policy if exists "portraits are public" on storage.objects;
     execute $p$create policy "portraits are public" on storage.objects for select using (bucket_id = 'portraits')$p$;
     -- Files are stored under <user id>/..., and only that user may write there.
+    drop policy if exists "players upload own portraits" on storage.objects;
     execute $p$create policy "players upload own portraits" on storage.objects for insert to authenticated
       with check (bucket_id = 'portraits' and (storage.foldername(name))[1] = auth.uid()::text)$p$;
+    drop policy if exists "players replace own portraits" on storage.objects;
     execute $p$create policy "players replace own portraits" on storage.objects for update to authenticated
       using (bucket_id = 'portraits' and (storage.foldername(name))[1] = auth.uid()::text)$p$;
+    drop policy if exists "players delete own portraits" on storage.objects;
     execute $p$create policy "players delete own portraits" on storage.objects for delete to authenticated
       using (bucket_id = 'portraits' and (storage.foldername(name))[1] = auth.uid()::text)$p$;
   end if;
