@@ -148,6 +148,9 @@ insert into public.items (slug, name, description, item_type, rarity, gold_price
   ('caravan-ledger', 'Torn Caravan Ledger', 'Water-stained pages with a strange symbol.', 'key', 'uncommon', null, null)
 on conflict (slug) do nothing;
 
+-- Story items, keys and trophies are bound to whoever earned them (not auctionable).
+update public.items set is_tradeable = false where item_type in ('artifact', 'key', 'trophy');
+
 insert into public.achievements (slug, name, description, icon, renown_bonus, is_secret) values
   ('founding-adventurer', 'Founding Adventurer', 'Joined the Guild during its founding season.', 'crown', 25, false),
   ('first-blood', 'First Blood', 'Survived your first battle.', 'sword', 10, false),

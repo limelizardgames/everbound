@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { sb, must } from "@/lib/supabase";
 import { useViewer } from "@/lib/viewer";
 import { useData } from "@/lib/useData";
@@ -27,6 +28,7 @@ export default function Inventory() {
       <PageHeader eyebrow={`${viewer.character.name}'s satchel`} title="Inventory">
         Purse: <span className="font-display text-gold-light">{viewer.totals?.gold ?? 0} gold</span>. Every change is recorded in an immutable ledger below.
       </PageHeader>
+      <p className="mb-4"><Link href="/auction/" className="btn-arcane btn-sm">Auction Hall ▸</Link></p>
       {data.inv.length === 0 ? <Empty title="Your satchel is empty">Loot from quests and trades at the Arcane Exchange will appear here.</Empty> : (
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {data.inv.map((r) => (

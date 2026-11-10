@@ -12,7 +12,7 @@ Live site: https://everbound.limelizardgames.com
 
 | Area | Pages |
 | --- | --- |
-| Public site | Home, How It Works, Explore the World (map), Quest Board + detail, Events Calendar, Everbound Chronicle, Raid Center, Hall of Legends, Guild Store (Supply Shop + Arcane Exchange), Join the Guild |
+| Public site | Home, How It Works, Explore the World (map), Quest Board + detail, Events Calendar, Everbound Chronicle, Raid Center, Hall of Legends, Guild Store (Supply Shop + Arcane Exchange), Auction Hall, Join the Guild |
 | QR guild cards | `/card/?t=<token>`: single-use claim for unclaimed cards, verified public profile for claimed ones. Never logs anyone in. |
 | Adventurer portal | Status dashboard, character creation and sheet (portrait upload), guild card, inventory and ledger, journal and quest archive, bookings (pay/cancel/waitlist), Guild Tavern realtime chat, achievements, notices, settings, orders |
 | GM Command Center | Dashboard, Session Manager (roster, live HP, notes, rewards → approval), Quest Creator (player-facing + GM-only sections), Guild Cards (forge, print sheet, assign, replace), World Editor (locations, flags, Chronicle, conflict review), Raid Controller, Players & Moderation, Audit Log, Settings & Orders |

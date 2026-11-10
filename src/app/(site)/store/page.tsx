@@ -27,9 +27,10 @@ function StorePage() {
       <PageHeader eyebrow="Guild Store" title={tab === "supply" ? "Guild Supply Shop" : "Arcane Exchange"}>
         {tab === "supply" ? "Physical goods, collectibles and card upgrades. Pick up at the partner store." : "Spend in-world gold on equipment and cosmetics. Gold is earned at the table — it can never be bought."}
       </PageHeader>
-      <div className="mb-8 grid max-w-md grid-cols-2 rounded-lg border border-gold/30 p-1 text-sm">
+      <div className="mb-8 grid max-w-2xl grid-cols-3 rounded-lg border border-gold/30 p-1 text-sm">
         <Link href="/store/" className={`rounded-md py-2 text-center ${tab === "supply" ? "bg-gold font-semibold text-midnight" : "text-parchment/70"}`}>Supply Shop · $</Link>
         <Link href="/store/?tab=exchange" className={`rounded-md py-2 text-center ${tab === "exchange" ? "bg-arcane font-semibold text-midnight" : "text-parchment/70"}`}>Arcane Exchange · Gold</Link>
+        <Link href="/auction/" className="rounded-md py-2 text-center text-parchment/70 hover:text-gold-light">Auction Hall ▸</Link>
       </div>
       {tab === "supply" ? <Supply /> : <Exchange />}
     </div>

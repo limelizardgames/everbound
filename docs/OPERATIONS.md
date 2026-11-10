@@ -21,6 +21,14 @@ Ledgers are append-only. To correct gold, renown or XP, use **Players & Moderati
 
 Raids watch a world flag. The seeded *Crimson Wyrm* unlocks automatically when `ancient_sigils` reaches 5: the Raid Center changes, a Chronicle proclamation is published, and every player is notified. Then use **Raid Controller** to open registration, run the raid and resolve it. **Emergency pause** stops automatic transitions, and admins can override the state (logged).
 
+## The Auction Hall
+
+Players at Rank E and above can auction tradeable items to each other for gold. Items go into escrow when listed; a bid's gold is held and returned automatically when outbid. Finished auctions settle the next time anyone opens the Auction Hall.
+
+- **Remove a listing:** any Game Master sees a *GM: remove listing* button on each auction. The bid is refunded, the item returns to the seller, and it is written to the audit log.
+- **Settings** (Supabase → Table Editor → `admin_settings`): `auction_min_rank` (default `"E"`), `auction_listing_fee` (2 gold), `auction_fee_percent` (5), `auction_max_price` (5000).
+- **Bound items:** story artifacts, keys and trophies cannot be sold. To change one item, set `is_tradeable` (and optionally `max_auction_price`) on its row in `items`.
+
 ## Moderation
 
 - Tavern messages are filtered for email addresses and phone numbers and rate-limited (5 per 20 seconds).

@@ -440,3 +440,23 @@ export async function updateOrderFulfillment(fd: FormData): Promise<ActionResult
   await must(sb().from("orders").update({ fulfillment_status: str(fd, "fulfillment_status"), updated_at: new Date().toISOString() }).eq("id", str(fd, "order_id")));
   return "Order updated.";
 }
+
+// ------------------------------------------------------------------ Auction Hall
+export async function createAuction(fd: FormData, characterId: string): Promise<ActionResult> {
+  const buyNow = num(fd, "buy_now");
+  await rpc("create_auction", {
+    p_character: characterId, p_item: str(fd, "item_id"), p_quantity: num(fd, "quantity") || 1,
+    p_start_price: num(fd, "start_price"), p_buy_now: buyNow > 0 ? buyNow : null, p_hours: num(fd, "hours") || 24,
+  });
+  return "Listed in the Auction Hall. Your item is held in escrow until it sells or the auction ends.";
+}
+
+export async function placeBid(auctionId: string, characterId: string, amount: number): Promise<ActionResult> {
+  const res = await rpc<{ result: string; price: number }>("place_bid", { p_auction: auctionId, p_character: characterId, p_amount: amount });
+  return res.result === "bought" ? `Purchased for ${res.price} gold! Check your satchel.` : `Bid placed: ${res.price} gold is held until you win or are outbid.`;
+}
+
+export async function cancelAuction(auctionId: string, reason?: string): Promise<ActionResult> {
+  await rpc("cancel_auction", { p_auction: auctionId, p_reason: reason ?? null });
+  return "Listing canceled. The item was returned.";
+}
