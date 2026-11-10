@@ -8,6 +8,7 @@ const TIER: Record<string, string> = {
   silver: "from-[#3a4250] via-midnight-900 to-[#3a4250] border-[#c9d1dc]",
   gold: "from-[#4a3a14] via-midnight-900 to-[#4a3a14] border-gold-light",
   mythril: "from-[#123a44] via-midnight-900 to-[#123a44] border-arcane",
+  celestial: "from-[#3a2a55] via-[#101827] to-[#4a3a14] border-white",
 };
 
 /**

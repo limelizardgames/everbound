@@ -410,7 +410,7 @@ create table public.quest_templates (
   summary text not null,
   description text not null,          -- spoiler-safe, player-facing
   rank_min text not null default 'F' references public.rank_definitions (code),
-  rank_max text not null default 'S' references public.rank_definitions (code),
+  rank_max text not null default 'SS' references public.rank_definitions (code),
   difficulty text not null default 'moderate' check (difficulty in ('gentle', 'moderate', 'hard', 'deadly')),
   suggested_level int not null default 1,
   party_min int not null default 3,

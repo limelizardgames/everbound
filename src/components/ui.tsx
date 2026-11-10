@@ -94,17 +94,18 @@ const RANK_TONE: Record<string, { fg: string; bg: string; glow: string }> = {
   B: { fg: "#ffe0bd", bg: "linear-gradient(160deg,#c9772a,#4a2508)", glow: "rgba(242,165,65,.5)" },
   A: { fg: "#ffd0c6", bg: "linear-gradient(160deg,#c9412d,#4a0f08)", glow: "rgba(224,83,61,.55)" },
   S: { fg: "#fff6d8", bg: "conic-gradient(from 200deg,#f2a541,#b07cff,#46bdd6,#4ade80,#f2a541)", glow: "rgba(240,215,154,.7)" },
+  SS: { fg: "#1a1206", bg: "radial-gradient(circle at 50% 35%,#ffffff,#fff1c9 30%,#f2a541 65%,#b07cff)", glow: "rgba(255,255,255,.9)" },
 };
 
 export function RankBadge({ code, title, size = "md" }: { code: string; title?: string; size?: "sm" | "md" | "lg" }) {
-  const dims = size === "lg" ? "h-16 w-14 text-3xl" : size === "sm" ? "h-8 w-7 text-sm" : "h-11 w-10 text-lg";
+  const dims = code.length > 1 ? (size === "lg" ? "h-16 w-14 text-2xl" : size === "sm" ? "h-8 w-7 text-[11px]" : "h-11 w-10 text-sm") : size === "lg" ? "h-16 w-14 text-3xl" : size === "sm" ? "h-8 w-7 text-sm" : "h-11 w-10 text-lg";
   const t = RANK_TONE[code] ?? RANK_TONE.F;
   return (
     <span className="inline-flex items-center gap-2">
       <span className="relative inline-flex" style={{ filter: `drop-shadow(0 0 8px ${t.glow})` }}>
         <span
           className={`inline-flex ${dims} items-center justify-center font-display font-bold`}
-          style={{ clipPath: "polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)", background: t.bg, color: t.fg, textShadow: "0 1px 2px rgba(0,0,0,.6)" }}
+          style={{ clipPath: "polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)", background: t.bg, color: t.fg, textShadow: code === "SS" ? "none" : "0 1px 2px rgba(0,0,0,.6)" }}
           aria-label={`Rank ${code}`}
         >
           {code}
@@ -207,14 +208,14 @@ export function SectionHeading({ eyebrow, title, children }: { eyebrow: string; 
 
 export const RANK_LADDER = [
   { code: "F", title: "Initiate", renown: 0 }, { code: "E", title: "Explorer", renown: 100 }, { code: "D", title: "Pathfinder", renown: 300 },
-  { code: "C", title: "Vanguard", renown: 750 }, { code: "B", title: "Champion", renown: 1500 }, { code: "A", title: "Hero", renown: 3000 }, { code: "S", title: "Legend", renown: 6000 },
+  { code: "C", title: "Vanguard", renown: 750 }, { code: "B", title: "Champion", renown: 1500 }, { code: "A", title: "Hero", renown: 3000 }, { code: "S", title: "Legend", renown: 6000 }, { code: "SS", title: "Mythic", renown: 12000 },
 ];
 
-/** F → S progression track. `current` highlights a rank (e.g. the viewer's). */
+/** F → SS progression track. `current` highlights a rank (e.g. the viewer's). */
 export function RankLadder({ current }: { current?: string }) {
   const idx = current ? RANK_LADDER.findIndex((r) => r.code === current) : -1;
   return (
-    <ol className="relative grid grid-cols-4 gap-y-8 sm:grid-cols-7">
+    <ol className="relative grid grid-cols-4 gap-y-8 sm:grid-cols-8">
       <span aria-hidden className="absolute left-[7%] right-[7%] top-8 hidden h-px bg-gradient-to-r from-rarity-common/40 via-epic/60 to-rarity-legendary/80 sm:block" />
       {RANK_LADDER.map((r, i) => (
         <li key={r.code} className={`relative flex flex-col items-center text-center transition ${idx >= 0 && i > idx ? "opacity-45" : ""}`}>

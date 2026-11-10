@@ -116,7 +116,7 @@ export default function Home() {
             <h2 className="heading mt-2 text-3xl sm:text-4xl">A Guild Card That Is Truly Yours</h2>
             <p className="muted mt-4 max-w-lg">Every adventurer carries a real, printed guild card. Scan its QR code once to bind it to you — from then on it is your proof of rank, and anyone you show it to can see your legend.</p>
             <ul className="mt-6 grid gap-3">
-              {[["◈", "Scan to claim", "One scan binds the card to your account. It can never be claimed twice."], ["✦", "Show your legend", "The same QR opens your verified profile: rank, titles and recent deeds."], ["★", "Upgrade with your rank", "Rise through the Guild and trade up to bronze, silver, gold and mythril designs."]].map(([i, t, d]) => (
+              {[["◈", "Scan to claim", "One scan binds the card to your account. It can never be claimed twice."], ["✦", "Show your legend", "The same QR opens your verified profile: rank, titles and recent deeds."], ["★", "Upgrade with your rank", "Rise through the Guild and trade up to bronze, silver, gold, mythril and celestial designs."]].map(([i, t, d]) => (
                 <li key={t} className="flex gap-3">
                   <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center border border-gold/50 bg-gold/10 text-gold-light" style={{ clipPath: "polygon(50% 0,100% 50%,50% 100%,0 50%)" }}>{i}</span>
                   <span><span className="block font-display text-lg text-parchment">{t}</span><span className="muted text-sm">{d}</span></span>
@@ -134,7 +134,7 @@ export default function Home() {
       </section>
 
       <section className="container-eb mt-28">
-        <SectionHeading eyebrow="Guild Ranks" title="Rise from Initiate to Legend">Rank is earned through renown — service to the Guild — and is separate from your character level. Higher ranks unlock elite quests and raids.</SectionHeading>
+        <SectionHeading eyebrow="Guild Ranks" title="Rise from Initiate to Mythic">Rank is earned through renown — service to the Guild — and is separate from your character level. Higher ranks unlock elite quests and raids.</SectionHeading>
         <div className="reveal panel sm:p-8"><RankLadder /></div>
       </section>
 

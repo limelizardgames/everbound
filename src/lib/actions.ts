@@ -210,7 +210,7 @@ export async function saveQuestTemplate(fd: FormData): Promise<ActionResult> {
     summary: str(fd, "summary"),
     description: str(fd, "description"),
     rank_min: str(fd, "rank_min") || "F",
-    rank_max: str(fd, "rank_max") || "S",
+    rank_max: str(fd, "rank_max") || "SS",
     difficulty: str(fd, "difficulty") || "moderate",
     suggested_level: num(fd, "suggested_level") || 1,
     party_min: num(fd, "party_min") || 3,

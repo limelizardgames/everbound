@@ -154,7 +154,7 @@ export default function Dashboard() {
   );
 }
 
-const RANKS = ["F", "E", "D", "C", "B", "A", "S"];
+const RANKS = ["F", "E", "D", "C", "B", "A", "S", "SS"];
 function nextRank(code: string) {
   return RANKS[Math.min(RANKS.indexOf(code) + 1, RANKS.length - 1)];
 }

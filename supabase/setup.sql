@@ -418,7 +418,7 @@ create table public.quest_templates (
   summary text not null,
   description text not null,          -- spoiler-safe, player-facing
   rank_min text not null default 'F' references public.rank_definitions (code),
-  rank_max text not null default 'S' references public.rank_definitions (code),
+  rank_max text not null default 'SS' references public.rank_definitions (code),
   difficulty text not null default 'moderate' check (difficulty in ('gentle', 'moderate', 'hard', 'deadly')),
   suggested_level int not null default 1,
   party_min int not null default 3,
@@ -1970,6 +1970,15 @@ create trigger inventory_append_only before update or delete on public.inventory
   for each row execute function public.forbid_ledger_mutation();
 
 
+-- >>> 20261110000001_ss_rank.sql
+-- SS rank: "Mythic", above S. Quests that were open to every rank stay open to SS.
+insert into public.rank_definitions (code, title, renown_required, sort, card_design)
+values ('SS', 'Mythic', 12000, 8, 'celestial')
+on conflict (code) do nothing;
+alter table public.quest_templates alter column rank_max set default 'SS';
+update public.quest_templates set rank_max = 'SS' where rank_max = 'S';
+
+
 -- >>> seed.sql
 -- =============================================================================
 -- EVERBOUND — Seed data for a fictional starting world (safe to edit freely)
@@ -1991,7 +2000,8 @@ insert into public.rank_definitions (code, title, renown_required, sort, card_de
   ('C', 'Vanguard', 750, 4, 'silver'),
   ('B', 'Champion', 1500, 5, 'silver'),
   ('A', 'Hero', 3000, 6, 'gold'),
-  ('S', 'Legend', 6000, 7, 'mythril')
+  ('S', 'Legend', 6000, 7, 'mythril'),
+  ('SS', 'Mythic', 12000, 8, 'celestial')
 on conflict (code) do nothing;
 
 insert into public.rule_sets (name, version, is_active, definition) values (
@@ -2146,7 +2156,7 @@ insert into public.quest_templates (slug, title, quest_type, status, summary, de
   ('herbs-for-the-apothecary', 'Herbs for the Apothecary', 'contract', 'published',
    'Gather moonpetal from the edge of Silverfen before the frost.',
    E'Old Mother Wren needs moonpetal for her winter remedies, and her knees are not what they were. A gentle errand — so long as you mind the bog lights.',
-   'F', 'S', 'gentle', 1, 2, 4, 90, (select id from public.locations where slug = 'silverfen'),
+   'F', 'SS', 'gentle', 1, 2, 4, 90, (select id from public.locations where slug = 'silverfen'),
    '25 gold · 15 renown', array[]::text[]),
   ('ashes-of-the-watchtower', 'Ashes of the Watchtower', 'story', 'published',
    'Investigate the fall of the Northern Watchtower.',
@@ -2156,7 +2166,7 @@ insert into public.quest_templates (slug, title, quest_type, status, summary, de
   ('the-crimson-wyrm', 'The Crimson Wyrm', 'world', 'locked',
    'A legendary threat sealed beneath the Crimson Peaks.',
    'Locked. The Guild has not yet found a way to the Wyrm.',
-   'C', 'S', 'deadly', 5, 6, 10, 240, (select id from public.locations where slug = 'crimson-peaks'),
+   'C', 'SS', 'deadly', 5, 6, 10, 240, (select id from public.locations where slug = 'crimson-peaks'),
    'Legendary', array['Intense combat'])
 on conflict (slug) do nothing;
 

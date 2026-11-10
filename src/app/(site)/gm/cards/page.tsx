@@ -13,7 +13,7 @@ import { Loading, useTitle } from "@/components/Guard";
 import { shortDate } from "@/lib/format";
 import { roleAtLeast } from "@/lib/types";
 
-const TIERS = ["standard", "founding", "iron", "bronze", "silver", "gold", "mythril"];
+const TIERS = ["standard", "founding", "iron", "bronze", "silver", "gold", "mythril", "celestial"];
 type C = { id: string; card_number: string; status: string; tier: string; batch_label: string | null; personalized_name: string | null; claimed_at: string | null; profile_id: string | null; character: { name: string } | null };
 
 export default function Page() {

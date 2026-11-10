@@ -35,7 +35,7 @@ export function QuestForm({ quest, secrets, objectives, locations, ranks, onSave
           <div><label className="label" htmlFor="rank_min">Min rank</label>
             <select className="input" id="rank_min" name="rank_min" defaultValue={f("rank_min") || "F"}>{ranks.map((r) => <option key={r}>{r}</option>)}</select></div>
           <div><label className="label" htmlFor="rank_max">Max rank</label>
-            <select className="input" id="rank_max" name="rank_max" defaultValue={f("rank_max") || "S"}>{ranks.map((r) => <option key={r}>{r}</option>)}</select></div>
+            <select className="input" id="rank_max" name="rank_max" defaultValue={f("rank_max") || "SS"}>{ranks.map((r) => <option key={r}>{r}</option>)}</select></div>
           <div><label className="label" htmlFor="suggested_level">Suggested level</label><input className="input" type="number" min={1} id="suggested_level" name="suggested_level" defaultValue={f("suggested_level") || 1} /></div>
           <div><label className="label" htmlFor="party_min">Party min</label><input className="input" type="number" min={1} id="party_min" name="party_min" defaultValue={f("party_min") || 3} /></div>
           <div><label className="label" htmlFor="party_max">Party max</label><input className="input" type="number" min={1} id="party_max" name="party_max" defaultValue={f("party_max") || 5} /></div>
