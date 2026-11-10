@@ -3,10 +3,10 @@ import type { ReactNode } from "react";
 
 export function PageHeader({ eyebrow, title, children, action }: { eyebrow?: string; title: string; children?: ReactNode; action?: ReactNode }) {
   return (
-    <header className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+    <header className="page-band mb-10 flex flex-col gap-4 pb-6 pt-2 sm:flex-row sm:items-end sm:justify-between">
       <div>
         {eyebrow && <p className="eyebrow mb-2">{eyebrow}</p>}
-        <h1 className="heading text-3xl sm:text-4xl">{title}</h1>
+        <h1 className="heading text-4xl sm:text-5xl">{title}</h1>
         <div aria-hidden className="mt-3 flex items-center gap-2">
           <span className="h-px w-16 bg-gradient-to-r from-gold to-transparent" />
           <span className="h-1.5 w-1.5 rotate-45 bg-arcane shadow-[0_0_8px_#46BDD6]" />
@@ -191,5 +191,39 @@ export function CTA({ href, children, variant = "gold" }: { href: string; childr
     <Link href={href} className={variant === "gold" ? "btn-gold" : variant === "arcane" ? "btn-arcane" : "btn-ghost"}>
       {children}
     </Link>
+  );
+}
+
+/** Centered ornamental section heading used on long pages. */
+export function SectionHeading({ eyebrow, title, children }: { eyebrow: string; title: string; children?: ReactNode }) {
+  return (
+    <div className="reveal mx-auto mb-10 max-w-2xl text-center">
+      <p className="eyebrow">{eyebrow}</p>
+      <h2 className="section-title mt-2"><span className="heading text-3xl sm:text-4xl">{title}</span></h2>
+      {children && <p className="muted mt-3">{children}</p>}
+    </div>
+  );
+}
+
+export const RANK_LADDER = [
+  { code: "F", title: "Initiate", renown: 0 }, { code: "E", title: "Explorer", renown: 100 }, { code: "D", title: "Pathfinder", renown: 300 },
+  { code: "C", title: "Vanguard", renown: 750 }, { code: "B", title: "Champion", renown: 1500 }, { code: "A", title: "Hero", renown: 3000 }, { code: "S", title: "Legend", renown: 6000 },
+];
+
+/** F → S progression track. `current` highlights a rank (e.g. the viewer's). */
+export function RankLadder({ current }: { current?: string }) {
+  const idx = current ? RANK_LADDER.findIndex((r) => r.code === current) : -1;
+  return (
+    <ol className="relative grid grid-cols-4 gap-y-8 sm:grid-cols-7">
+      <span aria-hidden className="absolute left-[7%] right-[7%] top-8 hidden h-px bg-gradient-to-r from-rarity-common/40 via-epic/60 to-rarity-legendary/80 sm:block" />
+      {RANK_LADDER.map((r, i) => (
+        <li key={r.code} className={`relative flex flex-col items-center text-center transition ${idx >= 0 && i > idx ? "opacity-45" : ""}`}>
+          <span className={i === idx ? "scale-110" : ""}><RankBadge code={r.code} size="lg" /></span>
+          <span className="mt-2 font-display text-[15px] text-parchment">{r.title}</span>
+          <span className="hud-num text-[12px] uppercase tracking-[0.14em] text-parchment/50">{r.renown.toLocaleString()} renown</span>
+          {i === idx && <span className="mt-1 font-ui text-[11px] font-bold uppercase tracking-[0.2em] text-arcane-light">▲ You</span>}
+        </li>
+      ))}
+    </ol>
   );
 }

@@ -47,19 +47,32 @@ function Leaderboards() {
       {!data ? <Loading /> : rows.length === 0 ? (
         <Empty title="No legends yet">The first adventurers to complete a quest will be inscribed here.</Empty>
       ) : (
-        <ol className="grid gap-2">
-          {rows.map((r) => (
-            <li key={`${r.place}-${r.character_name}`} className={`flex items-center gap-4 rounded-xl border p-3 sm:p-4 ${r.place <= 3 ? "border-gold/50 bg-gold/5" : "border-midnight-600 bg-midnight-900/60"}`}>
-              <span className={`w-10 text-center font-display text-2xl font-bold ${r.place === 1 ? "text-gold" : r.place <= 3 ? "text-gold-light" : "text-parchment/50"}`}>#{r.place}</span>
-              <RankBadge code={r.rank_code} size="sm" />
-              <span className="flex-1">
-                {r.card_number ? <Link href={`/adventurer/?n=${r.card_number}`} className="font-display text-lg text-parchment hover:text-gold-light">{r.character_name}</Link> : <span className="font-display text-lg">{r.character_name}</span>}
-                <span className="muted block text-xs capitalize">{r.species.replace("_", " ")} · {r.class}</span>
-              </span>
-              <span className="font-display text-xl text-gold-light">{Number(r.value).toLocaleString()}</span>
-            </li>
-          ))}
-        </ol>
+        <>
+          <div className="mb-6 grid items-end gap-3 sm:grid-cols-3">
+            {[rows[1], rows[0], rows[2]].map((r, i) => r && (
+              <div key={r.character_name} className={`reveal panel text-center ${i === 1 ? "border-gold/60 shadow-gold sm:pb-10 sm:pt-8" : "sm:pb-6"} ${i === 1 ? "order-first sm:order-none" : ""}`}>
+                <p className="font-display text-4xl font-bold" style={{ color: ["#C9D1DC", "#F0D79A", "#C08A4A"][i] }}>{["II", "I", "III"][i]}</p>
+                <div className="mt-2 flex justify-center"><RankBadge code={r.rank_code} size={i === 1 ? "lg" : "md"} /></div>
+                {r.card_number ? <Link href={`/adventurer/?n=${r.card_number}`} className="mt-2 block font-display text-xl text-parchment hover:text-gold-light">{r.character_name}</Link> : <p className="mt-2 font-display text-xl">{r.character_name}</p>}
+                <p className="muted font-ui text-[12px] font-semibold uppercase tracking-[0.16em]">{r.species.replace("_", "-")} · {r.class}</p>
+                <p className="hud-num mt-2 text-2xl text-gold-light">{Number(r.value).toLocaleString()}</p>
+              </div>
+            ))}
+          </div>
+          <ol className="grid gap-2">
+            {rows.slice(3).map((r) => (
+              <li key={`${r.place}-${r.character_name}`} className="flex items-center gap-4 rounded-sm border border-white/10 bg-white/[0.03] p-3 sm:p-4">
+                <span className="hud-num w-10 text-center text-xl text-parchment/50">#{r.place}</span>
+                <RankBadge code={r.rank_code} size="sm" />
+                <span className="flex-1">
+                  {r.card_number ? <Link href={`/adventurer/?n=${r.card_number}`} className="font-display text-lg text-parchment hover:text-gold-light">{r.character_name}</Link> : <span className="font-display text-lg">{r.character_name}</span>}
+                  <span className="muted block font-ui text-[12px] font-semibold uppercase tracking-[0.14em]">{r.species.replace("_", "-")} · {r.class}</span>
+                </span>
+                <span className="hud-num text-xl text-gold-light">{Number(r.value).toLocaleString()}</span>
+              </li>
+            ))}
+          </ol>
+        </>
       )}
     </div>
   );

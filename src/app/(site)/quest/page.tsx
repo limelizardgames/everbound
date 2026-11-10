@@ -43,8 +43,9 @@ function QuestDetail() {
     <div className="container-eb max-w-5xl py-12">
       <Link href="/quests/" className="link text-sm">← Quest Board</Link>
       <div className="mt-4 grid gap-6 lg:grid-cols-3">
-        <article className="parchment-card p-6 sm:p-8 lg:col-span-2">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-forest">{QUEST_TYPE_LABEL[quest.quest_type]}</p>
+        <article className="parchment-card p-6 sm:p-10 lg:col-span-2">
+          <div aria-hidden className="wax-seal absolute -top-5 right-6 hidden sm:flex">{locked ? "?" : "E"}</div>
+          <p className="font-ui text-[13px] font-bold uppercase tracking-[0.3em] text-forest">Guild Contract · {QUEST_TYPE_LABEL[quest.quest_type]}</p>
           <h1 className="mt-2 font-display text-3xl font-bold sm:text-4xl">{quest.title}</h1>
           <p className="mt-3 text-lg text-midnight/80">{quest.summary}</p>
           <div className="mt-5 whitespace-pre-line leading-relaxed text-midnight/85">{quest.description}</div>

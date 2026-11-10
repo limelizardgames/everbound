@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { sb, must } from "@/lib/supabase";
 import { isSupabaseConfigured } from "@/lib/env";
 import { useData } from "@/lib/useData";
-import { Empty, PageHeader } from "@/components/ui";
+import { Empty } from "@/components/ui";
 import { SetupNotice } from "@/components/SetupNotice";
 import { Loading, useTitle } from "@/components/Guard";
 import { CHRONICLE_LABEL, shortDate } from "@/lib/format";
@@ -27,8 +27,13 @@ function ChroniclePage() {
   const [lead, ...rest] = data ?? [];
   return (
     <div className="container-eb py-12">
-      <PageHeader eyebrow="The Everbound Chronicle" title="News From the Realm">World news, adventure outcomes, discoveries, NPC announcements and guild proclamations.</PageHeader>
-      <nav className="mb-6 flex flex-wrap gap-2" aria-label="Categories">
+      <header className="page-band mb-8 pb-6 pt-2 text-center">
+        <p className="eyebrow">Est. in the founding season · All the news the Guild sees fit to print</p>
+        <h1 className="heading mt-3 text-4xl sm:text-6xl">The Everbound Chronicle</h1>
+        <div aria-hidden className="mx-auto mt-4 h-[3px] max-w-3xl border-y border-gold/50" />
+        <p className="muted mx-auto mt-3 max-w-xl text-sm">World news, adventure outcomes, discoveries, NPC announcements and guild proclamations.</p>
+      </header>
+      <nav className="mb-6 flex flex-wrap justify-center gap-2" aria-label="Categories">
         <Link href="/chronicle/" className={`btn-sm ${!cat ? "btn-gold" : "btn-ghost"}`}>All</Link>
         {Object.entries(CHRONICLE_LABEL).map(([k, v]) => (
           <Link key={k} href={`/chronicle/?category=${k}`} className={`btn-sm ${cat === k ? "btn-gold" : "btn-ghost"}`}>{v}</Link>

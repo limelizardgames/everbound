@@ -10,7 +10,11 @@ import { QuestCard } from "@/components/QuestCard";
 import { Crest } from "@/components/Crest";
 import { MagicCircle } from "@/components/MagicCircle";
 import { HeroAtlas } from "@/components/HeroAtlas";
-import { StatusPill, SystemWindow } from "@/components/ui";
+import { RankLadder, SectionHeading, StatusPill, SystemWindow } from "@/components/ui";
+import { ClassShowcase } from "@/components/ClassShowcase";
+import { GuildCard } from "@/components/GuildCard";
+import { TiltCard } from "@/components/TiltCard";
+import { cardQrSvg } from "@/lib/qr";
 import { SetupNotice } from "@/components/SetupNotice";
 import { CHRONICLE_LABEL, shortDate } from "@/lib/format";
 import type { ChroniclePost, PublicRaid } from "@/lib/types";
@@ -28,17 +32,19 @@ type Stats = { adventurers: number; open_quests: number; world_events: number };
 
 export default function Home() {
   const { data } = useData(async () => {
-    const [stats, quests, posts, raids] = await Promise.all([
+    const [stats, quests, posts, raids, rules, sampleQr] = await Promise.all([
       must(sb().rpc("get_guild_stats")),
       questBoard(),
       must(sb().from("chronicle_posts").select("*").eq("published", true).order("is_featured", { ascending: false }).order("published_at", { ascending: false }).limit(4)),
       must(sb().rpc("get_raids_public")),
+      must(sb().from("rule_sets").select("definition").eq("is_active", true).maybeSingle()),
+      cardQrSvg("sample-card"),
     ]);
-    return { stats: stats as Stats, quests, posts: posts as ChroniclePost[], raids: raids as PublicRaid[] };
+    return { stats: stats as Stats, quests, posts: posts as ChroniclePost[], raids: raids as PublicRaid[], classes: rules?.definition?.classes as { key: string; label: string; hp_base: number; role?: string }[] | undefined, sampleQr };
   }, []);
   if (!isSupabaseConfigured) return <Hero stats={null} />;
   if (!data) return (<><Hero stats={{ adventurers: 0, open_quests: 0, world_events: 0 }} /><Loading /></>);
-  const { stats, quests, posts, raids } = data;
+  const { stats, quests, posts, raids, classes, sampleQr } = data;
   const [featured, ...recent] = posts;
   const raid = raids[0];
 
@@ -46,8 +52,20 @@ export default function Home() {
     <>
       <Hero stats={stats} />
 
+      {posts.length > 0 && (
+        <div className="relative z-10 overflow-hidden border-b border-gold/15 bg-midnight-950/90" aria-label="Latest news from the realm">
+          <div className="ticker flex w-max gap-12 whitespace-nowrap py-2.5 font-ui text-[13px] font-semibold uppercase tracking-[0.18em] text-parchment/70">
+            {[...posts, ...posts].map((p, i) => (
+              <Link key={i} href={`/story/?s=${p.slug}`} className="hover:text-gold-light" tabIndex={i >= posts.length ? -1 : 0} aria-hidden={i >= posts.length}>
+                <span className="text-arcane">◆</span> <span className="text-gold-light/80">{CHRONICLE_LABEL[p.category]}</span> — {p.title}
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+
       {featured && (
-        <section className="container-eb relative z-10 -mt-14">
+        <section className="container-eb relative z-10 mt-10">
           <Link href={`/story/?s=${featured.slug}`} className="block transition hover:-translate-y-0.5">
             <SystemWindow title="World Event" right={<span className="font-ui text-[12px] font-bold uppercase tracking-[0.2em] text-ember-light">⚠ Alert</span>}>
               <p className="eyebrow">The world is changing · {CHRONICLE_LABEL[featured.category]}</p>
@@ -58,40 +76,69 @@ export default function Home() {
         </section>
       )}
 
-      <section className="container-eb mt-20">
-        <div className="mb-6 flex items-end justify-between">
-          <div>
-            <p className="eyebrow">Guild Quest Board</p>
-            <h2 className="heading mt-1 text-2xl sm:text-3xl">Available Contracts</h2>
-          </div>
-          <Link href="/quests/" className="link font-ui text-sm font-semibold uppercase tracking-[0.14em]">All quests ▸</Link>
-        </div>
+      <section className="container-eb mt-24">
+        <SectionHeading eyebrow="Guild Quest Board" title="Available Contracts">Hosted three-hour adventures at the Guild&apos;s partner store. Pick one that fits your week — there is no campaign to fall behind on.</SectionHeading>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {quests.slice(0, 3).map((q) => <QuestCard key={q.id} quest={q} />)}
+          {quests.slice(0, 3).map((q) => <div key={q.id} className="reveal"><QuestCard quest={q} /></div>)}
         </div>
+        <div className="mt-8 text-center"><Link href="/quests/" className="btn-ghost">View the full board ▸</Link></div>
       </section>
 
-      <section className="container-eb mt-20">
-        <p className="eyebrow text-center">Tutorial</p>
-        <h2 className="heading mt-1 text-center text-2xl sm:text-3xl">Your First Steps in Everbound</h2>
-        <ol className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <section className="container-eb mt-28">
+        <SectionHeading eyebrow="Tutorial" title="Your First Steps">From picking up a card to changing the world, in six steps.</SectionHeading>
+        <ol className="relative grid gap-x-4 gap-y-10 sm:grid-cols-2 lg:grid-cols-6">
+          <span aria-hidden className="absolute left-[8%] right-[8%] top-7 hidden border-t border-dashed border-gold/40 lg:block" />
           {STEPS.map(([t, d, icon], i) => (
-            <li key={t} className="panel flex gap-4">
-              <span className="flex h-12 w-12 shrink-0 items-center justify-center border border-arcane/50 bg-arcane/10 font-display text-xl text-arcane-light shadow-glow" style={{ clipPath: "polygon(50% 0,100% 50%,50% 100%,0 50%)" }}>
+            <li key={t} className="reveal relative flex gap-4 lg:flex-col lg:items-center lg:text-center">
+              <span className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center bg-midnight-950 font-display text-xl text-gold-light" style={{ clipPath: "polygon(50% 0,100% 50%,50% 100%,0 50%)", background: "linear-gradient(160deg,#1c2944,#0d1424)", boxShadow: "inset 0 0 0 2px rgba(212,170,90,.7)" }}>
                 {icon}
               </span>
               <span>
                 <span className="block font-ui text-[12px] font-bold uppercase tracking-[0.24em] text-arcane/80">Step {String(i + 1).padStart(2, "0")}</span>
-                <span className="block font-display text-lg text-gold-light">{t}</span>
-                <span className="muted text-sm">{d}</span>
+                <span className="block font-display text-lg leading-tight text-gold-light">{t}</span>
+                <span className="muted mt-1 block text-sm">{d}</span>
               </span>
             </li>
           ))}
         </ol>
-        <div className="mt-6 text-center"><Link href="/how-it-works/" className="btn-ghost">Read the Guild Handbook</Link></div>
+        <div className="mt-10 text-center"><Link href="/how-it-works/" className="btn-ghost">Read the Guild Handbook</Link></div>
       </section>
 
-      <section className="container-eb mt-20 grid gap-6 lg:grid-cols-5">
+      <section className="container-eb mt-28">
+        <SectionHeading eyebrow="Character Creation" title="Choose Your Path">Six classes, six ways to be the hero of the table. No rulebook required — your Guild Master teaches as you play.</SectionHeading>
+        <div className="reveal"><ClassShowcase classes={classes} /></div>
+      </section>
+
+      <section className="relative mt-28 overflow-hidden border-y border-gold/15 bg-[radial-gradient(60%_120%_at_75%_50%,rgba(212,170,90,.12),transparent_70%),#0b1324] py-20">
+        <div className="container-eb grid items-center gap-12 lg:grid-cols-2">
+          <div className="reveal">
+            <p className="eyebrow">Physical membership</p>
+            <h2 className="heading mt-2 text-3xl sm:text-4xl">A Guild Card That Is Truly Yours</h2>
+            <p className="muted mt-4 max-w-lg">Every adventurer carries a real, printed guild card. Scan its QR code once to bind it to you — from then on it is your proof of rank, and anyone you show it to can see your legend.</p>
+            <ul className="mt-6 grid gap-3">
+              {[["◈", "Scan to claim", "One scan binds the card to your account. It can never be claimed twice."], ["✦", "Show your legend", "The same QR opens your verified profile: rank, titles and recent deeds."], ["★", "Upgrade with your rank", "Rise through the Guild and trade up to bronze, silver, gold and mythril designs."]].map(([i, t, d]) => (
+                <li key={t} className="flex gap-3">
+                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center border border-gold/50 bg-gold/10 text-gold-light" style={{ clipPath: "polygon(50% 0,100% 50%,50% 100%,0 50%)" }}>{i}</span>
+                  <span><span className="block font-display text-lg text-parchment">{t}</span><span className="muted text-sm">{d}</span></span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="reveal relative mx-auto w-full max-w-md">
+            <div aria-hidden className="absolute -inset-10 rounded-full bg-gold/10 blur-3xl" />
+            <div className="absolute left-6 top-8 w-full rotate-[7deg] text-[15px] opacity-70 sm:text-[18px]"><GuildCard cardNumber="EVB-00007" name="Thorne Ironhand" rank="C" tier="silver" qrSvg={sampleQr} /></div>
+            <TiltCard className="relative -rotate-3 text-[15px] sm:text-[18px]"><GuildCard cardNumber="EVB-00042" name="Aelindra" rank="E" tier="founding" qrSvg={sampleQr} /></TiltCard>
+            <p className="muted mt-14 text-center font-ui text-[12px] font-semibold uppercase tracking-[0.2em]">Sample cards · move your cursor over the card</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="container-eb mt-28">
+        <SectionHeading eyebrow="Guild Ranks" title="Rise from Initiate to Legend">Rank is earned through renown — service to the Guild — and is separate from your character level. Higher ranks unlock elite quests and raids.</SectionHeading>
+        <div className="reveal panel sm:p-8"><RankLadder /></div>
+      </section>
+
+      <section className="reveal container-eb mt-28 grid gap-6 lg:grid-cols-5">
         {raid && (
           <Link href="/raids/" className="panel relative overflow-hidden text-center lg:col-span-2 sm:p-8">
             <div className="relative mx-auto h-48 w-48">
@@ -130,7 +177,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="container-eb mt-20">
+      <section className="reveal container-eb mt-28">
         <div className="parchment-card p-8 text-center sm:p-12">
           <p className="font-ui text-[13px] font-bold uppercase tracking-[0.3em] text-forest">Founding Guild · Limited-time title</p>
           <h2 className="mt-2 font-display text-3xl font-bold">The world does not wait for heroes.</h2>

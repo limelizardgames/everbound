@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useViewer } from "@/lib/viewer";
 import { useData } from "@/lib/useData";
 import { GuildCard } from "@/components/GuildCard";
+import { TiltCard } from "@/components/TiltCard";
 import { PageHeader } from "@/components/ui";
 import { Loading, useTitle } from "@/components/Guard";
 import { cardQrSvg } from "@/lib/qr";
@@ -21,7 +22,7 @@ export default function CardPage() {
       {card ? (
         <>
           <div className="mx-auto max-w-md text-[15px] sm:text-[18px]">
-            {svg ? <GuildCard cardNumber={card.card_number} name={viewer.character?.name ?? viewer.profile.display_name} rank={viewer.totals?.rank_code} tier={card.tier} qrSvg={svg} /> : <Loading />}
+            {svg ? <TiltCard><GuildCard cardNumber={card.card_number} name={viewer.character?.name ?? viewer.profile.display_name} rank={viewer.totals?.rank_code} tier={card.tier} qrSvg={svg} /></TiltCard> : <Loading />}
           </div>
           <div className="panel mt-6 text-sm">
             <p>When someone scans your card they see your <Link className="link" href={`/adventurer/?n=${card.card_number}`}>verified public profile</Link>. Scanning never signs anyone into your account.</p>

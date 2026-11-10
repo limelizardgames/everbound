@@ -1,16 +1,8 @@
-import { CTA, PageHeader, RankBadge } from "@/components/ui";
+import { CTA, PageHeader, RankLadder } from "@/components/ui";
 
 export const metadata = { title: "How It Works" };
 
-const RANKS = [
-  { code: "F", title: "Initiate", renown_required: 0 }, { code: "E", title: "Explorer", renown_required: 100 },
-  { code: "D", title: "Pathfinder", renown_required: 300 }, { code: "C", title: "Vanguard", renown_required: 750 },
-  { code: "B", title: "Champion", renown_required: 1500 }, { code: "A", title: "Hero", renown_required: 3000 },
-  { code: "S", title: "Legend", renown_required: 6000 },
-];
-
 export default function HowItWorks() {
-  const ranks = RANKS;
   return (
     <div className="container-eb py-12">
       <PageHeader eyebrow="The Guild handbook" title="How Everbound works">
@@ -46,22 +38,11 @@ export default function HowItWorks() {
 
       <div className="divider-ornament" aria-hidden>✦</div>
 
-      <div className="grid gap-6 lg:grid-cols-2">
-        <div className="panel">
+      <div className="grid gap-6">
+        <div className="panel sm:p-8">
           <h2 className="heading text-2xl">Guild ranks</h2>
           <p className="muted mt-1 text-sm">Rank reflects service to the Guild and is separate from character level. Higher ranks unlock elite quests and upgraded physical cards.</p>
-          <table className="table-eb mt-4">
-            <thead><tr><th>Rank</th><th>Title</th><th className="text-right">Renown</th></tr></thead>
-            <tbody>
-              {ranks.map((r) => (
-                <tr key={r.code}>
-                  <td><RankBadge code={r.code} size="sm" /></td>
-                  <td>{r.title}</td>
-                  <td className="text-right">{r.renown_required.toLocaleString()}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div className="mt-6"><RankLadder /></div>
         </div>
         <div className="panel">
           <h2 className="heading text-2xl">Three kinds of progress</h2>
@@ -86,7 +67,7 @@ export default function HowItWorks() {
 
 function Section({ n, title, children }: { n: string; title: string; children: React.ReactNode }) {
   return (
-    <section className="panel">
+    <section className="reveal panel">
       <p className="eyebrow">Step {n}</p>
       <h2 className="heading mt-1 text-xl">{title}</h2>
       <p className="muted mt-2 text-sm leading-relaxed">{children}</p>

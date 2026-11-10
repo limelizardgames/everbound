@@ -20,7 +20,6 @@ export default function WorldPage() {
   }, []);
   if (!isSupabaseConfigured) return <SetupNotice />;
   const locations = data?.locations ?? [];
-  const regions = [...new Set(locations.map((l) => l.region))];
   return (
     <div className="container-eb py-12">
       <PageHeader eyebrow="Atlas of the realm" title="Explore the World">
@@ -39,23 +38,18 @@ export default function WorldPage() {
               ))}
             </div>
           )}
-          <div className="mt-10 grid gap-8">
-            {regions.map((r) => (
-              <section key={r}>
-                <h2 className="heading text-xl">{r}</h2>
-                <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                  {locations.filter((l) => l.region === r).map((l) => (
-                    <Link key={l.id} href={`/place/?s=${l.slug}`} className="panel block hover:border-gold/60">
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="font-display text-lg text-gold-light">{l.name}</span>
-                        <StatusPill status={l.status} />
-                      </div>
-                      <p className="muted mt-2 text-sm">{l.summary}</p>
-                      {l.threat && <p className="mt-2 text-xs text-gold">Threat: {l.threat}</p>}
-                    </Link>
-                  ))}
+          <h2 className="section-title mt-14"><span className="heading text-2xl sm:text-3xl">Known Locations</span></h2>
+          <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {locations.map((l) => (
+              <Link key={l.id} href={`/place/?s=${l.slug}`} className="reveal panel block transition hover:-translate-y-0.5 hover:border-gold/60">
+                <p className="font-ui text-[12px] font-bold uppercase tracking-[0.2em] text-arcane-light/80">{l.region}</p>
+                <div className="mt-1 flex items-center justify-between gap-2">
+                  <span className="font-display text-xl text-gold-light">{l.name}</span>
+                  <StatusPill status={l.status} />
                 </div>
-              </section>
+                <p className="muted mt-2 text-sm">{l.summary}</p>
+                {l.threat && <p className="mt-2 font-ui text-[13px] font-semibold uppercase tracking-wider text-ember-light">⚠ {l.threat}</p>}
+              </Link>
             ))}
           </div>
         </>
