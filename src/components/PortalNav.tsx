@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const ITEMS = [
-  ["/portal", "Dashboard"], ["/portal/character", "Character"], ["/portal/card", "Guild Card"], ["/portal/inventory", "Inventory"],
+  ["/portal", "Dashboard"], ["/portal/character", "Character"], ["/portal/card", "Guild Card"], ["/portal/inventory", "Inventory"], ["/portal/errands", "Errands"], ["/portal/workshop", "Workshop"],
   ["/portal/journal", "Journal"], ["/portal/bookings", "Bookings"], ["/portal/tavern", "Tavern"], ["/portal/achievements", "Achievements"],
   ["/portal/notifications", "Notices"], ["/portal/settings", "Settings"],
 ] as const;

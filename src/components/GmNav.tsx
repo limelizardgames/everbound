@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 
 const ITEMS = [
   ["/gm", "Command Center"], ["/gm/sessions", "Session Manager"], ["/gm/quests", "Quest Creator"], ["/gm/cards", "Guild Cards"],
-  ["/gm/world", "World Editor"], ["/gm/raids", "Raid Controller"], ["/gm/players", "Players & Moderation"], ["/gm/audit", "Audit Log"], ["/gm/settings", "Settings & Orders"],
+  ["/gm/world", "World Editor"], ["/gm/raids", "Raid Controller"], ["/gm/errands", "Errands & Crafting"], ["/gm/players", "Players & Moderation"], ["/gm/audit", "Audit Log"], ["/gm/settings", "Settings & Orders"],
 ] as const;
 
 export function GmNav() {

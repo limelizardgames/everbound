@@ -460,3 +460,93 @@ export async function cancelAuction(auctionId: string, reason?: string): Promise
   await rpc("cancel_auction", { p_auction: auctionId, p_reason: reason ?? null });
   return "Listing canceled. The item was returned.";
 }
+
+// ------------------------------------------------------------------ Guild Errands & Professions
+type Reward = { item: string; quantity: number; rarity: string };
+const lootText = (r: Reward[]) => (r.length ? r.map((x) => `${x.quantity}× ${x.item}`).join(", ") : "nothing this time");
+
+export async function startExpedition(characterId: string, errandId: string): Promise<ActionResult> {
+  await rpc("start_expedition", { p_character: characterId, p_errand: errandId });
+  return "Your adventurer has set out. Come back when the timer runs out to collect the haul.";
+}
+
+export async function claimExpedition(runId: string): Promise<ActionResult> {
+  const r = await rpc<Reward[]>("claim_expedition", { p_run: runId });
+  return `Expedition complete! You gathered ${lootText(r)}.`;
+}
+
+export async function abandonExpedition(runId: string): Promise<ActionResult> {
+  await rpc("abandon_expedition", { p_run: runId });
+  return "Expedition recalled.";
+}
+
+export async function solveRiddle(characterId: string, errandId: string, answer: string): Promise<ActionResult> {
+  const r = await rpc<{ correct: boolean; attempts_left?: number; rewards?: Reward[] }>("solve_riddle", { p_character: characterId, p_errand: errandId, p_answer: answer });
+  if (!r.correct) throw new Error(`Not quite. ${r.attempts_left ?? 0} guess${r.attempts_left === 1 ? "" : "es"} left today.`);
+  return `Correct! You earned ${lootText(r.rewards ?? [])}.`;
+}
+
+export async function learnProfession(characterId: string, key: string): Promise<ActionResult> {
+  await rpc("learn_profession", { p_character: characterId, p_profession: key });
+  return "Profession learned. Visit its recipes to start crafting.";
+}
+
+export async function forgetProfession(characterId: string, key: string): Promise<ActionResult> {
+  await rpc("forget_profession", { p_character: characterId, p_profession: key });
+  return "Profession forgotten.";
+}
+
+export async function craftRecipe(characterId: string, recipeId: string, times: number): Promise<ActionResult> {
+  const r = await rpc<{ item: string; quantity: number; xp_gained: number; level: number; leveled_up: boolean }>("craft", { p_character: characterId, p_recipe: recipeId, p_times: times });
+  return `Crafted ${r.quantity}× ${r.item} (+${r.xp_gained} skill).${r.leveled_up ? ` Skill up! You are now level ${r.level}.` : ""}`;
+}
+
+export async function gmUseItem(reservationId: string, itemId: string): Promise<ActionResult> {
+  const left = await rpc<number>("gm_use_item", { p_reservation: reservationId, p_item: itemId, p_quantity: 1 });
+  return `Item used. ${left} left.`;
+}
+
+// ------------------------------------------------------------------ GM: errands & recipes
+export async function saveErrand(fd: FormData): Promise<ActionResult> {
+  const me = await uid();
+  const kind = str(fd, "kind") === "riddle" ? "riddle" : "expedition";
+  const title = str(fd, "title");
+  const row = await must(sb().from("errands").insert({
+    slug: `${slugify(title)}-${Date.now().toString(36)}`, title, kind, description: str(fd, "description"),
+    location_id: str(fd, "location_id") || null, min_rank: str(fd, "min_rank") || "F",
+    duration_minutes: kind === "expedition" ? Math.round(Number(fd.get("hours") || 2) * 60) : null,
+    gold_reward: Math.min(num(fd, "gold"), 50), created_by: me,
+  }).select("id").single());
+  const rewards = [0, 1, 2].map((i) => ({ item_id: str(fd, `item_${i}`), qty_min: num(fd, `min_${i}`) || 1, qty_max: num(fd, `max_${i}`) || num(fd, `min_${i}`) || 1, chance: Math.min(Math.max(Number(fd.get(`chance_${i}`) || 100), 1), 100) / 100 }))
+    .filter((r) => r.item_id).map((r) => ({ ...r, errand_id: row!.id, qty_max: Math.max(r.qty_max, r.qty_min) }));
+  if (rewards.length) await must(sb().from("errand_rewards").insert(rewards));
+  if (kind === "riddle") {
+    const answers = str(fd, "answers").split(",").map((a) => a.trim()).filter(Boolean);
+    if (!answers.length) throw new Error("Add at least one accepted answer.");
+    await must(sb().from("errand_secrets").insert({ errand_id: row!.id, answers }));
+  }
+  return kind === "riddle" ? "Riddle posted to the Errand Board." : "Expedition posted to the Errand Board.";
+}
+
+export async function toggleErrand(id: string, active: boolean): Promise<ActionResult> {
+  await must(sb().from("errands").update({ is_active: active }).eq("id", id));
+  return active ? "Errand is live." : "Errand hidden.";
+}
+
+export async function saveRecipe(fd: FormData): Promise<ActionResult> {
+  const name = str(fd, "name");
+  const row = await must(sb().from("recipes").insert({
+    slug: `${slugify(name)}-${Date.now().toString(36)}`, name, profession_key: str(fd, "profession_key"),
+    required_level: Math.min(Math.max(num(fd, "required_level"), 1), 10), output_item_id: str(fd, "output_item_id"),
+    output_quantity: num(fd, "output_quantity") || 1, prof_xp: num(fd, "prof_xp") || 10, gold_cost: num(fd, "gold_cost"),
+  }).select("id").single());
+  const ings = [0, 1, 2, 3].map((i) => ({ recipe_id: row!.id, item_id: str(fd, `ing_${i}`), quantity: num(fd, `qty_${i}`) || 1 })).filter((x) => x.item_id);
+  if (!ings.length) throw new Error("Add at least one ingredient.");
+  await must(sb().from("recipe_ingredients").insert(ings));
+  return "Recipe added to the Workshop.";
+}
+
+export async function toggleRecipe(id: string, active: boolean): Promise<ActionResult> {
+  await must(sb().from("recipes").update({ is_active: active }).eq("id", id));
+  return active ? "Recipe is live." : "Recipe hidden.";
+}

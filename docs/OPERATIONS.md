@@ -21,6 +21,18 @@ Ledgers are append-only. To correct gold, renown or XP, use **Players & Moderati
 
 Raids watch a world flag. The seeded *Crimson Wyrm* unlocks automatically when `ancient_sigils` reaches 5: the Raid Center changes, a Chronicle proclamation is published, and every player is notified. Then use **Raid Controller** to open registration, run the raid and resolve it. **Emergency pause** stops automatic transitions, and admins can override the state (logged).
 
+## Guild Errands & Professions
+
+Players do mini-quests from home: **expeditions** (send your adventurer away for a few hours, then collect materials) and **riddles** (lore questions answered from the Chronicle, quest pages and atlas; checked on the server). Errands pay **materials and at most 50 gold, never XP or renown**.
+
+Materials feed five **professions** (Blacksmithing, Alchemy, Leatherworking, Cooking, Artificing). Each adventurer learns up to two; crafting raises that profession's skill (1–10), separate from character level. Recipes 3+ levels below your skill give almost no skill, so players move on to harder recipes.
+
+- **Post errands / recipes:** Command Center → *Errands & Crafting* (Senior GM). Hide or publish any errand or recipe there.
+- **At the table:** in Session Manager, each adventurer on the roster has a *Pack*. Click *Use* on a potion or ration to spend it; this is logged in their inventory.
+- **Settings** (`admin_settings`): `expedition_slots` (2), `errand_daily_cap` (8 rewards per 24h), `riddle_attempts_per_day` (5), `profession_slots` (2).
+- **New items** for recipes: add a row in Supabase → Table Editor → `items`, then it appears in the recipe form.
+- Item descriptions starting "Table effect:" are suggestions for the GM; the rules engine does not enforce them.
+
 ## The Auction Hall
 
 Players at Rank E and above can auction tradeable items to each other for gold. Items go into escrow when listed; a bid's gold is held and returned automatically when outbid. Finished auctions settle the next time anyone opens the Auction Hall.

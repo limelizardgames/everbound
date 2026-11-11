@@ -7,7 +7,7 @@ import { useViewer } from "@/lib/viewer";
 import { useData } from "@/lib/useData";
 import { useAct } from "@/lib/toast";
 import {
-  approveResults, cancelReservation, rejectResults, saveResults, saveSessionNotes, setPaymentStatus, updateLiveState, updateSession,
+  approveResults, cancelReservation, gmUseItem, rejectResults, saveResults, saveSessionNotes, setPaymentStatus, updateLiveState, updateSession,
 } from "@/lib/actions";
 import { Empty, PageHeader, StatusPill } from "@/components/ui";
 import { SubmitButton } from "@/components/SubmitButton";
@@ -38,12 +38,14 @@ async function loadSession(id: string) {
   const all = roster as unknown as R[];
   const charIds = all.map((r) => r.character.id);
   const totals = charIds.length ? await must(c.from("character_totals").select("character_id, level, rank_code").in("character_id", charIds)) : [];
+  const packs = charIds.length ? await must(c.from("inventory_balances").select("character_id, quantity, item:items(id, name, rarity, item_type)").in("character_id", charIds)) : [];
   return {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     session, all, notes: notes as { notes: string | null } | null, results: results as any, secrets: secrets as any,
     items: items as Opt[], achievements: achievements as Opt[], flags: flags as { key: string; label: string; value: number }[],
     locations: locations as { id: string; name: string; status: string; is_discovered: boolean }[], staff: staff as { id: string; display_name: string }[],
     tmap: new Map((totals as { character_id: string; level: number; rank_code: string }[]).map((t) => [t.character_id, t])),
+    packs: packs as unknown as { character_id: string; quantity: number; item: { id: string; name: string; rarity: string; item_type: string } }[],
   };
 }
 
@@ -59,7 +61,7 @@ function SessionDetail() {
   useTitle(data?.session.template.title ?? "Run Session");
   if (loading || !viewer) return <Loading />;
   if (!data) return <Empty title="Session not found" action={<Link className="btn-ghost" href="/gm/sessions/">Session Manager</Link>} />;
-  const { session, all, notes, results, secrets, items, achievements, flags, locations, staff, tmap } = data;
+  const { session, all, notes, results, secrets, items, achievements, flags, locations, staff, tmap, packs } = data;
   const after = { after: reload };
   const seated = all.filter((r) => ["confirmed", "pending_payment", "attended", "no_show"].includes(r.status));
   const waitlist = all.filter((r) => r.status === "waitlisted");
@@ -90,7 +92,25 @@ function SessionDetail() {
                 const t = tmap.get(r.character.id);
                 return (
                   <tr key={r.id}>
-                    <td><span className="font-semibold">{r.character.name}</span><span className="muted block text-xs capitalize">{r.character.species.replace("_", " ")} {r.character.class}</span></td>
+                    <td>
+                      <span className="font-semibold">{r.character.name}</span><span className="muted block text-xs capitalize">{r.character.species.replace("_", " ")} {r.character.class}</span>
+                      {(() => {
+                        const bag = packs.filter((p) => p.character_id === r.character.id && ["consumable", "gear"].includes(p.item.item_type));
+                        return bag.length > 0 && (
+                          <details className="mt-1">
+                            <summary className="cursor-pointer font-ui text-[12px] font-bold uppercase tracking-wider text-arcane-light">Pack · {bag.reduce((n, b) => n + b.quantity, 0)} items</summary>
+                            <ul className="mt-1 grid gap-1">
+                              {bag.map((b) => (
+                                <li key={b.item.id} className="flex items-center justify-between gap-2 text-xs">
+                                  <span className={`rarity-${b.item.rarity}`}>{b.item.name} ×{b.quantity}</span>
+                                  {b.item.item_type === "consumable" && <form action={act(() => gmUseItem(r.id, b.item.id), after)}><SubmitButton className="btn-arcane btn-sm !min-h-[28px] !px-2 !py-0.5" pendingText="…">Use</SubmitButton></form>}
+                                </li>
+                              ))}
+                            </ul>
+                          </details>
+                        );
+                      })()}
+                    </td>
                     <td>{t?.level ?? "?"} / {t?.rank_code ?? "?"}</td>
                     <td>
                       <form action={act(updateLiveState, after)} className="flex flex-wrap items-center gap-1">

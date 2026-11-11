@@ -2252,6 +2252,450 @@ grant execute on function public.cancel_auction(uuid, text) to authenticated;
 grant execute on function public.settle_due_auctions() to service_role;
 
 
+-- >>> 20261111000001_errands_and_professions.sql
+-- =============================================================================
+-- EVERBOUND — Guild Errands (at-home mini-quests) and Professions (crafting)
+--
+-- Errands reward ONLY materials and small amounts of gold (never XP or renown),
+-- so rank and level stay earned at the table.
+--   * Expeditions: send your adventurer on a timed job; claim the haul later.
+--   * Riddles: lore questions answered from the Chronicle and quest pages,
+--     checked on the server (answers are never sent to players).
+-- Professions: each adventurer learns up to two; recipes turn materials into
+-- gear and consumables that can be used at the table or sold at auction.
+-- Profession skill (crafting level) is separate from character XP.
+-- Everything flows through the same append-only ledgers.
+-- =============================================================================
+
+alter table public.ledger_entries drop constraint if exists ledger_entries_source_type_check;
+alter table public.ledger_entries add constraint ledger_entries_source_type_check
+  check (source_type in ('session', 'raid', 'admin', 'purchase', 'refund', 'correction', 'achievement', 'starting', 'auction', 'errand', 'crafting'));
+alter table public.inventory_transactions drop constraint if exists inventory_transactions_source_type_check;
+alter table public.inventory_transactions add constraint inventory_transactions_source_type_check
+  check (source_type in ('session', 'raid', 'admin', 'purchase', 'refund', 'correction', 'starting', 'crafting', 'auction', 'errand'));
+
+insert into public.admin_settings (key, value, description) values
+  ('expedition_slots', '2', 'How many expeditions one adventurer can have running at once'),
+  ('errand_daily_cap', '8', 'Max errand rewards one adventurer can collect in any 24 hours'),
+  ('riddle_attempts_per_day', '5', 'Wrong answers allowed per riddle per 24 hours'),
+  ('profession_slots', '2', 'How many professions one adventurer can learn')
+on conflict (key) do nothing;
+
+-- ---------------------------------------------------------------- tables
+create table if not exists public.professions (
+  key text primary key,
+  name text not null,
+  description text not null,
+  icon text not null default 'hammer',
+  sort int not null default 0
+);
+
+create table if not exists public.character_professions (
+  character_id uuid not null references public.characters (id) on delete cascade,
+  profession_key text not null references public.professions (key),
+  xp int not null default 0 check (xp >= 0),
+  learned_at timestamptz not null default now(),
+  primary key (character_id, profession_key)
+);
+
+create table if not exists public.recipes (
+  id uuid primary key default gen_random_uuid(),
+  slug text not null unique,
+  name text not null,
+  profession_key text not null references public.professions (key),
+  required_level int not null default 1 check (required_level between 1 and 10),
+  output_item_id uuid not null references public.items (id),
+  output_quantity int not null default 1 check (output_quantity between 1 and 20),
+  prof_xp int not null default 10 check (prof_xp between 1 and 200),
+  gold_cost int not null default 0 check (gold_cost between 0 and 100),
+  is_active boolean not null default true,
+  created_at timestamptz not null default now()
+);
+
+create table if not exists public.recipe_ingredients (
+  recipe_id uuid not null references public.recipes (id) on delete cascade,
+  item_id uuid not null references public.items (id),
+  quantity int not null check (quantity between 1 and 50),
+  primary key (recipe_id, item_id)
+);
+
+create table if not exists public.errands (
+  id uuid primary key default gen_random_uuid(),
+  slug text not null unique,
+  title text not null,
+  kind text not null check (kind in ('expedition', 'riddle')),
+  description text not null,
+  location_id uuid references public.locations (id),
+  min_rank text not null default 'F' references public.rank_definitions (code),
+  duration_minutes int check (duration_minutes is null or duration_minutes between 5 and 4320),
+  gold_reward int not null default 0 check (gold_reward between 0 and 50),   -- "small gold" by design
+  is_active boolean not null default true,
+  sort int not null default 0,
+  created_by uuid,
+  created_at timestamptz not null default now(),
+  check (kind = 'riddle' or duration_minutes is not null)
+);
+
+create table if not exists public.errand_rewards (
+  id bigint generated always as identity primary key,
+  errand_id uuid not null references public.errands (id) on delete cascade,
+  item_id uuid not null references public.items (id),
+  qty_min int not null default 1 check (qty_min >= 1),
+  qty_max int not null default 1,
+  chance numeric(4, 3) not null default 1 check (chance > 0 and chance <= 1),
+  check (qty_max >= qty_min and qty_max <= 20),
+  unique (errand_id, item_id)
+);
+
+-- Riddle answers are staff-only; players only ever see right/wrong.
+create table if not exists public.errand_secrets (
+  errand_id uuid primary key references public.errands (id) on delete cascade,
+  answers text[] not null
+);
+
+create table if not exists public.errand_runs (
+  id uuid primary key default gen_random_uuid(),
+  errand_id uuid not null references public.errands (id),
+  character_id uuid not null references public.characters (id) on delete cascade,
+  profile_id uuid not null references public.profiles (id) on delete cascade,
+  status text not null check (status in ('running', 'claimed', 'solved')),
+  started_at timestamptz not null default now(),
+  ready_at timestamptz,
+  claimed_at timestamptz,
+  rewards jsonb not null default '[]'::jsonb
+);
+create index if not exists errand_runs_char_idx on public.errand_runs (character_id, status);
+create unique index if not exists errand_runs_riddle_once on public.errand_runs (errand_id, character_id) where status = 'solved';
+create unique index if not exists errand_runs_one_running on public.errand_runs (errand_id, character_id) where status = 'running';
+
+create table if not exists public.riddle_attempts (
+  id bigint generated always as identity primary key,
+  errand_id uuid not null references public.errands (id) on delete cascade,
+  character_id uuid not null references public.characters (id) on delete cascade,
+  correct boolean not null,
+  created_at timestamptz not null default now()
+);
+
+create table if not exists public.crafting_log (
+  id bigint generated always as identity primary key,
+  character_id uuid not null references public.characters (id) on delete cascade,
+  recipe_id uuid not null references public.recipes (id),
+  times int not null,
+  xp_gained int not null,
+  created_at timestamptz not null default now()
+);
+
+-- ---------------------------------------------------------------- profession levels (1–10)
+create or replace function public.profession_level(p_xp int)
+returns int language sql immutable
+as $$ select count(*)::int from unnest(array[0, 30, 80, 150, 250, 400, 600, 850, 1150, 1500]) t where t <= p_xp $$;
+
+create or replace function public.profession_next_xp(p_xp int)
+returns int language sql immutable
+as $$ select min(t) from unnest(array[0, 30, 80, 150, 250, 400, 600, 850, 1150, 1500]) t where t > p_xp $$;
+
+create or replace view public.character_profession_levels with (security_invoker = true) as
+select cp.character_id, cp.profession_key, cp.xp, cp.learned_at,
+       public.profession_level(cp.xp) as level, public.profession_next_xp(cp.xp) as next_level_xp
+from public.character_professions cp;
+
+-- ---------------------------------------------------------------- RLS
+alter table public.professions enable row level security;
+alter table public.character_professions enable row level security;
+alter table public.recipes enable row level security;
+alter table public.recipe_ingredients enable row level security;
+alter table public.errands enable row level security;
+alter table public.errand_rewards enable row level security;
+alter table public.errand_secrets enable row level security;
+alter table public.errand_runs enable row level security;
+alter table public.riddle_attempts enable row level security;
+alter table public.crafting_log enable row level security;
+
+drop policy if exists professions_read on public.professions;
+create policy professions_read on public.professions for select using (true);
+drop policy if exists professions_write on public.professions;
+create policy professions_write on public.professions for all using (public.has_role('admin')) with check (public.has_role('admin'));
+
+drop policy if exists char_prof_read on public.character_professions;
+create policy char_prof_read on public.character_professions for select
+  using (public.is_staff() or exists (select 1 from public.characters c where c.id = character_id and c.profile_id = auth.uid()));
+
+drop policy if exists recipes_read on public.recipes;
+create policy recipes_read on public.recipes for select using (is_active or public.is_staff());
+drop policy if exists recipes_write on public.recipes;
+create policy recipes_write on public.recipes for all using (public.has_role('senior_gm')) with check (public.has_role('senior_gm'));
+drop policy if exists ingredients_read on public.recipe_ingredients;
+create policy ingredients_read on public.recipe_ingredients for select using (true);
+drop policy if exists ingredients_write on public.recipe_ingredients;
+create policy ingredients_write on public.recipe_ingredients for all using (public.has_role('senior_gm')) with check (public.has_role('senior_gm'));
+
+drop policy if exists errands_read on public.errands;
+create policy errands_read on public.errands for select using (is_active or public.is_staff());
+drop policy if exists errands_write on public.errands;
+create policy errands_write on public.errands for all using (public.has_role('senior_gm')) with check (public.has_role('senior_gm'));
+drop policy if exists errand_rewards_read on public.errand_rewards;
+create policy errand_rewards_read on public.errand_rewards for select using (true);
+drop policy if exists errand_rewards_write on public.errand_rewards;
+create policy errand_rewards_write on public.errand_rewards for all using (public.has_role('senior_gm')) with check (public.has_role('senior_gm'));
+drop policy if exists errand_secrets_staff on public.errand_secrets;
+create policy errand_secrets_staff on public.errand_secrets for all using (public.has_role('senior_gm')) with check (public.has_role('senior_gm'));
+
+drop policy if exists errand_runs_read on public.errand_runs;
+create policy errand_runs_read on public.errand_runs for select using (profile_id = auth.uid() or public.is_staff());
+drop policy if exists riddle_attempts_read on public.riddle_attempts;
+create policy riddle_attempts_read on public.riddle_attempts for select
+  using (public.is_staff() or exists (select 1 from public.characters c where c.id = character_id and c.profile_id = auth.uid()));
+drop policy if exists crafting_log_read on public.crafting_log;
+create policy crafting_log_read on public.crafting_log for select
+  using (public.is_staff() or exists (select 1 from public.characters c where c.id = character_id and c.profile_id = auth.uid()));
+
+drop trigger if exists crafting_log_append_only on public.crafting_log;
+create trigger crafting_log_append_only before update or delete on public.crafting_log
+  for each row execute function public.forbid_ledger_mutation();
+
+-- ---------------------------------------------------------------- helpers
+-- Signed-in owner of an active character, not banned. Returns the character's rank.
+create or replace function public._own_character(p_character uuid)
+returns text language plpgsql security definer set search_path = public
+as $$
+declare v_rank text;
+begin
+  if auth.uid() is null then raise exception 'Please sign in first'; end if;
+  if exists (select 1 from public.profiles where id = auth.uid() and is_banned) then raise exception 'Account restricted'; end if;
+  if not exists (select 1 from public.characters where id = p_character and profile_id = auth.uid() and is_active) then
+    raise exception 'Choose one of your active adventurers';
+  end if;
+  select rank_code into v_rank from public.character_totals where character_id = p_character;
+  return v_rank;
+end $$;
+
+create or replace function public._norm_answer(p text)
+returns text language sql immutable
+as $$ select regexp_replace(regexp_replace(lower(trim(coalesce(p, ''))), '^(the|a|an)\s+', ''), '[^a-z0-9]', '', 'g') $$;
+
+-- Rewards collected in the last 24h (expeditions claimed + riddles solved).
+create or replace function public._errand_claims_today(p_character uuid)
+returns int language sql stable security definer set search_path = public
+as $$ select count(*)::int from public.errand_runs where character_id = p_character and status in ('claimed', 'solved') and claimed_at > now() - interval '24 hours' $$;
+
+-- Rolls and grants an errand's rewards once (idempotency keys per run).
+create or replace function public._grant_errand_rewards(p_errand uuid, p_character uuid, p_run uuid)
+returns jsonb language plpgsql security definer set search_path = public
+as $$
+declare e public.errands%rowtype; r record; q int; v_out jsonb := '[]'::jsonb;
+begin
+  select * into e from public.errands where id = p_errand;
+  for r in select er.*, i.name, i.rarity from public.errand_rewards er join public.items i on i.id = er.item_id where er.errand_id = p_errand order by er.id loop
+    if random() <= r.chance then
+      q := r.qty_min + floor(random() * (r.qty_max - r.qty_min + 1))::int;
+      insert into public.inventory_transactions (character_id, item_id, quantity, reason, source_type, source_id, idempotency_key)
+      values (p_character, r.item_id, q, 'Errand: ' || e.title, 'errand', p_run::text, format('errand:%s:item:%s', p_run, r.item_id))
+      on conflict (idempotency_key) do nothing;
+      v_out := v_out || jsonb_build_object('item', r.name, 'rarity', r.rarity, 'quantity', q);
+    end if;
+  end loop;
+  if e.gold_reward > 0 then
+    insert into public.ledger_entries (character_id, resource, amount, reason, source_type, source_id, idempotency_key)
+    values (p_character, 'gold', e.gold_reward, 'Errand: ' || e.title, 'errand', p_run::text, format('errand:%s:gold', p_run))
+    on conflict (idempotency_key) do nothing;
+    v_out := v_out || jsonb_build_object('item', 'Gold', 'rarity', 'legendary', 'quantity', e.gold_reward);
+  end if;
+  return v_out;
+end $$;
+
+-- ---------------------------------------------------------------- expeditions
+create or replace function public.start_expedition(p_character uuid, p_errand uuid)
+returns uuid language plpgsql security definer set search_path = public
+as $$
+declare v_rank text; e public.errands%rowtype; v_id uuid;
+begin
+  v_rank := public._own_character(p_character);
+  select * into e from public.errands where id = p_errand and is_active and kind = 'expedition';
+  if not found then raise exception 'That expedition is not available'; end if;
+  if public.rank_sort(v_rank) < public.rank_sort(e.min_rank) then raise exception 'This expedition requires guild rank %', e.min_rank; end if;
+  perform pg_advisory_xact_lock(hashtext('errands:' || p_character));
+  if (select count(*) from public.errand_runs where character_id = p_character and status = 'running') >= public.setting_text('expedition_slots', '2')::int then
+    raise exception 'Your adventurer is already on % expeditions. Collect one first.', public.setting_text('expedition_slots', '2');
+  end if;
+  if exists (select 1 from public.errand_runs where character_id = p_character and errand_id = p_errand and status = 'running') then
+    raise exception 'You are already on this expedition';
+  end if;
+  insert into public.errand_runs (errand_id, character_id, profile_id, status, ready_at)
+  values (p_errand, p_character, auth.uid(), 'running', now() + make_interval(mins => e.duration_minutes))
+  returning id into v_id;
+  return v_id;
+end $$;
+
+create or replace function public.claim_expedition(p_run uuid)
+returns jsonb language plpgsql security definer set search_path = public
+as $$
+declare run public.errand_runs%rowtype; v_rewards jsonb; v_cap int := public.setting_text('errand_daily_cap', '8')::int;
+begin
+  select * into run from public.errand_runs where id = p_run for update;
+  if not found or run.profile_id is distinct from auth.uid() then raise exception 'Expedition not found'; end if;
+  perform public._own_character(run.character_id);
+  if run.status <> 'running' then raise exception 'You already collected this expedition'; end if;
+  if run.ready_at > now() then raise exception 'Your adventurer has not returned yet'; end if;
+  if public._errand_claims_today(run.character_id) >= v_cap then
+    raise exception 'The quartermaster has logged % errands for you today. Your haul will wait until tomorrow.', v_cap;
+  end if;
+  v_rewards := public._grant_errand_rewards(run.errand_id, run.character_id, run.id);
+  update public.errand_runs set status = 'claimed', claimed_at = now(), rewards = v_rewards where id = run.id;
+  return v_rewards;
+end $$;
+
+create or replace function public.abandon_expedition(p_run uuid)
+returns void language plpgsql security definer set search_path = public
+as $$
+begin
+  delete from public.errand_runs where id = p_run and profile_id = auth.uid() and status = 'running';
+  if not found then raise exception 'Expedition not found'; end if;
+end $$;
+
+-- ---------------------------------------------------------------- riddles
+create or replace function public.solve_riddle(p_character uuid, p_errand uuid, p_answer text)
+returns jsonb language plpgsql security definer set search_path = public
+as $$
+declare v_rank text; e public.errands%rowtype; v_limit int := public.setting_text('riddle_attempts_per_day', '5')::int;
+        v_wrong int; v_ok boolean; v_run uuid; v_rewards jsonb;
+begin
+  v_rank := public._own_character(p_character);
+  select * into e from public.errands where id = p_errand and is_active and kind = 'riddle';
+  if not found then raise exception 'That riddle is not available'; end if;
+  if public.rank_sort(v_rank) < public.rank_sort(e.min_rank) then raise exception 'This riddle requires guild rank %', e.min_rank; end if;
+  perform pg_advisory_xact_lock(hashtext('errands:' || p_character));
+  if exists (select 1 from public.errand_runs where errand_id = p_errand and character_id = p_character and status = 'solved') then
+    raise exception 'You have already solved this riddle';
+  end if;
+  select count(*) into v_wrong from public.riddle_attempts
+   where errand_id = p_errand and character_id = p_character and not correct and created_at > now() - interval '24 hours';
+  if v_wrong >= v_limit then raise exception 'Out of guesses for today. Study the Chronicle and try again tomorrow.'; end if;
+  if length(coalesce(p_answer, '')) > 100 then raise exception 'That answer is too long'; end if;
+
+  select exists (select 1 from public.errand_secrets s, unnest(s.answers) a
+                 where s.errand_id = p_errand and public._norm_answer(a) = public._norm_answer(p_answer) and public._norm_answer(p_answer) <> '')
+    into v_ok;
+  insert into public.riddle_attempts (errand_id, character_id, correct) values (p_errand, p_character, v_ok);
+  if not v_ok then
+    return jsonb_build_object('correct', false, 'attempts_left', v_limit - v_wrong - 1);
+  end if;
+  insert into public.errand_runs (errand_id, character_id, profile_id, status, ready_at, claimed_at)
+  values (p_errand, p_character, auth.uid(), 'solved', now(), now()) returning id into v_run;
+  v_rewards := public._grant_errand_rewards(p_errand, p_character, v_run);
+  update public.errand_runs set rewards = v_rewards where id = v_run;
+  return jsonb_build_object('correct', true, 'rewards', v_rewards);
+end $$;
+
+-- ---------------------------------------------------------------- professions
+create or replace function public.learn_profession(p_character uuid, p_profession text)
+returns void language plpgsql security definer set search_path = public
+as $$
+declare v_slots int := public.setting_text('profession_slots', '2')::int;
+begin
+  perform public._own_character(p_character);
+  if not exists (select 1 from public.professions where key = p_profession) then raise exception 'Unknown profession'; end if;
+  perform pg_advisory_xact_lock(hashtext('errands:' || p_character));
+  if exists (select 1 from public.character_professions where character_id = p_character and profession_key = p_profession) then
+    raise exception 'You already know this profession';
+  end if;
+  if (select count(*) from public.character_professions where character_id = p_character) >= v_slots then
+    raise exception 'An adventurer can master only % professions. Forget one first.', v_slots;
+  end if;
+  insert into public.character_professions (character_id, profession_key) values (p_character, p_profession);
+  insert into public.character_history (character_id, entry_type, title, created_by)
+  select p_character, 'note', 'Took up the craft of ' || name, auth.uid() from public.professions where key = p_profession;
+end $$;
+
+create or replace function public.forget_profession(p_character uuid, p_profession text)
+returns void language plpgsql security definer set search_path = public
+as $$
+begin
+  perform public._own_character(p_character);
+  delete from public.character_professions where character_id = p_character and profession_key = p_profession;
+  if not found then raise exception 'You do not know that profession'; end if;
+end $$;
+
+create or replace function public.craft(p_character uuid, p_recipe uuid, p_times int default 1)
+returns jsonb language plpgsql security definer set search_path = public
+as $$
+declare r public.recipes%rowtype; v_out text; v_xp int; v_level int; v_per int; v_gain int; v_have int; ing record; v_key text := gen_random_uuid()::text;
+begin
+  perform public._own_character(p_character);
+  if p_times is null or p_times < 1 or p_times > 20 then raise exception 'Craft between 1 and 20 at a time'; end if;
+  select * into r from public.recipes where id = p_recipe and is_active;
+  if not found then raise exception 'Unknown recipe'; end if;
+  select xp into v_xp from public.character_professions where character_id = p_character and profession_key = r.profession_key for update;
+  if not found then raise exception 'You have not learned this profession'; end if;
+  v_level := public.profession_level(v_xp);
+  if v_level < r.required_level then raise exception 'Requires % level %', initcap(r.profession_key), r.required_level; end if;
+
+  perform pg_advisory_xact_lock(hashtext('gold:' || p_character));
+  for ing in select ri.item_id, ri.quantity, i.name from public.recipe_ingredients ri join public.items i on i.id = ri.item_id where ri.recipe_id = r.id loop
+    select coalesce(sum(quantity), 0) into v_have from public.inventory_transactions where character_id = p_character and item_id = ing.item_id;
+    if v_have < ing.quantity * p_times then raise exception 'Not enough % (% needed, % held)', ing.name, ing.quantity * p_times, v_have; end if;
+  end loop;
+  if r.gold_cost > 0 and public._gold(p_character) < r.gold_cost * p_times then
+    raise exception 'Workshop fee: % gold needed', r.gold_cost * p_times;
+  end if;
+
+  for ing in select ri.item_id, ri.quantity from public.recipe_ingredients ri where ri.recipe_id = r.id loop
+    insert into public.inventory_transactions (character_id, item_id, quantity, reason, source_type, source_id, idempotency_key, created_by)
+    values (p_character, ing.item_id, -ing.quantity * p_times, 'Crafting: ' || r.name, 'crafting', r.id::text, format('craft:%s:in:%s', v_key, ing.item_id), auth.uid());
+  end loop;
+  insert into public.inventory_transactions (character_id, item_id, quantity, reason, source_type, source_id, idempotency_key, created_by)
+  values (p_character, r.output_item_id, r.output_quantity * p_times, 'Crafted: ' || r.name, 'crafting', r.id::text, format('craft:%s:out', v_key), auth.uid());
+  if r.gold_cost > 0 then
+    insert into public.ledger_entries (character_id, resource, amount, reason, source_type, source_id, idempotency_key, created_by)
+    values (p_character, 'gold', -r.gold_cost * p_times, 'Workshop fee: ' || r.name, 'crafting', r.id::text, format('craft:%s:fee', v_key), auth.uid());
+  end if;
+
+  -- Recipes 3+ levels below your skill are "grey": they teach almost nothing.
+  v_per := case when v_level - r.required_level >= 3 then 1 else r.prof_xp end;
+  v_gain := v_per * p_times;
+  update public.character_professions set xp = least(xp + v_gain, 1500) where character_id = p_character and profession_key = r.profession_key;
+  insert into public.crafting_log (character_id, recipe_id, times, xp_gained) values (p_character, r.id, p_times, v_gain);
+  select name into v_out from public.items where id = r.output_item_id;
+  return jsonb_build_object('item', v_out, 'quantity', r.output_quantity * p_times, 'xp_gained', v_gain,
+    'level', public.profession_level(least(v_xp + v_gain, 1500)), 'leveled_up', public.profession_level(least(v_xp + v_gain, 1500)) > v_level);
+end $$;
+
+-- ---------------------------------------------------------------- at the table
+-- The assigned GM spends a consumable (or any item) a player brought to the session.
+create or replace function public.gm_use_item(p_reservation uuid, p_item uuid, p_quantity int default 1)
+returns int language plpgsql security definer set search_path = public
+as $$
+declare v_res public.reservations%rowtype; v_gm uuid; v_have int; v_name text;
+begin
+  select * into v_res from public.reservations where id = p_reservation;
+  if not found then raise exception 'Reservation not found'; end if;
+  select gm_id into v_gm from public.quest_sessions where id = v_res.session_id;
+  if not (public.has_role('senior_gm') or (public.is_staff() and v_gm = auth.uid())) then
+    raise exception 'Only the assigned Game Master can use items at this table';
+  end if;
+  perform pg_advisory_xact_lock(hashtext('gold:' || v_res.character_id));
+  select coalesce(sum(quantity), 0) into v_have from public.inventory_transactions where character_id = v_res.character_id and item_id = p_item;
+  if v_have < p_quantity or p_quantity < 1 then raise exception 'The adventurer does not carry enough of that item'; end if;
+  select name into v_name from public.items where id = p_item;
+  insert into public.inventory_transactions (character_id, item_id, quantity, reason, source_type, source_id, created_by)
+  values (v_res.character_id, p_item, -p_quantity, 'Used at the table: ' || v_name, 'session', v_res.session_id::text, auth.uid());
+  return v_have - p_quantity;
+end $$;
+
+-- ---------------------------------------------------------------- grants
+revoke all on function public._own_character(uuid) from public, anon, authenticated;
+revoke all on function public._errand_claims_today(uuid) from public, anon, authenticated;
+revoke all on function public._grant_errand_rewards(uuid, uuid, uuid) from public, anon, authenticated;
+do $$
+declare f text;
+begin
+  foreach f in array array['start_expedition(uuid, uuid)', 'claim_expedition(uuid)', 'abandon_expedition(uuid)', 'solve_riddle(uuid, uuid, text)',
+                           'learn_profession(uuid, text)', 'forget_profession(uuid, text)', 'craft(uuid, uuid, int)', 'gm_use_item(uuid, uuid, int)'] loop
+    execute format('revoke execute on function public.%s from public, anon', f);
+    execute format('grant execute on function public.%s to authenticated', f);
+  end loop;
+end $$;
+
+
 -- >>> seed.sql
 -- =============================================================================
 -- EVERBOUND — Seed data for a fictional starting world (safe to edit freely)
@@ -2512,6 +2956,146 @@ on conflict (slug) do nothing;
 insert into public.guild_cards (card_number, token, tier, batch_label)
 select 'EVB-' || lpad(nextval('public.guild_card_number_seq')::text, 5, '0'), public.new_card_token(), 'founding', 'founding-batch'
 from generate_series(1, 12);
+
+
+-- >>> content_professions.sql
+-- =============================================================================
+-- EVERBOUND — Starter professions, materials, recipes and Guild Errands.
+-- Idempotent: safe to run more than once. Edit freely; GMs can add more from
+-- Command Center → Errands & Crafting.
+-- Table effects in item descriptions are suggestions for the Guild Master.
+-- =============================================================================
+
+insert into public.professions (key, name, description, icon, sort) values
+  ('blacksmithing', 'Blacksmithing', 'Smelt ore into ingots and forge blades and shields at the Highmere anvils.', 'anvil', 1),
+  ('alchemy', 'Alchemy', 'Brew draughts, tonics and elixirs from herbs and marsh water.', 'flask', 2),
+  ('leatherworking', 'Leatherworking', 'Cure hides and stitch packs and armour for life on the road.', 'needle', 3),
+  ('cooking', 'Cooking', 'Turn game and grain into meals that keep a party on its feet.', 'pot', 4),
+  ('artificing', 'Artificing', 'Bind glimmer dust and crystal into charms, wards and lanterns.', 'gem', 5)
+on conflict (key) do nothing;
+
+insert into public.items (slug, name, description, item_type, rarity, is_tradeable) values
+  -- gathered materials
+  ('moonpetal', 'Moonpetal', 'Pale blossoms from the edge of Silverfen. An alchemist''s staple.', 'material', 'common', true),
+  ('marsh-water', 'Marsh Water', 'Brackish, faintly glowing water from the Glimmering Marsh.', 'material', 'common', true),
+  ('ember-root', 'Ember Root', 'A warm red root that grows in the Ashen Road''s burned soil.', 'material', 'uncommon', true),
+  ('iron-ore', 'Iron Ore', 'Raw ore from the upper galleries of Whisperstone.', 'material', 'common', true),
+  ('coal', 'Coal', 'Fuel for the forge.', 'material', 'common', true),
+  ('ashwood', 'Ashwood Timber', 'Fire-hardened wood from the charred oaks of the Ashen Road.', 'material', 'common', true),
+  ('rough-hide', 'Rough Hide', 'An untreated hide from the Emberfall hunting grounds.', 'material', 'common', true),
+  ('wild-game', 'Wild Game', 'Fresh venison and fowl from around Emberfall.', 'material', 'common', true),
+  ('emberfall-grain', 'Emberfall Grain', 'Golden grain from Emberfall''s famous harvest.', 'material', 'common', true),
+  ('glimmer-dust', 'Glimmer Dust', 'Fine powder scraped from Silverfen crystals. Hums when shaken.', 'material', 'uncommon', true),
+  ('frost-lichen', 'Frost Lichen', 'A blue lichen from the Frostmarch that stays cold even in a fire.', 'material', 'uncommon', true),
+  -- intermediates
+  ('iron-ingot', 'Iron Ingot', 'Smelted iron, ready for the anvil.', 'material', 'common', true),
+  ('cured-leather', 'Cured Leather', 'Supple leather, ready for stitching.', 'material', 'common', true),
+  -- crafted goods
+  ('ember-tonic', 'Ember Tonic', 'Table effect: resist fire for one encounter.', 'consumable', 'uncommon', true),
+  ('elixir-of-clear-sight', 'Elixir of Clear Sight', 'Table effect: see through one illusion or find one hidden thing.', 'consumable', 'rare', true),
+  ('iron-dagger', 'Iron Dagger', 'A plain, honest blade.', 'gear', 'common', true),
+  ('frostforged-blade', 'Frostforged Blade', 'Table effect: once per session, your strike chills the target and slows it.', 'gear', 'epic', true),
+  ('travelers-pack', 'Traveler''s Pack', 'Table effect: carry one extra item into a session.', 'gear', 'uncommon', true),
+  ('hunters-jerkin', 'Hunter''s Jerkin', 'Table effect: advantage on one stealth or tracking check per session.', 'gear', 'uncommon', true),
+  ('trail-rations', 'Trail Rations', 'Table effect: recover a little HP during a short rest.', 'consumable', 'common', true),
+  ('hearty-stew', 'Hearty Stew', 'Table effect: the whole party recovers a little HP during a rest.', 'consumable', 'common', true),
+  ('ember-pepper-roast', 'Ember Pepper Roast', 'Table effect: courage — reroll one failed fear or morale check.', 'consumable', 'uncommon', true),
+  ('glimmer-charm', 'Glimmer Charm', 'A small charm that glows softly near magic.', 'cosmetic', 'uncommon', true),
+  ('resonance-ward', 'Resonance Ward', 'Table effect: once per session, turn aside one magical attack.', 'gear', 'rare', true)
+on conflict (slug) do nothing;
+
+insert into public.recipes (slug, name, profession_key, required_level, output_item_id, output_quantity, prof_xp, gold_cost)
+select v.slug, v.name, v.prof, v.lvl, i.id, v.qty, v.xp, v.gold
+from (values
+  ('smelt-iron-ingot', 'Smelt Iron Ingot', 'blacksmithing', 1, 'iron-ingot', 1, 8, 0),
+  ('forge-iron-dagger', 'Forge Iron Dagger', 'blacksmithing', 2, 'iron-dagger', 1, 20, 2),
+  ('forge-ironwood-shield', 'Forge Ironwood Shield', 'blacksmithing', 4, 'ironwood-shield', 1, 45, 5),
+  ('forge-frostforged-blade', 'Forge Frostforged Blade', 'blacksmithing', 6, 'frostforged-blade', 1, 90, 10),
+  ('brew-healing-draught', 'Brew Healing Draught', 'alchemy', 1, 'healing-draught', 1, 10, 0),
+  ('brew-ember-tonic', 'Brew Ember Tonic', 'alchemy', 2, 'ember-tonic', 1, 20, 1),
+  ('brew-elixir-of-clear-sight', 'Brew Elixir of Clear Sight', 'alchemy', 4, 'elixir-of-clear-sight', 1, 45, 4),
+  ('cure-leather', 'Cure Leather', 'leatherworking', 1, 'cured-leather', 1, 8, 0),
+  ('stitch-travelers-pack', 'Stitch Traveler''s Pack', 'leatherworking', 2, 'travelers-pack', 1, 25, 2),
+  ('stitch-hunters-jerkin', 'Stitch Hunter''s Jerkin', 'leatherworking', 4, 'hunters-jerkin', 1, 45, 4),
+  ('cook-trail-rations', 'Cook Trail Rations', 'cooking', 1, 'trail-rations', 2, 10, 0),
+  ('cook-hearty-stew', 'Cook Hearty Stew', 'cooking', 2, 'hearty-stew', 1, 20, 1),
+  ('cook-ember-pepper-roast', 'Cook Ember Pepper Roast', 'cooking', 4, 'ember-pepper-roast', 1, 40, 2),
+  ('craft-glimmer-charm', 'Craft Glimmer Charm', 'artificing', 1, 'glimmer-charm', 1, 12, 1),
+  ('craft-lantern-of-clear-sight', 'Craft Lantern of Clear Sight', 'artificing', 3, 'lantern-of-clear-sight', 1, 35, 3),
+  ('craft-resonance-ward', 'Craft Resonance Ward', 'artificing', 5, 'resonance-ward', 1, 70, 6)
+) v(slug, name, prof, lvl, out_slug, qty, xp, gold)
+join public.items i on i.slug = v.out_slug
+on conflict (slug) do nothing;
+
+insert into public.recipe_ingredients (recipe_id, item_id, quantity)
+select r.id, i.id, v.qty
+from (values
+  ('smelt-iron-ingot', 'iron-ore', 2), ('smelt-iron-ingot', 'coal', 1),
+  ('forge-iron-dagger', 'iron-ingot', 2), ('forge-iron-dagger', 'ashwood', 1),
+  ('forge-ironwood-shield', 'iron-ingot', 3), ('forge-ironwood-shield', 'ashwood', 2),
+  ('forge-frostforged-blade', 'iron-ingot', 4), ('forge-frostforged-blade', 'frost-lichen', 2), ('forge-frostforged-blade', 'glimmer-dust', 1),
+  ('brew-healing-draught', 'moonpetal', 3), ('brew-healing-draught', 'marsh-water', 1),
+  ('brew-ember-tonic', 'ember-root', 2), ('brew-ember-tonic', 'marsh-water', 1),
+  ('brew-elixir-of-clear-sight', 'glimmer-dust', 2), ('brew-elixir-of-clear-sight', 'moonpetal', 2), ('brew-elixir-of-clear-sight', 'marsh-water', 1),
+  ('cure-leather', 'rough-hide', 2), ('cure-leather', 'marsh-water', 1),
+  ('stitch-travelers-pack', 'cured-leather', 3), ('stitch-travelers-pack', 'travelers-rope', 1),
+  ('stitch-hunters-jerkin', 'cured-leather', 4), ('stitch-hunters-jerkin', 'ember-root', 1),
+  ('cook-trail-rations', 'wild-game', 1), ('cook-trail-rations', 'emberfall-grain', 1),
+  ('cook-hearty-stew', 'wild-game', 2), ('cook-hearty-stew', 'moonpetal', 1), ('cook-hearty-stew', 'emberfall-grain', 1),
+  ('cook-ember-pepper-roast', 'wild-game', 2), ('cook-ember-pepper-roast', 'ember-root', 2),
+  ('craft-glimmer-charm', 'glimmer-dust', 2), ('craft-glimmer-charm', 'iron-ingot', 1),
+  ('craft-lantern-of-clear-sight', 'glimmer-dust', 2), ('craft-lantern-of-clear-sight', 'iron-ingot', 1), ('craft-lantern-of-clear-sight', 'ashwood', 1),
+  ('craft-resonance-ward', 'silverfen-crystal-shard', 1), ('craft-resonance-ward', 'glimmer-dust', 3), ('craft-resonance-ward', 'iron-ingot', 2)
+) v(recipe, item, qty)
+join public.recipes r on r.slug = v.recipe
+join public.items i on i.slug = v.item
+on conflict do nothing;
+
+insert into public.errands (slug, title, kind, description, location_id, min_rank, duration_minutes, gold_reward, sort)
+select v.slug, v.title, v.kind, v.descr, l.id, v.rank, v.mins, v.gold, v.sort
+from (values
+  ('gather-moonpetal', 'Moonpetal Gathering', 'expedition', 'Mother Wren pays for moonpetal picked at dawn on the edge of Silverfen. Mind the bog lights.', 'silverfen', 'F', 120, 3, 1),
+  ('mine-upper-galleries', 'Mine the Upper Galleries', 'expedition', 'The upper galleries of Whisperstone are safe enough by day. Bring back ore and coal for the forges.', 'whisperstone-mines', 'F', 240, 4, 2),
+  ('emberfall-hunt', 'The Emberfall Hunt', 'expedition', 'Emberfall''s hunters need an extra bow. You keep a share of the game and hides.', 'emberfall', 'F', 180, 3, 3),
+  ('ashen-timber', 'Timber on the Ashen Road', 'expedition', 'Fell fire-hardened ashwood along the road. Keep an eye out for bandits.', 'ashen-road', 'E', 240, 5, 4),
+  ('crystal-survey', 'Crystal Survey at Silverfen', 'expedition', 'Help the Guild scholars catalogue the strange crystals beneath the marsh.', 'silverfen', 'E', 480, 6, 5),
+  ('frostmarch-patrol', 'Frostmarch Patrol', 'expedition', 'Walk the Old King''s Road as far as the frost line and report back.', 'old-kings-road', 'D', 480, 8, 6),
+  ('riddle-last-word', 'The Last Word', 'riddle', 'The Northern Watchtower sent one final message before it fell silent. What was that single word?', 'northern-watchtower', 'F', null, 5, 10),
+  ('riddle-quartermaster', 'The Quartermaster''s Complaint', 'riddle', 'Quartermaster Bram cannot restock one kind of item until the Ashen Road is cleared. What is it?', 'highmere', 'F', null, 5, 11),
+  ('riddle-lights', 'Lights Beneath the Water', 'riddle', 'In which village do fisherfolk speak of lights beneath the water on moonless nights?', 'silverfen', 'F', null, 5, 12),
+  ('riddle-sigils', 'The Sealed Gate', 'riddle', 'How many ancient sigils were set to seal the Crimson Wyrm?', 'crimson-peaks', 'F', null, 5, 13)
+) v(slug, title, kind, descr, loc, rank, mins, gold, sort)
+left join public.locations l on l.slug = v.loc
+on conflict (slug) do nothing;
+
+insert into public.errand_rewards (errand_id, item_id, qty_min, qty_max, chance)
+select e.id, i.id, v.mn, v.mx, v.ch
+from (values
+  ('gather-moonpetal', 'moonpetal', 2, 4, 1.0), ('gather-moonpetal', 'marsh-water', 1, 2, 1.0),
+  ('mine-upper-galleries', 'iron-ore', 2, 4, 1.0), ('mine-upper-galleries', 'coal', 1, 3, 1.0),
+  ('emberfall-hunt', 'wild-game', 2, 3, 1.0), ('emberfall-hunt', 'rough-hide', 1, 2, 1.0), ('emberfall-hunt', 'emberfall-grain', 1, 2, 0.8),
+  ('ashen-timber', 'ashwood', 2, 3, 1.0), ('ashen-timber', 'ember-root', 1, 2, 0.6),
+  ('crystal-survey', 'glimmer-dust', 1, 2, 1.0), ('crystal-survey', 'marsh-water', 1, 2, 1.0), ('crystal-survey', 'silverfen-crystal-shard', 1, 1, 0.1),
+  ('frostmarch-patrol', 'frost-lichen', 1, 2, 1.0), ('frostmarch-patrol', 'iron-ore', 1, 2, 1.0),
+  ('riddle-last-word', 'glimmer-dust', 2, 2, 1.0),
+  ('riddle-quartermaster', 'iron-ore', 3, 3, 1.0),
+  ('riddle-lights', 'moonpetal', 4, 4, 1.0),
+  ('riddle-sigils', 'ember-root', 2, 2, 1.0)
+) v(errand, item, mn, mx, ch)
+join public.errands e on e.slug = v.errand
+join public.items i on i.slug = v.item
+on conflict (errand_id, item_id) do nothing;
+
+insert into public.errand_secrets (errand_id, answers)
+select e.id, v.answers
+from (values
+  ('riddle-last-word', array['Gate']),
+  ('riddle-quartermaster', array['Ironwood shields', 'Ironwood shield', 'Shields', 'Shield']),
+  ('riddle-lights', array['Silverfen']),
+  ('riddle-sigils', array['Five', '5'])
+) v(errand, answers)
+join public.errands e on e.slug = v.errand
+on conflict (errand_id) do nothing;
 
 
 commit;

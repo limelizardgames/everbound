@@ -135,7 +135,7 @@ export default function Dashboard() {
       </div>
 
       <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
-        {[["/portal/inventory/", "Inventory"], ["/portal/journal/", "Journal"], ["/portal/bookings/", "Sessions"], ["/portal/tavern/", "Guild Chat"]].map(([h, l]) => (
+        {[["/portal/errands/", "Errands"], ["/portal/workshop/", "Workshop"], ["/portal/inventory/", "Inventory"], ["/auction/", "Auction Hall"]].map(([h, l]) => (
           <Link key={h} href={h} className="btn-ghost">{l}</Link>
         ))}
       </div>
