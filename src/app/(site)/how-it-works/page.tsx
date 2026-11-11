@@ -31,13 +31,13 @@ export default function HowItWorks() {
           You don&apos;t have to attend every week. Miss three weeks and there will still be quests for you. Other parties keep the world moving in the meantime — and
           your past choices still matter.
         </Section>
+        <Section n="6" title="Change the world">
+          Quest outcomes update the shared world: roads reopen, villages fall, merchants restock, and sealed raids awaken. The Everbound Chronicle reports it all.
+        </Section>
         <Section n="7" title="Between sessions: errands and professions">
           Send your adventurer on timed expeditions and solve the Guild&apos;s lore riddles from home to gather materials and a little gold. Learn up to two
           professions (Blacksmithing, Alchemy, Leatherworking, Cooking or Artificing) and craft gear and potions to bring to the table or sell in the
           Auction Hall. Errands never grant XP or renown, so rank is always earned at the table.
-        </Section>
-        <Section n="6" title="Change the world">
-          Quest outcomes update the shared world: roads reopen, villages fall, merchants restock, and sealed raids awaken. The Everbound Chronicle reports it all.
         </Section>
       </div>
 
