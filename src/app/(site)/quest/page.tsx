@@ -67,6 +67,7 @@ function QuestDetail() {
             <dt className="muted">Party size</dt><dd className="text-right">{quest.party_min}–{quest.party_max}</dd>
             <dt className="muted">Playtime</dt><dd className="text-right">~{Math.round((quest.est_minutes / 60) * 10) / 10} hours</dd>
             {quest.location && (<><dt className="muted">Location</dt><dd className="text-right"><Link className="link" href={`/place/?s=${quest.location.slug}`}>{quest.location.name}</Link></dd></>)}
+            {quest.min_age && (<><dt className="muted">Age rating</dt><dd className="text-right font-semibold text-ember-light">{quest.min_age}+</dd></>)}
             <dt className="muted">Rewards</dt><dd className="text-right text-gold-light">{quest.reward_preview}</dd>
           </dl>
           {locked && <div className="mt-4"><StatusPill status="locked" label="Locked — conditions unknown" /></div>}

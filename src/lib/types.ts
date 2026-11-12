@@ -18,6 +18,9 @@ export type Profile = {
   role: Role;
   show_on_leaderboards: boolean;
   is_banned: boolean;
+  birth_year: number | null;
+  birth_month: number | null;
+  guardian_consent: boolean;
   chat_muted_until: string | null;
   created_at: string;
 };
@@ -85,6 +88,7 @@ export type QuestTemplate = {
   reward_preview: string | null;
   content_advisories: string[];
   created_by: string | null;
+  min_age?: number | null;
 };
 
 export type QuestSession = {

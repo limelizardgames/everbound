@@ -22,6 +22,12 @@ async function uid() {
   if (!data.session) throw new Error("Please sign in first.");
   return data.session.user.id;
 }
+export function ageFrom(year: number, month: number) {
+  const now = new Date();
+  let age = now.getFullYear() - year;
+  if (now.getMonth() + 1 < month) age -= 1;
+  return age;
+}
 const slugify = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 
 // ------------------------------------------------------------------ Auth
@@ -32,12 +38,19 @@ export async function signUp(fd: FormData): Promise<ActionResult> {
   const displayName = str(fd, "display_name");
   if (password.length < 8) throw new Error("Use a password of at least 8 characters.");
   if (displayName.length < 2 || displayName.length > 40) throw new Error("Display name must be 2–40 characters.");
-  if (fd.get("age_attested") !== "on") throw new Error("Please confirm the age requirement.");
+  const birthYear = num(fd, "birth_year"), birthMonth = num(fd, "birth_month");
+  if (!birthYear || !birthMonth) throw new Error("Please enter your birth month and year.");
+  const { data: minRow } = await sb().from("admin_settings").select("value").eq("key", "min_age").maybeSingle();
+  const minAge = Number(minRow?.value ?? 13);
+  const age = ageFrom(birthYear, birthMonth);
+  if (age < minAge) throw new Error(`Everbound is for ages ${minAge} and up. We'd love to see you when you're older!`);
+  const guardian = fd.get("guardian_consent") === "on";
+  if (age < 18 && !guardian) throw new Error("Players under 18 need a parent or guardian's permission. Please tick the box once they've agreed.");
   const { data, error } = await sb().auth.signUp({
     email,
     password,
     options: {
-      data: { display_name: displayName, age_attested: true },
+      data: { display_name: displayName, age_attested: true, birth_year: birthYear, birth_month: birthMonth, guardian_consent: guardian },
       emailRedirectTo: absoluteUrl(`/auth/callback/?next=${encodeURIComponent(next)}`),
     },
   });
@@ -184,7 +197,14 @@ export async function updateCharacter(fd: FormData, characterId: string): Promis
 
 export async function updateSettings(fd: FormData): Promise<ActionResult> {
   const me = await uid();
-  await must(sb().from("profiles").update({ display_name: str(fd, "display_name"), show_on_leaderboards: fd.get("show_on_leaderboards") === "on" }).eq("id", me));
+  const patch: Record<string, unknown> = { display_name: str(fd, "display_name"), show_on_leaderboards: fd.get("show_on_leaderboards") === "on" };
+  if (fd.has("birth_year")) {
+    patch.birth_year = num(fd, "birth_year");
+    patch.birth_month = num(fd, "birth_month");
+    patch.guardian_consent = fd.get("guardian_consent") === "on";
+    if (!patch.birth_year || !patch.birth_month) throw new Error("Please enter your birth month and year.");
+  }
+  await must(sb().from("profiles").update(patch).eq("id", me));
   return "Settings saved.";
 }
 
@@ -219,6 +239,7 @@ export async function saveQuestTemplate(fd: FormData): Promise<ActionResult> {
     location_id: str(fd, "location_id") || null,
     reward_preview: str(fd, "reward_preview") || null,
     content_advisories: str(fd, "content_advisories").split(",").map((s) => s.trim()).filter(Boolean),
+    min_age: num(fd, "min_age") || null,
   };
   let templateId = id;
   if (id) await must(sb().from("quest_templates").update(row).eq("id", id));
@@ -431,7 +452,7 @@ export async function resolveReport(reportId: string, messageId: string, remove:
 export async function saveSetting(fd: FormData): Promise<ActionResult> {
   const key = str(fd, "key");
   const raw = str(fd, "value");
-  const value = key === "chat_retention_days" ? Number(raw) : key === "season_start" ? new Date(raw).toISOString() : raw;
+  const value = key === "chat_retention_days" || key === "min_age" ? Number(raw) : key === "season_start" ? new Date(raw).toISOString() : raw;
   await must(sb().from("admin_settings").upsert({ key, value, updated_at: new Date().toISOString() }));
   return "Setting saved.";
 }

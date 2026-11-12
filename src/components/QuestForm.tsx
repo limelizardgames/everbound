@@ -43,6 +43,8 @@ export function QuestForm({ quest, secrets, objectives, locations, ranks, onSave
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
           <div><label className="label" htmlFor="reward_preview">Possible rewards (shown to players)</label><input className="input" id="reward_preview" name="reward_preview" defaultValue={f("reward_preview")} placeholder="75 gold · 40 renown" /></div>
+          <div><label className="label" htmlFor="min_age">Age rating</label>
+            <select className="input" id="min_age" name="min_age" defaultValue={quest?.min_age ?? ""}><option value="">All ages (site minimum)</option>{[13, 14, 15, 16, 17, 18].map((a) => <option key={a} value={a}>{a}+</option>)}</select></div>
           <div><label className="label" htmlFor="content_advisories">Content advisories (comma-separated)</label><input className="input" id="content_advisories" name="content_advisories" defaultValue={quest?.content_advisories.join(", ") ?? ""} /></div>
         </div>
         <div>

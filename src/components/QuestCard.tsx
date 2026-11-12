@@ -58,6 +58,7 @@ export function QuestCard({ quest }: { quest: QuestCardData }) {
         <span className="flex items-center gap-1.5"><RankBadge code={quest.rank_min} size="sm" /><span className="text-parchment/50">–</span><RankBadge code={quest.rank_max} size="sm" /></span>
         <span style={{ color: locked ? undefined : diff.color }} className={locked ? "text-parchment/50" : ""}>◆ {diff.label}</span>
         <span className="text-parchment/70">⚑ {quest.party_min}–{quest.party_max}</span>
+        {quest.min_age && <span className="rounded-sm border border-ember/50 px-1.5 text-ember-light">{quest.min_age}+</span>}
       </div>
       <div className="mt-4 flex flex-wrap gap-1.5">
         {locked ? (

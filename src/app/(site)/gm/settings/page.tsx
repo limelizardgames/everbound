@@ -58,6 +58,13 @@ function SettingsPage() {
           <SubmitButton className="btn-ghost">Save</SubmitButton>
         </form>
         <form action={act(saveSetting, after)} className="panel grid gap-2">
+          <input type="hidden" name="key" value="min_age" />
+          <label className="label" htmlFor="ma">Minimum age to join</label>
+          <select id="ma" className="input" name="value" defaultValue={String(get("min_age") ?? 13)}>{[13, 14, 15, 16, 17, 18].map((a) => <option key={a} value={a}>{a}+</option>)}</select>
+          <p className="muted text-xs">Applies to new sign-ups. Rate individual quests 15+/18+ in the Quest Creator.</p>
+          <SubmitButton className="btn-ghost">Save</SubmitButton>
+        </form>
+        <form action={act(saveSetting, after)} className="panel grid gap-2">
           <input type="hidden" name="key" value="season_name" />
           <label className="label" htmlFor="sn">Season name</label>
           <input id="sn" className="input" name="value" defaultValue={String(get("season_name") ?? "")} />

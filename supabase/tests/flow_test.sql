@@ -386,4 +386,26 @@ select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000a
 set role authenticated;
 select t_expect_error($$select gm_use_item((select v from ids where k='res104'), (select id from items where slug='healing-draught'), 1)$$, 'assigned Game Master');
 reset role;
+\echo '--- Age policy'
+select t_expect_error($$insert into auth.users (email, raw_user_meta_data) values ('kid@x.test', jsonb_build_object('display_name','Kid','birth_year', extract(year from now())::int - 11, 'birth_month', 1))$$, 'ages 13 and up');
+select t_expect_error($$insert into auth.users (email, raw_user_meta_data) values ('teen@x.test', jsonb_build_object('display_name','Teen','birth_year', extract(year from now())::int - 14, 'birth_month', 1))$$, 'guardian');
+insert into auth.users (id, email, raw_user_meta_data) values ('00000000-0000-0000-0000-0000000000c1', 'teen2@x.test', jsonb_build_object('display_name','Teen Two','birth_year', extract(year from now())::int - 14, 'birth_month', 1, 'guardian_consent', true));
+select t_assert((select profile_age('00000000-0000-0000-0000-0000000000c1')) = 14, 'teen account created with guardian consent');
+update quest_templates set min_age = 15 where slug = 'whispers-beneath-stone';
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-0000000000c1', false);
+set role authenticated;
+insert into ids select 'cTeen', create_character('Young Hero','human','bard',null,null,'{"spirit":2}');
+reset role;
+insert into ledger_entries (character_id, resource, amount, reason, source_type) values ((select v from ids where k='cTeen'), 'renown', 150, 'test', 'admin');
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-0000000000c1', false);
+set role authenticated;
+select t_expect_error($$select reserve_seat((select v from ids where k='mines'), (select v from ids where k='cTeen'))$$, 'rated for ages 15');
+select t_expect_error($$update profiles set birth_year = 1990 where id = auth.uid()$$, 'already on record');
+reset role;
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000a', false);
+set role authenticated;
+select t_expect_error($$select reserve_seat((select v from ids where k='mines'), (select v from ids where k='charA'))$$, 'Add your birth month');
+update profiles set birth_year = 1995, birth_month = 6 where id = auth.uid();
+select t_assert((reserve_seat((select v from ids where k='mines'), (select v from ids where k='charA')) ->> 'status') in ('confirmed','waitlisted'), 'adult can book a 15+ quest after adding birth date');
+reset role;
 \echo 'ALL TESTS PASSED'

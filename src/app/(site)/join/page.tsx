@@ -10,6 +10,9 @@ import { safeNext } from "@/lib/format";
 import { Crest } from "@/components/Crest";
 import { MagicCircle } from "@/components/MagicCircle";
 import { SubmitButton } from "@/components/SubmitButton";
+import { BirthFields } from "@/components/BirthFields";
+import { useData } from "@/lib/useData";
+import { sb } from "@/lib/supabase";
 import { SetupNotice } from "@/components/SetupNotice";
 import { Loading, useTitle } from "@/components/Guard";
 
@@ -25,6 +28,7 @@ function JoinPage() {
   const { viewer, loading } = useViewer();
   const router = useRouter();
   const act = useAct();
+  const { data: minAge } = useData(async () => Number((await sb().from("admin_settings").select("value").eq("key", "min_age").maybeSingle()).data?.value ?? 13), []);
   useEffect(() => {
     if (viewer) router.replace(next);
   }, [viewer, next, router]);
@@ -56,10 +60,7 @@ function JoinPage() {
             </div>
             <div><label className="label" htmlFor="email">Email</label><input className="input" id="email" name="email" type="email" required autoComplete="email" /></div>
             <div><label className="label" htmlFor="password">Password</label><input className="input" id="password" name="password" type="password" required minLength={8} autoComplete="new-password" /></div>
-            <label className="flex items-start gap-3 text-sm">
-              <input type="checkbox" name="age_attested" className="mt-1 h-5 w-5 accent-gold" required />
-              <span className="muted">I am 18 or older, or I have permission from a parent or guardian who has read the Guild&apos;s privacy policy.</span>
-            </label>
+            <BirthFields minAge={minAge ?? 13} />
             <SubmitButton pendingText="Registering…">▸ Register with the Guild</SubmitButton>
           </form>
         ) : (

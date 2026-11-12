@@ -21,6 +21,13 @@ Ledgers are append-only. To correct gold, renown or XP, use **Players & Moderati
 
 Raids watch a world flag. The seeded *Crimson Wyrm* unlocks automatically when `ancient_sigils` reaches 5: the Raid Center changes, a Chronicle proclamation is published, and every player is notified. Then use **Raid Controller** to open registration, run the raid and resolve it. **Emergency pause** stops automatic transitions, and admins can override the state (logged).
 
+## Age policy
+
+- **Minimum age** to create an account: Command Center → Settings & Orders → *Minimum age to join* (default **13**). Raising it affects new sign-ups only.
+- **Under 18:** sign-up requires the player to confirm a parent or guardian's permission. Only birth month and year are stored.
+- **Age-rated quests:** in the Quest Creator, set *Age rating* (13+ to 18+) on mature quests. Booking is refused for younger players, or for anyone who hasn't added their birth month and year (they can add it once in Settings; after that only an admin can change it).
+- Content advisories on each quest tell players and guardians what to expect.
+
 ## Guild Errands & Professions
 
 Players do mini-quests from home: **expeditions** (send your adventurer away for a few hours, then collect materials) and **riddles** (lore questions answered from the Chronicle, quest pages and atlas; checked on the server). Errands pay **materials and at most 50 gold, never XP or renown**.
