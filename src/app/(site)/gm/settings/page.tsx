@@ -65,6 +65,20 @@ function SettingsPage() {
           <SubmitButton className="btn-ghost">Save</SubmitButton>
         </form>
         <form action={act(saveSetting, after)} className="panel grid gap-2">
+          <input type="hidden" name="key" value="gm_max_suspension_days" />
+          <label className="label" htmlFor="gms">Longest suspension a Game Master can issue (days)</label>
+          <input id="gms" className="input" type="number" min={0} max={60} name="value" defaultValue={Number(get("gm_max_suspension_days") ?? 0)} />
+          <p className="muted text-xs">0 = only administrators can suspend. Players can always appeal; another staff member reviews it.</p>
+          <SubmitButton className="btn-ghost">Save</SubmitButton>
+        </form>
+        <form action={act(saveSetting, after)} className="panel grid gap-2">
+          <input type="hidden" name="key" value="suspension_response_hours" />
+          <label className="label" htmlFor="srh">Hours a suspended player has to reschedule or cancel bookings</label>
+          <input id="srh" className="input" type="number" min={12} max={336} name="value" defaultValue={Number(get("suspension_response_hours") ?? 72)} />
+          <p className="muted text-xs">After this (or when the session starts, if sooner) untouched bookings are forfeited without refund.</p>
+          <SubmitButton className="btn-ghost">Save</SubmitButton>
+        </form>
+        <form action={act(saveSetting, after)} className="panel grid gap-2">
           <input type="hidden" name="key" value="season_name" />
           <label className="label" htmlFor="sn">Season name</label>
           <input id="sn" className="input" name="value" defaultValue={String(get("season_name") ?? "")} />

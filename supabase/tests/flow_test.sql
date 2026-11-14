@@ -422,4 +422,72 @@ insert into auth.users (id, email, raw_user_meta_data) values ('00000000-0000-00
   jsonb_build_object('display_name','Newbie','birth_year',1999,'birth_month',4,'card_token',(select token from guild_cards where id = (select v from ids where k='freshCard'))));
 select t_assert((select profile_id from guild_cards where id = (select v from ids where k='freshCard')) = '00000000-0000-0000-0000-0000000000d1', 'sign-up binds the scanned card to the new account');
 select t_expect_error(format($$insert into auth.users (email, raw_user_meta_data) values ('again@x.test', jsonb_build_object('display_name','Again','birth_year',1990,'birth_month',1,'card_token',%L))$$, (select token from guild_cards where id = (select v from ids where k='freshCard'))), 'already been claimed');
+\echo '--- Suspensions, bans and appeals'
+-- Player B (Hero 000b) books an early and a late session
+insert into ids select 'sEarly', s.id from quest_sessions s join quest_templates t on t.id = s.template_id where t.slug = 'ashes-of-the-watchtower' order by starts_at limit 1;
+insert into ids select 'sLate', s.id from quest_sessions s join quest_templates t on t.id = s.template_id where t.slug = 'ashes-of-the-watchtower' order by starts_at desc limit 1;
+insert into ids select 'cB', id from characters where profile_id = '00000000-0000-0000-0000-00000000000b';
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000b', false);
+set role authenticated;
+insert into ids select 'rEarly', (reserve_seat((select v from ids where k='sEarly'), (select v from ids where k='cB')) ->> 'reservation_id')::uuid;
+reset role;
+-- a GM cannot suspend until the setting allows it
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-0000000000a1', false);
+set role authenticated;
+select t_expect_error($$select suspend_user('00000000-0000-0000-0000-00000000000b', 3, 'Rude at the table')$$, 'cannot issue suspensions yet');
+reset role;
+update admin_settings set value = '7' where key = 'gm_max_suspension_days';
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-0000000000a1', false);
+set role authenticated;
+select t_expect_error($$select suspend_user('00000000-0000-0000-0000-00000000000b', 10, 'Rude at the table')$$, 'up to 7 days');
+select t_expect_error($$select ban_user('00000000-0000-0000-0000-00000000000b', 'Rude at the table')$$, 'Only administrators can ban');
+select t_expect_error($$select suspend_user('00000000-0000-0000-0000-0000000000f2', 3, 'Testing powers')$$, 'Only the owner');
+select t_expect_error($$select suspend_user('00000000-0000-0000-0000-00000000000b', 3, 'no')$$, 'reason');
+-- suspend B for 5 days: the early session (~2 days out) is flagged, the late one (~11 days) is not booked yet
+select t_assert((suspend_user('00000000-0000-0000-0000-00000000000b', 5, 'Repeated rudeness at the table') ->> 'bookings_flagged')::int = 1, 'GM suspends 5 days; early booking flagged');
+reset role;
+select t_assert((select suspension_deadline is not null from reservations where id = (select v from ids where k='rEarly')), 'flag has a deadline');
+select t_assert((select count(*) from notifications where profile_id = '00000000-0000-0000-0000-00000000000b' and title = 'Your account is suspended') = 1, 'player notified with reason');
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000b', false);
+set role authenticated;
+select t_assert((select restriction_reason from profiles where id = auth.uid()) like 'Repeated rudeness%', 'player can read their reason');
+select t_expect_error($$select reserve_seat((select v from ids where k='sLate'), (select v from ids where k='cB'))$$, 'restricted');
+select t_expect_error($$update profiles set is_banned = false where id = auth.uid()$$, 'Only administrators');
+select t_expect_error($$select reschedule_reservation((select v from ids where k='rEarly'), (select v from ids where k='sEarly'))$$, 'another scheduled session');
+select t_assert(reschedule_reservation((select v from ids where k='rEarly'), (select v from ids where k='sLate')) in ('confirmed', 'waitlisted'), 'rescheduled to a session after the suspension');
+select t_assert((select count(*) from reservations where profile_id = auth.uid() and session_id = (select v from ids where k='sLate') and status <> 'canceled') = 1, 'new booking exists');
+-- appeal
+select t_expect_error($$select submit_appeal('too short')$$, 'restriction_appeals_message_check|check');
+insert into ids select 'appeal', submit_appeal('I was frustrated that night and have apologised to the table.');
+select t_expect_error($$select submit_appeal('Second appeal attempt here please')$$, 'already being reviewed');
+reset role;
+-- issuer (GM) cannot decide; a different admin can
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-0000000000f2', false);
+set role authenticated;
+select decide_appeal((select v from ids where k='appeal'), true, 'Apology accepted. Welcome back.');
+reset role;
+select t_assert((select not is_banned and restriction_reason is null from profiles where id = '00000000-0000-0000-0000-00000000000b'), 'overturned appeal lifts the suspension');
+-- forfeit: suspend again (admin), let the deadline pass without action
+insert into ids select 'rLate', id from reservations where profile_id = '00000000-0000-0000-0000-00000000000b' and session_id = (select v from ids where k='sLate') and status <> 'canceled';
+update reservations set payment_status = 'paid' where id = (select v from ids where k='rLate');
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-0000000000f2', false);
+set role authenticated;
+select suspend_user('00000000-0000-0000-0000-00000000000b', 30, 'Second incident after warning');
+reset role;
+update reservations set suspension_deadline = now() - interval '1 minute' where id = (select v from ids where k='rLate');
+select process_moderation();
+select t_assert((select status = 'canceled' and payment_status = 'forfeited' from reservations where id = (select v from ids where k='rLate')), 'overdue booking forfeited without refund');
+-- expiry lifts automatically
+update profiles set suspended_until = now() - interval '1 minute' where id = '00000000-0000-0000-0000-00000000000b';
+select process_moderation();
+select t_assert((select not is_banned from profiles where id = '00000000-0000-0000-0000-00000000000b'), 'expired suspension lifted');
+-- ban retires the card
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-0000000000f2', false);
+set role authenticated;
+select ban_user('00000000-0000-0000-0000-0000000000d1', 'Harassment of another player', true);
+select t_expect_error($$select ban_user('00000000-0000-0000-0000-0000000000f1', 'Coup attempt')$$, 'Only the owner');
+select t_expect_error($$select ban_user('00000000-0000-0000-0000-0000000000f2', 'Self ban')$$, 'yourself');
+reset role;
+select t_assert((select status from guild_cards where profile_id = '00000000-0000-0000-0000-0000000000d1' order by created_at desc limit 1) = 'deactivated', 'ban retired the card');
+select t_assert((select is_banned and suspended_until is null from profiles where id = '00000000-0000-0000-0000-0000000000d1'), 'ban is permanent');
 \echo 'ALL TESTS PASSED'

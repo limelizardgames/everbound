@@ -50,10 +50,25 @@ Players at Rank E and above can auction tradeable items to each other for gold. 
 
 ## Moderation
 
-- Tavern messages are filtered for email addresses and phone numbers and rate-limited (5 per 20 seconds).
-- Players can report and block. Reports appear in **Players & Moderation** and on the Command Center.
-- Admins can mute (1 hour, 1 day, 1 week) or ban. Banned accounts cannot book, claim cards or chat.
-- Private messaging is intentionally not built yet (per the brief). Channels are public, plus per-session party rooms.
+**Who can do what** (Command Center → Players & Moderation):
+
+| Action | Who |
+| --- | --- |
+| Remove chat messages, resolve reports, mute (1 hour – 1 week) | Game Master and up |
+| Suspend (lifts automatically) | Administrators, any length. Game Masters up to `gm_max_suspension_days` (default **0** = not yet; raise it in Settings & Orders when GMs are ready) |
+| Ban (permanent), optionally retiring the guild card | Administrators |
+| Restrict an administrator | Owner only |
+| Lift a restriction early | Any administrator, or whoever issued it |
+
+Every suspension and ban needs a reason, which the player sees in their portal and in a notification. Nobody can restrict themselves, and everything is written to the Audit Log.
+
+**Bookings during a suspension:** sessions that start *after* the suspension ends are kept. Sessions *during* it are flagged, and the player must reschedule (to a later session of the same or lower price) or cancel within `suspension_response_hours` (default 72) or before the session starts, whichever is sooner. Untouched bookings are canceled as **forfeited** (no refund). For bans, bookings can only be canceled. The roster shows a warning on flagged bookings.
+
+**Appeals:** a restricted player can send one appeal per restriction from their portal. Administrators see it under *Open appeals*. The person who issued the restriction cannot decide its appeal (except the owner). Granting the appeal lifts the restriction; either way the player sees your response.
+
+**Suggested ladder** (publish it as your code of conduct): warning → chat mute → suspension (1–4 weeks) → ban. Skip straight to suspension or ban for harassment, threats or anything affecting a minor's safety; for players aged 13–17, contact a parent or guardian at the suspension stage. Agree bans between both founders.
+
+Tavern messages are filtered for email addresses and phone numbers and rate-limited. Private messaging is intentionally not built.
 
 ## Scheduled maintenance (Supabase → Database → Cron)
 

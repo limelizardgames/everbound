@@ -22,6 +22,8 @@ async function loadViewer(): Promise<Viewer | null> {
   const { data: { session } } = await supabase.auth.getSession();
   const user = session?.user;
   if (!user) return null;
+  // Lift expired suspensions / forfeit overdue bookings before reading state.
+  await supabase.rpc("process_moderation").then(() => undefined, () => undefined);
   const [{ data: profile }, { data: character }, { data: card }, { count }] = await Promise.all([
     supabase.from("profiles").select("*").eq("id", user.id).single(),
     supabase.from("characters").select("*").eq("profile_id", user.id).eq("is_active", true).maybeSingle(),

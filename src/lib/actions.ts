@@ -463,7 +463,7 @@ export async function resolveReport(reportId: string, messageId: string, remove:
 export async function saveSetting(fd: FormData): Promise<ActionResult> {
   const key = str(fd, "key");
   const raw = str(fd, "value");
-  const value = key === "chat_retention_days" || key === "min_age" ? Number(raw) : key === "season_start" ? new Date(raw).toISOString() : raw;
+  const value = ["chat_retention_days", "min_age", "gm_max_suspension_days", "suspension_response_hours"].includes(key) ? Number(raw) : key === "season_start" ? new Date(raw).toISOString() : raw;
   await must(sb().from("admin_settings").upsert({ key, value, updated_at: new Date().toISOString() }));
   return "Setting saved.";
 }
@@ -581,4 +581,45 @@ export async function saveRecipe(fd: FormData): Promise<ActionResult> {
 export async function toggleRecipe(id: string, active: boolean): Promise<ActionResult> {
   await must(sb().from("recipes").update({ is_active: active }).eq("id", id));
   return active ? "Recipe is live." : "Recipe hidden.";
+}
+
+// ------------------------------------------------------------------ Moderation: suspensions, bans, appeals
+export async function suspendUser(fd: FormData): Promise<ActionResult> {
+  const r = await rpc<{ until: string; bookings_flagged: number }>("suspend_user", { p_profile: str(fd, "profile_id"), p_days: num(fd, "days"), p_reason: str(fd, "reason") });
+  return `Suspended until ${new Date(r.until).toLocaleDateString()}.${r.bookings_flagged ? ` ${r.bookings_flagged} booking(s) flagged for rescheduling.` : ""}`;
+}
+
+export async function banUser(fd: FormData): Promise<ActionResult> {
+  const r = await rpc<{ bookings_flagged: number; card_retired: boolean }>("ban_user", { p_profile: str(fd, "profile_id"), p_reason: str(fd, "reason"), p_retire_card: fd.get("retire_card") === "on" });
+  return `Account banned.${r.card_retired ? " Card retired." : ""}${r.bookings_flagged ? ` ${r.bookings_flagged} booking(s) must be canceled by the player.` : ""}`;
+}
+
+export async function liftRestriction(profileId: string, note?: string): Promise<ActionResult> {
+  await rpc("lift_restriction", { p_profile: profileId, p_note: note ?? null });
+  return "Restriction lifted.";
+}
+
+export async function muteUser(profileId: string, minutes: number): Promise<ActionResult> {
+  await rpc("restrict_user", { p_profile: profileId, p_mute_minutes: minutes, p_ban: null });
+  return minutes > 0 ? "Muted in the Tavern." : "Unmuted.";
+}
+
+export async function rescheduleBooking(reservationId: string, sessionId: string): Promise<ActionResult> {
+  const status = await rpc<string>("reschedule_reservation", { p_reservation: reservationId, p_session: sessionId });
+  return status === "waitlisted" ? "Moved — that session is full, so you're on its waitlist." : "Booking moved to the new session.";
+}
+
+export async function submitAppeal(fd: FormData): Promise<ActionResult> {
+  await rpc("submit_appeal", { p_message: str(fd, "message") });
+  return "Appeal sent. A different Guild Master will review it.";
+}
+
+export async function decideAppeal(fd: FormData, overturn: boolean): Promise<ActionResult> {
+  await rpc("decide_appeal", { p_appeal: str(fd, "appeal_id"), p_overturn: overturn, p_response: str(fd, "response") });
+  return overturn ? "Appeal upheld for the player: restriction lifted." : "Appeal denied: restriction stands.";
+}
+
+export async function retireCard(cardId: string, reason: string): Promise<ActionResult> {
+  await rpc("deactivate_guild_card", { p_card: cardId, p_reason: reason || "Retired by staff" });
+  return "Card retired. It no longer works; the account is untouched.";
 }

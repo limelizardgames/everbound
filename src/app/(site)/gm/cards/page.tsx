@@ -6,7 +6,7 @@ import { sb, must } from "@/lib/supabase";
 import { useViewer } from "@/lib/viewer";
 import { useData } from "@/lib/useData";
 import { useAct } from "@/lib/toast";
-import { assignCard, deactivateCard, generateCards, replaceCard } from "@/lib/actions";
+import { assignCard, deactivateCard, generateCards, replaceCard, retireCard } from "@/lib/actions";
 import { PageHeader, StatusPill } from "@/components/ui";
 import { SubmitButton } from "@/components/SubmitButton";
 import { Loading, useTitle } from "@/components/Guard";
@@ -122,6 +122,12 @@ function Cards() {
                       <select name="tier" className="input min-h-[36px] w-28 py-1 text-xs" aria-label="New design" defaultValue=""><option value="">same design</option>{TIERS.map((t) => <option key={t}>{t}</option>)}</select>
                       <input name="reason" className="input min-h-[36px] w-28 py-1 text-xs" placeholder="reason" aria-label="Reason" />
                       <SubmitButton className="btn-ghost btn-sm" confirm={`Retire ${c.card_number} and issue a replacement?`}>Replace</SubmitButton>
+                    </form>
+                  )}
+                  {admin && c.status === "claimed" && (
+                    <form action={act((fd) => retireCard(c.id, String(fd.get("reason") ?? "")), after)} className="mt-1 flex gap-1">
+                      <input name="reason" className="input min-h-[36px] w-28 py-1 text-xs" placeholder="reason" aria-label="Retire reason" />
+                      <SubmitButton className="btn-danger btn-sm" confirm={`Retire ${c.card_number} without a replacement? The account is kept; the card stops working.`}>Retire</SubmitButton>
                     </form>
                   )}
                   {admin && c.status === "unassigned" && (

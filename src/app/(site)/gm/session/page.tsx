@@ -17,7 +17,7 @@ import { roleAtLeast } from "@/lib/types";
 
 type Reward = { character_id: string; attended?: boolean; xp?: number; gold?: number; renown?: number; items?: { item_id: string }[]; achievements?: string[]; note?: string };
 type Opt = { id: string; name: string };
-type R = { id: string; status: string; payment_status: string; amount_cents: number; live_hp: number | null; live_conditions: string | null; profile_id: string; character: { id: string; name: string; species: string; class: string; hp_current: number; hp_max: number; conditions: string | null; profile_id: string } };
+type R = { id: string; status: string; payment_status: string; amount_cents: number; suspension_deadline: string | null; live_hp: number | null; live_conditions: string | null; profile_id: string; character: { id: string; name: string; species: string; class: string; hp_current: number; hp_max: number; conditions: string | null; profile_id: string } };
 
 async function loadSession(id: string) {
   const c = sb();
@@ -25,7 +25,7 @@ async function loadSession(id: string) {
   const session = (await must(c.from("quest_sessions").select("*, template:quest_templates(id, title, slug, reward_preview)").eq("id", id).maybeSingle())) as any;
   if (!session) return null;
   const [roster, notes, results, secrets, items, achievements, flags, locations, staff] = await Promise.all([
-    must(c.from("reservations").select("id, status, payment_status, amount_cents, live_hp, live_conditions, created_at, profile_id, character:characters(id, name, species, class, hp_current, hp_max, conditions, profile_id)").eq("session_id", id).order("created_at")),
+    must(c.from("reservations").select("id, status, payment_status, amount_cents, suspension_deadline, live_hp, live_conditions, created_at, profile_id, character:characters(id, name, species, class, hp_current, hp_max, conditions, profile_id)").eq("session_id", id).order("created_at")),
     must(c.from("quest_session_notes").select("notes").eq("session_id", id).maybeSingle()),
     must(c.from("session_results").select("*").eq("session_id", id).maybeSingle()),
     must(c.from("quest_template_secrets").select("*").eq("template_id", session.template.id).maybeSingle()),
@@ -123,7 +123,7 @@ function SessionDetail() {
                         <SubmitButton className="btn-arcane btn-sm" pendingText="…">Set</SubmitButton>
                       </form>
                     </td>
-                    <td><StatusPill status={r.status} /><span className="muted block text-[11px]">{r.payment_status.replace("_", " ")}</span></td>
+                    <td><StatusPill status={r.status} /><span className="muted block text-[11px]">{r.payment_status.replace("_", " ")}</span>{r.suspension_deadline && <span className="mt-1 block text-[11px] font-semibold text-ember-light">Suspended: must reschedule/cancel by {dateTime(r.suspension_deadline)}</span>}</td>
                     <td className="space-y-1">
                       {admin && r.amount_cents > 0 && !["paid", "comped"].includes(r.payment_status) && (
                         <form action={act(() => setPaymentStatus(r.id, "paid"), after)}><SubmitButton className="btn-ghost btn-sm">Paid in store</SubmitButton></form>

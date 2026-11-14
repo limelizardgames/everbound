@@ -19,6 +19,9 @@ export type Profile = {
   show_on_leaderboards: boolean;
   is_banned: boolean;
   birth_year: number | null;
+  suspended_until: string | null;
+  restriction_reason: string | null;
+  restricted_at: string | null;
   birth_month: number | null;
   guardian_consent: boolean;
   chat_muted_until: string | null;
