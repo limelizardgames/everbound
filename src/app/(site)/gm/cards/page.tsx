@@ -12,9 +12,21 @@ import { SubmitButton } from "@/components/SubmitButton";
 import { Loading, useTitle } from "@/components/Guard";
 import { shortDate } from "@/lib/format";
 import { roleAtLeast } from "@/lib/types";
+import { cardUrl } from "@/lib/qr";
+
+/** Spreadsheet for a card printer's variable-data / QR merge: one row per card. */
+function exportCsv(rows: C[]) {
+  const esc = (v: string) => `"${v.replace(/"/g, '""')}"`;
+  const lines = [["card_number", "qr_link", "claim_code", "design", "name_on_card", "batch", "status"].join(",")]
+    .concat(rows.map((c) => [c.card_number, cardUrl(c.token), c.token, c.tier, c.personalized_name ?? c.character?.name ?? "", c.batch_label ?? "", c.status].map(esc).join(",")));
+  const url = URL.createObjectURL(new Blob([lines.join("\n")], { type: "text/csv" }));
+  const a = document.createElement("a");
+  a.href = url; a.download = `everbound-cards-${new Date().toISOString().slice(0, 10)}.csv`; a.click();
+  URL.revokeObjectURL(url);
+}
 
 const TIERS = ["standard", "founding", "iron", "bronze", "silver", "gold", "mythril", "celestial"];
-type C = { id: string; card_number: string; status: string; tier: string; batch_label: string | null; personalized_name: string | null; claimed_at: string | null; profile_id: string | null; character: { name: string } | null };
+type C = { id: string; token: string; card_number: string; status: string; tier: string; batch_label: string | null; personalized_name: string | null; claimed_at: string | null; profile_id: string | null; character: { name: string } | null };
 
 export default function Page() {
   return <Suspense fallback={<Loading />}><Cards /></Suspense>;
@@ -30,7 +42,7 @@ function Cards() {
   const status = params.get("status") || undefined;
   const search = params.get("q")?.trim().toUpperCase() || undefined;
   const { data, reload } = useData(async () => {
-    let query = sb().from("guild_cards").select("id, card_number, status, tier, batch_label, personalized_name, claimed_at, created_at, profile_id, character:characters(name)").order("card_number", { ascending: false }).limit(200);
+    let query = sb().from("guild_cards").select("id, token, card_number, status, tier, batch_label, personalized_name, claimed_at, created_at, profile_id, character:characters(name)").order("card_number", { ascending: false }).limit(200);
     if (batch) query = query.eq("batch_label", batch);
     if (status) query = query.eq("status", status);
     if (search) query = query.ilike("card_number", `%${search}%`);
@@ -52,7 +64,7 @@ function Cards() {
 
   return (
     <div>
-      <PageHeader eyebrow="Physical membership" title="Guild Cards" action={<Link href={printHref} className="btn-gold">Print sheet ↗</Link>}>
+      <PageHeader eyebrow="Physical membership" title="Guild Cards" action={<span className="flex flex-wrap gap-2"><button type="button" className="btn-ghost" onClick={() => exportCsv(cards.filter((c) => c.status !== "deactivated"))}>Export for printer (CSV)</button><Link href={printHref} className="btn-gold">Print sheet ↗</Link></span>}>
         Forge cards, print them, and hand them out. Each QR code points to a single-use claim page; once a player claims it, the same QR shows their verified profile.
       </PageHeader>
 
