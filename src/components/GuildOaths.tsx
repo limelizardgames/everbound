@@ -1,4 +1,12 @@
-const OATHS: [string, string, string][] = [
+"use client";
+import { useEffect, useState } from "react";
+import { sb } from "@/lib/supabase";
+import { isSupabaseConfigured } from "@/lib/env";
+
+export type Oath = { oath: string; plain: string };
+const NUMERALS = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
+
+const DEFAULTS: [string, string, string][] = [
   ["I", "Raise no blade against a guildmate.", "Respect every player. No harassment or bullying."],
   ["II", "Let the X be honoured, and the tale turn aside.", "Respect the safety tools, no questions asked."],
   ["III", "Wear the villain's mask, never the villain's heart.", "Your character can be a villain. You can't be a jerk."],
@@ -11,7 +19,26 @@ const OATHS: [string, string, string][] = [
   ["X", "Heed the Guild Master's word, and speak your grievance after.", "Disagree politely, and appeal through the proper channels."],
 ];
 
+/** The original wording; used until an administrator saves new wording (Command Center → Names & Lore). */
+export const DEFAULT_OATHS: Oath[] = DEFAULTS.map(([, oath, plain]) => ({ oath, plain }));
+
+/** Saved wording from admin_settings.guild_oaths, falling back to the defaults. */
+export function useOaths(): Oath[] {
+  const [oaths, setOaths] = useState<Oath[]>(DEFAULT_OATHS);
+  useEffect(() => {
+    if (!isSupabaseConfigured) return;
+    let live = true;
+    sb().from("admin_settings").select("value").eq("key", "guild_oaths").maybeSingle().then(({ data }) => {
+      const v = data?.value as Oath[] | undefined;
+      if (live && Array.isArray(v) && v.length === 10 && v.every((o) => o && typeof o.oath === "string" && o.oath.trim())) setOaths(v);
+    });
+    return () => { live = false; };
+  }, []);
+  return oaths;
+}
+
 export function GuildOaths({ className = "" }: { className?: string }) {
+  const OATHS = useOaths().map((o, i) => [NUMERALS[i], o.oath, o.plain] as [string, string, string]);
   return (
     <section aria-labelledby="oaths-title" className={`relative overflow-hidden rounded-md border border-gold/40 bg-gradient-to-b from-[#1a1d2b] to-[#0f1220] p-6 shadow-[inset_0_0_0_1px_rgba(212,170,90,.15),0_0_40px_-15px_rgba(212,170,90,.5)] sm:p-9 ${className}`}>
       <div className="text-center">

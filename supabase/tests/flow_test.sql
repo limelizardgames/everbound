@@ -544,4 +544,20 @@ select gm_set_allegiance((select v from ids where k='charA'), (select v from ids
 reset role;
 select t_assert((select faction_id from characters where id = (select v from ids where k='charA')) = (select v from ids where k='fGuild'), 'admin moved adventurer back');
 select t_assert((select count(*) from audit_logs where action = 'set_allegiance') = 1, 'allegiance correction audited');
+
+\echo '--- Names & Lore (admin edits)'
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000a', false);
+set role authenticated;
+update factions set name = 'Hacked' where slug = 'ashen-covenant';
+select t_expect_error($$insert into admin_settings (key, value) values ('guild_oaths', '[{"oath":"x","plain":"y"}]')$$, 'row-level security|permission');
+reset role;
+select t_assert((select name from factions where slug = 'ashen-covenant') = 'The Ashen Covenant', 'players cannot rename allegiances');
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-0000000000f2', false);
+set role authenticated;
+update factions set name = 'The Cinder Pact', motto = 'Feed the flame' where slug = 'ashen-covenant';
+insert into admin_settings (key, value) values ('guild_oaths', '[{"oath":"Raise no blade against a guildmate outside the field of honour.","plain":"Respect every player."}]')
+  on conflict (key) do update set value = excluded.value;
+reset role;
+select t_assert((select name from get_factions() where slug = 'ashen-covenant') = 'The Cinder Pact', 'admin renamed an allegiance');
+select t_assert((select value -> 0 ->> 'oath' from admin_settings where key = 'guild_oaths') like '%field of honour%', 'admin saved oath wording');
 \echo 'ALL TESTS PASSED'

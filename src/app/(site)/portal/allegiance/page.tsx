@@ -118,7 +118,7 @@ export default function AllegiancePage() {
           <ul className="mt-3 grid gap-2 text-sm">
             {data.changes.map((h) => (
               <li key={h.created_at} className="flex flex-wrap justify-between gap-2 border-b border-white/5 pb-2">
-                <span>{h.from?.name ?? "The Adventurers Guild"} → <strong className="text-parchment">{h.to?.name}</strong>{h.note ? <span className="muted"> · {h.note}</span> : null}</span>
+                <span>{h.from?.name ?? data.factions.find((f) => f.is_default)?.name} → <strong className="text-parchment">{h.to?.name}</strong>{h.note ? <span className="muted"> · {h.note}</span> : null}</span>
                 <span className="muted">{dateTime(h.created_at)}</span>
               </li>
             ))}

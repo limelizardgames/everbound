@@ -419,6 +419,29 @@ export async function gmSetAllegiance(fd: FormData): Promise<ActionResult> {
   return rpc<string>("gm_set_allegiance", { p_character: str(fd, "character_id"), p_faction: str(fd, "faction_id"), p_reason: str(fd, "reason") });
 }
 
+// ------------------------------------------------------------------ Admin: names & lore
+const FACTION_COLORS = ["gold", "ember", "arcane", "epic", "green"];
+export async function saveFaction(fd: FormData): Promise<ActionResult> {
+  const name = str(fd, "name"), motto = str(fd, "motto"), description = str(fd, "description");
+  if (name.length < 3 || name.length > 60) throw new Error("Give the allegiance a name of 3 to 60 characters.");
+  if (!motto || motto.length > 40) throw new Error("Give it a motto of up to 40 characters.");
+  if (!description || description.length > 300) throw new Error("Give it a description of up to 300 characters.");
+  const color = FACTION_COLORS.includes(str(fd, "color")) ? str(fd, "color") : "gold";
+  await must(sb().from("factions").update({ name, motto, description, color }).eq("id", str(fd, "faction_id")));
+  return `${name} saved.`;
+}
+export async function saveOaths(fd: FormData): Promise<ActionResult> {
+  const oaths = Array.from({ length: 10 }, (_, i) => ({ oath: str(fd, `oath_${i}`), plain: str(fd, `plain_${i}`) }));
+  const bad = oaths.findIndex((o) => !o.oath || o.oath.length > 120 || o.plain.length > 140);
+  if (bad >= 0) throw new Error(`Oath ${bad + 1} needs wording (up to 120 characters; meaning up to 140).`);
+  await must(sb().from("admin_settings").upsert({ key: "guild_oaths", value: oaths, description: "The Ten Oaths shown on the Code of Conduct and Guild Handbook", updated_at: new Date().toISOString() }));
+  return "The Ten Oaths are saved. They show on the site straight away.";
+}
+export async function resetOaths(): Promise<ActionResult> {
+  await must(sb().from("admin_settings").delete().eq("key", "guild_oaths"));
+  return "The Ten Oaths are back to their original wording.";
+}
+
 // ------------------------------------------------------------------ GM: raids
 export async function setRaidState(raidId: string, state: string, override = false): Promise<ActionResult> {
   await rpc("set_raid_state", { p_raid: raidId, p_state: state, p_override: override });

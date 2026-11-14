@@ -13,7 +13,7 @@ import type { Faction } from "@/lib/types";
 const MODES = [
   ["Skirmishes", "Two parties of opposing allegiances meet at the store and clash, with a Guild Master refereeing every roll."],
   ["Contested quests", "Rival parties race for the same objective. Whoever holds it at the end moves the world toward their side."],
-  ["Raids with two sides", "When a raid like the Crimson Wyrm opens, Covenant adventurers defend the lair. The raid becomes a battle between players."],
+  ["Raids with two sides", "When a raid like the Crimson Wyrm opens, adventurers sworn to the other side defend the lair. The raid becomes a battle between players."],
 ];
 
 const SAFEGUARDS = [
@@ -36,11 +36,15 @@ export default function AllegiancesPage() {
   }, []);
   if (!isSupabaseConfigured) return <SetupNotice />;
   if (!data) return <Loading />;
+  const guild = data.factions.find((f) => f.is_default);
+  const defenders = data.factions.find((f) => f.raid_side === "defenders");
+  const either = data.factions.filter((f) => f.raid_side === "either");
+  const short = (f?: Faction) => (f ? f.name.replace(/^The /, "") : "");
 
   return (
     <div className="container-eb py-12">
       <PageHeader eyebrow="The World · Allegiances & Rivalries" title="Choose Your Allegiance">
-        Every adventurer begins in the Adventurers Guild. As the world darkens, some pledge themselves to rival powers, and the struggle between them decides what Everbound becomes.
+        Every adventurer begins in {guild?.name ?? "the Adventurers Guild"}. As the world darkens, some pledge themselves to rival powers, and the struggle between them decides what Everbound becomes.
       </PageHeader>
 
       <div className="grid gap-5 md:grid-cols-3">
@@ -93,11 +97,11 @@ export default function AllegiancesPage() {
           </ol>
           <SystemWindow title="The Crimson Wyrm Raid">
             <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-2 py-4 text-center sm:gap-4">
-              <div className="text-gold-light"><FactionSigil slug="adventurers-guild" className="mx-auto h-14 w-14" /><p className="mt-2 font-display text-lg">Guild raiders</p><p className="muted text-xs">break the seal</p></div>
+              <div className="text-gold-light"><FactionSigil slug="adventurers-guild" className="mx-auto h-14 w-14" /><p className="mt-2 font-display text-lg">{short(guild)} raiders</p><p className="muted text-xs">break the seal</p></div>
               <div className="text-ember"><svg viewBox="0 0 48 48" className="mx-auto h-16 w-16" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden><path d="M4 24 C12 12 36 12 44 24 C36 36 12 36 4 24 Z" /><path d="M24 15 C27 19 27 29 24 33 C21 29 21 19 24 15 Z" fill="currentColor" /><path d="M2 14 L8 18 M46 14 L40 18 M2 34 L8 30 M46 34 L40 30" /></svg><p className="mt-2 font-display text-lg text-parchment">The Wyrm</p><p className="muted text-xs">the prize</p></div>
-              <div className="text-ember-light"><FactionSigil slug="ashen-covenant" className="mx-auto h-14 w-14 opacity-80" /><p className="mt-2 font-display text-lg">Covenant defenders</p><p className="muted text-xs">guard the Wyrm</p></div>
+              <div className="text-ember-light"><FactionSigil slug="ashen-covenant" className="mx-auto h-14 w-14 opacity-80" /><p className="mt-2 font-display text-lg">{defenders ? `${short(defenders)} defenders` : "Defenders"}</p><p className="muted text-xs">guard the Wyrm</p></div>
             </div>
-            <p className="border-t border-white/10 pt-3 text-center text-sm text-arcane-light">Free Companies choose a side when they sign up.</p>
+            {either.length > 0 && <p className="border-t border-white/10 pt-3 text-center text-sm text-arcane-light">{either.map((f) => f.name).join(" and ")} choose a side when they sign up.</p>}
           </SystemWindow>
         </div>
       </section>

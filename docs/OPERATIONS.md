@@ -56,8 +56,12 @@ Every adventurer starts in **The Adventurers Guild**. From guild rank `allegianc
 - **PvP quests:** in the Quest Creator set *Party vs party* to **Skirmish** (rival parties clash) or **Contested** (rival parties race for an objective). Only opted-in adventurers can book them, and the Quest Board shows a ⚔ PvP tag. Split the table by allegiance at session zero.
 - **Two-sided raids:** in the Raid Controller tick *Two-sided raid*. Registration then requires PvP, records each adventurer's side (Covenant → defenders, Guild → raiders, Free Companies choose), and the Raid Center shows the count per side. The seeded Crimson Wyrm is two-sided.
 - **Corrections:** administrators can set any adventurer's allegiance from **Players & Moderation** (reason required, ignores rank and cooldown, written to the Audit Log).
-- **Factions** live in the `factions` table (name, motto, description, colour, raid side). Rename them there; add new ones with a `slug` and `raid_side`.
+- **Rename allegiances** (name, motto, description, colour) in **Command Center → Names & Lore** (administrators). Members stay in place. To add a new faction, insert a row in the `factions` table with a `slug` and `raid_side`.
 - Faction names are working names: check them in the trademark review along with "Everbound".
+
+## Names & Lore
+
+**Command Center → Names & Lore** (administrators) edits the allegiance names and the wording of **The Ten Oaths** (each oath and its plain-language meaning). Both show on the site immediately. *Restore original wording* puts the oaths back. The saved oaths live in `admin_settings.guild_oaths`.
 
 ## Moderation
 

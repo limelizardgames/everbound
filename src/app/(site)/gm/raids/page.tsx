@@ -82,7 +82,7 @@ export default function RaidController() {
                       <div><label className="label" htmlFor={`st-${r.id}`}>Raid window starts</label><input id={`st-${r.id}`} className="input" type="datetime-local" name="starts_at" defaultValue={r.starts_at ? toZonedInput(r.starts_at) : ""} /></div>
                     </div>
                     <label className="flex items-center gap-2 text-sm"><input type="checkbox" name="conditions_public" defaultChecked={r.conditions_public} className="accent-gold" />Show unlock progress publicly (e.g. “Ancient Seal 3/5”)</label>
-                    <label className="flex items-center gap-2 text-sm"><input type="checkbox" name="two_sided" defaultChecked={(r as unknown as { two_sided?: boolean }).two_sided} className="accent-gold" />Two-sided raid: Covenant adventurers defend, PvP opt-in required</label>
+                    <label className="flex items-center gap-2 text-sm"><input type="checkbox" name="two_sided" defaultChecked={(r as unknown as { two_sided?: boolean }).two_sided} className="accent-gold" />Two-sided raid: the defending allegiance guards the lair, PvP opt-in required</label>
                     <SubmitButton className="btn-ghost">Save</SubmitButton>
                   </form>
                 </details>
