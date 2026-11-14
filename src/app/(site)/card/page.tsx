@@ -71,6 +71,7 @@ function CardPage() {
                 <p className="muted mt-1 text-xs">You&apos;ll log in with your email and password. The card itself never logs anyone in.</p>
               </div>
               <BirthFields minAge={minAge ?? 13} />
+              <p className="muted text-center text-xs">By creating an account you agree to the <Link className="link" href="/conduct/" target="_blank">Code of Conduct</Link>.</p>
               <SubmitButton pendingText="Binding your card…">▸ Claim card &amp; create account</SubmitButton>
               <p className="muted text-center text-xs">Already have an account? <Link className="link" href={`/join/?next=${encodeURIComponent(next)}`}>Log in</Link> to bind this card to it.</p>
             </form>

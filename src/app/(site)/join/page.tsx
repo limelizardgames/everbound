@@ -71,6 +71,7 @@ function JoinPage() {
           <div className="mt-8 flex flex-wrap gap-3">
             <Link href="/calendar/" className="btn-gold">See when the Guild meets</Link>
             <Link href="/how-it-works/" className="btn-ghost">Read the Guild Handbook</Link>
+            <Link href="/conduct/" className="btn-ghost">Code of Conduct</Link>
           </div>
           <p className="muted mt-6 text-sm">Lost your card? Your progress is safe. Ask a Guild Master for a replacement at your next session.</p>
         </section>

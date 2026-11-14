@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { sb, must } from "@/lib/supabase";
 import { useViewer } from "@/lib/viewer";
 import { useData } from "@/lib/useData";
@@ -38,6 +39,7 @@ export function RestrictionBanner() {
       <p className="muted mt-2 text-sm">
         While {ban ? "banned" : "suspended"} you can view your adventurer but can&apos;t book quests, chat, trade or run errands.
         {ban ? "" : " Your account is restored automatically when the suspension ends."}
+        {" "}See the <Link className="link" href="/conduct/#article-VII">Code of Conduct</Link>.
       </p>
 
       {data && data.flagged.length > 0 && (
