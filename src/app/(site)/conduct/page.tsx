@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { PageHeader, SystemWindow } from "@/components/ui";
+import { PageHeader } from "@/components/ui";
+import { GuildOaths } from "@/components/GuildOaths";
 
 export const metadata = { title: "Code of Conduct" };
 
@@ -29,18 +30,7 @@ export default function ConductPage() {
         Everbound only works if everyone at the table — and in the Tavern — feels welcome and safe. By claiming a guild card, every adventurer agrees to this charter.
       </PageHeader>
 
-      <SystemWindow title="The Short Version" className="mb-8">
-        <ul className="grid gap-2 text-[15px] text-parchment/90 sm:grid-cols-2">
-          {[
-            "Be kind. Play to make the game fun for everyone, not just you.",
-            "Respect the safety tools. If someone taps the X-card, move on — no questions asked.",
-            "Your character can be a villain; you can't be a jerk.",
-            "Keep personal info private, especially other people's.",
-            "Play fair: no cheating, no selling items for real money, one account per person.",
-            "Respect the store, its staff and its stock.",
-          ].map((t) => <li key={t} className="flex gap-2"><span className="text-arcane">◆</span>{t}</li>)}
-        </ul>
-      </SystemWindow>
+      <GuildOaths className="mb-8" />
 
       <nav aria-label="Articles" className="mb-8 flex flex-wrap gap-2">
         {["Respect", "At the table", "In the Tavern", "Young adventurers", "Fair play", "The store", "Consequences", "Reporting & appeals"].map((t, i) => (

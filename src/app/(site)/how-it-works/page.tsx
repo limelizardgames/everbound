@@ -1,4 +1,6 @@
+import Link from "next/link";
 import { CTA, PageHeader, RankLadder } from "@/components/ui";
+import { GuildOaths } from "@/components/GuildOaths";
 
 export const metadata = { title: "How It Works" };
 
@@ -62,6 +64,9 @@ export default function HowItWorks() {
           <p className="muted mt-4 text-sm">Gold can never be bought with real money. Store purchases are physical or cosmetic and never give a gameplay advantage.</p>
         </div>
       </div>
+
+      <GuildOaths className="mt-10" />
+      <p className="muted mt-3 text-center text-sm">The full rules are in the <Link className="link" href="/conduct/">Code of Conduct</Link>.</p>
 
       <div className="mt-10 text-center">
         <CTA href="/join/">Join the Guild</CTA>
