@@ -4,7 +4,7 @@ import { CalmToggle } from "@/components/CalmToggle";
 
 const COLS: [string, [string, string][]][] = [
   ["Play", [["Quest Board", "/quests/"], ["Events Calendar", "/calendar/"], ["Raid Center", "/raids/"], ["Auction Hall", "/auction/"], ["Join the Guild", "/join/"]]],
-  ["The World", [["World Atlas", "/world/"], ["The Chronicle", "/chronicle/"], ["Hall of Legends", "/leaderboards/"]]],
+  ["The World", [["World Atlas", "/world/"], ["Allegiances", "/allegiances/"], ["The Chronicle", "/chronicle/"], ["Hall of Legends", "/leaderboards/"]]],
   ["Guild", [["How It Works", "/how-it-works/"], ["Code of Conduct", "/conduct/"], ["Guild Store", "/store/"], ["My Status", "/portal/"]]],
 ];
 

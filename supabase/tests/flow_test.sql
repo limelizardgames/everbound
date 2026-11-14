@@ -15,6 +15,9 @@ create or replace function public.t_assert(p_cond boolean, p_msg text) returns t
 begin if not coalesce(p_cond, false) then raise exception 'ASSERT FAILED: %', p_msg; end if; return 'ok ' || p_msg; end $$;
 
 update admin_settings set value = 'false' where key = 'card_required_for_signup';
+-- Legacy raid tests use a one-sided raid; the Allegiances section turns two-sided back on.
+select t_assert((select two_sided from raids where slug = 'the-crimson-wyrm'), 'Crimson Wyrm raid is seeded two-sided');
+update raids set two_sided = false where slug = 'the-crimson-wyrm';
 insert into auth.users (id, email, raw_user_meta_data) values
  ('00000000-0000-0000-0000-00000000000a', 'a@x.test', '{"display_name":"Aelindra","age_attested":true}'),
  ('00000000-0000-0000-0000-00000000000b', 'b@x.test', '{"display_name":"Thorne"}'),
@@ -238,7 +241,7 @@ select t_assert((get_public_character('evb-00001') -> 'character' ->> 'rank_code
 select t_assert((select character_name from get_leaderboard('renown', 'season') limit 1) = 'Aelindra', 'leaderboard top');
 select t_assert((select count(*) from get_raids_public() where state = 'unlocked' and progress = 5) = 1, 'public raid view');
 select t_assert((select count(*) from locations where slug = 'sunken-abbey') = 0, 'undiscovered hidden from public');
-select t_assert((select count(*) from quest_templates) = 5, 'public sees published+locked templates');
+select t_assert((select count(*) from quest_templates) = 6, 'public sees published+locked templates');
 select t_assert((select count(*) from characters) = 0, 'anon sees no characters');
 select t_assert((select count(*) from raids) = 0, 'anon cannot read raw raids (reveal text)');
 select t_expect_error($$select claim_guild_card('x')$$, 'permission denied');
@@ -490,4 +493,55 @@ select t_expect_error($$select ban_user('00000000-0000-0000-0000-0000000000f2', 
 reset role;
 select t_assert((select status from guild_cards where profile_id = '00000000-0000-0000-0000-0000000000d1' order by created_at desc limit 1) = 'deactivated', 'ban retired the card');
 select t_assert((select is_banned and suspended_until is null from profiles where id = '00000000-0000-0000-0000-0000000000d1'), 'ban is permanent');
+
+\echo '--- Allegiances & PvP'
+update raid_registrations set status = 'canceled' where character_id = (select v from ids where k='charA');
+insert into ids select 'fCov', id from factions where slug = 'ashen-covenant';
+insert into ids select 'fGuild', id from factions where slug = 'adventurers-guild';
+insert into ids select 'fFree', id from factions where slug = 'free-companies';
+insert into ids select 'pvpQuest', id from quest_templates where slug = 'clash-at-the-ashen-crossroads';
+select t_assert((select pvp_mode from quest_templates where id = (select v from ids where k='pvpQuest')) = 'contested', 'sample PvP quest seeded');
+update quest_templates set rank_min = 'F' where id = (select v from ids where k='pvpQuest');
+insert into ids select 'pvpSession', id from quest_sessions where template_id = (select v from ids where k='pvpQuest') limit 1;
+update admin_settings set value = '"SS"' where key = 'allegiance_min_rank';
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000a', false);
+set role authenticated;
+select t_assert((select (select members from get_factions() where slug = 'adventurers-guild') >= 1), 'unpledged adventurers count as Guild');
+select t_expect_error($$update characters set faction_id = (select v from ids where k='fCov') where id = (select v from ids where k='charA')$$, 'Allegiance page');
+select t_expect_error($$update characters set pvp_opt_in = true where id = (select v from ids where k='charA')$$, 'Allegiance page');
+select t_expect_error($$select pledge_allegiance((select v from ids where k='charA'), (select v from ids where k='fCov'))$$, 'opens at guild rank SS');
+select t_expect_error($$select pledge_allegiance((select v from ids where k='charA'), (select v from ids where k='fGuild'))$$, 'already serve');
+reset role;
+update admin_settings set value = '"F"' where key = 'allegiance_min_rank';
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000a', false);
+set role authenticated;
+select t_assert(pledge_allegiance((select v from ids where k='charA'), (select v from ids where k='fCov')) like 'You now serve The Ashen Covenant%', 'pledge to the Covenant');
+select t_assert((select count(*) from allegiance_changes where character_id = (select v from ids where k='charA')) = 1, 'change recorded and visible to owner');
+select t_expect_error($$select pledge_allegiance((select v from ids where k='charA'), (select v from ids where k='fFree'))$$, 'changed allegiance recently');
+-- PvP quest needs opt-in
+select t_expect_error($$select reserve_seat((select v from ids where k='pvpSession'), (select v from ids where k='charA'))$$, 'party-vs-party');
+select set_pvp_opt_in((select v from ids where k='charA'), true);
+select t_assert((reserve_seat((select v from ids where k='pvpSession'), (select v from ids where k='charA')) ->> 'reservation_id') is not null, 'opted-in adventurer books the PvP quest');
+select t_expect_error($$select set_pvp_opt_in((select v from ids where k='charA'), false)$$, 'Cancel it before turning PvP off');
+reset role;
+-- two-sided raid: Covenant joins the defenders; non-opted-in players are refused
+update raids set state = 'registration', is_paused = false, min_rank = null, capacity = 20, two_sided = true where slug = 'the-crimson-wyrm';
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000a', false);
+set role authenticated;
+select register_for_raid((select id from get_raids_public() where slug = 'the-crimson-wyrm'), (select v from ids where k='charA'), null, 'attackers');
+select t_assert((select side from raid_registrations where character_id = (select v from ids where k='charA') and status = 'registered') = 'defenders', 'Covenant member placed on the defending side');
+select t_assert((select defenders from get_raid_sides() where raid_id = (select id from get_raids_public() where slug = 'the-crimson-wyrm')) = 1, 'side counts reported');
+reset role;
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000000b', false);
+set role authenticated;
+select t_expect_error($$select register_for_raid((select id from get_raids_public() where slug = 'the-crimson-wyrm'), (select v from ids where k='cB'))$$, 'Turn on PvP');
+reset role;
+-- admin correction bypasses cooldown and is audited
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-0000000000f2', false);
+set role authenticated;
+select t_expect_error($$select gm_set_allegiance((select v from ids where k='charA'), (select v from ids where k='fGuild'), '')$$, 'reason');
+select gm_set_allegiance((select v from ids where k='charA'), (select v from ids where k='fGuild'), 'Player asked to return after the raid');
+reset role;
+select t_assert((select faction_id from characters where id = (select v from ids where k='charA')) = (select v from ids where k='fGuild'), 'admin moved adventurer back');
+select t_assert((select count(*) from audit_logs where action = 'set_allegiance') = 1, 'allegiance correction audited');
 \echo 'ALL TESTS PASSED'

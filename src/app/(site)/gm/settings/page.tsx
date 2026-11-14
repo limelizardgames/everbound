@@ -79,6 +79,20 @@ function SettingsPage() {
           <SubmitButton className="btn-ghost">Save</SubmitButton>
         </form>
         <form action={act(saveSetting, after)} className="panel grid gap-2">
+          <input type="hidden" name="key" value="allegiance_min_rank" />
+          <label className="label" htmlFor="amr">Rank needed to pledge to another allegiance</label>
+          <select id="amr" className="input" name="value" defaultValue={String(get("allegiance_min_rank") ?? "D")}>{["F", "E", "D", "C", "B", "A", "S", "SS"].map((r) => <option key={r} value={r}>{r}</option>)}</select>
+          <p className="muted text-xs">Everyone starts in the Adventurers Guild. Returning to the Guild is allowed at any rank.</p>
+          <SubmitButton className="btn-ghost">Save</SubmitButton>
+        </form>
+        <form action={act(saveSetting, after)} className="panel grid gap-2">
+          <input type="hidden" name="key" value="allegiance_cooldown_days" />
+          <label className="label" htmlFor="acd">Days between allegiance changes</label>
+          <input id="acd" className="input" type="number" min={0} max={365} name="value" defaultValue={Number(get("allegiance_cooldown_days") ?? 90)} />
+          <p className="muted text-xs">Administrators can move an adventurer at any time from Players &amp; Moderation (logged).</p>
+          <SubmitButton className="btn-ghost">Save</SubmitButton>
+        </form>
+        <form action={act(saveSetting, after)} className="panel grid gap-2">
           <input type="hidden" name="key" value="season_name" />
           <label className="label" htmlFor="sn">Season name</label>
           <input id="sn" className="input" name="value" defaultValue={String(get("season_name") ?? "")} />

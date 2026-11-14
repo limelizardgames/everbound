@@ -45,6 +45,9 @@ export type Character = {
   is_active: boolean;
   is_public: boolean;
   created_at: string;
+  faction_id?: string | null;
+  faction_changed_at?: string | null;
+  pvp_opt_in?: boolean;
 };
 
 export type CharacterTotals = {
@@ -92,6 +95,7 @@ export type QuestTemplate = {
   content_advisories: string[];
   created_by: string | null;
   min_age?: number | null;
+  pvp_mode?: "skirmish" | "contested" | null;
 };
 
 export type QuestSession = {
@@ -153,6 +157,21 @@ export type PublicRaid = {
   starts_at: string | null;
   is_paused: boolean;
   my_registration: string | null;
+};
+
+export type RaidSides = { raid_id: string; two_sided: boolean; attackers: number; defenders: number; my_side: "attackers" | "defenders" | null };
+
+export type Faction = {
+  id: string;
+  slug: string;
+  name: string;
+  motto: string;
+  description: string;
+  color: "gold" | "ember" | "arcane" | "epic" | "green";
+  raid_side: "attackers" | "defenders" | "either";
+  is_default: boolean;
+  members: number;
+  pvp_members: number;
 };
 
 export type PublicCharacter = {

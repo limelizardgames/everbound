@@ -22,7 +22,7 @@ export default function RaidController() {
     const [raids, flags, regs, ranks] = await Promise.all([
       must(sb().from("raids").select("*").order("created_at")),
       must(sb().from("world_flags").select("key, label, value")),
-      must(sb().from("raid_registrations").select("raid_id, status, preferred_window, character:characters(name)").neq("status", "canceled")),
+      must(sb().from("raid_registrations").select("raid_id, status, preferred_window, side, character:characters(name)").neq("status", "canceled")),
       must(sb().from("rank_definitions").select("code").order("sort")),
     ]);
     return { raids: raids as Raid[], flags: flags as { key: string; label: string; value: number }[], regs: regs as Raid[], ranks: ranks as { code: string }[] };
@@ -42,7 +42,7 @@ export default function RaidController() {
         {raids.map((r: Raid) => {
           const f = r.condition_flag_key ? fmap.get(r.condition_flag_key) : null;
           const idx = STATES.indexOf(r.state);
-          const mine = regs.filter((g: Raid) => g.raid_id === r.id) as unknown as { status: string; preferred_window: string | null; character: { name: string } }[];
+          const mine = regs.filter((g: Raid) => g.raid_id === r.id) as unknown as { status: string; preferred_window: string | null; side: string; character: { name: string } }[];
           return (
             <section key={r.id} className="panel-arcane grid gap-4">
               <div className="flex flex-wrap items-center justify-between gap-2">
@@ -82,6 +82,7 @@ export default function RaidController() {
                       <div><label className="label" htmlFor={`st-${r.id}`}>Raid window starts</label><input id={`st-${r.id}`} className="input" type="datetime-local" name="starts_at" defaultValue={r.starts_at ? toZonedInput(r.starts_at) : ""} /></div>
                     </div>
                     <label className="flex items-center gap-2 text-sm"><input type="checkbox" name="conditions_public" defaultChecked={r.conditions_public} className="accent-gold" />Show unlock progress publicly (e.g. “Ancient Seal 3/5”)</label>
+                    <label className="flex items-center gap-2 text-sm"><input type="checkbox" name="two_sided" defaultChecked={(r as unknown as { two_sided?: boolean }).two_sided} className="accent-gold" />Two-sided raid: Covenant adventurers defend, PvP opt-in required</label>
                     <SubmitButton className="btn-ghost">Save</SubmitButton>
                   </form>
                 </details>
@@ -89,7 +90,7 @@ export default function RaidController() {
               <div>
                 <h3 className="eyebrow">Registrations ({mine.length}{r.capacity ? ` / ${r.capacity}` : ""})</h3>
                 <ul className="mt-2 grid gap-1 text-sm">
-                  {mine.map((g, i) => <li key={i}>{g.character.name} <span className="muted">· {g.status}{g.preferred_window ? ` · prefers ${g.preferred_window}` : ""}</span></li>)}
+                  {mine.map((g, i) => <li key={i}>{g.character.name} <span className="muted">· {(r as unknown as { two_sided?: boolean }).two_sided ? `${g.side} · ` : ""}{g.status}{g.preferred_window ? ` · prefers ${g.preferred_window}` : ""}</span></li>)}
                   {mine.length === 0 && <li className="muted">None yet.</li>}
                 </ul>
               </div>

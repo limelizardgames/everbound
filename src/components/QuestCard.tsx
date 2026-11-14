@@ -59,6 +59,7 @@ export function QuestCard({ quest }: { quest: QuestCardData }) {
         <span style={{ color: locked ? undefined : diff.color }} className={locked ? "text-parchment/50" : ""}>◆ {diff.label}</span>
         <span className="text-parchment/70">⚑ {quest.party_min}–{quest.party_max}</span>
         {quest.min_age && <span className="rounded-sm border border-ember/50 px-1.5 text-ember-light">{quest.min_age}+</span>}
+        {quest.pvp_mode && <span className="rounded-sm border border-ember bg-ember/15 px-1.5 text-ember-light" title="Party vs party: PvP opt-in required">⚔ PvP · {quest.pvp_mode}</span>}
       </div>
       <div className="mt-4 flex flex-wrap gap-1.5">
         {locked ? (

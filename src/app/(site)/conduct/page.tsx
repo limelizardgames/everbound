@@ -56,6 +56,7 @@ export default function ConductPage() {
             <li><strong>Lines and veils.</strong> Some content is never in our games (a line). Some happens “off-screen” (a veil). The Guild Master sets these, and you can ask privately for more.</li>
             <li><strong>Share the spotlight.</strong> Let others act, talk and shine. Don&apos;t talk over people or play their characters for them.</li>
             <li><strong>In-character is not an excuse.</strong> Your character may be grumpy or villainous; targeting a real person through your character is not allowed.</li>
+            <li><strong>Rivals in the story, friends at the table.</strong> In party-vs-party quests and two-sided raids, your character fights the other side&apos;s characters, never the players. PvP is always opt-in and a Guild Master referees every clash.</li>
             <li><strong>The Guild Master&apos;s ruling stands</strong> for the session. Disagree politely, and raise it afterwards if it matters.</li>
             <li>Arrive on time and cancel early if you can&apos;t make it, so someone on the waitlist can play.</li>
           </ul>
@@ -87,7 +88,8 @@ export default function ConductPage() {
             <li><strong>One account and one guild card per person.</strong> Don&apos;t share, sell or lend your card or your login.</li>
             <li><strong>No real-money trading.</strong> Gold, items and characters may never be bought or sold for real money, inside or outside the site. Trade only through the Auction Hall.</li>
             <li>Don&apos;t exploit bugs. If you find one, tell a Guild Master — honesty may even earn you a reward.</li>
-            <li>Don&apos;t pressure other players, especially newer ones, into trades.</li>
+            <li>Don&apos;t pressure other players, especially newer ones, into trades, into turning PvP on, or into joining your allegiance.</li>
+            <li>In PvP, don&apos;t single out the same player again and again, and never use the game to settle a real-world grudge.</li>
             <li>Riddle answers are for solving, not for posting in the Tavern.</li>
           </ul>
         </Article>

@@ -48,6 +48,17 @@ Players at Rank E and above can auction tradeable items to each other for gold. 
 - **Settings** (Supabase → Table Editor → `admin_settings`): `auction_min_rank` (default `"E"`), `auction_listing_fee` (2 gold), `auction_fee_percent` (5), `auction_max_price` (5000).
 - **Bound items:** story artifacts, keys and trophies cannot be sold. To change one item, set `is_tradeable` (and optionally `max_auction_price`) on its row in `items`.
 
+## Allegiances & party-vs-party (PvP)
+
+Every adventurer starts in **The Adventurers Guild**. From guild rank `allegiance_min_rank` (default **D**) they can pledge to another allegiance on **Portal → Allegiance**: **The Ashen Covenant** (defends in two-sided raids) or **The Free Companies** (choose a side at raid sign-up). Changing again is blocked for `allegiance_cooldown_days` (default **90**), and nobody can switch sides while signed up for a raid or a PvP quest. Both settings are in **Settings & Orders**.
+
+- **PvP is opt-in** per adventurer (Portal → Allegiance). It can be turned off at any time unless they are signed up for a PvP quest or two-sided raid.
+- **PvP quests:** in the Quest Creator set *Party vs party* to **Skirmish** (rival parties clash) or **Contested** (rival parties race for an objective). Only opted-in adventurers can book them, and the Quest Board shows a ⚔ PvP tag. Split the table by allegiance at session zero.
+- **Two-sided raids:** in the Raid Controller tick *Two-sided raid*. Registration then requires PvP, records each adventurer's side (Covenant → defenders, Guild → raiders, Free Companies choose), and the Raid Center shows the count per side. The seeded Crimson Wyrm is two-sided.
+- **Corrections:** administrators can set any adventurer's allegiance from **Players & Moderation** (reason required, ignores rank and cooldown, written to the Audit Log).
+- **Factions** live in the `factions` table (name, motto, description, colour, raid side). Rename them there; add new ones with a `slug` and `raid_side`.
+- Faction names are working names: check them in the trademark review along with "Everbound".
+
 ## Moderation
 
 **Who can do what** (Command Center → Players & Moderation):

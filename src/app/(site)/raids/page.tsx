@@ -12,7 +12,8 @@ import { PageHeader, StatusPill } from "@/components/ui";
 import { SubmitButton } from "@/components/SubmitButton";
 import { SetupNotice } from "@/components/SetupNotice";
 import { dateTime } from "@/lib/format";
-import type { PublicRaid } from "@/lib/types";
+import Link from "next/link";
+import type { Faction, PublicRaid, RaidSides } from "@/lib/types";
 
 
 const STAGES = ["dormant", "foreshadowed", "unlocked", "registration", "active", "resolved"];
@@ -21,10 +22,15 @@ export default function RaidsPage() {
   useTitle("Raid Center");
   const { viewer } = useViewer();
   const act = useAct();
-  const { data, reload } = useData(async () => (await must(sb().rpc("get_raids_public"))) as PublicRaid[], [viewer?.userId]);
+  const { data: all, reload } = useData(async () => {
+    const [raids, sides, factions] = await Promise.all([must(sb().rpc("get_raids_public")), must(sb().rpc("get_raid_sides")), must(sb().rpc("get_factions"))]);
+    return { raids: raids as PublicRaid[], sides: new Map((sides as RaidSides[]).map((x) => [x.raid_id, x])), factions: factions as Faction[] };
+  }, [viewer?.userId]);
+  const data = all?.raids;
   if (!isSupabaseConfigured) return <SetupNotice />;
   if (!data) return <Loading />;
   const raids = data;
+  const myFaction = all!.factions.find((f) => f.id === viewer?.character?.faction_id) ?? all!.factions.find((f) => f.is_default);
   return (
     <div className="container-eb max-w-4xl py-12">
       <PageHeader eyebrow="Everbound · Raid Center" title="The Sealed Gate">
@@ -39,6 +45,7 @@ export default function RaidsPage() {
       <div className="grid gap-6">
         {raids.map((r) => {
           const sealed = r.state === "dormant" || r.state === "foreshadowed";
+          const sides = all!.sides.get(r.id);
           return (
             <section key={r.id} className={`${sealed ? "panel" : "panel-arcane arcane-shimmer"} text-center sm:p-10`}>
               <div className="relative mx-auto h-48 w-48">
@@ -49,6 +56,7 @@ export default function RaidsPage() {
               <div className="mt-2 flex justify-center gap-2">
                 <StatusPill status={sealed ? "locked" : r.state === "registration" ? "open" : "completed"} label={r.state} />
                 {r.is_paused && <StatusPill status="waitlisted" label="paused by Guild Masters" />}
+                {sides?.two_sided && <Link href="/allegiances/" className="rounded-sm border border-ember bg-ember/15 px-2 py-0.5 font-ui text-[12px] font-bold uppercase tracking-wider text-ember-light">⚔ Two-sided · PvP</Link>}
               </div>
               <p className="mx-auto mt-4 max-w-xl text-parchment/85">{r.display_text}</p>
               {r.progress !== null && r.target !== null ? (
@@ -68,17 +76,28 @@ export default function RaidsPage() {
                   {r.starts_at && (<><dt className="muted text-left">Raid window</dt><dd className="text-right">{dateTime(r.starts_at)}</dd></>)}
                   {r.capacity && (<><dt className="muted text-left">Registered</dt><dd className="text-right">{r.registered} / {r.capacity}</dd></>)}
                   {r.min_rank && (<><dt className="muted text-left">Minimum rank</dt><dd className="text-right">{r.min_rank}</dd></>)}
+                  {sides?.two_sided && (<><dt className="muted text-left">Raiders · Defenders</dt><dd className="text-right"><span className="text-gold-light">{sides.attackers}</span> · <span className="text-ember-light">{sides.defenders}</span></dd></>)}
                 </dl>
               )}
               {r.state === "registration" && !r.is_paused && (
                 <div className="mt-6">
                   {r.my_registration && r.my_registration !== "canceled" ? (
-                    <StatusPill status={r.my_registration === "registered" ? "confirmed" : "waitlisted"} label={`You are ${r.my_registration}`} />
+                    <StatusPill status={r.my_registration === "registered" ? "confirmed" : "waitlisted"} label={`You are ${r.my_registration}${sides?.two_sided && sides.my_side ? ` with the ${sides.my_side}` : ""}`} />
+                  ) : viewer?.character && sides?.two_sided && !viewer.character.pvp_opt_in ? (
+                    <p className="mx-auto max-w-sm text-sm text-parchment/85">In this raid players fight each other. <Link className="link" href="/portal/allegiance/">Turn on PvP</Link> to answer the call.</p>
                   ) : viewer?.character ? (
                     <form action={act((fd) => registerForRaid(fd, viewer!.character!.id), { after: reload })} className="mx-auto grid max-w-sm gap-2">
                       <input type="hidden" name="raid_id" value={r.id} />
                       <label className="label text-left" htmlFor={`w-${r.id}`}>Preferred window (optional)</label>
                       <input id={`w-${r.id}`} name="window" className="input" placeholder="e.g. Friday evening or Saturday afternoon" />
+                      {sides?.two_sided && myFaction && (myFaction.raid_side === "either" ? (
+                        <>
+                          <label className="label text-left" htmlFor={`side-${r.id}`}>Your side ({myFaction.name} may choose)</label>
+                          <select id={`side-${r.id}`} name="side" className="input" defaultValue="attackers"><option value="attackers">Raiders: break the seal</option><option value="defenders">Defenders: guard the Wyrm</option></select>
+                        </>
+                      ) : (
+                        <p className="text-left text-sm text-parchment/80">As {myFaction.name} you fight with the <strong className={myFaction.raid_side === "defenders" ? "text-ember-light" : "text-gold-light"}>{myFaction.raid_side}</strong>.</p>
+                      ))}
                       <SubmitButton>Answer the call</SubmitButton>
                     </form>
                   ) : (

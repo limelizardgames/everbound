@@ -225,7 +225,7 @@ export async function markAllRead(): Promise<ActionResult> {
 }
 
 export async function registerForRaid(fd: FormData, characterId: string): Promise<ActionResult> {
-  const status = await rpc<string>("register_for_raid", { p_raid: str(fd, "raid_id"), p_character: characterId, p_window: str(fd, "window") || null });
+  const status = await rpc<string>("register_for_raid", { p_raid: str(fd, "raid_id"), p_character: characterId, p_window: str(fd, "window") || null, p_side: str(fd, "side") || null });
   return status === "waitlisted" ? "The raid is full — you are on the waitlist." : "You have answered the call!";
 }
 
@@ -251,6 +251,7 @@ export async function saveQuestTemplate(fd: FormData): Promise<ActionResult> {
     reward_preview: str(fd, "reward_preview") || null,
     content_advisories: str(fd, "content_advisories").split(",").map((s) => s.trim()).filter(Boolean),
     min_age: num(fd, "min_age") || null,
+    pvp_mode: str(fd, "pvp_mode") || null,
   };
   let templateId = id;
   if (id) await must(sb().from("quest_templates").update(row).eq("id", id));
@@ -407,6 +408,17 @@ export async function toggleChronicle(id: string, publish: boolean): Promise<Act
   return publish ? "Published." : "Unpublished.";
 }
 
+// ------------------------------------------------------------------ Allegiances & PvP
+export async function pledgeAllegiance(characterId: string, factionId: string): Promise<ActionResult> {
+  return rpc<string>("pledge_allegiance", { p_character: characterId, p_faction: factionId });
+}
+export async function setPvpOptIn(characterId: string, on: boolean): Promise<ActionResult> {
+  return rpc<string>("set_pvp_opt_in", { p_character: characterId, p_on: on });
+}
+export async function gmSetAllegiance(fd: FormData): Promise<ActionResult> {
+  return rpc<string>("gm_set_allegiance", { p_character: str(fd, "character_id"), p_faction: str(fd, "faction_id"), p_reason: str(fd, "reason") });
+}
+
 // ------------------------------------------------------------------ GM: raids
 export async function setRaidState(raidId: string, state: string, override = false): Promise<ActionResult> {
   await rpc("set_raid_state", { p_raid: raidId, p_state: state, p_override: override });
@@ -424,6 +436,7 @@ export async function updateRaid(fd: FormData): Promise<ActionResult> {
     foreshadow_text: str(fd, "foreshadow_text") || null, reveal_text: str(fd, "reveal_text") || null,
     capacity: num(fd, "capacity") || null, min_rank: str(fd, "min_rank") || null,
     starts_at: starts ? zonedToUtc(starts).toISOString() : null, conditions_public: fd.get("conditions_public") === "on",
+    two_sided: fd.get("two_sided") === "on",
     updated_at: new Date().toISOString(),
   }).eq("id", str(fd, "raid_id")));
   return "Raid details saved.";
@@ -463,7 +476,7 @@ export async function resolveReport(reportId: string, messageId: string, remove:
 export async function saveSetting(fd: FormData): Promise<ActionResult> {
   const key = str(fd, "key");
   const raw = str(fd, "value");
-  const value = ["chat_retention_days", "min_age", "gm_max_suspension_days", "suspension_response_hours"].includes(key) ? Number(raw) : key === "season_start" ? new Date(raw).toISOString() : raw;
+  const value = ["chat_retention_days", "min_age", "gm_max_suspension_days", "suspension_response_hours", "allegiance_cooldown_days"].includes(key) ? Number(raw) : key === "season_start" ? new Date(raw).toISOString() : raw;
   await must(sb().from("admin_settings").upsert({ key, value, updated_at: new Date().toISOString() }));
   return "Setting saved.";
 }

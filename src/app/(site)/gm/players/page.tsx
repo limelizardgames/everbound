@@ -5,7 +5,7 @@ import { sb, must } from "@/lib/supabase";
 import { useViewer } from "@/lib/viewer";
 import { useData } from "@/lib/useData";
 import { useAct } from "@/lib/toast";
-import { adjustLedger, banUser, decideAppeal, grantItem, liftRestriction, muteUser, resolveReport, setRole, suspendUser } from "@/lib/actions";
+import { adjustLedger, banUser, decideAppeal, gmSetAllegiance, grantItem, liftRestriction, muteUser, resolveReport, setRole, suspendUser } from "@/lib/actions";
 import { dateTime } from "@/lib/format";
 import { PageHeader, StatusPill } from "@/components/ui";
 import { SubmitButton } from "@/components/SubmitButton";
@@ -32,21 +32,22 @@ function Players() {
   const { data, reload } = useData(async () => {
     let pq = sb().from("profiles").select("id, display_name, role, is_banned, chat_muted_until, created_at, suspended_until, restriction_reason, restricted_by, restricted_at").order("created_at", { ascending: false }).limit(200);
     if (search) pq = pq.ilike("display_name", `%${search}%`);
-    const [profiles, chars, reports, items, appeals, gmMax, names] = await Promise.all([
+    const [profiles, chars, reports, items, appeals, gmMax, names, factions] = await Promise.all([
       must(pq),
-      must(sb().from("characters").select("id, profile_id, name, class, is_active").eq("is_active", true)),
+      must(sb().from("characters").select("id, profile_id, name, class, is_active, faction_id").eq("is_active", true)),
       must(sb().from("message_reports").select("id, reason, created_at, message:messages(id, body, author_name, deleted_at)").eq("status", "open").order("created_at")),
       must(sb().from("items").select("id, name").order("name")),
       must(sb().from("restriction_appeals").select("*").eq("status", "open").order("created_at")).catch(() => []),
       must(sb().from("admin_settings").select("value").eq("key", "gm_max_suspension_days").maybeSingle()),
       must(sb().from("profiles").select("id, display_name")),
+      must(sb().from("factions").select("id, name, is_default").order("sort")),
     ]);
     const cs = chars as Ch[];
     const totals = cs.length ? await must(sb().from("character_totals").select("character_id, level, rank_code, gold, renown, xp").in("character_id", cs.map((c) => c.id))) : [];
-    return { appeals: appeals as Appeal[], gmMax: Number((gmMax as { value: unknown } | null)?.value ?? 0), names: new Map((names as { id: string; display_name: string }[]).map((n) => [n.id, n.display_name])), profiles: profiles as Prof[], chars: cs, reports: reports as unknown as Rep[], items: items as { id: string; name: string }[], totals: totals as Tot[] };
+    return { appeals: appeals as Appeal[], gmMax: Number((gmMax as { value: unknown } | null)?.value ?? 0), names: new Map((names as { id: string; display_name: string }[]).map((n) => [n.id, n.display_name])), profiles: profiles as Prof[], chars: cs, reports: reports as unknown as Rep[], items: items as { id: string; name: string }[], totals: totals as Tot[], factions: factions as { id: string; name: string; is_default: boolean }[] };
   }, [search]);
   if (!data || !viewer) return <Loading />;
-  const { profiles, chars, reports, items, totals, appeals, gmMax, names } = data;
+  const { profiles, chars, reports, items, totals, appeals, gmMax, names, factions } = data;
   const admin = roleAtLeast(viewer.profile.role, "admin");
   const owner = viewer.profile.role === "owner";
   const maxDays = admin ? 365 : gmMax;
@@ -188,6 +189,14 @@ function Players() {
                         <input className="input flex-1" name="reason" placeholder="Reason" aria-label="Reason" />
                         <SubmitButton className="btn-ghost">Grant</SubmitButton>
                       </form>
+                      {admin && (
+                        <form action={act(gmSetAllegiance, after)} className="flex flex-wrap gap-2">
+                          <input type="hidden" name="character_id" value={c.id} />
+                          <select className="input flex-1" name="faction_id" aria-label="Allegiance" defaultValue={(c as Ch & { faction_id?: string | null }).faction_id ?? factions.find((f) => f.is_default)?.id}>{factions.map((f) => <option key={f.id} value={f.id}>{f.name}</option>)}</select>
+                          <input className="input flex-1" name="reason" placeholder="Reason (required)" required aria-label="Reason" />
+                          <SubmitButton className="btn-ghost">Set allegiance</SubmitButton>
+                        </form>
+                      )}
                       <p className="muted text-xs">Corrections are new ledger entries, never edits. You cannot adjust your own character.</p>
                     </div>
                   )}

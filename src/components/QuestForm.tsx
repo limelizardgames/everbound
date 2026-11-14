@@ -45,6 +45,9 @@ export function QuestForm({ quest, secrets, objectives, locations, ranks, onSave
           <div><label className="label" htmlFor="reward_preview">Possible rewards (shown to players)</label><input className="input" id="reward_preview" name="reward_preview" defaultValue={f("reward_preview")} placeholder="75 gold · 40 renown" /></div>
           <div><label className="label" htmlFor="min_age">Age rating</label>
             <select className="input" id="min_age" name="min_age" defaultValue={quest?.min_age ?? ""}><option value="">All ages (site minimum)</option>{[13, 14, 15, 16, 17, 18].map((a) => <option key={a} value={a}>{a}+</option>)}</select></div>
+          <div><label className="label" htmlFor="pvp_mode">Party vs party</label>
+            <select className="input" id="pvp_mode" name="pvp_mode" defaultValue={quest?.pvp_mode ?? ""}><option value="">No (standard quest)</option><option value="skirmish">Skirmish: rival parties clash</option><option value="contested">Contested: rival parties race for an objective</option></select>
+            <p className="muted mt-1 text-xs">Only adventurers with PvP turned on can book it.</p></div>
           <div><label className="label" htmlFor="content_advisories">Content advisories (comma-separated)</label><input className="input" id="content_advisories" name="content_advisories" defaultValue={quest?.content_advisories.join(", ") ?? ""} /></div>
         </div>
         <div>
