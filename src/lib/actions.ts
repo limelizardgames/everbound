@@ -31,11 +31,14 @@ export function ageFrom(year: number, month: number) {
 const slugify = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 
 // ------------------------------------------------------------------ Auth
-export async function signUp(fd: FormData): Promise<ActionResult> {
-  const next = safeNext(str(fd, "next"), "/portal/");
+/** Accounts are only ever created from an unclaimed guild card (scan → this form). */
+export async function signUpWithCard(fd: FormData): Promise<ActionResult> {
+  const token = str(fd, "card_token");
+  const next = "/portal/character/new/";
   const email = str(fd, "email");
   const password = String(fd.get("password") ?? "");
   const displayName = str(fd, "display_name");
+  if (!token) throw new Error("Scan your guild card to create your account.");
   if (password.length < 8) throw new Error("Use a password of at least 8 characters.");
   if (displayName.length < 2 || displayName.length > 40) throw new Error("Display name must be 2–40 characters.");
   const birthYear = num(fd, "birth_year"), birthMonth = num(fd, "birth_month");
@@ -46,17 +49,25 @@ export async function signUp(fd: FormData): Promise<ActionResult> {
   if (age < minAge) throw new Error(`Everbound is for ages ${minAge} and up. We'd love to see you when you're older!`);
   const guardian = fd.get("guardian_consent") === "on";
   if (age < 18 && !guardian) throw new Error("Players under 18 need a parent or guardian's permission. Please tick the box once they've agreed.");
+  const card = (await sb().rpc("resolve_guild_card", { p_token: token })).data as { status: string } | null;
+  if (!card || card.status !== "unassigned") throw new Error("This guild card has already been claimed. If it's yours, log in instead.");
+
   const { data, error } = await sb().auth.signUp({
     email,
     password,
     options: {
-      data: { display_name: displayName, age_attested: true, birth_year: birthYear, birth_month: birthMonth, guardian_consent: guardian },
+      data: { display_name: displayName, age_attested: true, birth_year: birthYear, birth_month: birthMonth, guardian_consent: guardian, card_token: token },
       emailRedirectTo: absoluteUrl(`/auth/callback/?next=${encodeURIComponent(next)}`),
     },
   });
-  if (error) throw new Error(error.message);
-  if (!data.session) return { ok: "Check your email to confirm your account, then sign in.", go: `/join/?mode=signin&next=${encodeURIComponent(next)}` };
-  return { ok: "Welcome to the Guild!", go: next };
+  if (error) {
+    // The database refuses invalid cards/ages; GoTrue reports that generically.
+    if (/database error/i.test(error.message)) throw new Error("This card could not be claimed. It may already be taken — ask a Guild Master.");
+    if (/already registered/i.test(error.message)) throw new Error("That email already has an account. Log in instead.");
+    throw new Error(error.message);
+  }
+  if (!data.session) return { ok: "Your card is now yours! Check your email to confirm your account, then log in to create your adventurer.", go: `/join/?next=${encodeURIComponent(next)}` };
+  return { ok: "Welcome to the Guild! Your card is bound to you.", go: next };
 }
 
 export async function signIn(fd: FormData): Promise<ActionResult> {

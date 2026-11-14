@@ -145,7 +145,7 @@ function AuctionHall() {
 
           <aside className="grid h-fit gap-4">
             {!viewer ? (
-              <SystemWindow title="Auction Hall"><p className="text-sm text-parchment/85">Browse freely. To bid or sell, join the Guild and reach <strong className="text-gold-light">Rank {data.minRank}</strong>.</p><Link href="/join/?next=/auction/" className="btn-gold btn-sm mt-4">Start Adventure</Link></SystemWindow>
+              <SystemWindow title="Auction Hall"><p className="text-sm text-parchment/85">Browse freely. To bid or sell, join the Guild and reach <strong className="text-gold-light">Rank {data.minRank}</strong>.</p><Link href="/join/?next=/auction/" className="btn-gold btn-sm mt-4">How to Join</Link></SystemWindow>
             ) : !unlocked || !charId ? (
               <SystemWindow title="Locked">
                 <div className="flex items-center gap-3"><RankBadge code={data.minRank} size="lg" /><p className="text-sm text-parchment/85">The Auction Hall opens to adventurers of <strong className="text-gold-light">Rank {data.minRank}</strong> and above. Earn renown on quests to unlock bidding and selling.</p></div>

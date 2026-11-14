@@ -7,7 +7,8 @@ import { isSupabaseConfigured } from "@/lib/env";
 import { useData } from "@/lib/useData";
 import { useViewer } from "@/lib/viewer";
 import { useAct } from "@/lib/toast";
-import { claimCard } from "@/lib/actions";
+import { claimCard, signUpWithCard } from "@/lib/actions";
+import { BirthFields } from "@/components/BirthFields";
 import { CharacterProfile } from "@/components/CharacterProfile";
 import { Crest } from "@/components/Crest";
 import { MagicCircle } from "@/components/MagicCircle";
@@ -31,6 +32,7 @@ function CardPage() {
   const token = useSearchParams().get("t") ?? "";
   const { viewer, loading: vLoading, refresh } = useViewer();
   const act = useAct();
+  const { data: minAge } = useData(async () => Number((await sb().from("admin_settings").select("value").eq("key", "min_age").maybeSingle()).data?.value ?? 13), []);
   const { data: card, loading } = useData(async () => (await must(sb().rpc("resolve_guild_card", { p_token: token }))) as Resolved, [token, viewer?.userId]);
   if (!isSupabaseConfigured) return <SetupNotice />;
   if (loading || vLoading) return <Loading />;
@@ -52,12 +54,26 @@ function CardPage() {
           <p className="eyebrow mt-2">Unclaimed guild card</p>
           <h1 className="heading mt-2 text-3xl">{card.card_number}</h1>
           {card.personalized_name && <p className="mt-1 text-gold-light">Inscribed for {card.personalized_name}</p>}
-          <p className="muted mx-auto mt-3 max-w-md">This card has not yet been bound to an adventurer. Whoever holds it may claim it. Once claimed, it is yours alone.</p>
+          <p className="muted mx-auto mt-3 max-w-md">This card has not been bound to anyone yet. Create your account below and it becomes yours alone: locked to you for good.</p>
           {!viewer ? (
-            <div className="mt-6 flex flex-wrap justify-center gap-3">
-              <Link className="btn-gold" href={`/join/?mode=signup&next=${encodeURIComponent(next)}`}>Create account &amp; claim</Link>
-              <Link className="btn-ghost" href={`/join/?mode=signin&next=${encodeURIComponent(next)}`}>Sign in to claim</Link>
-            </div>
+            <form action={act(signUpWithCard, { after: refresh })} className="mx-auto mt-8 grid max-w-md gap-4 text-left">
+              <input type="hidden" name="card_token" value={token} />
+              <p className="text-center font-display text-xl text-gold-light">Create your account</p>
+              <div>
+                <label className="label" htmlFor="display_name">Display name</label>
+                <input className="input" id="display_name" name="display_name" required minLength={2} maxLength={40} autoComplete="nickname" placeholder="Shown in the Tavern" />
+                <p className="muted mt-1 text-xs">Use a nickname. Never your full legal name.</p>
+              </div>
+              <div><label className="label" htmlFor="email">Email</label><input className="input" id="email" name="email" type="email" required autoComplete="email" /></div>
+              <div>
+                <label className="label" htmlFor="password">Password</label>
+                <input className="input" id="password" name="password" type="password" required minLength={8} autoComplete="new-password" />
+                <p className="muted mt-1 text-xs">You&apos;ll log in with your email and password. The card itself never logs anyone in.</p>
+              </div>
+              <BirthFields minAge={minAge ?? 13} />
+              <SubmitButton pendingText="Binding your card…">▸ Claim card &amp; create account</SubmitButton>
+              <p className="muted text-center text-xs">Already have an account? <Link className="link" href={`/join/?next=${encodeURIComponent(next)}`}>Log in</Link> to bind this card to it.</p>
+            </form>
           ) : viewer.card ? (
             <p className="mt-6 rounded-lg border border-gold/40 p-3 text-sm">You already hold card <strong>{viewer.card.card_number}</strong>. If this is an upgrade or replacement, a Guild Master can transfer it for you.</p>
           ) : (

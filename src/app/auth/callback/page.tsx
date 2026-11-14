@@ -29,7 +29,7 @@ function Callback() {
         <div className="panel mx-auto max-w-md">
           <p className="heading text-xl">That link has expired</p>
           <p className="muted mt-2 text-sm">Open the link in the same browser you signed up with, or sign in again.</p>
-          <a className="btn-gold mt-4" href={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/join/?mode=signin`}>Sign in</a>
+          <a className="btn-gold mt-4" href={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/join/`}>Log in</a>
         </div>
       ) : (
         <Loading label="Opening the Guild gates…" />

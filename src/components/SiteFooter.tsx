@@ -23,7 +23,7 @@ export function SiteFooter() {
             </div>
           </div>
           <p className="muted mt-4 max-w-sm text-sm">A real-world tabletop adventure with a persistent online guild. The world remembers what its players have done.</p>
-          <Link href="/join/" className="btn-gold btn-sm mt-5">Start Adventure</Link>
+          <Link href="/join/" className="btn-gold btn-sm mt-5">How to Join</Link>
         </div>
         <nav className="grid grid-cols-2 gap-8 sm:grid-cols-3" aria-label="Footer">
           {COLS.map(([title, links]) => (

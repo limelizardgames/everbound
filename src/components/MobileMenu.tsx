@@ -31,8 +31,8 @@ export function MobileMenu({ nav, signedIn, staff, unread }: { nav: { href: stri
               </>
             ) : (
               <>
-                <Link href="/join/" className="btn-gold">Start Adventure</Link>
-                <Link href="/join/?mode=signin" className="btn-ghost">Log in</Link>
+                <Link href="/join/" className="btn-gold">How to Join</Link>
+                <Link href="/join/" className="btn-ghost">Log in</Link>
               </>
             )}
           </div>

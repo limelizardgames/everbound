@@ -55,8 +55,8 @@ export function SiteHeader() {
             </>
           ) : (
             <>
-              <Link href="/join/?mode=signin" className="btn-ghost btn-sm">Log in</Link>
-              <Link href="/join/" className="btn-gold btn-sm">Start Adventure</Link>
+              <Link href="/join/" className="btn-ghost btn-sm">Log in</Link>
+              <Link href="/join/" className="btn-gold btn-sm">How to Join</Link>
             </>
           )}
         </div>

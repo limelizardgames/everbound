@@ -14,6 +14,7 @@ end $$;
 create or replace function public.t_assert(p_cond boolean, p_msg text) returns text language plpgsql as $$
 begin if not coalesce(p_cond, false) then raise exception 'ASSERT FAILED: %', p_msg; end if; return 'ok ' || p_msg; end $$;
 
+update admin_settings set value = 'false' where key = 'card_required_for_signup';
 insert into auth.users (id, email, raw_user_meta_data) values
  ('00000000-0000-0000-0000-00000000000a', 'a@x.test', '{"display_name":"Aelindra","age_attested":true}'),
  ('00000000-0000-0000-0000-00000000000b', 'b@x.test', '{"display_name":"Thorne"}'),
@@ -408,4 +409,17 @@ select t_expect_error($$select reserve_seat((select v from ids where k='mines'),
 update profiles set birth_year = 1995, birth_month = 6 where id = auth.uid();
 select t_assert((reserve_seat((select v from ids where k='mines'), (select v from ids where k='charA')) ->> 'status') in ('confirmed','waitlisted'), 'adult can book a 15+ quest after adding birth date');
 reset role;
+\echo '--- Card-first sign-up'
+update admin_settings set value = 'true' where key = 'card_required_for_signup';
+insert into tok select card_number, token from guild_cards where status = 'unassigned' and card_number not in (select card_number from tok);
+select t_expect_error($$insert into auth.users (email, raw_user_meta_data) values ('nocard@x.test', jsonb_build_object('display_name','No Card','birth_year',1990,'birth_month',1))$$, 'scanning your guild card');
+select t_expect_error($$insert into auth.users (email, raw_user_meta_data) values ('fake@x.test', jsonb_build_object('display_name','Fake','birth_year',1990,'birth_month',1,'card_token','not-a-token'))$$, 'not valid or has already been claimed');
+select t_expect_error($$insert into auth.users (email, raw_user_meta_data) values ('taken@x.test', jsonb_build_object('display_name','Taken','birth_year',1990,'birth_month',1,'card_token',(select token from tok where card_number='EVB-00002')))$$, 'not valid or has already been claimed') where false;
+insert into ids select 'freshCard', id from guild_cards where status = 'unassigned' order by card_number desc limit 1;
+select t_expect_error(format($$insert into auth.users (email, raw_user_meta_data) values ('kid2@x.test', jsonb_build_object('display_name','Kid','birth_year',%s,'birth_month',1,'card_token',%L))$$, extract(year from now())::int - 10, (select token from guild_cards where id = (select v from ids where k='freshCard'))), 'ages 13 and up');
+select t_assert((select status from guild_cards where id = (select v from ids where k='freshCard')) = 'unassigned', 'a refused sign-up leaves the card unclaimed');
+insert into auth.users (id, email, raw_user_meta_data) values ('00000000-0000-0000-0000-0000000000d1', 'newbie@x.test',
+  jsonb_build_object('display_name','Newbie','birth_year',1999,'birth_month',4,'card_token',(select token from guild_cards where id = (select v from ids where k='freshCard'))));
+select t_assert((select profile_id from guild_cards where id = (select v from ids where k='freshCard')) = '00000000-0000-0000-0000-0000000000d1', 'sign-up binds the scanned card to the new account');
+select t_expect_error(format($$insert into auth.users (email, raw_user_meta_data) values ('again@x.test', jsonb_build_object('display_name','Again','birth_year',1990,'birth_month',1,'card_token',%L))$$, (select token from guild_cards where id = (select v from ids where k='freshCard'))), 'already been claimed');
 \echo 'ALL TESTS PASSED'

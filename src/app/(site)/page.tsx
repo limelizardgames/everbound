@@ -242,7 +242,7 @@ function Hero({ stats }: { stats: Stats | null }) {
                   </>
                 ) : (
                   <>
-                    <Link href="/join/" className="btn-gold">▸ Accept · Join</Link>
+                    <Link href="/join/" className="btn-gold">▸ How to Join</Link>
                     <Link href="/quests/" className="btn-arcane">▸ View Quests</Link>
                   </>
                 )}

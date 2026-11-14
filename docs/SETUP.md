@@ -47,8 +47,17 @@ Your site address is **https://everbound.limelizardgames.com** (custom domain, s
 
 ## 3. Make yourselves the Guild Masters
 
-1. Each founder signs up on the live site with **Join the Guild**.
-2. In Supabase → **SQL Editor**, run this with your own emails:
+There is no sign-up page: every account, including yours, is created by scanning a guild card.
+
+1. Sign in to Supabase, open **SQL Editor**, and get two card links:
+
+   ```sql
+   select card_number, 'https://everbound.limelizardgames.com/card/?t=' || token as link
+   from public.guild_cards where status = 'unassigned' order by card_number limit 2;
+   ```
+
+2. Each founder opens one link (or scans that printed card) and fills in **Create your account**.
+3. Back in the SQL Editor, run (with your own emails):
 
    ```sql
    update public.profiles set role = 'owner'
@@ -58,13 +67,15 @@ Your site address is **https://everbound.limelizardgames.com** (custom domain, s
    where id = (select id from auth.users where email = 'founder-two@example.com');
    ```
 
-3. Refresh the site. A **Command Center** button appears. Further roles (Game Master, Senior GM) are assigned from **Command Center → Players & Moderation**.
+4. Refresh the site. A **GM Console** button appears. Further roles are assigned from **Command Center → Players & Moderation**.
+
+> Need an account without a card (for example a store owner)? Set `card_required_for_signup` to `false` in `admin_settings`, create the account in **Supabase → Authentication → Add user**, then set it back to `true`.
 
 ## 4. Print and hand out guild cards
 
 1. **Command Center → Guild Cards**: forge a batch, or use the 12 seeded founding cards.
 2. Click **Print sheet**. This opens a Letter-size sheet of CR80 cards (3.375" × 2.125"). Print at **100% scale**, or save as PDF for a card printer.
-3. A player scans the QR → creates an account → taps **Bind this card** → registers a character. The card is now theirs. The same QR shows their verified public profile from then on, and it never logs anyone in.
+3. A player scans the QR, fills in **Create your account** on the card's page, and goes straight to character creation. The card is now theirs. The same QR shows their verified public profile from then on, and it never logs anyone in.
 4. If a camera won't scan, the player can type the code printed under the QR into **Guild Card** in their portal. Staff can also bind a card directly with **Assign or transfer**.
 5. For a lost card or a rank upgrade, use **Replace**. The old card stops working and a new number is issued to the same adventurer, with no progress lost.
 
