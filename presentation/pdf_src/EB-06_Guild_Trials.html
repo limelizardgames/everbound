@@ -1,0 +1,1135 @@
+<!doctype html><html><head><meta charset='utf-8'><title>EB-06 Guild Trials</title><style>@page { margin: 16mm 14mm 16mm 14mm; }
+:root { --ink: #231a2b; --muted: #6a6170; --line: #d9d2c7; --plum: #4a1d3f; --gold: #9a7420; }
+* { box-sizing: border-box; }
+body { font-family: "Liberation Serif", "DejaVu Serif", Georgia, serif; color: var(--ink); font-size: 10pt; line-height: 1.42; margin: 0; background: #fff; }
+h1, h2, h3, h4 { font-family: "Liberation Sans", "DejaVu Sans", Arial, sans-serif; color: var(--plum); line-height: 1.2; break-after: avoid; }
+h1 { font-size: 20pt; margin: 18pt 0 8pt; }
+h2 { font-size: 14pt; margin: 18pt 0 6pt; padding-bottom: 3pt; border-bottom: 1px solid var(--line); }
+h3 { font-size: 11.5pt; margin: 12pt 0 4pt; }
+h4 { font-size: 10.5pt; margin: 10pt 0 4pt; }
+p, ul, ol { margin: 4pt 0 6pt; }
+li { margin: 1.5pt 0; }
+a { color: var(--plum); text-decoration: none; }
+code { font-size: 9pt; background: #f4f0ea; padding: 0 2pt; }
+pre { background: #f6f2ec; padding: 6pt 8pt; font-size: 8.5pt; white-space: pre-wrap; border: 1px solid var(--line); break-inside: avoid; }
+blockquote { margin: 6pt 0; padding: 4pt 10pt; border-left: 3px solid var(--gold); background: #fbf8f2; color: #3b3040; }
+table { width: 100%; border-collapse: collapse; margin: 6pt 0 10pt; font-size: 8.6pt; line-height: 1.32; font-family: "Liberation Sans", "DejaVu Sans", Arial, sans-serif; }
+th, td { border: 1px solid var(--line); padding: 3pt 5pt; vertical-align: top; text-align: left; }
+th { background: #efe8df; color: var(--plum); }
+tr { break-inside: avoid; }
+thead { display: table-header-group; }
+hr { border: 0; border-top: 1px solid var(--line); margin: 12pt 0; }
+.badge { display: inline-block; font-family: "Liberation Sans", "DejaVu Sans", Arial, sans-serif; font-size: 7.5pt; font-weight: 700; letter-spacing: .08em; padding: 1.5pt 5pt; border-radius: 3pt; vertical-align: middle; border: 1px solid; }
+.badge.approved { color: #1d6b3a; background: #e3f4e8; border-color: #8cc9a2; }
+.badge.draft { color: #8a5a00; background: #fff3d4; border-color: #e7c46a; }
+h2 .badge, h3 .badge { margin-left: 6pt; }
+.cover { border: 1px solid var(--line); border-radius: 6pt; padding: 18pt 20pt; margin-bottom: 16pt; background: #fbf8f2; break-inside: avoid; }
+.cover .brand { font-family: "Liberation Sans", Arial, sans-serif; font-size: 8pt; letter-spacing: .25em; color: var(--gold); text-transform: uppercase; }
+.cover .docid { font-family: "Liberation Sans", Arial, sans-serif; font-size: 11pt; font-weight: 700; color: var(--muted); margin-top: 10pt; }
+.cover h1.title { font-size: 26pt; margin: 2pt 0 6pt; border: 0; }
+.cover .meta { font-family: "Liberation Sans", Arial, sans-serif; color: var(--muted); font-size: 9.5pt; }
+.cover .purpose { font-size: 11.5pt; margin: 10pt 0; }
+.cover .legend { font-family: "Liberation Sans", Arial, sans-serif; font-size: 8.5pt; color: var(--muted); margin-top: 8pt; }
+.cover .related { margin-top: 10pt; font-family: "Liberation Sans", Arial, sans-serif; font-size: 9pt; }
+.cover .related ul { margin: 3pt 0 0; padding-left: 16pt; columns: 2; }
+.art { margin: 8pt 0 14pt; text-align: center; break-inside: avoid; }
+.art img { max-width: 100%; max-height: 98mm; border: 1px solid var(--line); }
+.art .cap { font-size: 8.5pt; color: var(--muted); margin-top: 3pt; font-style: italic; }
+
+.pb { break-before: page; }
+</style></head><body class='port'><div class="cover">
+<div class="brand">EVERBOUND · The Living Adventurers Guild</div>
+<div class="docid">EB-06</div>
+<h1 class="title">Guild Trials</h1>
+<div class="meta">Version 1.0 · November 23, 2026 · <span class="badge draft">DRAFT</span></div>
+<p class="purpose">The 18 specialization trials, scoring and lineage variations.</p>
+<div class="legend"><span class="badge approved">APPROVED</span> decided by the founders &nbsp; <span class="badge draft">DRAFT</span> proposed, expect changes after playtesting</div>
+<div class="related"><b>Related documents</b><ul><li><b>EB-01</b> Core Rules</li><li><b>EB-02</b> Classes and Specializations</li><li><b>EB-03</b> Races and Lineages</li></ul></div>
+</div>
+
+<p><strong>Version:</strong> 1.0<br />
+<strong>Status:</strong> Proposed / Not yet playtested<br />
+<strong>Scope:</strong> 18 standardized specialization trials · 12 base
+races · 60 lineage customization hooks<br />
+<strong>Companion documents:</strong> Everbound Class &amp;
+Specialization Compendium; Everbound Racial Lineage Compendium;
+Everbound Character Progression Compendium</p>
+<blockquote>
+<p><strong>Design intent:</strong> An adventurer earns a specialization
+by demonstrating how they think and act, not simply by reaching a level.
+All lineages can complete the same trial for a given specialization.
+Lineage changes presentation, environmental opportunities, and
+flavor—not the required objective, base difficulty, or reward.</p>
+</blockquote>
+<hr />
+<h2 id="1-guild-trial-framework">1. Guild Trial Framework</h2>
+<h3 id="eligibility-and-reward">Eligibility and reward</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Proposed rule</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Available trials</td>
+<td>18, one per established class specialization</td>
+</tr>
+<tr class="even">
+<td>Entry requirement</td>
+<td>At least <strong>5 Skill Points (SP)</strong> invested in the
+adventurer's universal class tree</td>
+</tr>
+<tr class="odd">
+<td>Trial duration</td>
+<td>Approximately <strong>20–30 minutes</strong></td>
+</tr>
+<tr class="even">
+<td>Starting class</td>
+<td>Remains Vanguard, Wildstrider, Shadowblade, Luminary, Arcanist, or
+Resonant</td>
+</tr>
+<tr class="odd">
+<td>Specialization</td>
+<td>Player chooses one of their class's three approved
+specializations</td>
+</tr>
+<tr class="even">
+<td>Skills permitted</td>
+<td>Existing class and racial abilities; <strong>do not require</strong>
+abilities from the specialization being tested</td>
+</tr>
+<tr class="odd">
+<td>Primary reward</td>
+<td>The selected specialization's <strong>Discipline Trait</strong>,
+plus access to its four-tier advanced skill tree</td>
+</tr>
+<tr class="even">
+<td>Guild rank</td>
+<td>Remains separate from specialization certification (F–SS rank is not
+a prerequisite)</td>
+</tr>
+<tr class="odd">
+<td>Failure</td>
+<td>Feedback and remedial mission or later retry; no character loss or
+erased progress</td>
+</tr>
+<tr class="even">
+<td>Assistance</td>
+<td>Party members may help, but the <strong>applicant</strong> is
+evaluated individually</td>
+</tr>
+<tr class="odd">
+<td>GM authority</td>
+<td>Any authorized GM may administer an approved standardized trial</td>
+</tr>
+</tbody>
+</table>
+<h3 id="three-stage-structure">Three-stage structure</h3>
+<ol type="1">
+<li><strong>Demonstration:</strong> Show competence with starting-class
+skills and the underlying challenge.</li>
+<li><strong>Complication:</strong> Respond when the initial plan is
+disrupted.</li>
+<li><strong>Final Test:</strong> Make a consequential decision that
+reveals the specialization's philosophy.</li>
+</ol>
+<h3 id="standard-assessment-rubric">Standard assessment rubric</h3>
+<p>Evaluate four criteria:</p>
+<ol type="1">
+<li><strong>Objective:</strong> Achieved the trial's central
+mission.</li>
+<li><strong>Class Mastery:</strong> Used existing class skills in a
+meaningful way.</li>
+<li><strong>Adaptability:</strong> Responded to the unexpected
+complication.</li>
+<li><strong>Judgment:</strong> Demonstrated the discipline's defining
+principle.</li>
+</ol>
+<p><strong>Proposed pass requirement:</strong> Satisfy at least
+<strong>3 of 4 criteria</strong>, including <strong>Judgment</strong>.
+Use the same four-criterion form at every table. Narratively creative
+solutions may satisfy a criterion without following the expected tactic.
+These are guidelines to test, not finalized numerical game
+mechanics.</p>
+<h3 id="fairness-and-accessibility">Fairness and accessibility</h3>
+<ul>
+<li>The <strong>core objective and pass criteria do not change</strong>
+for different races or lineages.</li>
+<li>Lineage-specific clues, props, routes, and NPC responses must
+provide <strong>comparable opportunities</strong>, not automatic
+successes.</li>
+<li>Each trial must remain completable with the character's
+<strong>already unlocked abilities</strong>, without depending on an
+advanced specialization technique.</li>
+<li>For water, confined passages, elevated routes, or gliding, provide a
+fair alternative where appropriate.</li>
+<li>Preserve approved race anatomy and limitations: <strong>no
+unrestricted Sylph/Skyborn flight, no automatic Drakari breath weapons,
+no assumptions of Forgeborn immunities</strong>.</li>
+<li>Failure should create a useful story moment and a path to retry, not
+a permanent lockout.</li>
+</ul>
+<hr />
+<h2 id="2-the-18-standardized-specialization-trials">2. The 18
+Standardized Specialization Trials</h2>
+<h3 id="vanguard">Vanguard</h3>
+<h4 id="01-guardian--the-last-lantern">01. Guardian — The Last
+Lantern</h4>
+<p><strong>Focus:</strong> Protection and responsibility.<br />
+<strong>Premise:</strong> Escort a wounded Guild apprentice carrying a
+ceremonial lantern through a hostile training route.</p>
+<ol type="1">
+<li><strong>Demonstration:</strong> Protect the apprentice across two
+checkpoints, using positioning or defensive class techniques.</li>
+<li><strong>Complication:</strong> A simulated ambush separates the
+apprentice from the planned escape route.</li>
+<li><strong>Final Test:</strong> The exit becomes accessible, but the
+apprentice remains in danger. The applicant must secure their protection
+rather than simply flee.</li>
+</ol>
+<p><strong>Passing objective:</strong> Bring the apprentice to safety
+while keeping the lantern intact or recoverable. Creative defensive
+solutions count as much as absorbing attacks.</p>
+<h4 id="02-berserker--the-crimson-bell">02. Berserker — The Crimson
+Bell</h4>
+<p><strong>Focus:</strong> Controlled aggression and restraint.<br />
+<strong>Premise:</strong> Defeat a progressively more difficult arena
+champion in a supervised Guild training ring.</p>
+<ol type="1">
+<li><strong>Demonstration:</strong> Face a heavily armored opponent and
+maintain offensive pressure.</li>
+<li><strong>Complication:</strong> The arena changes, forcing adaptation
+instead of reliance on raw aggression.</li>
+<li><strong>Final Test:</strong> A civilian actor enters the danger zone
+while the opponent remains vulnerable.</li>
+</ol>
+<p><strong>Passing objective:</strong> Overcome the champion without
+harming the civilian. The defining lesson is knowing when to restrain
+overwhelming force.</p>
+<h4 id="03-warlord--the-broken-banner">03. Warlord — The Broken
+Banner</h4>
+<p><strong>Focus:</strong> Tactical leadership.<br />
+<strong>Premise:</strong> Lead three novice Guild volunteers across a
+simulated battlefield to recover a fallen banner.</p>
+<ol type="1">
+<li><strong>Demonstration:</strong> Organize volunteers to secure two
+tactical positions.</li>
+<li><strong>Complication:</strong> A messenger delivers incorrect
+intelligence, requiring a revised plan.</li>
+<li><strong>Final Test:</strong> Recover the banner while arranging a
+safe withdrawal for the volunteers.</li>
+</ol>
+<p><strong>Passing objective:</strong> Communicate, adapt, and lead
+effectively rather than simply inflicting personal damage.</p>
+<h3 id="wildstrider">Wildstrider</h3>
+<h4 id="04-beastwarden--the-first-bond">04. Beastwarden — The First
+Bond</h4>
+<p><strong>Focus:</strong> Animal trust and cooperative action.<br />
+<strong>Premise:</strong> Earn the trust of a Guild-approved animal and
+complete a short joint task.</p>
+<ol type="1">
+<li><strong>Demonstration:</strong> Approach the animal, recognize its
+behavior, and build trust without coercion.</li>
+<li><strong>Complication:</strong> A disturbance frightens the animal or
+interrupts its task.</li>
+<li><strong>Final Test:</strong> Locate and retrieve a missing Guild
+token together without endangering the animal.</li>
+</ol>
+<p><strong>Passing objective:</strong> Show patience, communication, and
+mutual cooperation. When appropriate, the animal may become the
+character's first bonded companion after certification; use the balanced
+companion rules established for Beastwarden.</p>
+<h4 id="05-deadeye--the-four-bells">05. Deadeye — The Four Bells</h4>
+<p><strong>Focus:</strong> Precision and responsible target
+selection.<br />
+<strong>Premise:</strong> Complete four progressively more complex
+ranged challenges.</p>
+<ol type="1">
+<li><strong>Demonstration:</strong> Strike two clearly marked targets
+from different positions.</li>
+<li><strong>Complication:</strong> A moving target appears behind
+partial cover while distractions interfere with timing.</li>
+<li><strong>Final Test:</strong> Identify and strike the correct bell
+among decoys without hitting a protected target.</li>
+</ol>
+<p><strong>Passing objective:</strong> Display accuracy, recognition,
+and restraint. Any suitable ranged weapon is permitted; a bow is not
+mandatory.</p>
+<h4 id="06-trailblazer--the-lost-road">06. Trailblazer — The Lost
+Road</h4>
+<p><strong>Focus:</strong> Navigation, survival, and expedition
+leadership.<br />
+<strong>Premise:</strong> Guide a small supply expedition to a Guild
+outpost through unfamiliar territory.</p>
+<ol type="1">
+<li><strong>Demonstration:</strong> Choose a route using maps,
+landmarks, and environmental clues.</li>
+<li><strong>Complication:</strong> A fallen bridge, blocked trail, or
+weather event invalidates the original route.</li>
+<li><strong>Final Test:</strong> Bring the expedition to safety while
+preserving essential supplies.</li>
+</ol>
+<p><strong>Passing objective:</strong> Reach safety through sound
+judgment, resource management, and navigation.</p>
+<h3 id="shadowblade">Shadowblade</h3>
+<h4 id="07-assassin--the-quiet-contract">07. Assassin — The Quiet
+Contract</h4>
+<p><strong>Focus:</strong> Precision, preparation, and discretion.<br />
+<strong>Premise:</strong> Infiltrate a guarded compound to retrieve a
+contract seal from a designated training target.</p>
+<ol type="1">
+<li><strong>Demonstration:</strong> Study guard movements and identify a
+viable route.</li>
+<li><strong>Complication:</strong> The intended target relocates or is
+replaced by a decoy.</li>
+<li><strong>Final Test:</strong> Retrieve the seal and escape without
+harming an uninvolved servant or setting off a major alarm.</li>
+</ol>
+<p><strong>Passing objective:</strong> Complete the assignment with
+precision and discretion. <strong>Killing is not required.</strong></p>
+<h4 id="08-trickster--the-counterfeit-seal">08. Trickster — The
+Counterfeit Seal</h4>
+<p><strong>Focus:</strong> Misdirection and investigative
+judgment.<br />
+<strong>Premise:</strong> Recover a stolen Guild seal hidden among
+actors posing as merchants.</p>
+<ol type="1">
+<li><strong>Demonstration:</strong> Examine conflicting clues and
+identify likely suspects.</li>
+<li><strong>Complication:</strong> A misleading witness directs
+suspicion toward an innocent merchant.</li>
+<li><strong>Final Test:</strong> Recover the seal through distraction,
+exchange, or nonviolent deception.</li>
+</ol>
+<p><strong>Passing objective:</strong> Solve the mystery without
+unnecessary harm or falsely condemning an innocent person.</p>
+<h4 id="09-phantom--the-vanishing-gallery">09. Phantom — The Vanishing
+Gallery</h4>
+<p><strong>Focus:</strong> Concealment, timing, and evasion.<br />
+<strong>Premise:</strong> Recover an object from an illuminated gallery
+patrolled by enchanted sentries.</p>
+<ol type="1">
+<li><strong>Demonstration:</strong> Cross the first section using
+concealment, movement, and timing.</li>
+<li><strong>Complication:</strong> Moving lanterns eliminate some
+formerly safe shadows.</li>
+<li><strong>Final Test:</strong> Retrieve the object and escape without
+sustained detection.</li>
+</ol>
+<p><strong>Passing objective:</strong> Demonstrate clever concealment,
+timing, and escape using <strong>existing</strong> abilities. Phantom
+techniques must not be prerequisites.</p>
+<h3 id="luminary">Luminary</h3>
+<h4 id="10-dawnbringer--the-dying-beacon">10. Dawnbringer — The Dying
+Beacon</h4>
+<p><strong>Focus:</strong> Courage, radiance, and protection.<br />
+<strong>Premise:</strong> Defend an ancient beacon from simulated shadow
+creatures.</p>
+<ol type="1">
+<li><strong>Demonstration:</strong> Use available Luminary abilities to
+defend the beacon and its attendant.</li>
+<li><strong>Complication:</strong> The beacon weakens while additional
+threats approach the attendant.</li>
+<li><strong>Final Test:</strong> Restore the beacon and protect the
+attendant from the remaining danger.</li>
+</ol>
+<p><strong>Passing objective:</strong> Balance offensive action with the
+duty to protect others.</p>
+<h4 id="11-sanctifier--the-broken-seal">11. Sanctifier — The Broken
+Seal</h4>
+<p><strong>Focus:</strong> Purification and discernment.<br />
+<strong>Premise:</strong> Investigate minor magical contamination
+threatening a Guild sanctuary.</p>
+<ol type="1">
+<li><strong>Demonstration:</strong> Examine affected objects and
+distinguish magical contamination from normal damage.</li>
+<li><strong>Complication:</strong> A harmless object has a similar
+magical signature and creates a false lead.</li>
+<li><strong>Final Test:</strong> Apply a basic purification rite to
+stabilize the actual source without harming occupants or valuable
+artifacts.</li>
+</ol>
+<p><strong>Passing objective:</strong> Correctly diagnose, contain, and
+act responsibly with magic.</p>
+<h4 id="12-spiritkeeper--a-name-unspoken">12. Spiritkeeper — A Name
+Unspoken</h4>
+<p><strong>Focus:</strong> Compassion and spiritual investigation.<br />
+<strong>Premise:</strong> Resolve a supernatural disturbance at an
+abandoned Guild residence.</p>
+<ol type="1">
+<li><strong>Demonstration:</strong> Study spiritual traces, records, and
+the home's history.</li>
+<li><strong>Complication:</strong> The haunting proves to be a spirit
+seeking aid rather than an enemy.</li>
+<li><strong>Final Test:</strong> Identify and honor the spirit's
+unfinished request through an appropriate action or rite.</li>
+</ol>
+<p><strong>Passing objective:</strong> Resolve the disturbance
+respectfully without forcibly banishing a peaceful spirit.</p>
+<h3 id="arcanist">Arcanist</h3>
+<h4 id="13-elementalist--the-three-crucibles">13. Elementalist — The
+Three Crucibles</h4>
+<p><strong>Focus:</strong> Elemental control and inventive
+reasoning.<br />
+<strong>Premise:</strong> Complete three elemental puzzles using basic
+magic and available environmental materials.</p>
+<ol type="1">
+<li><strong>Demonstration:</strong> Use a basic elemental Weavebolt to
+activate a training mechanism.</li>
+<li><strong>Complication:</strong> An unexpected magical reaction makes
+raw power ineffective or dangerous.</li>
+<li><strong>Final Test:</strong> Stabilize the last crucible through a
+carefully controlled elemental effect and available materials.</li>
+</ol>
+<p><strong>Passing objective:</strong> Apply elemental magic safely and
+creatively. Knowledge of multiple elements is <strong>not</strong>
+required.</p>
+<h4 id="14-runecaster--the-failing-gate">14. Runecaster — The Failing
+Gate</h4>
+<p><strong>Focus:</strong> Runic literacy and magical
+troubleshooting.<br />
+<strong>Premise:</strong> Diagnose a malfunctioning rune-powered Guild
+gate.</p>
+<ol type="1">
+<li><strong>Demonstration:</strong> Identify the function of three
+existing runes using basic Runic Insight.</li>
+<li><strong>Complication:</strong> A damaged rune makes the obvious
+activation sequence unsafe.</li>
+<li><strong>Final Test:</strong> Reconfigure supplied training sigils
+and activate the gate safely.</li>
+</ol>
+<p><strong>Passing objective:</strong> Understand the system, choose a
+logical repair sequence, and avoid reckless activation.</p>
+<h4 id="15-spellbinder--the-unruly-conduit">15. Spellbinder — The Unruly
+Conduit</h4>
+<p><strong>Focus:</strong> Magical control and threat diagnosis.<br />
+<strong>Premise:</strong> Shut down an unstable magical conduit while
+several spells interfere with the chamber.</p>
+<ol type="1">
+<li><strong>Demonstration:</strong> Recognize the nature and direction
+of incoming magical effects.</li>
+<li><strong>Complication:</strong> A dramatic-looking spell is illusory
+while a subtler effect threatens the mechanism.</li>
+<li><strong>Final Test:</strong> Redirect, interrupt through provided
+controls, or isolate the harmful magical flow.</li>
+</ol>
+<p><strong>Passing objective:</strong> Diagnose accurately and contain
+magic without uncontrolled destruction. No advanced counterspell is
+needed.</p>
+<h3 id="resonant">Resonant</h3>
+<h4 id="16-warcaller--the-drummers-crossing">16. Warcaller — The
+Drummer's Crossing</h4>
+<p><strong>Focus:</strong> Battlefield communication and
+coordination.<br />
+<strong>Premise:</strong> Lead three novice Guild recruits escorting a
+supply wagon across a contested bridge.</p>
+<ol type="1">
+<li><strong>Demonstration:</strong> Establish a simple communication and
+movement plan.</li>
+<li><strong>Complication:</strong> Loud noise or a simulated attack
+interrupts the signals.</li>
+<li><strong>Final Test:</strong> Regroup the recruits and get the wagon
+to safety.</li>
+</ol>
+<p><strong>Passing objective:</strong> Restore effective communication
+and group coordination under changing conditions.</p>
+<h4 id="17-echo-sage--the-whispering-archive">17. Echo Sage — The
+Whispering Archive</h4>
+<p><strong>Focus:</strong> Resonance, listening, and evidence.<br />
+<strong>Premise:</strong> Find a missing Guild record in an archive
+filled with misleading echoes.</p>
+<ol type="1">
+<li><strong>Demonstration:</strong> Interpret sound direction,
+vibrations, and acoustic clues.</li>
+<li><strong>Complication:</strong> Enchanted surfaces repeat false or
+delayed sounds.</li>
+<li><strong>Final Test:</strong> Identify the authentic source, find the
+record, and explain the reasoning.</li>
+</ol>
+<p><strong>Passing objective:</strong> Investigate carefully and
+distinguish genuine clues from misleading echoes.</p>
+<h4 id="18-harmonist--three-unsteady-hearts">18. Harmonist — Three
+Unsteady Hearts</h4>
+<p><strong>Focus:</strong> Cooperation and emotional resilience.<br />
+<strong>Premise:</strong> Help three Guild trainees with conflicting
+priorities complete a shared task.</p>
+<ol type="1">
+<li><strong>Demonstration:</strong> Listen and identify the cause of
+their conflict.</li>
+<li><strong>Complication:</strong> One trainee grows frightened or
+frustrated and refuses to continue.</li>
+<li><strong>Final Test:</strong> Re-establish enough
+<strong>voluntary</strong> cooperation for the group to complete its
+objective.</li>
+</ol>
+<p><strong>Passing objective:</strong> Build genuine teamwork without
+coercion or magical control of emotions.</p>
+<hr />
+<h2 id="3-race-and-lineage-customization-framework">3. Race and Lineage
+Customization Framework</h2>
+<p>Use <strong>one optional lineage modifier</strong> per trial. A
+modifier can adjust scenery, an environmental route, a clue, an NPC
+interaction, or an alternate means of reaching the same goal. It should
+never add an entirely new success requirement or grant an automatic
+special power.</p>
+<blockquote>
+<p><strong>Roster integrity:</strong> All twelve approved base races
+have exactly five listed lineages. This section does not add excluded
+Beastkin, Skyborn, or Tidekin variants.</p>
+</blockquote>
+<h3 id="human--regional-heritage">Human — Regional heritage</h3>
+<p>Human variations represent culture, experience, and training—not
+fixed biological powers.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Lineage</th>
+<th>Trial variation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Highlander</td>
+<td>Elevated checkpoint, mountain passage, or rope-assisted
+crossing</td>
+</tr>
+<tr class="even">
+<td>Coastlander</td>
+<td>Harbor, dockside obstacle, maritime signals, or shipboard
+setting</td>
+</tr>
+<tr class="odd">
+<td>Plainsfolk</td>
+<td>Caravan route, open crossroads, or distant landmark puzzle</td>
+</tr>
+<tr class="even">
+<td>Dune Dweller</td>
+<td>Supplies puzzle involving water, shade, heat, or travel
+provisioning</td>
+</tr>
+<tr class="odd">
+<td>Frostlander</td>
+<td>Icy path, winter equipment, or cold-weather rescue scenario</td>
+</tr>
+</tbody>
+</table>
+<h3 id="elf--natural-and-magical-sensitivity">Elf — Natural and magical
+sensitivity</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Lineage</th>
+<th>Trial variation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>High Elf</td>
+<td>Ancient magical inscription or enchanted mechanism providing an
+optional clue</td>
+</tr>
+<tr class="even">
+<td>Wood Elf</td>
+<td>Forest checkpoint, canopy path, or dense vegetation</td>
+</tr>
+<tr class="odd">
+<td>Moon Elf</td>
+<td>Moonlit setting with reflections or faint, concealed markings</td>
+</tr>
+<tr class="even">
+<td>Deep Elf</td>
+<td>Dim tunnel or underground chamber</td>
+</tr>
+<tr class="odd">
+<td>Frost Elf</td>
+<td>Frosted ruin, frozen artifact, or cold-weather route</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dwarf--endurance-and-material-knowledge">Dwarf — Endurance and
+material knowledge</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Lineage</th>
+<th>Trial variation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mountain Dwarf</td>
+<td>Difficult stone passage, weighted gate, or rocky incline</td>
+</tr>
+<tr class="even">
+<td>Hill Dwarf</td>
+<td>Uneven ground, hillside checkpoint, or balance/stability
+problem</td>
+</tr>
+<tr class="odd">
+<td>Deep Dwarf</td>
+<td>Cave junction with environmental or geological clues</td>
+</tr>
+<tr class="even">
+<td>Ember Dwarf</td>
+<td>Controlled forge area, warm chamber, or harmless heat source</td>
+</tr>
+<tr class="odd">
+<td>Crystal Dwarf</td>
+<td>Mineral resonance, patterned crystals, or vibrating stone
+mechanism</td>
+</tr>
+</tbody>
+</table>
+<h3 id="halfling--ingenuity-and-mobility">Halfling — Ingenuity and
+mobility</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Lineage</th>
+<th>Trial variation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Hillfoot</td>
+<td>Terraced slope or uneven footpath</td>
+</tr>
+<tr class="even">
+<td>Woodfoot</td>
+<td>Wooded corridor, low branches, or compact climbing route</td>
+</tr>
+<tr class="odd">
+<td>Riverfoot</td>
+<td>Stepping stones, shallow stream, or small water crossing</td>
+</tr>
+<tr class="even">
+<td>Marshfoot</td>
+<td>Soft ground, unstable footing, or reed-covered route</td>
+</tr>
+<tr class="odd">
+<td>Cavefoot</td>
+<td>Short tunnel or concealed passage with a fair, wider
+alternative</td>
+</tr>
+</tbody>
+</table>
+<h3
+id="orcborn--physical-resilience-and-environmental-adaptation">Orcborn —
+Physical resilience and environmental adaptation</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Lineage</th>
+<th>Trial variation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mountain Orc</td>
+<td>Heavy barricade or sturdy obstacle that can be moved or
+bypassed</td>
+</tr>
+<tr class="even">
+<td>Steppe Orc</td>
+<td>Pursuit section or extended route where tactical pacing matters</td>
+</tr>
+<tr class="odd">
+<td>Ash Orc</td>
+<td>Controlled ash-covered path, soot-obscured clue, or volcanic-themed
+zone</td>
+</tr>
+<tr class="even">
+<td>Marsh Orc</td>
+<td>Shallow water, mud, or unstable boardwalk</td>
+</tr>
+<tr class="odd">
+<td>Frost Orc</td>
+<td>Windswept ridge or simulated winter hazard</td>
+</tr>
+</tbody>
+</table>
+<h3 id="beastkin--animal-lineage-traits">Beastkin — Animal lineage
+traits</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Lineage</th>
+<th>Trial variation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Wolfkin</td>
+<td>Conflicting scent trails or traces of a moving group</td>
+</tr>
+<tr class="even">
+<td>Foxkin</td>
+<td>Decoy, misleading footprints, or an NPC whose motives can be
+read</td>
+</tr>
+<tr class="odd">
+<td>Catkin</td>
+<td>Narrow ledge, balance segment, or precision-positioning option</td>
+</tr>
+<tr class="even">
+<td>Rabbitkin</td>
+<td>Short jumping course or sudden escape-route opportunity</td>
+</tr>
+<tr class="odd">
+<td>Bearkin</td>
+<td>Rescue involving a heavy obstacle or sheltering someone
+vulnerable</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Approved Beastkin only:</strong> Wolfkin, Foxkin, Catkin,
+Rabbitkin, Bearkin.</p>
+<h3 id="drakari--draconic-ancestry">Drakari — Draconic ancestry</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Lineage</th>
+<th>Trial variation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Wyrmkin</td>
+<td>Reinforced gate, pressure plate, or heavy obstacle</td>
+</tr>
+<tr class="even">
+<td>Serpentkin</td>
+<td>Winding passage or movement challenge with alternate routes</td>
+</tr>
+<tr class="odd">
+<td>Drakekin</td>
+<td>Close-quarters encounter or defensive positioning opportunity</td>
+</tr>
+<tr class="even">
+<td>Crystaldrake</td>
+<td>Magical disturbance resonating through nearby crystals or stone</td>
+</tr>
+<tr class="odd">
+<td>Thornscale</td>
+<td>Controlled contact hazard or obstacle rewarding defensive
+responses</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Anatomy limit:</strong> No assumed wings or unrestricted
+breath attacks; appearance color does not grant elemental affinity.</p>
+<h3 id="ashborn--environmental-and-supernatural-awareness">Ashborn —
+Environmental and supernatural awareness</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Lineage</th>
+<th>Trial variation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Cinderborn</td>
+<td>Controlled embers, heated stones, or warm chamber</td>
+</tr>
+<tr class="even">
+<td>Duskhorn</td>
+<td>Shifting shadows, hidden observer, or low-light checkpoint</td>
+</tr>
+<tr class="odd">
+<td>Paleash</td>
+<td>Arcane fluctuation or faint magical signal</td>
+</tr>
+<tr class="even">
+<td>Thornhorn</td>
+<td>Defensive positioning or controlled contact challenge</td>
+</tr>
+<tr class="odd">
+<td>Smokeborn</td>
+<td>Light smoke, obscured markings, or visibility puzzle</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sylph--gliding-and-sensory-adaptation">Sylph — Gliding and
+sensory adaptation</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Lineage</th>
+<th>Trial variation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Butterfly Sylph</td>
+<td>Colored panels, visual distractions, or brief controlled-glide
+option</td>
+</tr>
+<tr class="even">
+<td>Moth Sylph</td>
+<td>Dim section with subtle light and sound clues</td>
+</tr>
+<tr class="odd">
+<td>Dragonfly Sylph</td>
+<td>Winding route, quick changes of direction, or controlled
+descent</td>
+</tr>
+<tr class="even">
+<td>Cicada Sylph</td>
+<td>Rhythmic vibration, repeating sound, or acoustic clue</td>
+</tr>
+<tr class="odd">
+<td>Lacewing Sylph</td>
+<td>Delicate precision placement or controlled landing task</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Movement limit:</strong> Gliding only; no unrestricted
+flight. Ground-accessible alternatives remain available.</p>
+<h3 id="tidekin--aquatic-heritage">Tidekin — Aquatic heritage</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Lineage</th>
+<th>Trial variation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Riverkin</td>
+<td>Shallow current, water-driven mechanism, or river navigation
+clue</td>
+</tr>
+<tr class="even">
+<td>Sharkkin</td>
+<td>Movement disturbances in shallow water or aquatic tracking clue</td>
+</tr>
+<tr class="odd">
+<td>Reefkin</td>
+<td>Color patterns, shoreline cover, or camouflage puzzle</td>
+</tr>
+<tr class="even">
+<td>Raykin</td>
+<td>Flowing obstacle route or tight channel with turning options</td>
+</tr>
+<tr class="odd">
+<td>Deepkin</td>
+<td>Dim cistern, underwater-themed chamber, or low-light
+investigation</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Accessibility limit:</strong> Every trial remains completable
+on land. Water is an optional opportunity, not a mandatory swimming
+requirement. <strong>Eelkin is not in the approved roster.</strong></p>
+<h3 id="skyborn--avian-ancestry">Skyborn — Avian ancestry</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Lineage</th>
+<th>Trial variation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Hawkin</td>
+<td>Elevated observation point or distant tracking marker</td>
+</tr>
+<tr class="even">
+<td>Eaglekin</td>
+<td>Long-distance visual clue or wide-area vantage point</td>
+</tr>
+<tr class="odd">
+<td>Falconkin</td>
+<td>Timed descent, swift repositioning, or precision approach</td>
+</tr>
+<tr class="even">
+<td>Owlkin</td>
+<td>Dark watchtower, quiet observation route, or low-light clue</td>
+</tr>
+<tr class="odd">
+<td>Ravenkin</td>
+<td>Sequence puzzle, remembered conversation, or recall-based clue</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Movement limit:</strong> Wing-assisted movement and
+controlled descent are permitted; unrestricted flight is not.
+<strong>Crowkin, Heronkin, Kingfisherkin, Vulturekin, and Albatrosskin
+are not in the approved roster.</strong></p>
+<h3 id="forgeborn--constructed-ancestry">Forgeborn — Constructed
+ancestry</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Lineage</th>
+<th>Trial variation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Stoneforged</td>
+<td>Stone mechanism, heavy gate, or structural-stability problem</td>
+</tr>
+<tr class="even">
+<td>Ironforged</td>
+<td>Forged chains, reinforced barrier, or defensive mechanism</td>
+</tr>
+<tr class="odd">
+<td>Bronzeforged</td>
+<td>Fine mechanical lock, gear puzzle, or precision-controlled
+device</td>
+</tr>
+<tr class="even">
+<td>Woodforged</td>
+<td>Livingwood corridor, root-shaped mechanism, or restoration clue</td>
+</tr>
+<tr class="odd">
+<td>Crystalforged</td>
+<td>Resonating crystals, refracted light, or magical energy pattern</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Construct rules:</strong> Use standard health, injury, and
+recovery mechanics unless separately finalized racial rules explicitly
+change them.</p>
+<hr />
+<h2 id="4-worked-examples-same-trial-different-lineages">4. Worked
+Examples: Same Trial, Different Lineages</h2>
+<h3 id="guardian--the-last-lantern">Guardian — The Last Lantern</h3>
+<p><strong>Unchanged goal:</strong> Protect the apprentice and return
+the lantern safely.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Applicant lineage</th>
+<th>Customization</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Bearkin</td>
+<td>A fallen wooden beam offers a way to shelter the apprentice</td>
+</tr>
+<tr class="even">
+<td>Moon Elf</td>
+<td>Moonlight reveals a concealed route away from attackers</td>
+</tr>
+<tr class="odd">
+<td>Stoneforged</td>
+<td>A stone gate can be secured to delay pursuers</td>
+</tr>
+</tbody>
+</table>
+<p>All three must meet the same protection standard. A lineage clue is
+an opportunity, not a success guarantee.</p>
+<h3 id="phantom--the-vanishing-gallery">Phantom — The Vanishing
+Gallery</h3>
+<p><strong>Unchanged goal:</strong> Retrieve the object and escape
+without sustained detection.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Applicant lineage</th>
+<th>Customization</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Owlkin</td>
+<td>A darkened watchtower offers clues and usable cover</td>
+</tr>
+<tr class="even">
+<td>Foxkin</td>
+<td>A false trail can misdirect enchanted sentries</td>
+</tr>
+<tr class="odd">
+<td>Cavefoot</td>
+<td>A small service passage provides an alternate gallery route</td>
+</tr>
+</tbody>
+</table>
+<h3 id="runecaster--the-failing-gate">Runecaster — The Failing Gate</h3>
+<p><strong>Unchanged goal:</strong> Identify the fault and safely
+stabilize the gate.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Applicant lineage</th>
+<th>Customization</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>High Elf</td>
+<td>Old arcane writing provides additional background on the
+mechanism</td>
+</tr>
+<tr class="even">
+<td>Bronzeforged</td>
+<td>A precision mechanical component needs alignment</td>
+</tr>
+<tr class="odd">
+<td>Crystaldrake</td>
+<td>Nearby crystals resonate with the unstable rune</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5-consistent-cross-table-administration">5. Consistent
+Cross-Table Administration</h2>
+<h3 id="standard-and-field-trials">Standard and Field Trials</h3>
+<ul>
+<li><strong>Standard Guild Trial:</strong> A repeatable, controlled
+training assignment, available through authorized Guild trainers and
+GMs.</li>
+<li><strong>Field Trial:</strong> The same defined objective and rubric
+embedded in a live world quest. The outcome may also alter the
+persistent world's state.</li>
+<li>Field consequences are <strong>recorded separately</strong> from
+trial certification. A world event is not an extra barrier to
+passing.</li>
+<li>A player may undertake a trial during a normal three-hour session,
+rather than needing a separate booking.</li>
+<li>Other adventurers can contribute, but the applicant must demonstrate
+their own judgment and class ability.</li>
+</ul>
+<h3 id="trial-record-template">Trial record template</h3>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">trial_id</span><span class="kw">:</span><span class="at"> guardian-the-last-lantern</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">trial_name</span><span class="kw">:</span><span class="at"> The Last Lantern</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">base_class</span><span class="kw">:</span><span class="at"> Vanguard</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">specialization</span><span class="kw">:</span><span class="at"> Guardian</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">applicant_character_id</span><span class="kw">:</span><span class="at"> &lt;character-id&gt;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">applicant_name</span><span class="kw">:</span><span class="at"> &lt;character-name&gt;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">race</span><span class="kw">:</span><span class="at"> &lt;approved-race&gt;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lineage</span><span class="kw">:</span><span class="at"> &lt;approved-lineage&gt;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">variation_used</span><span class="kw">:</span><span class="at"> &lt;optional-lineage-modifier&gt;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> standard</span><span class="co"> # or field</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">gm_id</span><span class="kw">:</span><span class="at"> &lt;authorized-gm-id&gt;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">started_at</span><span class="kw">:</span><span class="at"> &lt;date-time&gt;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">completed_at</span><span class="kw">:</span><span class="at"> &lt;date-time&gt;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">assessment</span><span class="kw">:</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">objective</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">class_mastery</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">adaptability</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">judgment</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">result</span><span class="kw">:</span><span class="at"> pending</span><span class="co"> # passed | not_yet_passed | pending</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="fu">feedback</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;&quot;</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">remedial_action</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;&quot;</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">world_event_reference</span><span class="kw">:</span><span class="at"> </span><span class="ch">null</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">awarded_discipline_trait</span><span class="kw">:</span><span class="at"> </span><span class="ch">null</span></span></code></pre></div>
+<h3 id="example-completed-record">Example completed record</h3>
+<p><strong>Applicant:</strong> Kaelen Ashford<br />
+<strong>Race / Lineage:</strong> Beastkin / Bearkin<br />
+<strong>Base class:</strong> Vanguard<br />
+<strong>Trial:</strong> The Last Lantern<br />
+<strong>Specialization:</strong> Guardian<br />
+<strong>Variation:</strong> Fallen beam can be used for protective
+shelter</p>
+<table>
+<thead>
+<tr class="header">
+<th>Criterion</th>
+<th>Example result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Objective</td>
+<td>Passed — apprentice and lantern recovered</td>
+</tr>
+<tr class="even">
+<td>Class Mastery</td>
+<td>Passed — defensive positioning and techniques used</td>
+</tr>
+<tr class="odd">
+<td>Adaptability</td>
+<td>Passed — adjusted when the route became blocked</td>
+</tr>
+<tr class="even">
+<td>Judgment</td>
+<td>Passed — prioritized apprentice's safety</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Certification:</strong> Guardian specialization granted;
+<strong>Protector's Oath</strong> Discipline Trait unlocked; Guardian
+advanced skill tree made available. Guild rank stays unchanged.</p>
+<h3 id="gm-checklist-before-and-after-a-trial">GM checklist before and
+after a trial</h3>
+<p><strong>Before:</strong></p>
+<ul>
+<li>Verify at least five universal class SP have been invested.</li>
+<li>Verify the chosen specialization is one of the class's three
+approved options.</li>
+<li>Select the canonical trial and optionally one lineage modifier.</li>
+<li>Confirm no trial obstacle requires an as-yet-unlocked specialization
+skill.</li>
+<li>Confirm a fair alternative exists for body-size, travel, aquatic,
+and aerial conditions.</li>
+</ul>
+<p><strong>During:</strong></p>
+<ul>
+<li>Present the same central mission and three-stage challenge.</li>
+<li>Allow legitimate alternate solutions.</li>
+<li>Record evidence for the four standard assessment criteria.</li>
+<li>Do not reward a lineage with automatic success or alter its base
+difficulty.</li>
+</ul>
+<p><strong>After:</strong></p>
+<ul>
+<li>Record result, date, GM, applicant, and selected variation.</li>
+<li>On success, unlock the proper Discipline Trait and advanced
+tree.</li>
+<li>On failure, provide a meaningful remedial step or later retry.</li>
+<li>If a Field Trial changes the shared world, record that effect
+separately.</li>
+</ul>
+<hr />
+<h2 id="6-certification-and-world-building-rewards">6. Certification and
+World-Building Rewards</h2>
+<p>After passing, the Guild may award a <strong>digital specialization
+endorsement</strong>, an optional <strong>physical certificate</strong>,
+and/or an endorsement stamp on the adventurer's Guild card. These are
+recognition items, not automatic Guild rank promotions.</p>
+<p>Field Trials can also generate persistent stories:</p>
+<ul>
+<li>A Trailblazer's <strong>The Lost Road</strong> opens a route other
+groups can use.</li>
+<li>A Spiritkeeper's <strong>A Name Unspoken</strong> resolves a
+haunting that affected earlier expeditions.</li>
+<li>A Warcaller's <strong>The Drummer's Crossing</strong> preserves a
+supply delivery whose effects appear on the world news board.</li>
+</ul>
+<p>The standardized test remains comparable while the world reacts to
+the player's decisions.</p>
+<hr />
+<h2 id="7-decisions-that-are-still-proposed">7. Decisions That Are Still
+Proposed</h2>
+<p>These should be tested before being treated as final rules:</p>
+<ul>
+<li>Exact character level or milestone required to accumulate five
+universal class SP.</li>
+<li>Whether a trial is run entirely in training or partially as a Field
+Trial by default.</li>
+<li>Final dice-check difficulty, action economy, damage, range, and
+resource costs.</li>
+<li>Retry waiting periods, if any, and the specific retraining
+procedure.</li>
+<li>Detailed handling of group-assisted trials and individual
+assessment.</li>
+<li>Whether future cross-specialization training requires another Guild
+Trial.</li>
+</ul>
+<p><strong>Locked design constraints preserved:</strong> Six fixed
+classes; three established specializations per class; twelve races with
+five approved lineages each; every lineage can choose any class; class
+rank F–SS remains independent; racial skill trees are separate from
+class specialization certification.</p>
+<hr />
+<p><em>EVERBOUND — The Living Adventurers Guild · Guild Trial Proposal
+v1.0</em></p>
+</body></html>

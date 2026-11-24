@@ -1,0 +1,232 @@
+<!doctype html><html><head><meta charset='utf-8'><title>EB-12 Decisions Log</title><style>@page { margin: 16mm 14mm 16mm 14mm; }
+:root { --ink: #231a2b; --muted: #6a6170; --line: #d9d2c7; --plum: #4a1d3f; --gold: #9a7420; }
+* { box-sizing: border-box; }
+body { font-family: "Liberation Serif", "DejaVu Serif", Georgia, serif; color: var(--ink); font-size: 10pt; line-height: 1.42; margin: 0; background: #fff; }
+h1, h2, h3, h4 { font-family: "Liberation Sans", "DejaVu Sans", Arial, sans-serif; color: var(--plum); line-height: 1.2; break-after: avoid; }
+h1 { font-size: 20pt; margin: 18pt 0 8pt; }
+h2 { font-size: 14pt; margin: 18pt 0 6pt; padding-bottom: 3pt; border-bottom: 1px solid var(--line); }
+h3 { font-size: 11.5pt; margin: 12pt 0 4pt; }
+h4 { font-size: 10.5pt; margin: 10pt 0 4pt; }
+p, ul, ol { margin: 4pt 0 6pt; }
+li { margin: 1.5pt 0; }
+a { color: var(--plum); text-decoration: none; }
+code { font-size: 9pt; background: #f4f0ea; padding: 0 2pt; }
+pre { background: #f6f2ec; padding: 6pt 8pt; font-size: 8.5pt; white-space: pre-wrap; border: 1px solid var(--line); break-inside: avoid; }
+blockquote { margin: 6pt 0; padding: 4pt 10pt; border-left: 3px solid var(--gold); background: #fbf8f2; color: #3b3040; }
+table { width: 100%; border-collapse: collapse; margin: 6pt 0 10pt; font-size: 8.6pt; line-height: 1.32; font-family: "Liberation Sans", "DejaVu Sans", Arial, sans-serif; }
+th, td { border: 1px solid var(--line); padding: 3pt 5pt; vertical-align: top; text-align: left; }
+th { background: #efe8df; color: var(--plum); }
+tr { break-inside: avoid; }
+thead { display: table-header-group; }
+hr { border: 0; border-top: 1px solid var(--line); margin: 12pt 0; }
+.badge { display: inline-block; font-family: "Liberation Sans", "DejaVu Sans", Arial, sans-serif; font-size: 7.5pt; font-weight: 700; letter-spacing: .08em; padding: 1.5pt 5pt; border-radius: 3pt; vertical-align: middle; border: 1px solid; }
+.badge.approved { color: #1d6b3a; background: #e3f4e8; border-color: #8cc9a2; }
+.badge.draft { color: #8a5a00; background: #fff3d4; border-color: #e7c46a; }
+h2 .badge, h3 .badge { margin-left: 6pt; }
+.cover { border: 1px solid var(--line); border-radius: 6pt; padding: 18pt 20pt; margin-bottom: 16pt; background: #fbf8f2; break-inside: avoid; }
+.cover .brand { font-family: "Liberation Sans", Arial, sans-serif; font-size: 8pt; letter-spacing: .25em; color: var(--gold); text-transform: uppercase; }
+.cover .docid { font-family: "Liberation Sans", Arial, sans-serif; font-size: 11pt; font-weight: 700; color: var(--muted); margin-top: 10pt; }
+.cover h1.title { font-size: 26pt; margin: 2pt 0 6pt; border: 0; }
+.cover .meta { font-family: "Liberation Sans", Arial, sans-serif; color: var(--muted); font-size: 9.5pt; }
+.cover .purpose { font-size: 11.5pt; margin: 10pt 0; }
+.cover .legend { font-family: "Liberation Sans", Arial, sans-serif; font-size: 8.5pt; color: var(--muted); margin-top: 8pt; }
+.cover .related { margin-top: 10pt; font-family: "Liberation Sans", Arial, sans-serif; font-size: 9pt; }
+.cover .related ul { margin: 3pt 0 0; padding-left: 16pt; columns: 2; }
+.art { margin: 8pt 0 14pt; text-align: center; break-inside: avoid; }
+.art img { max-width: 100%; max-height: 98mm; border: 1px solid var(--line); }
+.art .cap { font-size: 8.5pt; color: var(--muted); margin-top: 3pt; font-style: italic; }
+
+.pb { break-before: page; }
+</style></head><body class='port'><div class="cover">
+<div class="brand">EVERBOUND · The Living Adventurers Guild</div>
+<div class="docid">EB-12</div>
+<h1 class="title">Decisions Log</h1>
+<div class="meta">Version 1.0 · November 23, 2026 · <span class="badge approved">APPROVED</span></div>
+<p class="purpose">Everything decided so far, and what is still open.</p>
+<div class="legend"><span class="badge approved">APPROVED</span> decided by the founders &nbsp; <span class="badge draft">DRAFT</span> proposed, expect changes after playtesting</div>
+<div class="related"><b>Related documents</b><ul><li><b>EB-00</b> Index and Status Guide</li></ul></div>
+</div>
+
+<h2 id="purpose">Purpose</h2>
+<p>A record of what the founders have decided, so the other documents
+can be checked against it. Items under "Still open" are not decided.</p>
+<h2 id="platform-and-business-approved">Platform and business
+<span class="badge approved">APPROVED</span></h2>
+<table>
+<thead>
+<tr class="header">
+<th>Decision</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Hosting</td>
+<td>Static website on GitHub Pages at everbound.limelizardgames.com;
+Supabase database.</td>
+</tr>
+<tr class="even">
+<td>Accounts</td>
+<td>No register page. Scanning an unclaimed guild card creates the
+account, and the card is then locked to it.</td>
+</tr>
+<tr class="odd">
+<td>Card links</td>
+<td>Each card's QR code opens /card/?t=&lt;token&gt;.</td>
+</tr>
+<tr class="even">
+<td>Ages</td>
+<td>13+ (some quests rated 15+); guardian permission under 18. May be
+raised later.</td>
+</tr>
+<tr class="odd">
+<td>Guild ranks</td>
+<td>F through SS.</td>
+</tr>
+<tr class="even">
+<td>Auction Hall</td>
+<td>Unlocks at rank E; gold only.</td>
+</tr>
+<tr class="odd">
+<td>Errands</td>
+<td>Rewards are materials and small amounts of gold only.</td>
+</tr>
+<tr class="even">
+<td>Professions</td>
+<td>Crafting professions (blacksmithing, alchemy and more) are part of
+the game.</td>
+</tr>
+<tr class="odd">
+<td>Moderation</td>
+<td>GMs act as admins for now and will later get discretion with an
+appeal process. A suspension that ends before a booked session keeps the
+booking; otherwise reschedule or cancel in time, or the booking is
+forfeited without refund.</td>
+</tr>
+<tr class="even">
+<td>PvP</td>
+<td>Optional allegiances with opt-in party-vs-party play.</td>
+</tr>
+<tr class="odd">
+<td>Names</td>
+<td>Faction names and the Ten Oaths are editable in the Command
+Center.</td>
+</tr>
+<tr class="even">
+<td>Website tracking</td>
+<td>The website tracks SP, RP, synergy slots and Guild Trials in each
+profile.</td>
+</tr>
+<tr class="odd">
+<td>Website update</td>
+<td>The website switches to the final classes, races and lineages once
+the rules are final.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="characters-and-world-approved">Characters and world
+<span class="badge approved">APPROVED</span></h2>
+<table>
+<thead>
+<tr class="header">
+<th>Decision</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Classes</td>
+<td>Six fixed classes: Vanguard, Wildstrider, Shadowblade, Luminary,
+Arcanist, Resonant. No custom classes.</td>
+</tr>
+<tr class="even">
+<td>Specializations</td>
+<td>Three per class (18 total), earned through a Guild Trial; one active
+at a time.</td>
+</tr>
+<tr class="odd">
+<td>Races</td>
+<td>12 races × 5 lineages = 60 lineages (EB-03). Any lineage can play
+any class.</td>
+</tr>
+<tr class="even">
+<td>Lineage art</td>
+<td>The Lineage Handbook art is the visual standard. Skyborn have full
+bird heads.</td>
+</tr>
+<tr class="odd">
+<td>Synergy names</td>
+<td>Keep all 360 technique names as flavour; techniques on the same
+specialization share one effect.</td>
+</tr>
+<tr class="even">
+<td>Recommendations</td>
+<td>No specialization is recommended for any lineage.</td>
+</tr>
+<tr class="odd">
+<td>Renames</td>
+<td>Wolfkin Beastwarden technique: Packtrail Bond. Crystalforged Tier
+II: Lattice Brace. Frost Orc capstone: Icefang Trek.</td>
+</tr>
+<tr class="even">
+<td>Trait and Tier I</td>
+<td>Overlap kept; Tier I adds more on top of the trait.</td>
+</tr>
+<tr class="odd">
+<td>Racial skills in combat</td>
+<td>Racial skills stay mostly exploration; class carries combat.</td>
+</tr>
+<tr class="even">
+<td>Skill format</td>
+<td>Every racial skill and synergy has player-visible Effect and Limits
+lines.</td>
+</tr>
+<tr class="odd">
+<td>Skill names kept</td>
+<td>Steady Pulse, Measured Blow and Ice Brace stay as written.</td>
+</tr>
+<tr class="even">
+<td>Trademark note</td>
+<td>"Highlander" trademark concern: ignored.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="still-open-draft">Still open
+<span class="badge draft">DRAFT</span></h2>
+<table>
+<thead>
+<tr class="header">
+<th>Item</th>
+<th>Where</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Rename the Ashen Covenant</td>
+<td>EB-07</td>
+</tr>
+<tr class="even">
+<td>Reword Oath I for PvP</td>
+<td>EB-08</td>
+</tr>
+<tr class="odd">
+<td>Rank C title "Vanguard" clashes with the class name</td>
+<td>EB-09</td>
+</tr>
+<tr class="even">
+<td>Core rules: dice, six vs four attributes, death, damage between
+sessions, starting numbers</td>
+<td>EB-01</td>
+</tr>
+<tr class="odd">
+<td>Guild Trials: SP milestone, default format, retries, group help,
+cross-spec training</td>
+<td>EB-06</td>
+</tr>
+<tr class="even">
+<td>Seat price, playtest date, legal documents</td>
+<td>EB-10</td>
+</tr>
+</tbody>
+</table>
+</body></html>

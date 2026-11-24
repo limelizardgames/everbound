@@ -1,0 +1,161 @@
+<!doctype html><html><head><meta charset='utf-8'><title>EB-07 Allegiances and PvP</title><style>@page { margin: 16mm 14mm 16mm 14mm; }
+:root { --ink: #231a2b; --muted: #6a6170; --line: #d9d2c7; --plum: #4a1d3f; --gold: #9a7420; }
+* { box-sizing: border-box; }
+body { font-family: "Liberation Serif", "DejaVu Serif", Georgia, serif; color: var(--ink); font-size: 10pt; line-height: 1.42; margin: 0; background: #fff; }
+h1, h2, h3, h4 { font-family: "Liberation Sans", "DejaVu Sans", Arial, sans-serif; color: var(--plum); line-height: 1.2; break-after: avoid; }
+h1 { font-size: 20pt; margin: 18pt 0 8pt; }
+h2 { font-size: 14pt; margin: 18pt 0 6pt; padding-bottom: 3pt; border-bottom: 1px solid var(--line); }
+h3 { font-size: 11.5pt; margin: 12pt 0 4pt; }
+h4 { font-size: 10.5pt; margin: 10pt 0 4pt; }
+p, ul, ol { margin: 4pt 0 6pt; }
+li { margin: 1.5pt 0; }
+a { color: var(--plum); text-decoration: none; }
+code { font-size: 9pt; background: #f4f0ea; padding: 0 2pt; }
+pre { background: #f6f2ec; padding: 6pt 8pt; font-size: 8.5pt; white-space: pre-wrap; border: 1px solid var(--line); break-inside: avoid; }
+blockquote { margin: 6pt 0; padding: 4pt 10pt; border-left: 3px solid var(--gold); background: #fbf8f2; color: #3b3040; }
+table { width: 100%; border-collapse: collapse; margin: 6pt 0 10pt; font-size: 8.6pt; line-height: 1.32; font-family: "Liberation Sans", "DejaVu Sans", Arial, sans-serif; }
+th, td { border: 1px solid var(--line); padding: 3pt 5pt; vertical-align: top; text-align: left; }
+th { background: #efe8df; color: var(--plum); }
+tr { break-inside: avoid; }
+thead { display: table-header-group; }
+hr { border: 0; border-top: 1px solid var(--line); margin: 12pt 0; }
+.badge { display: inline-block; font-family: "Liberation Sans", "DejaVu Sans", Arial, sans-serif; font-size: 7.5pt; font-weight: 700; letter-spacing: .08em; padding: 1.5pt 5pt; border-radius: 3pt; vertical-align: middle; border: 1px solid; }
+.badge.approved { color: #1d6b3a; background: #e3f4e8; border-color: #8cc9a2; }
+.badge.draft { color: #8a5a00; background: #fff3d4; border-color: #e7c46a; }
+h2 .badge, h3 .badge { margin-left: 6pt; }
+.cover { border: 1px solid var(--line); border-radius: 6pt; padding: 18pt 20pt; margin-bottom: 16pt; background: #fbf8f2; break-inside: avoid; }
+.cover .brand { font-family: "Liberation Sans", Arial, sans-serif; font-size: 8pt; letter-spacing: .25em; color: var(--gold); text-transform: uppercase; }
+.cover .docid { font-family: "Liberation Sans", Arial, sans-serif; font-size: 11pt; font-weight: 700; color: var(--muted); margin-top: 10pt; }
+.cover h1.title { font-size: 26pt; margin: 2pt 0 6pt; border: 0; }
+.cover .meta { font-family: "Liberation Sans", Arial, sans-serif; color: var(--muted); font-size: 9.5pt; }
+.cover .purpose { font-size: 11.5pt; margin: 10pt 0; }
+.cover .legend { font-family: "Liberation Sans", Arial, sans-serif; font-size: 8.5pt; color: var(--muted); margin-top: 8pt; }
+.cover .related { margin-top: 10pt; font-family: "Liberation Sans", Arial, sans-serif; font-size: 9pt; }
+.cover .related ul { margin: 3pt 0 0; padding-left: 16pt; columns: 2; }
+.art { margin: 8pt 0 14pt; text-align: center; break-inside: avoid; }
+.art img { max-width: 100%; max-height: 98mm; border: 1px solid var(--line); }
+.art .cap { font-size: 8.5pt; color: var(--muted); margin-top: 3pt; font-style: italic; }
+
+.pb { break-before: page; }
+</style></head><body class='port'><div class="cover">
+<div class="brand">EVERBOUND · The Living Adventurers Guild</div>
+<div class="docid">EB-07</div>
+<h1 class="title">Allegiances and PvP</h1>
+<div class="meta">Version 1.0 · November 23, 2026 · <span class="badge draft">DRAFT</span></div>
+<p class="purpose">Factions, pledging, party-vs-party modes and two-sided raids.</p>
+<div class="legend"><span class="badge approved">APPROVED</span> decided by the founders &nbsp; <span class="badge draft">DRAFT</span> proposed, expect changes after playtesting</div>
+<div class="related"><b>Related documents</b><ul><li><b>EB-01</b> Core Rules</li><li><b>EB-08</b> Code of Conduct and the Ten Oaths</li><li><b>EB-09</b> World and Lore</li></ul></div>
+</div>
+
+<h2 id="purpose">Purpose</h2>
+<p>How adventurers choose a side in the world's conflicts, and how
+party-vs-party (PvP) play works. This feature is <strong>live on the
+website</strong>; names and numbers can still change.</p>
+<h2 id="the-three-allegiances-draft">The three allegiances
+<span class="badge draft">DRAFT</span></h2>
+<table>
+<thead>
+<tr class="header">
+<th>Allegiance</th>
+<th>Motto</th>
+<th>Description</th>
+<th>In two-sided raids</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>The Adventurers Guild</strong></td>
+<td>Protect the realm</td>
+<td>Everyone starts here. Defend the towns, recover the sigils and stand
+against what wakes beyond the gate.</td>
+<td>Raiders</td>
+</tr>
+<tr class="even">
+<td><strong>The Ashen Covenant</strong> <em>(working name; rename
+pending)</em></td>
+<td>Serve the Wyrm</td>
+<td>Cultists who want the Crimson Wyrm free. They sabotage sigil hunts
+and guard the Wyrm's lair.</td>
+<td>Defenders</td>
+</tr>
+<tr class="odd">
+<td><strong>The Free Companies</strong></td>
+<td>Gold before glory</td>
+<td>Mercenaries loyal to coin. They take contracts from either side and
+can tip a close fight.</td>
+<td>Choose a side at sign-up</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Open item:</strong> rename the Ashen Covenant. Keep the new
+name clear of race and lineage words (ash, ember, cinder, smoke, wyrm,
+crimson). Ideas so far: <em>The Sealbreakers</em>, <em>The Hollow
+Accord</em>, <em>The Order of the Open Gate</em>. Names are edited in
+the Command Center (Names &amp; Lore); see EB-11.</p>
+<h2 id="pledging-draft">Pledging
+<span class="badge draft">DRAFT</span></h2>
+<ul>
+<li>Every adventurer begins in the Adventurers Guild.</li>
+<li>From guild rank <strong>D</strong>, an adventurer may pledge to
+another allegiance on their portal's Allegiance page. Returning to the
+Guild is allowed at any rank.</li>
+<li>After changing, they must wait <strong>90 days</strong> before
+changing again.</li>
+<li>Nobody can switch sides while signed up for a raid or a PvP
+quest.</li>
+<li>Administrators can correct an allegiance from Players &amp;
+Moderation; a reason is required and the change is audited.</li>
+<li>Rank and cooldown are settings (<code>allegiance_min_rank</code>,
+<code>allegiance_cooldown_days</code>).</li>
+</ul>
+<h2 id="party-vs-party-draft">Party vs party
+<span class="badge draft">DRAFT</span></h2>
+<p>PvP is <strong>opt-in</strong> per adventurer and can be turned off
+at any time unless they are signed up for a PvP quest or a two-sided
+raid.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Mode</th>
+<th>How it works</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Skirmish</strong></td>
+<td>Two parties of opposing allegiances clash at the store, with a Guild
+Master refereeing.</td>
+</tr>
+<tr class="even">
+<td><strong>Contested quest</strong></td>
+<td>Rival parties race for the same objective; the winner's side moves
+the world's counters. Sample: <em>Clash at the Ashen Crossroads</em>
+(rank D+).</td>
+</tr>
+<tr class="odd">
+<td><strong>Two-sided raid</strong></td>
+<td>Covenant adventurers defend the lair while Guild adventurers raid
+it; Free Companies choose. Registration requires PvP to be on. The
+Crimson Wyrm is set up as two-sided.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="safeguards-approved">Safeguards
+<span class="badge approved">APPROVED</span></h2>
+<ul>
+<li>PvP is always opt-in; nobody fights another player without choosing
+to.</li>
+<li>A Guild Master referees every clash, in person.</li>
+<li>Rivals in the story, friends at the table: the Code of Conduct
+(EB-08) always applies.</li>
+<li>No pressuring anyone into PvP or into an allegiance; no singling out
+the same player; no real-world grudges.</li>
+</ul>
+<h2 id="related-rules">Related rules</h2>
+<ul>
+<li>Combat procedure, conditions and Downed rules: <strong>EB-01 Core
+Rules</strong>.</li>
+<li>The raid, world counters and places: <strong>EB-09 World &amp;
+Lore</strong>.</li>
+</ul>
+</body></html>

@@ -1,0 +1,136 @@
+# Everbound Core Rules v0.1 — single source for the doc and the whiteboard
+ATTRS = [
+ ("Might", "Strength, lifting, breaking, heavy weapons", ["Athletics", "Force"]),
+ ("Grace", "Agility, balance, aim, light weapons, Guard", ["Acrobatics", "Stealth", "Finesse"]),
+ ("Vigor", "Toughness, stamina, extra HP each level", ["Endurance"]),
+ ("Wits", "Reasoning, memory, study; Arcanist power", ["Arcana", "Lore", "Investigation", "Craft"]),
+ ("Insight", "Awareness, intuition, care; Luminary power", ["Perception", "Empathy", "Survival", "Medicine"]),
+ ("Presence", "Force of personality; Resonant power", ["Persuasion", "Deception", "Performance", "Command"]),
+]
+SKILLS = {
+ "Athletics": "Climb, swim, jump, run, grapple",
+ "Force": "Lift, push, break, hold a door",
+ "Acrobatics": "Balance, tumble, land, slip free",
+ "Stealth": "Move unseen and unheard",
+ "Finesse": "Locks, traps, sleight of hand, fine tools",
+ "Endurance": "Resist fatigue, heat, cold, poison, hard travel",
+ "Arcana": "Magic, runes, magical devices",
+ "Lore": "History, legends, religions, the world",
+ "Investigation": "Search, deduce, piece clues together",
+ "Craft": "Make, repair and appraise (ties to professions)",
+ "Perception": "Notice, spot, listen",
+ "Empathy": "Read people and moods, spot lies",
+ "Survival": "Track, navigate, forage, read nature and animals",
+ "Medicine": "Treat wounds, stabilize, diagnose",
+ "Persuasion": "Convince, negotiate, befriend",
+ "Deception": "Bluff, disguise, mislead",
+ "Performance": "Music, speech, storytelling, distraction",
+ "Command": "Lead, rally, intimidate",
+}
+# race: HP bonus, attribute +1, move (squares), note
+RACES = [
+ ("Human", 2, "+1 any", 6, "Adaptable: one extra trained skill"),
+ ("Elf", 1, "Grace", 6, "Dim-light sight per lineage"),
+ ("Dwarf", 4, "Vigor", 5, "Stout: Edge to resist being knocked down"),
+ ("Halfling", 2, "Grace", 5, "Small: moves through larger creatures' spaces"),
+ ("Orcborn", 4, "Might", 6, "Powerful build: carries heavy loads"),
+ ("Beastkin", 2, "Grace", 6, "Keen senses per lineage"),
+ ("Drakari", 3, "Might", 6, "No wings or breath weapon"),
+ ("Ashborn", 2, "Presence", 6, "Ember-bright eyes: see in dim light"),
+ ("Sylph", 0, "Insight", 6, "Glide: fall slowly, glide 2 squares per square dropped; no flight"),
+ ("Tidekin", 2, "Vigor", 6, "Hold breath 10 minutes; swim at full move"),
+ ("Skyborn", 1, "Insight", 6, "Wing-assisted jump and glide; no flight"),
+ ("Forgeborn", 3, "Vigor", 6, "Standard healing and recovery; no immunities"),
+]
+# lineage trained skill
+LINEAGE_SKILL = {
+ "Human": [("Highlander","Athletics"),("Coastlander","Acrobatics"),("Plainsfolk","Perception"),("Dune Dweller","Survival"),("Frostlander","Endurance")],
+ "Elf": [("High Elf","Arcana"),("Wood Elf","Survival"),("Moon Elf","Perception"),("Deep Elf","Stealth"),("Frost Elf","Endurance")],
+ "Dwarf": [("Mountain Dwarf","Force"),("Hill Dwarf","Endurance"),("Deep Dwarf","Perception"),("Ember Dwarf","Craft"),("Crystal Dwarf","Arcana")],
+ "Halfling": [("Hillfoot","Endurance"),("Woodfoot","Stealth"),("Riverfoot","Acrobatics"),("Marshfoot","Survival"),("Cavefoot","Perception")],
+ "Orcborn": [("Mountain Orc","Force"),("Steppe Orc","Athletics"),("Ash Orc","Perception"),("Marsh Orc","Survival"),("Frost Orc","Endurance")],
+ "Beastkin": [("Wolfkin","Survival"),("Foxkin","Deception"),("Catkin","Acrobatics"),("Rabbitkin","Perception"),("Bearkin","Force")],
+ "Drakari": [("Wyrmkin","Force"),("Serpentkin","Acrobatics"),("Drakekin","Athletics"),("Crystaldrake","Arcana"),("Thornscale","Endurance")],
+ "Ashborn": [("Cinderborn","Endurance"),("Duskhorn","Perception"),("Paleash","Arcana"),("Thornhorn","Force"),("Smokeborn","Stealth")],
+ "Sylph": [("Butterfly Sylph","Performance"),("Moth Sylph","Stealth"),("Dragonfly Sylph","Acrobatics"),("Cicada Sylph","Perception"),("Lacewing Sylph","Finesse")],
+ "Tidekin": [("Riverkin","Survival"),("Sharkkin","Athletics"),("Reefkin","Stealth"),("Raykin","Acrobatics"),("Deepkin","Perception")],
+ "Skyborn": [("Hawkin","Perception"),("Eaglekin","Athletics"),("Falconkin","Acrobatics"),("Owlkin","Stealth"),("Ravenkin","Investigation")],
+ "Forgeborn": [("Stoneforged","Endurance"),("Ironforged","Force"),("Bronzeforged","Finesse"),("Woodforged","Survival"),("Crystalforged","Arcana")],
+}
+# class: HP, HP/level, Guard, primary, resists, skills to pick (n, list), recovery die, main weapon die
+CLASSES = [
+ ("Vanguard", 12, 7, "14 + Grace (max +1)", "Might", "Might, Vigor", 3, ["Athletics","Force","Endurance","Command","Perception","Survival"], "d10"),
+ ("Wildstrider", 9, 5, "12 + Grace", "Grace", "Grace, Insight", 3, ["Survival","Perception","Stealth","Athletics","Acrobatics","Medicine"], "d8"),
+ ("Shadowblade", 8, 5, "12 + Grace", "Grace", "Grace, Wits", 4, ["Stealth","Finesse","Acrobatics","Deception","Investigation","Perception"], "d8"),
+ ("Luminary", 8, 5, "13 + Grace (max +2)", "Insight", "Insight, Presence", 3, ["Medicine","Empathy","Lore","Arcana","Persuasion","Endurance"], "d8"),
+ ("Arcanist", 6, 4, "11 + Grace", "Wits", "Wits, Insight", 3, ["Arcana","Lore","Investigation","Craft","Perception","Medicine"], "d6"),
+ ("Resonant", 7, 4, "11 + Grace", "Presence", "Presence, Grace", 3, ["Performance","Persuasion","Empathy","Deception","Command","Lore"], "d6"),
+]
+# level, xp, training, SP total, RP total, other
+LEVELS = [
+ (1, 0, "+2", 2, 1, "Starting abilities, lineage trait"),
+ (2, 300, "+2", 3, 1, ""),
+ (3, 900, "+2", 4, 2, ""),
+ (4, 1800, "+2", 5, 2, "+1 attribute · eligible for a Guild Trial"),
+ (5, 3000, "+3", 6, 3, "Scaling abilities grow"),
+ (6, 4500, "+3", 7, 3, ""),
+ (7, 6500, "+3", 8, 4, ""),
+ (8, 9000, "+3", 9, 4, "+1 attribute"),
+ (9, 12000, "+4", 10, 5, "Scaling abilities grow"),
+ (10, 16000, "+4", 11, 5, "Capstone reachable"),
+]
+DIFFICULTY = [("Easy", 8), ("Standard", 12), ("Hard", 15), ("Heroic", 18), ("Legendary", 21)]
+CONDITIONS = [
+ ("Exposed", "Attacks against you have Edge", "End of your next turn"),
+ ("Staggered", "No reactions; Strain on your next attack", "End of your next turn"),
+ ("Pinned", "Move is 0", "End of your next turn, or escape (Athletics/Acrobatics vs DC)"),
+ ("Prone", "Melee attacks against you have Edge; standing costs half your move", "You stand up"),
+ ("Frightened", "Strain on checks and attacks while the source is in sight", "Resist (Insight) at end of each turn"),
+ ("Hidden", "Unseen: your next attack has Edge", "You attack, make noise, or are found"),
+ ("Poisoned", "Strain on attacks and checks", "Resist (Vigor) at end of each turn, or Medicine"),
+ ("Shielded", "+2 Guard", "Start of the shielder's next turn"),
+ ("Downed", "At 0 HP: prone, can't act; make Last Breath rolls", "Any healing, or stabilized"),
+]
+STARTERS = {
+ "Vanguard": ["Iron Resolve — Edge on Resists against being pushed or knocked prone.",
+              "Shieldbreak — Weapon attack; on a hit, push the target 1 square OR it has Strain on attacks against anyone but you until your next turn.",
+              "Stand Before Me (reaction, 1/encounter) — When an ally within 1 square is hit, take the hit instead and reduce its damage by 1d8 + Vigor.",
+              "Siegeborn — Edge on checks to find structural weak points, defensible positions or ways through barriers."],
+ "Wildstrider": ["Keen Instinct — +2 Perception to notice tracks, ambushes and hazards; you can't be surprised while conscious.",
+                 "Skirmisher's Strike — Weapon attack, then move up to 2 squares without provoking.",
+                 "Predator's Snare (1/encounter) — Target Resists (Grace) vs your ability DC or is Pinned; allies have Edge against it until your next turn.",
+                 "Pathfinder — Edge on Survival to find routes, trails and safer paths."],
+ "Shadowblade": ["Exploit Weakness — Once per turn, +1d6 damage against a target that is Exposed, unaware, or next to one of your allies (+2d6 at L5, +3d6 at L9).",
+                 "Feint & Slip — Weapon attack, then move up to 2 squares to cover without provoking.",
+                 "Veilstep (1/encounter) — Move up to 3 squares to a spot out of an enemy's sight; you are Hidden.",
+                 "Underhand — Edge on Finesse with locks, traps and hidden compartments."],
+ "Luminary": ["Guiding Flame — Edge on Medicine to diagnose and on Perception to sense spirits or corruption.",
+              "Radiant Hand — Give an ally within 6 squares Shielded (+2 Guard), OR spell attack (Insight) for 1d8 radiant (2d8 at L5, 3d8 at L9).",
+              "Wellspring (1/encounter) — An ally within 6 squares heals 1d8 + Insight (+1d8 at L5 and L9) OR ends one minor condition.",
+              "Rite of Clarity — Stabilize a Downed ally without a check; purify a small tainted object; Edge on Medicine checks."],
+ "Arcanist": ["Arcane Sense — Sense active magic within 6 squares.",
+              "Weavebolt — Spell attack (Wits), range 12, 1d8 (2d8 at L5, 3d8 at L9). Pick: fire (ignites), frost (target moves 1 less), lightning (no reactions), force (push 1).",
+              "Sigilburst (1/encounter) — 2-square radius within 8 squares; each creature Resists (Grace) vs your DC: 2d6 damage, half on a success (+1d6 at L5 and L9).",
+              "Runic Insight — Edge on Arcana to read runes, symbols and magical devices."],
+ "Resonant": ["Attunement — Edge on Empathy to read a group's mood; sense supernatural sounds.",
+              "Harmonic Cue — An ally within 6 squares adds 1d4 to their next roll, OR a target Resists (Presence) vs your DC or takes 1d6 sonic and has Strain on its next attack.",
+              "Grand Refrain (reaction, 1/encounter) — An ally within 6 squares rerolls a failed roll and adds +2.",
+              "Echo of Words — Edge on Performance; make your voice carry; recall faint sounds you heard."],
+}
+WORKFLOW = [
+ ("Check in", "Scan your guild card. The GM tablet loads your sheet; HP and uses reset."),
+ ("Session zero", "Safety tools, quest briefing, who's playing what."),
+ ("Frame a scene", "The GM sets the scene: explore, talk, solve or fight."),
+ ("Act and roll", "Say what you do. If it's risky, roll d20 + attribute + training vs the Difficulty."),
+ ("Encounter", "Initiative, then rounds: Move, Action, Reaction. Ends on defeat, retreat, surrender or objective."),
+ ("Breather", "Between scenes: spend Recovery Dice to heal; plan the next move."),
+ ("Finale", "The big choice that can change the world."),
+ ("Wrap-up", "The GM records XP, gold, loot, renown and world changes; a second GM approves."),
+]
+OPEN = [
+ ("Dice", "d20 + attribute + training vs a target number (closest to D&D)."),
+ ("Attributes", "Six attributes. The website currently has four (Might, Grace, Wits, Spirit) and switches with one ruleset edit."),
+ ("Death", "No permanent death without the player's consent; falling in battle means a lasting wound in the story."),
+ ("HP between sessions", "Full reset at the start of each session; injuries carry over only as story."),
+ ("Numbers", "Starting HP, Guard and damage here are first guesses to playtest."),
+]

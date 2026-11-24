@@ -1,0 +1,920 @@
+<!doctype html><html><head><meta charset='utf-8'><title>EB-03 Races and Lineages</title><style>@page { margin: 16mm 14mm 16mm 14mm; }
+:root { --ink: #231a2b; --muted: #6a6170; --line: #d9d2c7; --plum: #4a1d3f; --gold: #9a7420; }
+* { box-sizing: border-box; }
+body { font-family: "Liberation Serif", "DejaVu Serif", Georgia, serif; color: var(--ink); font-size: 10pt; line-height: 1.42; margin: 0; background: #fff; }
+h1, h2, h3, h4 { font-family: "Liberation Sans", "DejaVu Sans", Arial, sans-serif; color: var(--plum); line-height: 1.2; break-after: avoid; }
+h1 { font-size: 20pt; margin: 18pt 0 8pt; }
+h2 { font-size: 14pt; margin: 18pt 0 6pt; padding-bottom: 3pt; border-bottom: 1px solid var(--line); }
+h3 { font-size: 11.5pt; margin: 12pt 0 4pt; }
+h4 { font-size: 10.5pt; margin: 10pt 0 4pt; }
+p, ul, ol { margin: 4pt 0 6pt; }
+li { margin: 1.5pt 0; }
+a { color: var(--plum); text-decoration: none; }
+code { font-size: 9pt; background: #f4f0ea; padding: 0 2pt; }
+pre { background: #f6f2ec; padding: 6pt 8pt; font-size: 8.5pt; white-space: pre-wrap; border: 1px solid var(--line); break-inside: avoid; }
+blockquote { margin: 6pt 0; padding: 4pt 10pt; border-left: 3px solid var(--gold); background: #fbf8f2; color: #3b3040; }
+table { width: 100%; border-collapse: collapse; margin: 6pt 0 10pt; font-size: 8.6pt; line-height: 1.32; font-family: "Liberation Sans", "DejaVu Sans", Arial, sans-serif; }
+th, td { border: 1px solid var(--line); padding: 3pt 5pt; vertical-align: top; text-align: left; }
+th { background: #efe8df; color: var(--plum); }
+tr { break-inside: avoid; }
+thead { display: table-header-group; }
+hr { border: 0; border-top: 1px solid var(--line); margin: 12pt 0; }
+.badge { display: inline-block; font-family: "Liberation Sans", "DejaVu Sans", Arial, sans-serif; font-size: 7.5pt; font-weight: 700; letter-spacing: .08em; padding: 1.5pt 5pt; border-radius: 3pt; vertical-align: middle; border: 1px solid; }
+.badge.approved { color: #1d6b3a; background: #e3f4e8; border-color: #8cc9a2; }
+.badge.draft { color: #8a5a00; background: #fff3d4; border-color: #e7c46a; }
+h2 .badge, h3 .badge { margin-left: 6pt; }
+.cover { border: 1px solid var(--line); border-radius: 6pt; padding: 18pt 20pt; margin-bottom: 16pt; background: #fbf8f2; break-inside: avoid; }
+.cover .brand { font-family: "Liberation Sans", Arial, sans-serif; font-size: 8pt; letter-spacing: .25em; color: var(--gold); text-transform: uppercase; }
+.cover .docid { font-family: "Liberation Sans", Arial, sans-serif; font-size: 11pt; font-weight: 700; color: var(--muted); margin-top: 10pt; }
+.cover h1.title { font-size: 26pt; margin: 2pt 0 6pt; border: 0; }
+.cover .meta { font-family: "Liberation Sans", Arial, sans-serif; color: var(--muted); font-size: 9.5pt; }
+.cover .purpose { font-size: 11.5pt; margin: 10pt 0; }
+.cover .legend { font-family: "Liberation Sans", Arial, sans-serif; font-size: 8.5pt; color: var(--muted); margin-top: 8pt; }
+.cover .related { margin-top: 10pt; font-family: "Liberation Sans", Arial, sans-serif; font-size: 9pt; }
+.cover .related ul { margin: 3pt 0 0; padding-left: 16pt; columns: 2; }
+.art { margin: 8pt 0 14pt; text-align: center; break-inside: avoid; }
+.art img { max-width: 100%; max-height: 98mm; border: 1px solid var(--line); }
+.art .cap { font-size: 8.5pt; color: var(--muted); margin-top: 3pt; font-style: italic; }
+
+.pb { break-before: page; }
+</style></head><body class='land'><div class="cover">
+<div class="brand">EVERBOUND · The Living Adventurers Guild</div>
+<div class="docid">EB-03</div>
+<h1 class="title">Races and Lineages</h1>
+<div class="meta">Version 1.0 · November 23, 2026 · <span class="badge approved">APPROVED</span></div>
+<p class="purpose">The 12 races and 60 lineages, with the approved reference art.</p>
+<div class="legend"><span class="badge approved">APPROVED</span> decided by the founders &nbsp; <span class="badge draft">DRAFT</span> proposed, expect changes after playtesting</div>
+<div class="related"><b>Related documents</b><ul><li><b>EB-01</b> Core Rules</li><li><b>EB-04</b> Racial Skill Trees</li><li><b>EB-05</b> Lineage × Specialization Synergies</li></ul></div>
+</div>
+
+<p><strong>Version:</strong> 1.0<br />
+<strong>Status:</strong> Approved roster and approved lineage art
+(Lineage Handbook)<br />
+<strong>Scope:</strong> 12 base races · 5 lineages per race · <strong>60
+playable lineages</strong><br />
+<strong>Companion design:</strong> Everbound class and specialization
+system</p>
+<hr />
+<h2 id="1-purpose-and-terminology">1. Purpose and terminology</h2>
+<p>This compendium establishes the <strong>lineage/ancestry
+choices</strong> for each of Everbound's 12 playable base races. A
+lineage is a recognizable ancestral variety, body/material type, or (for
+humans) regional heritage—not a class, subclass, or skill-tree name.
+Each lineage has a visual or cultural identity and a <strong>core
+natural specialty</strong> to guide later racial skill design.</p>
+<ul>
+<li><strong>Race:</strong> What kind of being a character is.</li>
+<li><strong>Lineage:</strong> The ancestry, biological variety,
+constructed body type, or heritage within that race.</li>
+<li><strong>Class:</strong> The character's trained role. Everbound's
+six official classes are <strong>Vanguard, Wildstrider, Shadowblade,
+Luminary, Arcanist, and Resonant</strong>.</li>
+<li><strong>Class specialization:</strong> A distinct advanced playstyle
+within the selected class.</li>
+<li><strong>Racial skill tree:</strong> Future skills developed from the
+selected lineage's innate traits and adapted strengths.</li>
+</ul>
+<p><strong>Character-building rule:</strong> Any race and lineage may
+choose any of the six official classes. A lineage specialty describes an
+area of aptitude, <strong>not an automatic granted power or class
+restriction</strong>. Numerical bonuses, unlock levels, active
+abilities, limitations, and capstones will be defined in the subsequent
+racial skill-tree design phase.</p>
+<p><strong>Art consistency:</strong> Preserve Everbound's approved
+<strong>Painterly JRPG</strong> character direction and base-race
+anatomy. Lineage variation should remain recognizable within the base
+race; skin, hair, feather, eye, and scale colors are not automatically
+gameplay powers.</p>
+<hr />
+<h2 id="2-roster-at-a-glance">2. Roster at a glance</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Base race</th>
+<th style="text-align: right;">Number of lineages</th>
+<th>Lineages</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Human</td>
+<td style="text-align: right;">5</td>
+<td>Highlander; Coastlander; Plainsfolk; Dune Dweller; Frostlander</td>
+</tr>
+<tr class="even">
+<td>Elf</td>
+<td style="text-align: right;">5</td>
+<td>High Elf; Wood Elf; Moon Elf; Deep Elf; Frost Elf</td>
+</tr>
+<tr class="odd">
+<td>Dwarf</td>
+<td style="text-align: right;">5</td>
+<td>Mountain Dwarf; Hill Dwarf; Deep Dwarf; Ember Dwarf; Crystal
+Dwarf</td>
+</tr>
+<tr class="even">
+<td>Halfling</td>
+<td style="text-align: right;">5</td>
+<td>Hillfoot; Woodfoot; Riverfoot; Marshfoot; Cavefoot</td>
+</tr>
+<tr class="odd">
+<td>Orcborn</td>
+<td style="text-align: right;">5</td>
+<td>Mountain Orc; Steppe Orc; Ash Orc; Marsh Orc; Frost Orc</td>
+</tr>
+<tr class="even">
+<td>Beastkin</td>
+<td style="text-align: right;">5</td>
+<td>Wolfkin; Foxkin; Catkin; Rabbitkin; Bearkin</td>
+</tr>
+<tr class="odd">
+<td>Drakari</td>
+<td style="text-align: right;">5</td>
+<td>Wyrmkin; Serpentkin; Drakekin; Crystaldrake; Thornscale</td>
+</tr>
+<tr class="even">
+<td>Ashborn</td>
+<td style="text-align: right;">5</td>
+<td>Cinderborn; Duskhorn; Paleash; Thornhorn; Smokeborn</td>
+</tr>
+<tr class="odd">
+<td>Sylph</td>
+<td style="text-align: right;">5</td>
+<td>Butterfly Sylph; Moth Sylph; Dragonfly Sylph; Cicada Sylph; Lacewing
+Sylph</td>
+</tr>
+<tr class="even">
+<td>Tidekin</td>
+<td style="text-align: right;">5</td>
+<td>Riverkin; Sharkkin; Reefkin; Raykin; Deepkin</td>
+</tr>
+<tr class="odd">
+<td>Skyborn</td>
+<td style="text-align: right;">5</td>
+<td>Hawkin; Eaglekin; Falconkin; Owlkin; Ravenkin</td>
+</tr>
+<tr class="even">
+<td>Forgeborn</td>
+<td style="text-align: right;">5</td>
+<td>Stoneforged; Ironforged; Bronzeforged; Woodforged;
+Crystalforged</td>
+</tr>
+<tr class="odd">
+<td><strong>TOTAL</strong></td>
+<td style="text-align: right;"><strong>60</strong></td>
+<td><strong>12 races × 5 lineages</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="pb"></div>
+
+<h2 id="3-human">3. Human</h2>
+<p><strong>Base identity:</strong> Adaptable human communities with
+broad variation in appearance and no required supernatural anatomy.
+Human lineages represent <strong>regional heritages and learned
+traditions</strong>, not biologically fixed traits.</p>
+<div class="art"><img src="../art/lineages-human.jpg" alt="Human lineage art"><div class="cap">Human lineages — approved reference art (male and female)</div></div>
+
+<table>
+<thead>
+<tr class="header">
+<th>Lineage</th>
+<th>Identity / visual cues</th>
+<th>Core natural or learned specialty</th>
+<th>Future skill-tree direction</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Highlander</strong></td>
+<td>Origin in mountain settlements; practical cold-weather climbing
+equipment</td>
+<td>Endurance, climbing</td>
+<td>Vertical traversal, difficult-terrain travel, persistence</td>
+</tr>
+<tr class="even">
+<td><strong>Coastlander</strong></td>
+<td>Coastal settlements; seafaring dress and equipment</td>
+<td>Sailing, swimming</td>
+<td>Navigation, water survival, shipboard movement</td>
+</tr>
+<tr class="odd">
+<td><strong>Plainsfolk</strong></td>
+<td>Open grassland and caravan communities</td>
+<td>Travel, navigation</td>
+<td>Routefinding, long-distance travel, awareness</td>
+</tr>
+<tr class="even">
+<td><strong>Dune Dweller</strong></td>
+<td>Arid-region communities; heat-adapted clothing and equipment</td>
+<td>Heat survival, resource conservation</td>
+<td>Heat management, waterfinding, expedition logistics</td>
+</tr>
+<tr class="odd">
+<td><strong>Frostlander</strong></td>
+<td>Northern settlements; layered winter gear and traditions</td>
+<td>Cold-weather survival, perseverance</td>
+<td>Cold-environment resilience, survival, morale</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Design note:</strong> Human appearance is freely
+customizable; ancestry does not prescribe skin tone or physical
+features. Lineage specialties should reflect background and
+training.</p>
+<div class="pb"></div>
+
+<h2 id="4-elf">4. Elf</h2>
+<p><strong>Base identity:</strong> Tall, slender humanoids with pointed
+ears, luminous irises, and sensitivity to the natural and magical
+world.</p>
+<div class="art"><img src="../art/lineages-elf.jpg" alt="Elf lineage art"><div class="cap">Elf lineages — approved reference art (male and female)</div></div>
+
+<table>
+<thead>
+<tr class="header">
+<th>Lineage</th>
+<th>Identity / visual cues</th>
+<th>Core specialty</th>
+<th>Future skill-tree direction</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>High Elf</strong></td>
+<td>Luminous irises, refined features, long-lived magical
+traditions</td>
+<td>Arcane sensitivity</td>
+<td>Spell sensing, magical understanding, resonance</td>
+</tr>
+<tr class="even">
+<td><strong>Wood Elf</strong></td>
+<td>Forest-adapted traditions, earth-toned markings and dress</td>
+<td>Forest awareness, stealth</td>
+<td>Tracking, wilderness concealment, woodland traversal</td>
+</tr>
+<tr class="odd">
+<td><strong>Moon Elf</strong></td>
+<td>Cool-toned appearance, prominent reflective irises</td>
+<td>Night perception</td>
+<td>Low-light detection, nighttime awareness, hidden-threat
+detection</td>
+</tr>
+<tr class="even">
+<td><strong>Deep Elf</strong></td>
+<td>Dim-environment adaptations, subdued coloration</td>
+<td>Darkness adaptation</td>
+<td>Underground perception, shadow navigation, sensory focus</td>
+</tr>
+<tr class="odd">
+<td><strong>Frost Elf</strong></td>
+<td>Cold-region adaptations, pale or frostlike markings</td>
+<td>Cold resilience</td>
+<td>Harsh-weather endurance, environmental survival, composure</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Design note:</strong> Lineage is not a personality, moral
+alignment, or mandatory class assignment.</p>
+<div class="pb"></div>
+
+<h2 id="5-dwarf">5. Dwarf</h2>
+<p><strong>Base identity:</strong> Short, broad, strong humanoids with
+dense builds, substantial hands, and traditions of craft and earth
+knowledge.</p>
+<div class="art"><img src="../art/lineages-dwarf.jpg" alt="Dwarf lineage art"><div class="cap">Dwarf lineages — approved reference art (male and female)</div></div>
+
+<table>
+<thead>
+<tr class="header">
+<th>Lineage</th>
+<th>Identity / visual cues</th>
+<th>Core specialty</th>
+<th>Future skill-tree direction</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Mountain Dwarf</strong></td>
+<td>Broad frame, dense musculature</td>
+<td>Strength, endurance</td>
+<td>Load bearing, sturdy footing, prolonged exertion</td>
+</tr>
+<tr class="even">
+<td><strong>Hill Dwarf</strong></td>
+<td>Compact build, steady gait, sturdy feet</td>
+<td>Stamina, balance</td>
+<td>Grounded movement, resistance to displacement, persistence</td>
+</tr>
+<tr class="odd">
+<td><strong>Deep Dwarf</strong></td>
+<td>Dim-adapted eyes, muted coloring</td>
+<td>Underground perception</td>
+<td>Cave navigation, hazard recognition, low-light sensing</td>
+</tr>
+<tr class="even">
+<td><strong>Ember Dwarf</strong></td>
+<td>Ruddy or ash-grey features, heat-adapted heritage</td>
+<td>Heat tolerance</td>
+<td>Forge and volcanic environments, heat resilience</td>
+</tr>
+<tr class="odd">
+<td><strong>Crystal Dwarf</strong></td>
+<td>Subtle mineral markings, reflective irises</td>
+<td>Resonance, mineral sensing</td>
+<td>Geological perception, vibration awareness, material analysis</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Design note:</strong> All lineages retain recognizable adult
+Dwarf proportions; material features are subtle, not a replacement with
+a constructed body.</p>
+<div class="pb"></div>
+
+<h2 id="6-halfling">6. Halfling</h2>
+<p><strong>Base identity:</strong> Compact adult humanoids, roughly
+three feet tall, known for dexterity and practical ingenuity.</p>
+<div class="art"><img src="../art/lineages-halfling.jpg" alt="Halfling lineage art"><div class="cap">Halfling lineages — approved reference art (male and female)</div></div>
+
+<table>
+<thead>
+<tr class="header">
+<th>Lineage</th>
+<th>Identity / visual cues</th>
+<th>Core specialty</th>
+<th>Future skill-tree direction</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Hillfoot</strong></td>
+<td>Compact, sturdy build; broad feet</td>
+<td>Endurance, balance</td>
+<td>Sure footing, long treks, stable movement</td>
+</tr>
+<tr class="even">
+<td><strong>Woodfoot</strong></td>
+<td>Leaner build, nimble hands and feet</td>
+<td>Stealth, climbing</td>
+<td>Concealment, climbing, natural cover</td>
+</tr>
+<tr class="odd">
+<td><strong>Riverfoot</strong></td>
+<td>Flexible feet, streamlined movement</td>
+<td>Swimming, agility</td>
+<td>Water movement, nimble repositioning</td>
+</tr>
+<tr class="even">
+<td><strong>Marshfoot</strong></td>
+<td>Wide-set feet, strong lower legs</td>
+<td>Difficult-terrain movement</td>
+<td>Mud, marshes, soft-ground traversal</td>
+</tr>
+<tr class="odd">
+<td><strong>Cavefoot</strong></td>
+<td>Low-light-adapted eyes, compact build</td>
+<td>Underground navigation</td>
+<td>Tunnel navigation, dark-area awareness, confined spaces</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Design note:</strong> Halflings remain clearly adult, not
+childlike or chibi.</p>
+<div class="pb"></div>
+
+<h2 id="7-orcborn">7. Orcborn</h2>
+<p><strong>Base identity:</strong> Tall and powerful humanoids with
+visible lower tusks, heavy brows, and diverse skin tones.</p>
+<div class="art"><img src="../art/lineages-orcborn.jpg" alt="Orcborn lineage art"><div class="cap">Orcborn lineages — approved reference art (male and female)</div></div>
+
+<table>
+<thead>
+<tr class="header">
+<th>Lineage</th>
+<th>Identity / visual cues</th>
+<th>Core specialty</th>
+<th>Future skill-tree direction</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Mountain Orc</strong></td>
+<td>Massive frame, heavy tusks, wide shoulders</td>
+<td>Strength, durability</td>
+<td>Powerful exertion, holding ground, resilience</td>
+</tr>
+<tr class="even">
+<td><strong>Steppe Orc</strong></td>
+<td>Lean musculature, long limbs</td>
+<td>Speed, stamina</td>
+<td>Running, pursuit, sustained travel</td>
+</tr>
+<tr class="odd">
+<td><strong>Ash Orc</strong></td>
+<td>Grey or charcoal skin, weathered features</td>
+<td>Heat and hazard resistance</td>
+<td>Environmental endurance, hazardous-ground traversal</td>
+</tr>
+<tr class="even">
+<td><strong>Marsh Orc</strong></td>
+<td>Broad hands and feet, green-toned skin variations</td>
+<td>Swimming, resilience</td>
+<td>Wetland survival, aquatic movement, tough footing</td>
+</tr>
+<tr class="odd">
+<td><strong>Frost Orc</strong></td>
+<td>Dense physique, pale grey skin variations</td>
+<td>Cold tolerance, endurance</td>
+<td>Winter survival, prolonged exertion</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Design note:</strong> An Orcborn lineage does not determine
+temperament, morality, or role.</p>
+<div class="pb"></div>
+
+<h2 id="8-beastkin">8. Beastkin</h2>
+<p><strong>Base identity:</strong> Humanlike faces, torsos, hands, and
+legs, with lineage-specific animal ears, animal-influenced eyes, and
+<strong>one</strong> appropriate tail. No animal muzzle, animal head, or
+second set of human ears.</p>
+<div class="art"><img src="../art/lineages-beastkin.jpg" alt="Beastkin lineage art"><div class="cap">Beastkin lineages — approved reference art (male and female)</div></div>
+
+<table>
+<thead>
+<tr class="header">
+<th>Lineage</th>
+<th>Identity / visual cues</th>
+<th>Core specialty</th>
+<th>Future skill-tree direction</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Wolfkin</strong></td>
+<td>Wolf ears, bushy wolf tail</td>
+<td>Tracking, pack coordination</td>
+<td>Scent tracking, coordinated action, shared target awareness</td>
+</tr>
+<tr class="even">
+<td><strong>Foxkin</strong></td>
+<td>Pointed fox ears, large fox tail</td>
+<td>Cunning, deception, agility</td>
+<td>Misdirection, rapid movement, reading intentions</td>
+</tr>
+<tr class="odd">
+<td><strong>Catkin</strong></td>
+<td>Cat ears, slender feline tail, keen eyes</td>
+<td>Balance, reflexes, precision</td>
+<td>Landing, evasive timing, precise movement</td>
+</tr>
+<tr class="even">
+<td><strong>Rabbitkin</strong></td>
+<td>Long rabbit ears, small rabbit tail, strong legs</td>
+<td>Jumping, speed, evasion</td>
+<td>Leaping, sudden escapes, threat awareness</td>
+</tr>
+<tr class="odd">
+<td><strong>Bearkin</strong></td>
+<td>Rounded bear ears, small bear tail, sturdy frame</td>
+<td>Strength, endurance, protection</td>
+<td>Strength, defensive resilience, sheltering allies</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Final selection:</strong> Only these <strong>five</strong>
+Beastkin lineages. <strong>Lionkin, Tigerkin, Deerkin, Otterkin, and
+Badgerkin are excluded</strong> from the current playable roster.</p>
+<div class="pb"></div>
+
+<h2 id="9-drakari">9. Drakari</h2>
+<p><strong>Base identity:</strong> Humanoid dragon descendants with
+scales on cheeks and forearms, swept-back horns, and slit pupils. No
+automatic wings or unrestricted breath weapons.</p>
+<div class="art"><img src="../art/lineages-drakari.jpg" alt="Drakari lineage art"><div class="cap">Drakari lineages — approved reference art (male and female)</div></div>
+
+<table>
+<thead>
+<tr class="header">
+<th>Lineage</th>
+<th>Identity / visual cues</th>
+<th>Core specialty</th>
+<th>Future skill-tree direction</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Wyrmkin</strong></td>
+<td>Heavy scales, broad horns, powerful frame</td>
+<td>Strength, resilience</td>
+<td>Physical endurance, heavy impacts, sturdy stance</td>
+</tr>
+<tr class="even">
+<td><strong>Serpentkin</strong></td>
+<td>Fine scales, slender frame, swept horns</td>
+<td>Agility, flexibility</td>
+<td>Flowing movement, evasion, body control</td>
+</tr>
+<tr class="odd">
+<td><strong>Drakekin</strong></td>
+<td>Thick scales, pronounced brow ridges</td>
+<td>Endurance, close combat</td>
+<td>Melee pressure, guarding, physical resilience</td>
+</tr>
+<tr class="even">
+<td><strong>Crystaldrake</strong></td>
+<td>Faceted scale patterns, crystalline horn ridges</td>
+<td>Magical resonance, perception</td>
+<td>Detecting magic, sensing disturbances, energy awareness</td>
+</tr>
+<tr class="odd">
+<td><strong>Thornscale</strong></td>
+<td>Raised scale ridges, pronounced horn structures</td>
+<td>Defense, counterattacks</td>
+<td>Guarding, counterforce, protective response</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Design note:</strong> Bronze, blue, ember-red, jade, and
+pearl scale colors are independent <strong>appearance options</strong>.
+Color does not dictate ancestry, affinity, or powers.</p>
+<div class="pb"></div>
+
+<h2 id="10-ashborn">10. Ashborn</h2>
+<p><strong>Base identity:</strong> Humanoids with curved horns, slender
+tails, ember-bright eyes, and ash-grey to crimson skin variations; not
+inherently evil.</p>
+<div class="art"><img src="../art/lineages-ashborn.jpg" alt="Ashborn lineage art"><div class="cap">Ashborn lineages — approved reference art (male and female)</div></div>
+
+<table>
+<thead>
+<tr class="header">
+<th>Lineage</th>
+<th>Identity / visual cues</th>
+<th>Core specialty</th>
+<th>Future skill-tree direction</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Cinderborn</strong></td>
+<td>Crimson skin, prominent curved horns</td>
+<td>Heat resistance</td>
+<td>Heat and fire-hazard resilience</td>
+</tr>
+<tr class="even">
+<td><strong>Duskhorn</strong></td>
+<td>Dark-violet skin, swept-back horns</td>
+<td>Shadow perception</td>
+<td>Low-light awareness, concealed-threat detection</td>
+</tr>
+<tr class="odd">
+<td><strong>Paleash</strong></td>
+<td>Pale grey skin, finer horns</td>
+<td>Magical sensitivity</td>
+<td>Sensing magic, arcane disturbances</td>
+</tr>
+<tr class="even">
+<td><strong>Thornhorn</strong></td>
+<td>Branching horns, distinctive tail</td>
+<td>Defensive resilience</td>
+<td>Sturdy defense, reacting to contact</td>
+</tr>
+<tr class="odd">
+<td><strong>Smokeborn</strong></td>
+<td>Charcoal complexion, smoke-like markings</td>
+<td>Concealment, environmental awareness</td>
+<td>Cover, obscured terrain, hazard sensing</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Design note:</strong> Horn and tail morphology can vary, but
+default Ashborn anatomy never requires dragon scales or wings.</p>
+<div class="pb"></div>
+
+<h2 id="11-sylph">11. Sylph</h2>
+<p><strong>Base identity:</strong> Light adult humanoids with
+translucent, veined <strong>insectlike</strong> gossamer wings and
+shimmering freckles. Wings enable controlled gliding rather than
+unrestricted flight.</p>
+<div class="art"><img src="../art/lineages-sylph.jpg" alt="Sylph lineage art"><div class="cap">Sylph lineages — approved reference art (male and female)</div></div>
+
+<table>
+<thead>
+<tr class="header">
+<th>Lineage</th>
+<th>Identity / visual cues</th>
+<th>Core specialty</th>
+<th>Future skill-tree direction</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Butterfly Sylph</strong></td>
+<td>Broad, patterned translucent wings</td>
+<td>Grace, visual misdirection</td>
+<td>Gliding, wing-display distractions, graceful movement</td>
+</tr>
+<tr class="even">
+<td><strong>Moth Sylph</strong></td>
+<td>Rounded wing shapes, soft markings, optional antennae</td>
+<td>Night senses, concealment</td>
+<td>Darkness awareness, quiet movement</td>
+</tr>
+<tr class="odd">
+<td><strong>Dragonfly Sylph</strong></td>
+<td>Four narrow gossamer wings, slender frame</td>
+<td>Rapid movement, reflexes</td>
+<td>Direction changes, evasion, controlled descent</td>
+</tr>
+<tr class="even">
+<td><strong>Cicada Sylph</strong></td>
+<td>Strongly veined wings, distinct wing-root markings</td>
+<td>Vibration and sound sensing</td>
+<td>Acoustic awareness, vibration detection</td>
+</tr>
+<tr class="odd">
+<td><strong>Lacewing Sylph</strong></td>
+<td>Delicate, intricate transparent wing veining</td>
+<td>Precision, controlled gliding</td>
+<td>Fine flight control, precise positioning</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Design note:</strong> Preserve Sylph's wing-based physical
+identity across every lineage. Never substitute feathered Skyborn
+wings.</p>
+<div class="pb"></div>
+
+<h2 id="12-tidekin">12. Tidekin</h2>
+<p><strong>Base identity:</strong> Amphibious-looking humanoids with
+neck gills, webbed fingers, finlike ears, and iridescent scale patches.
+Two legs and feet—not mermaid tails.</p>
+<div class="art"><img src="../art/lineages-tidekin.jpg" alt="Tidekin lineage art"><div class="cap">Tidekin lineages — approved reference art (male and female)</div></div>
+
+<table>
+<thead>
+<tr class="header">
+<th>Lineage</th>
+<th>Identity / visual cues</th>
+<th>Core specialty</th>
+<th>Future skill-tree direction</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Riverkin</strong></td>
+<td>Subtle freshwater scale patterns, compact fins</td>
+<td>River navigation, current sensing</td>
+<td>Navigating currents, swimming, freshwater survival</td>
+</tr>
+<tr class="even">
+<td><strong>Sharkkin</strong></td>
+<td>Sharklike fin styling, sharper teeth</td>
+<td>Predator senses, strength</td>
+<td>Detecting movement, physical pursuit, aquatic awareness</td>
+</tr>
+<tr class="odd">
+<td><strong>Reefkin</strong></td>
+<td>Bright scale patterns, ornamental fins</td>
+<td>Camouflage, environmental awareness</td>
+<td>Blending with surroundings, reefs and shoreline navigation</td>
+</tr>
+<tr class="even">
+<td><strong>Raykin</strong></td>
+<td>Broad finlike ear structures, flattened scale patterns</td>
+<td>Fluid movement, defense</td>
+<td>Flowing repositioning, defensive turning</td>
+</tr>
+<tr class="odd">
+<td><strong>Deepkin</strong></td>
+<td>Dark scales, subtle bioluminescent markings</td>
+<td>Low-light vision, pressure tolerance</td>
+<td>Deep-water awareness, darkness adaptation</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Final selection:</strong> Only these <strong>five</strong>
+Tidekin lineages. <strong>Eelkin is removed</strong> from the playable
+roster.</p>
+<p><strong>Design note:</strong> Tidekin traits need useful applications
+during land-based adventures; water should improve their options, not be
+mandatory.</p>
+<div class="pb"></div>
+
+<h2 id="13-skyborn">13. Skyborn</h2>
+<p><strong>Base identity:</strong> Avian humanoids with <strong>full
+bird heads</strong> (beak, avian eyes and a feathered crest, matching
+the approved lineage art), feathered wings behind their shoulders, two
+arms, two legs, and avian feet. Wing-assisted movement does
+<strong>not</strong> mean unrestricted flight.</p>
+<div class="art"><img src="../art/lineages-skyborn.jpg" alt="Skyborn lineage art"><div class="cap">Skyborn lineages — approved reference art (male and female)</div></div>
+
+<table>
+<thead>
+<tr class="header">
+<th>Lineage</th>
+<th>Identity / visual cues</th>
+<th>Core specialty</th>
+<th>Future skill-tree direction</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Hawkin</strong></td>
+<td>Hawk-inspired crest, strong wings, sharp eyes</td>
+<td>Tracking, aerial positioning</td>
+<td>Long sightlines, surveying terrain, positional movement</td>
+</tr>
+<tr class="even">
+<td><strong>Eaglekin</strong></td>
+<td>Broad wings, powerful build, prominent crest</td>
+<td>Strength, distant vision</td>
+<td>Long-range perception, soaring control, powerful positioning</td>
+</tr>
+<tr class="odd">
+<td><strong>Falconkin</strong></td>
+<td>Streamlined wings, lean frame</td>
+<td>Speed, precision</td>
+<td>Rapid descent, accuracy, reactive movement</td>
+</tr>
+<tr class="even">
+<td><strong>Owlkin</strong></td>
+<td>Rounded feather patterns, broad wings, owl features</td>
+<td>Night vision, silent movement</td>
+<td>Low-light detection, quiet gliding, stealth</td>
+</tr>
+<tr class="odd">
+<td><strong>Ravenkin</strong></td>
+<td>Ravenlike plumage and crest, expressive eyes</td>
+<td>Intelligence, memory</td>
+<td>Observation, recall, clever tactics</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Final selection:</strong> Only these <strong>five</strong>
+Skyborn lineages. <strong>Crowkin, Heronkin, Kingfisherkin, Vulturekin,
+and Albatrosskin are excluded</strong> from the current playable
+roster.</p>
+<div class="pb"></div>
+
+<h2 id="14-forgeborn">14. Forgeborn</h2>
+<p><strong>Base identity:</strong> Awakened souls in clearly constructed
+humanoid bodies, with a visible chest core gem and rune seams. Magical
+craftsmanship rather than science-fiction robotics.</p>
+<div class="art"><img src="../art/lineages-forgeborn.jpg" alt="Forgeborn lineage art"><div class="cap">Forgeborn lineages — approved reference art (male and female)</div></div>
+
+<table>
+<thead>
+<tr class="header">
+<th>Lineage</th>
+<th>Identity / visual cues</th>
+<th>Core specialty</th>
+<th>Future skill-tree direction</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Stoneforged</strong></td>
+<td>Carved stone body, heavy joints</td>
+<td>Physical durability</td>
+<td>Fortification, structural stability, damage resilience</td>
+</tr>
+<tr class="even">
+<td><strong>Ironforged</strong></td>
+<td>Forged iron plates, reinforced joints</td>
+<td>Strength, defense</td>
+<td>Heavy exertion, guarding, sturdy stance</td>
+</tr>
+<tr class="odd">
+<td><strong>Bronzeforged</strong></td>
+<td>Bronze plates, intricate crafted details</td>
+<td>Precision, adaptability</td>
+<td>Accurate manipulation, coordination, flexible mechanisms</td>
+</tr>
+<tr class="even">
+<td><strong>Woodforged</strong></td>
+<td>Livingwood or carved timber body</td>
+<td>Regeneration, nature affinity</td>
+<td>Natural renewal, wood-based resilience, repair</td>
+</tr>
+<tr class="odd">
+<td><strong>Crystalforged</strong></td>
+<td>Crystal facets, translucent constructed sections</td>
+<td>Magical energy sensitivity</td>
+<td>Resonance, magical perception, power regulation</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Design note:</strong> All Forgeborn retain constructed
+faces/bodies and visible core gems. Any effects on healing, poison,
+exhaustion, and repair must be explicitly balanced in the rules rather
+than assumed.</p>
+<hr />
+<h2 id="15-implementation-rules-for-the-character-creator">15.
+Implementation rules for the character creator</h2>
+<ol type="1">
+<li><strong>Race first:</strong> Player selects one of 12 base
+races.</li>
+<li><strong>Lineage second:</strong> Player selects one of exactly five
+lineages for that race.</li>
+<li><strong>Appearance:</strong> Player customizes appearance within
+approved race/lineage anatomy (including scale/feather/material colors
+where appropriate).</li>
+<li><strong>Class:</strong> Player selects one of the six official,
+fixed classes: Vanguard, Wildstrider, Shadowblade, Luminary, Arcanist,
+Resonant.</li>
+<li><strong>Class specialization:</strong> Class advancement follows the
+existing class-specialization rules.</li>
+<li><strong>Racial skill tree:</strong> A separate progression tree tied
+to the selected lineage, added in a future design phase.</li>
+<li><strong>No restrictions by lineage:</strong> All 60 lineages can
+play all six classes; no custom classes or lineage-locked classes.</li>
+<li><strong>Cross-table consistency:</strong> The same character lineage
+and physical traits persist across Everbound sessions and online
+character profiles.</li>
+</ol>
+<h2 id="16-racial-skill-tree-development-template">16. Racial-skill-tree
+development template</h2>
+<p>For each lineage, future design should specify:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Core identity</td>
+<td>What makes this lineage visually and thematically distinct</td>
+</tr>
+<tr class="even">
+<td>Innate trait</td>
+<td>One modest, immediately recognizable starting feature</td>
+</tr>
+<tr class="odd">
+<td>Mechanical niche</td>
+<td>Specialty that complements—but does not replace—a class</td>
+</tr>
+<tr class="even">
+<td>Racial skill branches</td>
+<td>Two or three coherent directions based on the lineage's
+ancestry</td>
+</tr>
+<tr class="odd">
+<td>Active skills</td>
+<td>Limited-use actions unlocked through racial progression</td>
+</tr>
+<tr class="even">
+<td>Passive skills</td>
+<td>Modest improvements to natural strengths</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>A high-tier expression of lineage mastery</td>
+</tr>
+<tr class="even">
+<td>Exploration use</td>
+<td>Meaningful benefit outside combat</td>
+</tr>
+<tr class="odd">
+<td>Constraints</td>
+<td>Clear boundaries to prevent overpowered mobility, defenses, or
+utility</td>
+</tr>
+<tr class="even">
+<td>Art direction</td>
+<td>Approved anatomy, silhouette, and appearance variables</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Balance guardrails:</strong> No unrestricted starting flight;
+no automatic elemental powers based solely on color; no lineage should
+require a particular terrain to remain playable; no lineage should
+invalidate another class's central role.</p>
+<hr />
+<h2 id="17-locked-roster-decisions-and-change-log">17. Locked roster
+decisions and change log</h2>
+<p><strong>Approved roster adjustments:</strong></p>
+<ul>
+<li>Beastkin reduced to <strong>Wolfkin, Foxkin, Catkin, Rabbitkin,
+Bearkin</strong>.</li>
+<li>Skyborn reduced to <strong>Hawkin, Eaglekin, Falconkin, Owlkin,
+Ravenkin</strong>.</li>
+<li>Tidekin reduced to <strong>Riverkin, Sharkkin, Reefkin, Raykin,
+Deepkin</strong>; <strong>Eelkin removed</strong>.</li>
+<li>Every other base race retains the five ancestries/heritages
+previously proposed.</li>
+<li>Total roster standardized to <strong>12 × 5 = 60
+lineages</strong>.</li>
+</ul>
+<p><strong>Next step:</strong> Design detailed racial skill trees for
+the 60 lineages, using this roster as the naming and identity
+reference.</p>
+<hr />
+<p><em>EVERBOUND — The Living Adventurers Guild · Racial Lineage
+Compendium v1.0</em></p>
+<hr />
+</body></html>

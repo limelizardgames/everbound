@@ -1,0 +1,551 @@
+<!doctype html><html><head><meta charset='utf-8'><title>EB-11 Platform and GM Handbook</title><style>@page { margin: 16mm 14mm 16mm 14mm; }
+:root { --ink: #231a2b; --muted: #6a6170; --line: #d9d2c7; --plum: #4a1d3f; --gold: #9a7420; }
+* { box-sizing: border-box; }
+body { font-family: "Liberation Serif", "DejaVu Serif", Georgia, serif; color: var(--ink); font-size: 10pt; line-height: 1.42; margin: 0; background: #fff; }
+h1, h2, h3, h4 { font-family: "Liberation Sans", "DejaVu Sans", Arial, sans-serif; color: var(--plum); line-height: 1.2; break-after: avoid; }
+h1 { font-size: 20pt; margin: 18pt 0 8pt; }
+h2 { font-size: 14pt; margin: 18pt 0 6pt; padding-bottom: 3pt; border-bottom: 1px solid var(--line); }
+h3 { font-size: 11.5pt; margin: 12pt 0 4pt; }
+h4 { font-size: 10.5pt; margin: 10pt 0 4pt; }
+p, ul, ol { margin: 4pt 0 6pt; }
+li { margin: 1.5pt 0; }
+a { color: var(--plum); text-decoration: none; }
+code { font-size: 9pt; background: #f4f0ea; padding: 0 2pt; }
+pre { background: #f6f2ec; padding: 6pt 8pt; font-size: 8.5pt; white-space: pre-wrap; border: 1px solid var(--line); break-inside: avoid; }
+blockquote { margin: 6pt 0; padding: 4pt 10pt; border-left: 3px solid var(--gold); background: #fbf8f2; color: #3b3040; }
+table { width: 100%; border-collapse: collapse; margin: 6pt 0 10pt; font-size: 8.6pt; line-height: 1.32; font-family: "Liberation Sans", "DejaVu Sans", Arial, sans-serif; }
+th, td { border: 1px solid var(--line); padding: 3pt 5pt; vertical-align: top; text-align: left; }
+th { background: #efe8df; color: var(--plum); }
+tr { break-inside: avoid; }
+thead { display: table-header-group; }
+hr { border: 0; border-top: 1px solid var(--line); margin: 12pt 0; }
+.badge { display: inline-block; font-family: "Liberation Sans", "DejaVu Sans", Arial, sans-serif; font-size: 7.5pt; font-weight: 700; letter-spacing: .08em; padding: 1.5pt 5pt; border-radius: 3pt; vertical-align: middle; border: 1px solid; }
+.badge.approved { color: #1d6b3a; background: #e3f4e8; border-color: #8cc9a2; }
+.badge.draft { color: #8a5a00; background: #fff3d4; border-color: #e7c46a; }
+h2 .badge, h3 .badge { margin-left: 6pt; }
+.cover { border: 1px solid var(--line); border-radius: 6pt; padding: 18pt 20pt; margin-bottom: 16pt; background: #fbf8f2; break-inside: avoid; }
+.cover .brand { font-family: "Liberation Sans", Arial, sans-serif; font-size: 8pt; letter-spacing: .25em; color: var(--gold); text-transform: uppercase; }
+.cover .docid { font-family: "Liberation Sans", Arial, sans-serif; font-size: 11pt; font-weight: 700; color: var(--muted); margin-top: 10pt; }
+.cover h1.title { font-size: 26pt; margin: 2pt 0 6pt; border: 0; }
+.cover .meta { font-family: "Liberation Sans", Arial, sans-serif; color: var(--muted); font-size: 9.5pt; }
+.cover .purpose { font-size: 11.5pt; margin: 10pt 0; }
+.cover .legend { font-family: "Liberation Sans", Arial, sans-serif; font-size: 8.5pt; color: var(--muted); margin-top: 8pt; }
+.cover .related { margin-top: 10pt; font-family: "Liberation Sans", Arial, sans-serif; font-size: 9pt; }
+.cover .related ul { margin: 3pt 0 0; padding-left: 16pt; columns: 2; }
+.art { margin: 8pt 0 14pt; text-align: center; break-inside: avoid; }
+.art img { max-width: 100%; max-height: 98mm; border: 1px solid var(--line); }
+.art .cap { font-size: 8.5pt; color: var(--muted); margin-top: 3pt; font-style: italic; }
+
+.pb { break-before: page; }
+</style></head><body class='port'><div class="cover">
+<div class="brand">EVERBOUND · The Living Adventurers Guild</div>
+<div class="docid">EB-11</div>
+<h1 class="title">Platform and GM Handbook</h1>
+<div class="meta">Version 1.0 · November 23, 2026 · <span class="badge approved">APPROVED</span></div>
+<p class="purpose">Setting up and running the live website and the Command Center.</p>
+<div class="legend"><span class="badge approved">APPROVED</span> decided by the founders &nbsp; <span class="badge draft">DRAFT</span> proposed, expect changes after playtesting</div>
+<div class="related"><b>Related documents</b><ul><li><b>EB-08</b> Code of Conduct and the Ten Oaths</li><li><b>EB-10</b> Business and Operations Plan</li></ul></div>
+</div>
+
+<p>Everbound is a <strong>static website hosted on GitHub
+Pages</strong>, backed by <strong>Supabase</strong>: the database,
+logins, realtime chat and portrait storage. Every rule (who can claim a
+card, book a seat, approve rewards…) is enforced inside the Supabase
+database, so the website itself is just HTML and JavaScript.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Service</th>
+<th>Why</th>
+<th>Cost for the pilot</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>GitHub Pages</strong>
+(<code>limelizardgames/everbound</code>)</td>
+<td>Hosts the website, rebuilt automatically on every push to
+<code>main</code></td>
+<td>Free for a <strong>public</strong> repo. A private repo needs GitHub
+Pro/Team.</td>
+</tr>
+<tr class="even">
+<td><strong>Supabase</strong></td>
+<td>Database, logins, Tavern chat, portraits</td>
+<td>Free tier</td>
+</tr>
+<tr class="odd">
+<td>Stripe <em>(optional)</em></td>
+<td>Online payment for sessions and store</td>
+<td>2.9% + 30¢ per charge</td>
+</tr>
+<tr class="even">
+<td>Custom domain <em>(optional, recommended before printing
+cards)</em></td>
+<td>QR codes encode the site address</td>
+<td>~$12/yr</td>
+</tr>
+</tbody>
+</table>
+<p>Your site address is <strong><a
+href="https://everbound.limelizardgames.com">https://everbound.limelizardgames.com</a></strong>
+(custom domain, set up in step 6). Without a custom domain it would be
+<a
+href="https://limelizardgames.github.io/everbound/">https://limelizardgames.github.io/everbound/</a>.</p>
+<hr />
+<h2 id="1-supabase-database--login">1. Supabase (database + login)</h2>
+<ol type="1">
+<li>Go to <a href="https://supabase.com">https://supabase.com</a> →
+<strong>New project</strong>. Pick a region near your store.</li>
+<li>Open the setup file on GitHub: <a
+href="https://github.com/limelizardgames/everbound/blob/main/supabase/setup.sql">https://github.com/limelizardgames/everbound/blob/main/supabase/setup.sql</a>.
+Click the <strong>Copy raw file</strong> button (the two-squares icon at
+the top right of the file). Don't select the text by hand.</li>
+<li>In Supabase, open <strong>SQL Editor → New query</strong>. Make sure
+the editor is completely empty, paste, make sure no text is highlighted,
+and click <strong>Run</strong>. You should see <em>Success. No rows
+returned</em>.
+<ul>
+<li>This creates every table, security rule and game function, and seeds
+the starting world: 10 locations, 5 quests, 6 upcoming sessions, the
+Crimson Wyrm raid at 3/5 sigils, the store, and <strong>12 unclaimed
+founding guild cards</strong>.</li>
+<li>The setup runs as one transaction: if it fails, nothing is applied
+and you can simply run it again.</li>
+<li>If you see
+<strong><code>type "user_role" already exists</code></strong> (or any
+"already exists" error), an earlier attempt left pieces behind. Run <a
+href="../supabase/reset.sql"><code>supabase/reset.sql</code></a> the
+same way (Copy raw file → empty query → Run), then run
+<code>setup.sql</code> again. The reset deletes all Everbound data,
+which is fine before launch.</li>
+</ul></li>
+<li><strong>Authentication → URL Configuration</strong>:
+<ul>
+<li><em>Site URL</em>:
+<code>https://everbound.limelizardgames.com</code></li>
+<li><em>Redirect URLs</em>: add
+<code>https://everbound.limelizardgames.com/**</code> (and
+<code>http://localhost:3000/**</code> for local testing)</li>
+</ul></li>
+<li><strong>Authentication → Sign In / Providers → Email</strong>: for
+quick testing, turn <strong>Confirm email</strong> off so testers can
+sign up and play immediately. Turn it back on before a public
+launch.</li>
+<li><strong>Project Settings → API</strong>: copy the <strong>Project
+URL</strong> and the <strong>anon public</strong> key. The anon key is
+designed to be public, so it's safe in a website.</li>
+</ol>
+<blockquote>
+<p>Supabase's built-in email sender is rate-limited to a few emails per
+hour. Before launch, add your own SMTP server (Resend, Postmark…) under
+<strong>Authentication → SMTP Settings</strong>.</p>
+</blockquote>
+<h2 id="2-github-pages-website-hosting">2. GitHub Pages (website
+hosting)</h2>
+<ol type="1">
+<li><p>In the repo: <strong>Settings → Pages → Build and deployment →
+Source: GitHub Actions</strong>. Not <em>Deploy from a branch</em>: that
+mode publishes the raw source code instead of the site.</p></li>
+<li><p><strong>Settings → Secrets and variables → Actions → Variables
+tab → New repository variable</strong>. These must be
+<em>Variables</em>, not <em>Secrets</em>. Add:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>NEXT_PUBLIC_SUPABASE_URL</code></td>
+<td>your Supabase Project URL</td>
+</tr>
+<tr class="even">
+<td><code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code></td>
+<td>your Supabase anon public key</td>
+</tr>
+<tr class="odd">
+<td><code>NEXT_PUBLIC_TIMEZONE</code> <em>(optional)</em></td>
+<td>e.g. <code>America/New_York</code> (the default)</td>
+</tr>
+<tr class="even">
+<td><code>NEXT_PUBLIC_SITE_URL</code> <em>(optional)</em></td>
+<td>only if you use a custom domain, e.g.
+<code>https://everbound.limelizardgames.com</code></td>
+</tr>
+</tbody>
+</table></li>
+<li><p><strong>Actions</strong> tab → <strong>Deploy to GitHub
+Pages</strong> → <strong>Run workflow</strong> (it also runs on every
+push to <code>main</code>). After about 2 minutes the site is live at
+the address shown on the run.</p></li>
+</ol>
+<blockquote>
+<p>Never add the Supabase <strong>service_role</strong> key or any
+Stripe key to GitHub. Anything in the website build is public.</p>
+</blockquote>
+<h2 id="3-make-yourselves-the-guild-masters">3. Make yourselves the
+Guild Masters</h2>
+<p>There is no sign-up page: every account, including yours, is created
+by scanning a guild card.</p>
+<ol type="1">
+<li><p>Sign in to Supabase, open <strong>SQL Editor</strong>, and get
+two card links:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span> card_number, <span class="st">&#39;https://everbound.limelizardgames.com/card/?t=&#39;</span> <span class="op">||</span> token <span class="kw">as</span> <span class="kw">link</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">from</span> <span class="kw">public</span>.guild_cards <span class="kw">where</span> status <span class="op">=</span> <span class="st">&#39;unassigned&#39;</span> <span class="kw">order</span> <span class="kw">by</span> card_number <span class="kw">limit</span> <span class="dv">2</span>;</span></code></pre></div></li>
+<li><p>Each founder opens one link (or scans that printed card) and
+fills in <strong>Create your account</strong>.</p></li>
+<li><p>Back in the SQL Editor, run (with your own emails):</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">update</span> <span class="kw">public</span>.profiles <span class="kw">set</span> <span class="kw">role</span> <span class="op">=</span> <span class="st">&#39;owner&#39;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">where</span> <span class="kw">id</span> <span class="op">=</span> (<span class="kw">select</span> <span class="kw">id</span> <span class="kw">from</span> auth.users <span class="kw">where</span> email <span class="op">=</span> <span class="st">&#39;founder-one@example.com&#39;</span>);</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">update</span> <span class="kw">public</span>.profiles <span class="kw">set</span> <span class="kw">role</span> <span class="op">=</span> <span class="st">&#39;admin&#39;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">where</span> <span class="kw">id</span> <span class="op">=</span> (<span class="kw">select</span> <span class="kw">id</span> <span class="kw">from</span> auth.users <span class="kw">where</span> email <span class="op">=</span> <span class="st">&#39;founder-two@example.com&#39;</span>);</span></code></pre></div></li>
+<li><p>Refresh the site. A <strong>GM Console</strong> button appears.
+Further roles are assigned from <strong>Command Center → Players &amp;
+Moderation</strong>.</p></li>
+</ol>
+<blockquote>
+<p>Need an account without a card (for example a store owner)? Set
+<code>card_required_for_signup</code> to <code>false</code> in
+<code>admin_settings</code>, create the account in <strong>Supabase →
+Authentication → Add user</strong>, then set it back to
+<code>true</code>.</p>
+</blockquote>
+<h2 id="4-print-and-hand-out-guild-cards">4. Print and hand out guild
+cards</h2>
+<ol type="1">
+<li><strong>Command Center → Guild Cards</strong>: forge a batch, or use
+the 12 seeded founding cards.</li>
+<li>Click <strong>Print sheet</strong>. This opens a Letter-size sheet
+of CR80 cards (3.375" × 2.125"). Print at <strong>100% scale</strong>,
+or save as PDF for a card printer.</li>
+<li>A player scans the QR, fills in <strong>Create your account</strong>
+on the card's page, and goes straight to character creation. The card is
+now theirs. The same QR shows their verified public profile from then
+on, and it never logs anyone in.</li>
+<li>If a camera won't scan, the player can type the code printed under
+the QR into <strong>Guild Card</strong> in their portal. Staff can also
+bind a card directly with <strong>Assign or transfer</strong>.</li>
+<li>For a lost card or a rank upgrade, use <strong>Replace</strong>. The
+old card stops working and a new number is issued to the same
+adventurer, with no progress lost.</li>
+</ol>
+<blockquote>
+<p><strong>Decide your permanent address before printing.</strong> QR
+codes encode the site URL. If you'll move to a custom domain later, set
+it up first (step 6) so printed cards never go stale.</p>
+</blockquote>
+<h2 id="5-stripe-optional-online-payments">5. Stripe (optional: online
+payments)</h2>
+<p>The demo works without Stripe: seats are confirmed instantly as
+<strong>Pay at the store</strong>, and GMs tick <strong>Paid in
+store</strong> on the roster. Store orders are reserved and paid at
+pickup.</p>
+<p>Online payments run in two <strong>Supabase Edge Functions</strong>
+(in <code>supabase/functions/</code>), so secret keys never touch the
+website:</p>
+<ol type="1">
+<li><p>Install the Supabase CLI and log in:
+<code>npx supabase login</code></p></li>
+<li><p>Deploy both functions:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> supabase functions deploy create-checkout <span class="at">--project-ref</span> YOUR-PROJECT-REF</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> supabase functions deploy stripe-webhook <span class="at">--no-verify-jwt</span> <span class="at">--project-ref</span> YOUR-PROJECT-REF</span></code></pre></div></li>
+<li><p>In Supabase → <strong>Edge Functions → Secrets</strong>, add:</p>
+<ul>
+<li><code>STRIPE_SECRET_KEY</code>: from Stripe → Developers → API keys.
+Start with the <strong>test</strong> key.</li>
+<li><code>SITE_URL</code>:
+<code>https://everbound.limelizardgames.com</code></li>
+<li><code>STRIPE_WEBHOOK_SECRET</code>: from the next step</li>
+</ul></li>
+<li><p>Stripe → <strong>Developers → Webhooks → Add endpoint</strong>:
+<code>https://YOUR-PROJECT-REF.supabase.co/functions/v1/stripe-webhook</code>,
+with events <code>checkout.session.completed</code> and
+<code>checkout.session.async_payment_succeeded</code>. Copy the signing
+secret into <code>STRIPE_WEBHOOK_SECRET</code>.</p></li>
+<li><p><strong>Command Center → Settings &amp; Orders</strong>: switch
+<em>Session payments</em> and/or <em>Store payments</em> to
+Stripe.</p></li>
+<li><p>Test with card <code>4242 4242 4242 4242</code>, any future date
+and any CVC.</p></li>
+</ol>
+<p>Booking places a 30-minute seat hold. Payment is confirmed
+<strong>only</strong> by the signed webhook.</p>
+<h2 id="6-custom-domain-optional">6. Custom domain (optional)</h2>
+<ol type="1">
+<li>At your domain's DNS provider, add a record: type
+<strong>CNAME</strong>, name <strong>everbound</strong>, value
+<strong>limelizardgames.github.io</strong>. Then in repo
+<strong>Settings → Pages → Custom domain</strong>, enter
+<code>everbound.limelizardgames.com</code> and wait for <em>DNS check
+successful</em>. Tick <strong>Enforce HTTPS</strong> once it's available
+(this can take up to an hour).</li>
+<li>Set the repo variable <code>NEXT_PUBLIC_SITE_URL</code> to
+<code>https://everbound.limelizardgames.com</code> and re-run the
+workflow.</li>
+<li>Update Supabase <strong>Site URL / Redirect URLs</strong> and the
+<code>SITE_URL</code> function secret to match.</li>
+</ol>
+<h2 id="7-local-development">7. Local development</h2>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> .env.example .env.local   <span class="co"># fill in your Supabase URL and anon key</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> run dev                  <span class="co"># http://localhost:3000</span></span></code></pre></div>
+<p>Database tests (needs a local Postgres 15+ and
+<code>psql</code>):</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="va">PGURL</span><span class="op">=</span>postgres://postgres@localhost:5432 <span class="ex">npm</span> run db:test</span></code></pre></div>
+<p>After changing a migration or the seed, regenerate the one-paste file
+with <code>npm run db:bundle</code>.</p>
+<h1 id="operations">Operations</h1>
+<h2 id="running-a-session-game-master">Running a session (Game
+Master)</h2>
+<ol type="1">
+<li><strong>Command Center → Session Manager → Schedule a
+session.</strong> This creates the bookable instance and a private party
+room in the Tavern.</li>
+<li>At the table, open the session on a tablet. The
+<strong>Roster</strong> shows each adventurer's level, rank, seat and
+payment. Update HP and conditions live.</li>
+<li><strong>End session → results &amp; rewards</strong>: tick
+attendance, enter XP, gold and renown, choose loot and achievements, and
+write a spoiler-safe recap. Optionally add world consequences (flag ±
+changes, location status changes, a Chronicle story).</li>
+<li><strong>Submit for approval.</strong> A Senior GM or admin reviews
+and clicks <strong>Approve &amp; publish</strong>. Everything is applied
+in one database transaction: ledgers, inventory, attendance, rank-ups,
+quest completions, world flags, location changes, Chronicle post, and
+raid evaluation.</li>
+</ol>
+<p>Safeguards built into the database:</p>
+<ul>
+<li>No one can approve rewards for their own character. The other
+founder approves.</li>
+<li>Approval runs once. Re-submitting or double-clicking cannot pay out
+twice (idempotency keys).</li>
+<li>If two tables change the same location, the second change is parked
+under <strong>World Editor → Conflicting updates</strong> for an admin
+to decide.</li>
+<li>Rewards outside sane per-session limits are rejected.</li>
+</ul>
+<h2 id="fixing-mistakes">Fixing mistakes</h2>
+<p>Ledgers are append-only. To correct gold, renown or XP, use
+<strong>Players &amp; Moderation → Correct</strong> with a reason. That
+records a new +/− entry, and the audit log records who did it.</p>
+<h2 id="raids">Raids</h2>
+<p>Raids watch a world flag. The seeded <em>Crimson Wyrm</em> unlocks
+automatically when <code>ancient_sigils</code> reaches 5: the Raid
+Center changes, a Chronicle proclamation is published, and every player
+is notified. Then use <strong>Raid Controller</strong> to open
+registration, run the raid and resolve it. <strong>Emergency
+pause</strong> stops automatic transitions, and admins can override the
+state (logged).</p>
+<h2 id="age-policy">Age policy</h2>
+<ul>
+<li><strong>Minimum age</strong> to create an account: Command Center →
+Settings &amp; Orders → <em>Minimum age to join</em> (default
+<strong>13</strong>). Raising it affects new sign-ups only.</li>
+<li><strong>Under 18:</strong> sign-up requires the player to confirm a
+parent or guardian's permission. Only birth month and year are
+stored.</li>
+<li><strong>Age-rated quests:</strong> in the Quest Creator, set <em>Age
+rating</em> (13+ to 18+) on mature quests. Booking is refused for
+younger players, or for anyone who hasn't added their birth month and
+year (they can add it once in Settings; after that only an admin can
+change it).</li>
+<li>Content advisories on each quest tell players and guardians what to
+expect.</li>
+</ul>
+<h2 id="guild-errands--professions">Guild Errands &amp; Professions</h2>
+<p>Players do mini-quests from home: <strong>expeditions</strong> (send
+your adventurer away for a few hours, then collect materials) and
+<strong>riddles</strong> (lore questions answered from the Chronicle,
+quest pages and atlas; checked on the server). Errands pay
+<strong>materials and at most 50 gold, never XP or renown</strong>.</p>
+<p>Materials feed five <strong>professions</strong> (Blacksmithing,
+Alchemy, Leatherworking, Cooking, Artificing). Each adventurer learns up
+to two; crafting raises that profession's skill (1–10), separate from
+character level. Recipes 3+ levels below your skill give almost no
+skill, so players move on to harder recipes.</p>
+<ul>
+<li><strong>Post errands / recipes:</strong> Command Center →
+<em>Errands &amp; Crafting</em> (Senior GM). Hide or publish any errand
+or recipe there.</li>
+<li><strong>At the table:</strong> in Session Manager, each adventurer
+on the roster has a <em>Pack</em>. Click <em>Use</em> on a potion or
+ration to spend it; this is logged in their inventory.</li>
+<li><strong>Settings</strong> (<code>admin_settings</code>):
+<code>expedition_slots</code> (2), <code>errand_daily_cap</code> (8
+rewards per 24h), <code>riddle_attempts_per_day</code> (5),
+<code>profession_slots</code> (2).</li>
+<li><strong>New items</strong> for recipes: add a row in Supabase →
+Table Editor → <code>items</code>, then it appears in the recipe
+form.</li>
+<li>Item descriptions starting "Table effect:" are suggestions for the
+GM; the rules engine does not enforce them.</li>
+</ul>
+<h2 id="the-auction-hall">The Auction Hall</h2>
+<p>Players at Rank E and above can auction tradeable items to each other
+for gold. Items go into escrow when listed; a bid's gold is held and
+returned automatically when outbid. Finished auctions settle the next
+time anyone opens the Auction Hall.</p>
+<ul>
+<li><strong>Remove a listing:</strong> any Game Master sees a <em>GM:
+remove listing</em> button on each auction. The bid is refunded, the
+item returns to the seller, and it is written to the audit log.</li>
+<li><strong>Settings</strong> (Supabase → Table Editor →
+<code>admin_settings</code>): <code>auction_min_rank</code> (default
+<code>"E"</code>), <code>auction_listing_fee</code> (2 gold),
+<code>auction_fee_percent</code> (5), <code>auction_max_price</code>
+(5000).</li>
+<li><strong>Bound items:</strong> story artifacts, keys and trophies
+cannot be sold. To change one item, set <code>is_tradeable</code> (and
+optionally <code>max_auction_price</code>) on its row in
+<code>items</code>.</li>
+</ul>
+<h2 id="allegiances--party-vs-party-pvp">Allegiances &amp;
+party-vs-party (PvP)</h2>
+<p>Every adventurer starts in <strong>The Adventurers Guild</strong>.
+From guild rank <code>allegiance_min_rank</code> (default
+<strong>D</strong>) they can pledge to another allegiance on
+<strong>Portal → Allegiance</strong>: <strong>The Ashen
+Covenant</strong> (defends in two-sided raids) or <strong>The Free
+Companies</strong> (choose a side at raid sign-up). Changing again is
+blocked for <code>allegiance_cooldown_days</code> (default
+<strong>90</strong>), and nobody can switch sides while signed up for a
+raid or a PvP quest. Both settings are in <strong>Settings &amp;
+Orders</strong>.</p>
+<ul>
+<li><strong>PvP is opt-in</strong> per adventurer (Portal → Allegiance).
+It can be turned off at any time unless they are signed up for a PvP
+quest or two-sided raid.</li>
+<li><strong>PvP quests:</strong> in the Quest Creator set <em>Party vs
+party</em> to <strong>Skirmish</strong> (rival parties clash) or
+<strong>Contested</strong> (rival parties race for an objective). Only
+opted-in adventurers can book them, and the Quest Board shows a ⚔ PvP
+tag. Split the table by allegiance at session zero.</li>
+<li><strong>Two-sided raids:</strong> in the Raid Controller tick
+<em>Two-sided raid</em>. Registration then requires PvP, records each
+adventurer's side (Covenant → defenders, Guild → raiders, Free Companies
+choose), and the Raid Center shows the count per side. The seeded
+Crimson Wyrm is two-sided.</li>
+<li><strong>Corrections:</strong> administrators can set any
+adventurer's allegiance from <strong>Players &amp; Moderation</strong>
+(reason required, ignores rank and cooldown, written to the Audit
+Log).</li>
+<li><strong>Rename allegiances</strong> (name, motto, description,
+colour) in <strong>Command Center → Names &amp; Lore</strong>
+(administrators). Members stay in place. To add a new faction, insert a
+row in the <code>factions</code> table with a <code>slug</code> and
+<code>raid_side</code>.</li>
+<li>Faction names are working names: check them in the trademark review
+along with "Everbound".</li>
+</ul>
+<h2 id="names--lore">Names &amp; Lore</h2>
+<p><strong>Command Center → Names &amp; Lore</strong> (administrators)
+edits the allegiance names and the wording of <strong>The Ten
+Oaths</strong> (each oath and its plain-language meaning). Both show on
+the site immediately. <em>Restore original wording</em> puts the oaths
+back. The saved oaths live in
+<code>admin_settings.guild_oaths</code>.</p>
+<h2 id="moderation">Moderation</h2>
+<p><strong>Who can do what</strong> (Command Center → Players &amp;
+Moderation):</p>
+<table>
+<thead>
+<tr class="header">
+<th>Action</th>
+<th>Who</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Remove chat messages, resolve reports, mute (1 hour – 1 week)</td>
+<td>Game Master and up</td>
+</tr>
+<tr class="even">
+<td>Suspend (lifts automatically)</td>
+<td>Administrators, any length. Game Masters up to
+<code>gm_max_suspension_days</code> (default <strong>0</strong> = not
+yet; raise it in Settings &amp; Orders when GMs are ready)</td>
+</tr>
+<tr class="odd">
+<td>Ban (permanent), optionally retiring the guild card</td>
+<td>Administrators</td>
+</tr>
+<tr class="even">
+<td>Restrict an administrator</td>
+<td>Owner only</td>
+</tr>
+<tr class="odd">
+<td>Lift a restriction early</td>
+<td>Any administrator, or whoever issued it</td>
+</tr>
+</tbody>
+</table>
+<p>Every suspension and ban needs a reason, which the player sees in
+their portal and in a notification. Nobody can restrict themselves, and
+everything is written to the Audit Log.</p>
+<p><strong>Bookings during a suspension:</strong> sessions that start
+<em>after</em> the suspension ends are kept. Sessions <em>during</em> it
+are flagged, and the player must reschedule (to a later session of the
+same or lower price) or cancel within
+<code>suspension_response_hours</code> (default 72) or before the
+session starts, whichever is sooner. Untouched bookings are canceled as
+<strong>forfeited</strong> (no refund). For bans, bookings can only be
+canceled. The roster shows a warning on flagged bookings.</p>
+<p><strong>Appeals:</strong> a restricted player can send one appeal per
+restriction from their portal. Administrators see it under <em>Open
+appeals</em>. The person who issued the restriction cannot decide its
+appeal (except the owner). Granting the appeal lifts the restriction;
+either way the player sees your response.</p>
+<p><strong>Suggested ladder</strong> (publish it as your code of
+conduct): warning → chat mute → suspension (1–4 weeks) → ban. Skip
+straight to suspension or ban for harassment, threats or anything
+affecting a minor's safety; for players aged 13–17, contact a parent or
+guardian at the suspension stage. Agree bans between both founders.</p>
+<p>Tavern messages are filtered for email addresses and phone numbers
+and rate-limited. Private messaging is intentionally not built.</p>
+<h2 id="scheduled-maintenance-supabase--database--cron">Scheduled
+maintenance (Supabase → Database → Cron)</h2>
+<p>Enable the <code>pg_cron</code> extension, then:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Purge Tavern messages older than the retention setting (default 180 days), nightly at 4am UTC.</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span> cron.schedule(<span class="st">&#39;purge-tavern&#39;</span>, <span class="st">&#39;0 4 * * *&#39;</span>, $$select <span class="kw">public</span>.purge_old_messages()$$);</span></code></pre></div>
+<h2 id="backups-and-restore">Backups and restore</h2>
+<ul>
+<li><p><strong>Automatic</strong>: Supabase Pro ($25/mo) keeps daily
+backups for 7 days, and Point-in-Time Recovery is an add-on. The free
+tier has <strong>no automatic backups</strong>, so upgrade before real
+players' progress matters.</p></li>
+<li><p><strong>Manual</strong>: run this weekly and keep the file
+somewhere safe.</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pg_dump</span> <span class="st">&quot;postgresql://postgres:PASSWORD@db.YOUR-PROJECT.supabase.co:5432/postgres&quot;</span> <span class="dt">\</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--schema</span><span class="op">=</span>public <span class="at">--schema</span><span class="op">=</span>auth <span class="at">--no-owner</span> <span class="at">-Fc</span> <span class="at">-f</span> everbound-<span class="va">$(</span><span class="fu">date</span> +%F<span class="va">)</span>.dump</span></code></pre></div></li>
+<li><p><strong>Restore test</strong> (do this once before launch):
+create a scratch Supabase project, then</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pg_restore</span> <span class="at">--no-owner</span> <span class="at">--clean</span> <span class="at">-d</span> <span class="st">&quot;postgresql://postgres:PASSWORD@db.SCRATCH.supabase.co:5432/postgres&quot;</span> everbound-YYYY-MM-DD.dump</span></code></pre></div>
+<p>Sign in on a local build (<code>npm run dev</code>) pointed at the
+scratch project and confirm characters, ledgers and cards look
+right.</p></li>
+</ul>
+<h2 id="investigating-problems">Investigating problems</h2>
+<ul>
+<li><strong>Audit Log</strong> (admins): every reward approval, card
+change, role change, raid override and correction.</li>
+<li><strong>World Editor → World history</strong>: every world-state
+change, with source session and GM.</li>
+<li>Supabase → <strong>Logs</strong> for API and auth errors. GitHub →
+<strong>Actions</strong> for failed deploys. Consider adding browser
+error monitoring (e.g. Sentry) before public launch.</li>
+</ul>
+</body></html>

@@ -1,0 +1,1931 @@
+<!doctype html><html><head><meta charset='utf-8'><title>EB-02 Classes and Specializations</title><style>@page { margin: 16mm 14mm 16mm 14mm; }
+:root { --ink: #231a2b; --muted: #6a6170; --line: #d9d2c7; --plum: #4a1d3f; --gold: #9a7420; }
+* { box-sizing: border-box; }
+body { font-family: "Liberation Serif", "DejaVu Serif", Georgia, serif; color: var(--ink); font-size: 10pt; line-height: 1.42; margin: 0; background: #fff; }
+h1, h2, h3, h4 { font-family: "Liberation Sans", "DejaVu Sans", Arial, sans-serif; color: var(--plum); line-height: 1.2; break-after: avoid; }
+h1 { font-size: 20pt; margin: 18pt 0 8pt; }
+h2 { font-size: 14pt; margin: 18pt 0 6pt; padding-bottom: 3pt; border-bottom: 1px solid var(--line); }
+h3 { font-size: 11.5pt; margin: 12pt 0 4pt; }
+h4 { font-size: 10.5pt; margin: 10pt 0 4pt; }
+p, ul, ol { margin: 4pt 0 6pt; }
+li { margin: 1.5pt 0; }
+a { color: var(--plum); text-decoration: none; }
+code { font-size: 9pt; background: #f4f0ea; padding: 0 2pt; }
+pre { background: #f6f2ec; padding: 6pt 8pt; font-size: 8.5pt; white-space: pre-wrap; border: 1px solid var(--line); break-inside: avoid; }
+blockquote { margin: 6pt 0; padding: 4pt 10pt; border-left: 3px solid var(--gold); background: #fbf8f2; color: #3b3040; }
+table { width: 100%; border-collapse: collapse; margin: 6pt 0 10pt; font-size: 8.6pt; line-height: 1.32; font-family: "Liberation Sans", "DejaVu Sans", Arial, sans-serif; }
+th, td { border: 1px solid var(--line); padding: 3pt 5pt; vertical-align: top; text-align: left; }
+th { background: #efe8df; color: var(--plum); }
+tr { break-inside: avoid; }
+thead { display: table-header-group; }
+hr { border: 0; border-top: 1px solid var(--line); margin: 12pt 0; }
+.badge { display: inline-block; font-family: "Liberation Sans", "DejaVu Sans", Arial, sans-serif; font-size: 7.5pt; font-weight: 700; letter-spacing: .08em; padding: 1.5pt 5pt; border-radius: 3pt; vertical-align: middle; border: 1px solid; }
+.badge.approved { color: #1d6b3a; background: #e3f4e8; border-color: #8cc9a2; }
+.badge.draft { color: #8a5a00; background: #fff3d4; border-color: #e7c46a; }
+h2 .badge, h3 .badge { margin-left: 6pt; }
+.cover { border: 1px solid var(--line); border-radius: 6pt; padding: 18pt 20pt; margin-bottom: 16pt; background: #fbf8f2; break-inside: avoid; }
+.cover .brand { font-family: "Liberation Sans", Arial, sans-serif; font-size: 8pt; letter-spacing: .25em; color: var(--gold); text-transform: uppercase; }
+.cover .docid { font-family: "Liberation Sans", Arial, sans-serif; font-size: 11pt; font-weight: 700; color: var(--muted); margin-top: 10pt; }
+.cover h1.title { font-size: 26pt; margin: 2pt 0 6pt; border: 0; }
+.cover .meta { font-family: "Liberation Sans", Arial, sans-serif; color: var(--muted); font-size: 9.5pt; }
+.cover .purpose { font-size: 11.5pt; margin: 10pt 0; }
+.cover .legend { font-family: "Liberation Sans", Arial, sans-serif; font-size: 8.5pt; color: var(--muted); margin-top: 8pt; }
+.cover .related { margin-top: 10pt; font-family: "Liberation Sans", Arial, sans-serif; font-size: 9pt; }
+.cover .related ul { margin: 3pt 0 0; padding-left: 16pt; columns: 2; }
+.art { margin: 8pt 0 14pt; text-align: center; break-inside: avoid; }
+.art img { max-width: 100%; max-height: 98mm; border: 1px solid var(--line); }
+.art .cap { font-size: 8.5pt; color: var(--muted); margin-top: 3pt; font-style: italic; }
+
+.pb { break-before: page; }
+</style></head><body class='port'><div class="cover">
+<div class="brand">EVERBOUND · The Living Adventurers Guild</div>
+<div class="docid">EB-02</div>
+<h1 class="title">Classes and Specializations</h1>
+<div class="meta">Version 1.1 · November 23, 2026 · <span class="badge approved">APPROVED</span> <span class="badge draft">DRAFT</span></div>
+<p class="purpose">The six classes, their starting abilities, class trees and 18 specializations.</p>
+<div class="legend"><span class="badge approved">APPROVED</span> decided by the founders &nbsp; <span class="badge draft">DRAFT</span> proposed, expect changes after playtesting</div>
+<div class="related"><b>Related documents</b><ul><li><b>EB-01</b> Core Rules</li><li><b>EB-05</b> Lineage × Specialization Synergies</li><li><b>EB-06</b> Guild Trials</li></ul></div>
+</div>
+
+<p><strong>Version:</strong> 1.1 (Lineage affinity expansion; base
+mechanics unchanged)<br />
+<strong>Updated:</strong> November 23, 2026<br />
+<strong>Status:</strong> <strong>Approved:</strong> class names, the
+fixed six-class roster and the 18 specialization names.
+<strong>Draft:</strong> everything else, as marked per section. Official
+class names and fixed starting-class roster; ability effects,
+progression thresholds, and balance numbers are proposed pending
+playtesting.</p>
+<blockquote>
+<p><strong>Purpose:</strong> Single reference for the six official
+Everbound starting classes, their beginner abilities, 72 generic
+skill-tree skills, 18 advanced specializations, 18 discipline traits,
+and 72 specialization skills. Racial skills and numerical combat
+mechanics are not yet finalized.</p>
+</blockquote>
+<h2 id="contents">Contents</h2>
+<ol type="1">
+<li><a href="#1-world-and-system-intent">World and system
+intent</a></li>
+<li><a href="#2-official-class-roster">Official class roster</a></li>
+<li><a href="#3-starting-class-abilities">Starting class
+abilities</a></li>
+<li><a href="#4-generic-skill-tree-rules">Generic skill-tree
+rules</a></li>
+<li><a href="#5-generic-skill-trees--all-classes">Generic skill trees —
+all classes</a></li>
+<li><a href="#6-advanced-specialization-system">Advanced specialization
+system</a></li>
+<li><a href="#7-specialization-trees--all-18">Specialization trees — all
+18</a></li>
+<li><a href="#8-rules-party-balance-and-gm-consistency">Rules, party
+balance, and GM consistency</a></li>
+<li><a href="#9-persistent-character-records-and-examples">Persistent
+character records and examples</a></li>
+<li><a href="#10-future-racial-skills-and-open-decisions">Future racial
+skills and open decisions</a></li>
+<li><a href="#12-content-inventory">Content inventory</a><br />
+<em>The lineage × class themes moved to EB-05.</em></li>
+</ol>
+<hr />
+<h2 id="1-world-and-system-intent-approved">1. World and system intent
+<span class="badge approved">APPROVED</span></h2>
+<p>Everbound is an original high-fantasy, isekai/JRPG-inspired
+Adventurers Guild world with a shared persistent world state. Players
+may join different sessions, collaborate with different adventurers and
+GMs, and preserve the effects of their actions between adventures. Guild
+rank runs <strong>F through SS</strong>, but rank expresses reputation
+and accomplishments rather than automatically determining character
+level or class power.</p>
+<p>Six <strong>fixed starting classes</strong> are available at
+registration. Players <strong>cannot invent or select a custom
+class</strong>. Classes should be equally valuable across combat,
+exploration, investigation, social scenes, and travel. Character
+differentiation comes from generic skills, advanced specialization
+skills, eventual racial traits, and in-world choices.</p>
+<p><strong>Important distinction:</strong> The class <strong>names and
+six-class roster are official</strong>. Skill descriptions and structure
+below form the working <strong>v1.0 design draft</strong>. Dice systems,
+exact numbers, resource economies, skills' action types, and some
+advanced restrictions remain subject to testing.</p>
+<h2 id="2-official-class-roster-approved">2. Official class roster
+<span class="badge approved">APPROVED</span></h2>
+<table>
+<thead>
+<tr class="header">
+<th>Original term</th>
+<th>Official Everbound class</th>
+<th>Epithet</th>
+<th>Core role</th>
+<th>Defining strengths</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Warrior</td>
+<td><strong>Vanguard</strong></td>
+<td>The Unyielding Front</td>
+<td>Defender / frontline / battlefield control</td>
+<td>Defense, melee interception, enemy positioning</td>
+</tr>
+<tr class="even">
+<td>Ranger</td>
+<td><strong>Wildstrider</strong></td>
+<td>The Path Unseen</td>
+<td>Skirmisher / tracker / explorer</td>
+<td>Ranged combat, mobility, tracking, terrain</td>
+</tr>
+<tr class="odd">
+<td>Rogue</td>
+<td><strong>Shadowblade</strong></td>
+<td>The Silent Edge</td>
+<td>Precision damage / infiltration / disruption</td>
+<td>Stealth, tactical positioning, traps, weaknesses</td>
+</tr>
+<tr class="even">
+<td>Cleric</td>
+<td><strong>Luminary</strong></td>
+<td>The Light That Endures</td>
+<td>Healer / protector / purifier</td>
+<td>Healing, barriers, cleansing, spiritual investigations</td>
+</tr>
+<tr class="odd">
+<td>Mage</td>
+<td><strong>Arcanist</strong></td>
+<td>The Weaver of the Arcane</td>
+<td>Magical damage / area control / utility</td>
+<td>Elemental magic, arcane study, runes</td>
+</tr>
+<tr class="even">
+<td>Bard</td>
+<td><strong>Resonant</strong></td>
+<td>The Voice That Moves Worlds</td>
+<td>Empowerment / disruption / social influence</td>
+<td>Morale, resonance, communication, support</td>
+</tr>
+</tbody>
+</table>
+<h3 id="class-identities">Class identities</h3>
+<ul>
+<li><strong>Vanguard:</strong> Holds ground, breaks enemy formations,
+and shields companions through discipline and resilience.</li>
+<li><strong>Wildstrider:</strong> Uses distance, movement, terrain
+knowledge, and perception to discover routes and exploit environmental
+advantages. Works in cities, ruins, or wilds.</li>
+<li><strong>Shadowblade:</strong> Uses timing, stealth, misdirection,
+and precision to expose weaknesses and create openings; not defined by a
+criminal background.</li>
+<li><strong>Luminary:</strong> Channels restorative light and protective
+energy. Practice need not be bound to any one deity or religious
+order.</li>
+<li><strong>Arcanist:</strong> Manipulates magical forces to reshape
+battlefields and investigate mysterious artifacts and mechanisms.</li>
+<li><strong>Resonant:</strong> Channels vibration, rhythm, sound, and
+emotional connection; instruments are optional, not mandatory.</li>
+</ul>
+<h3 id="indicative-role-strengths-qualitative-not-numerical">Indicative
+role strengths (qualitative, not numerical)</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Class</th>
+<th>Damage</th>
+<th>Defense</th>
+<th>Support</th>
+<th>Exploration</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Vanguard</td>
+<td>High</td>
+<td>Excellent</td>
+<td>Moderate</td>
+<td>Moderate</td>
+</tr>
+<tr class="even">
+<td>Wildstrider</td>
+<td>High</td>
+<td>Moderate</td>
+<td>Moderate</td>
+<td>Excellent</td>
+</tr>
+<tr class="odd">
+<td>Shadowblade</td>
+<td>Excellent (conditional)</td>
+<td>Low</td>
+<td>Moderate</td>
+<td>High</td>
+</tr>
+<tr class="even">
+<td>Luminary</td>
+<td>Moderate</td>
+<td>Moderate</td>
+<td>Excellent</td>
+<td>High</td>
+</tr>
+<tr class="odd">
+<td>Arcanist</td>
+<td>Excellent</td>
+<td>Low</td>
+<td>Moderate</td>
+<td>High</td>
+</tr>
+<tr class="even">
+<td>Resonant</td>
+<td>Moderate</td>
+<td>Low</td>
+<td>Excellent</td>
+<td>High</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Party design principle:</strong> Do not require a fixed
+tank/healer/damage composition. A party of multiple adventurers with the
+same class should remain viable, with different advantages and
+drawbacks.</p>
+<h2 id="3-starting-class-abilities-draft">3. Starting class abilities
+<span class="badge draft">DRAFT</span></h2>
+<p>Each starting class automatically receives <strong>four foundation
+abilities</strong>:</p>
+<ul>
+<li><strong>Passive:</strong> A consistently available class trait.</li>
+<li><strong>Core Technique:</strong> A repeatable encounter
+technique.</li>
+<li><strong>Signature Ability:</strong> A stronger move, provisionally
+limited to <strong>once per encounter</strong>.</li>
+<li><strong>Field Skill:</strong> A valuable exploration, investigation,
+travel, or social application.</li>
+</ul>
+<p>The following are the previously established starter abilities,
+preserved here as drafted:</p>
+<h3 id="31-vanguard--the-unyielding-front">3.1 Vanguard — The Unyielding
+Front</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Ability</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Passive</td>
+<td><strong>Iron Resolve</strong></td>
+<td>Increased resistance to being pushed, knocked down, or forcibly
+displaced.</td>
+</tr>
+<tr class="even">
+<td>Core Technique</td>
+<td><strong>Shieldbreak</strong></td>
+<td>Strike an opponent and either push them back or force them to focus
+on you.</td>
+</tr>
+<tr class="odd">
+<td>Signature Ability</td>
+<td><strong>Stand Before Me</strong></td>
+<td>Intercept an attack against a nearby ally and reduce its
+damage.</td>
+</tr>
+<tr class="even">
+<td>Field Skill</td>
+<td><strong>Siegeborn</strong></td>
+<td>Recognize structural weaknesses, defensible positions, and effective
+ways to breach obstacles.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Experience:</strong> Leads charges, stands against dangerous
+opponents, and makes heroic defensive decisions.</p>
+<h3 id="32-wildstrider--the-path-unseen">3.2 Wildstrider — The Path
+Unseen</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Ability</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Passive</td>
+<td><strong>Keen Instinct</strong></td>
+<td>Increased awareness of tracks, ambushes, and environmental
+hazards.</td>
+</tr>
+<tr class="even">
+<td>Core Technique</td>
+<td><strong>Skirmisher's Strike</strong></td>
+<td>Attack with a ranged or agile weapon and reposition a short
+distance.</td>
+</tr>
+<tr class="odd">
+<td>Signature Ability</td>
+<td><strong>Predator's Snare</strong></td>
+<td>Pin an enemy or restrict their movement, giving allies an
+opening.</td>
+</tr>
+<tr class="even">
+<td>Field Skill</td>
+<td><strong>Pathfinder</strong></td>
+<td>Discover hidden trails, estimate travel dangers, and locate safer
+routes.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Experience:</strong> Mobile scouting, traps, and adaptation
+to varied environments.</p>
+<h3 id="33-shadowblade--the-silent-edge">3.3 Shadowblade — The Silent
+Edge</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Ability</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Passive</td>
+<td><strong>Exploit Weakness</strong></td>
+<td>Gain a precision advantage against distracted, exposed, or unaware
+opponents.</td>
+</tr>
+<tr class="even">
+<td>Core Technique</td>
+<td><strong>Feint &amp; Slip</strong></td>
+<td>Execute a quick strike, then reposition to cover or a more
+advantageous location.</td>
+</tr>
+<tr class="odd">
+<td>Signature Ability</td>
+<td><strong>Veilstep</strong></td>
+<td>Break an enemy's line of sight and reposition without triggering a
+normal retaliation.</td>
+</tr>
+<tr class="even">
+<td>Field Skill</td>
+<td><strong>Underhand</strong></td>
+<td>Examine and manipulate locks, traps, concealed compartments, and
+security mechanisms.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Experience:</strong> Positioning, infiltration, and cunning
+problem-solving instead of brute force.</p>
+<h3 id="34-luminary--the-light-that-endures">3.4 Luminary — The Light
+That Endures</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Ability</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Passive</td>
+<td><strong>Guiding Flame</strong></td>
+<td>Sense nearby spiritual disturbances and recognize serious injuries
+through examination.</td>
+</tr>
+<tr class="even">
+<td>Core Technique</td>
+<td><strong>Radiant Hand</strong></td>
+<td>Create a brief protective ward around an ally or strike an enemy
+with light.</td>
+</tr>
+<tr class="odd">
+<td>Signature Ability</td>
+<td><strong>Wellspring</strong></td>
+<td>Restore health to a wounded ally or cleanse one minor harmful
+condition.</td>
+</tr>
+<tr class="even">
+<td>Field Skill</td>
+<td><strong>Rite of Clarity</strong></td>
+<td>Purify small tainted objects, provide basic medical stabilization,
+and examine magical corruption.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Experience:</strong> Helps allies survive, maintains
+defenses, and investigates supernatural problems.</p>
+<h3 id="35-arcanist--the-weaver-of-the-arcane">3.5 Arcanist — The Weaver
+of the Arcane</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Ability</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Passive</td>
+<td><strong>Arcane Sense</strong></td>
+<td>Detect nearby active magical effects and unusual energy
+fluctuations.</td>
+</tr>
+<tr class="even">
+<td>Core Technique</td>
+<td><strong>Weavebolt</strong></td>
+<td>Launch a controlled magical projectile, selecting an elemental or
+force-based effect.</td>
+</tr>
+<tr class="odd">
+<td>Signature Ability</td>
+<td><strong>Sigilburst</strong></td>
+<td>Release stored arcane energy across a small area, damaging or
+disrupting multiple enemies.</td>
+</tr>
+<tr class="even">
+<td>Field Skill</td>
+<td><strong>Runic Insight</strong></td>
+<td>Interpret arcane symbols and investigate the function of magical
+devices.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Experience:</strong> Magic experiments, discovery, and
+manipulating enemy formations.</p>
+<h3 id="36-resonant--the-voice-that-moves-worlds">3.6 Resonant — The
+Voice That Moves Worlds</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Ability</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Passive</td>
+<td><strong>Attunement</strong></td>
+<td>Recognize supernatural sound patterns, unusual vibrations, and
+shifts in group morale.</td>
+</tr>
+<tr class="even">
+<td>Core Technique</td>
+<td><strong>Harmonic Cue</strong></td>
+<td>Enhance an ally's next action or unleash a focused disruptive sound
+attack.</td>
+</tr>
+<tr class="odd">
+<td>Signature Ability</td>
+<td><strong>Grand Refrain</strong></td>
+<td>Allow an ally to retry a failed action through a surge of resonant
+energy.</td>
+</tr>
+<tr class="even">
+<td>Field Skill</td>
+<td><strong>Echo of Words</strong></td>
+<td>Use magical resonance to strengthen performances, aid communication,
+and recover faint sounds or echoes.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Experience:</strong> Cooperative tactics, social
+problem-solving, and unconventional solutions.</p>
+<hr />
+<h2 id="4-generic-skill-tree-rules-draft">4. Generic skill-tree rules
+<span class="badge draft">DRAFT</span></h2>
+<p>Every class has <strong>three universal development paths</strong>,
+each with <strong>four progressive skills</strong> (<strong>12 trainable
+skills per class</strong>, <strong>72 in total</strong>). A player can
+invest in any combination of their class's three paths. These paths are
+<strong>not</strong> specializations.</p>
+<p><strong>Proposed cost and progression:</strong></p>
+<ul>
+<li>Gain <strong>Skill Points (SP)</strong> through character
+progression; earning rate is <strong>not finalized</strong>.</li>
+<li>Each generic skill costs <strong>1 SP</strong> to learn.</li>
+<li>Unlocks run <strong>Tier I → Tier II → Tier III → Tier IV</strong>
+within each path.</li>
+<li>Unlock the directly preceding skill in that path before purchasing a
+higher tier.</li>
+<li>Meet the cumulative <strong>class-tree SP investment</strong> for
+the tier:</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>Generic tier</th>
+<th style="text-align: right;">Class-tree SP already spent</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>I — Foundation</td>
+<td style="text-align: right;">0</td>
+<td>Establish playstyle</td>
+</tr>
+<tr class="even">
+<td>II — Development</td>
+<td style="text-align: right;">2</td>
+<td>Strengthen abilities</td>
+</tr>
+<tr class="odd">
+<td>III — Expertise</td>
+<td style="text-align: right;">5</td>
+<td>Develop advanced tactics</td>
+</tr>
+<tr class="even">
+<td>IV — Mastery</td>
+<td style="text-align: right;">8</td>
+<td>Powerful universal techniques</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Interpretation:</strong> The SP thresholds are points already
+invested <em>in the character's generic class tree</em>, not necessarily
+total career SP. Actual character-level thresholds and reward cadence
+remain open. Generic skill trees are available to <strong>every
+race</strong> that can choose the corresponding class.</p>
+<hr />
+<h2 id="5-generic-skill-trees--all-classes-draft">5. Generic skill trees
+— all classes <span class="badge draft">DRAFT</span></h2>
+<h3 id="51-vanguard">5.1 Vanguard</h3>
+<p><strong>Paths:</strong> Bulwark (defense), Breaker (enemy
+disruption), Command (leadership).</p>
+<table>
+<thead>
+<tr class="header">
+<th>Tier</th>
+<th><strong>Bulwark</strong></th>
+<th><strong>Breaker</strong></th>
+<th><strong>Command</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>I</td>
+<td><strong>Brace</strong> — Reduce incoming damage when holding
+position.</td>
+<td><strong>Driving Blow</strong> — Push an enemy a short distance after
+a successful melee hit.</td>
+<td><strong>Mark the Threat</strong> — Identify an enemy, giving an ally
+an advantage on their next attack against it.</td>
+</tr>
+<tr class="even">
+<td>II</td>
+<td><strong>Holdfast</strong> — Improve resistance to forced movement
+while protecting an ally.</td>
+<td><strong>Staggering Strike</strong> — Temporarily prevent a struck
+enemy from retaliating.</td>
+<td><strong>Steady the Line</strong> — Help an ally resist fear,
+stagger, or interruption.</td>
+</tr>
+<tr class="odd">
+<td>III</td>
+<td><strong>Extended Guard</strong> — Increase the effective protective
+reach of Stand Before Me.</td>
+<td><strong>Pursuing Step</strong> — Advance after an enemy you have
+pushed without exposing yourself to immediate retaliation.</td>
+<td><strong>Tactical Exchange</strong> — Safely switch positions with a
+willing nearby ally.</td>
+</tr>
+<tr class="even">
+<td>IV</td>
+<td><strong>Unbroken Front</strong> — Briefly defend multiple nearby
+allies against incoming attacks.</td>
+<td><strong>Break Formation</strong> — Disrupt a group of enemies and
+create openings for your allies.</td>
+<td><strong>Rallying Stand</strong> — Grant nearby allies temporary
+defensive benefits during a dangerous encounter.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example differentiation:</strong> A Bulwark-heavy Vanguard is
+a dedicated protector; a Breaker/Command Vanguard is an aggressive
+tactical leader.</p>
+<h3 id="52-wildstrider">5.2 Wildstrider</h3>
+<p><strong>Paths:</strong> Sharpshot (accuracy), Wayfinding (movement
+and navigation), Fieldcraft (environment).</p>
+<table>
+<thead>
+<tr class="header">
+<th>Tier</th>
+<th><strong>Sharpshot</strong></th>
+<th><strong>Wayfinding</strong></th>
+<th><strong>Fieldcraft</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>I</td>
+<td><strong>Steady Aim</strong> — Improve accuracy when attacking from a
+prepared position.</td>
+<td><strong>Trailstep</strong> — Move through minor difficult terrain
+without normal movement penalties.</td>
+<td><strong>Spot the Snare</strong> — Gain improved awareness of traps
+and environmental hazards.</td>
+</tr>
+<tr class="even">
+<td>II</td>
+<td><strong>Angle Shot</strong> — Reduce the defensive advantage an
+enemy receives from partial cover.</td>
+<td><strong>Signs in Silence</strong> — Reconstruct a recent travel
+route from faint environmental clues.</td>
+<td><strong>Snarecraft</strong> — Construct a simple trap using
+available supplies and terrain.</td>
+</tr>
+<tr class="odd">
+<td>III</td>
+<td><strong>Quarry Mark</strong> — Mark an enemy to improve your ability
+to track and target it during an encounter.</td>
+<td><strong>Evasive Route</strong> — Quickly reposition to reduce the
+effects of an incoming environmental hazard.</td>
+<td><strong>Shape the Ground</strong> — Create minor cover, an obstacle,
+or a temporary chokepoint using local materials.</td>
+</tr>
+<tr class="even">
+<td>IV</td>
+<td><strong>Piercing Trajectory</strong> — Execute a powerful ranged
+attack capable of threatening aligned targets.</td>
+<td><strong>Guide of the Lost</strong> — Improve the whole party's
+chances of safely navigating dangerous environments.</td>
+<td><strong>Claimed Terrain</strong> — Establish a surveyed area in
+which allies gain tactical advantages.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Equipment flexibility:</strong> Wildstriders are not
+restricted to bows; appropriate ranged or agile weapons may qualify.</p>
+<h3 id="53-shadowblade">5.3 Shadowblade</h3>
+<p><strong>Paths:</strong> Precision (timing), Veil (concealment), Guile
+(infiltration and deception).</p>
+<table>
+<thead>
+<tr class="header">
+<th>Tier</th>
+<th><strong>Precision</strong></th>
+<th><strong>Veil</strong></th>
+<th><strong>Guile</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>I</td>
+<td><strong>Opening Cut</strong> — Deal additional damage against an
+enemy whose defenses are exposed.</td>
+<td><strong>Quiet Steps</strong> — Improve stealth while moving
+cautiously through a concealed area.</td>
+<td><strong>Quick Hands</strong> — Perform subtle tool manipulation and
+object handling more effectively.</td>
+</tr>
+<tr class="even">
+<td>II</td>
+<td><strong>Disarming Flick</strong> — Use a precise strike to interfere
+with an enemy's grip or held equipment.</td>
+<td><strong>Blend with the Scene</strong> — Conceal yourself more
+effectively in crowds or suitable surroundings.</td>
+<td><strong>Read the Mark</strong> — Identify behavioral patterns,
+routines, and likely vulnerabilities in a target.</td>
+</tr>
+<tr class="odd">
+<td>III</td>
+<td><strong>Follow Through</strong> — Reposition after a successful
+precision strike without a normal movement penalty.</td>
+<td><strong>Slip the Gaze</strong> — Escape an enemy's immediate
+attention when cover or a distraction is available.</td>
+<td><strong>False Trail</strong> — Create a convincing decoy or
+misleading evidence to divert pursuers.</td>
+</tr>
+<tr class="even">
+<td>IV</td>
+<td><strong>Perfect Window</strong> — Deliver an especially powerful
+precision strike against an enemy you have successfully set up.</td>
+<td><strong>Ghost Passage</strong> — Bypass a guarded area using
+concealment, timing, and misdirection.</td>
+<td><strong>Master of Access</strong> — Gain major proficiency in
+bypassing complex locks, traps, and physical security systems.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Constraint:</strong> Stealth needs suitable conditions. It
+does not automatically create invisibility or guarantee success.</p>
+<h3 id="54-luminary">5.4 Luminary</h3>
+<p><strong>Paths:</strong> Renewal (healing), Aegis (protection),
+Revelation (supernatural understanding).</p>
+<table>
+<thead>
+<tr class="header">
+<th>Tier</th>
+<th><strong>Renewal</strong></th>
+<th><strong>Aegis</strong></th>
+<th><strong>Revelation</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>I</td>
+<td><strong>Gentle Mend</strong> — Restore a small amount of health
+using a limited healing ability.</td>
+<td><strong>Flicker Ward</strong> — Briefly reduce the damage an ally
+receives.</td>
+<td><strong>Residual Light</strong> — Identify traces of magical
+corruption and their approximate origin.</td>
+</tr>
+<tr class="even">
+<td>II</td>
+<td><strong>Respite</strong> — Improve recovery when treating injured
+allies between encounters.</td>
+<td><strong>Bound Ward</strong> — Extend the protection of a defensive
+ward until the next qualifying hit.</td>
+<td><strong>Truthglimmer</strong> — Reveal minor magical concealments or
+hidden inscriptions.</td>
+</tr>
+<tr class="odd">
+<td>III</td>
+<td><strong>Purging Touch</strong> — Attempt to alleviate a minor
+harmful condition such as poison, magical fear, or weakness.</td>
+<td><strong>Hallowed Circle</strong> — Establish a small area offering
+protective benefits to allies.</td>
+<td><strong>Purity Seal</strong> — Temporarily stabilize a contaminated
+or magically corrupted object.</td>
+</tr>
+<tr class="even">
+<td>IV</td>
+<td><strong>Shared Renewal</strong> — Distribute a limited amount of
+healing among several nearby allies.</td>
+<td><strong>Sanctuary Burst</strong> — Protect multiple companions
+against a dangerous incoming area attack.</td>
+<td><strong>Beacon of Clarity</strong> — Expose hidden supernatural
+threats and weaken minor illusions in an area.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Constraint:</strong> Luminaries are valuable but not
+essential to party viability; their magic is not restricted to one
+religion.</p>
+<h3 id="55-arcanist">5.5 Arcanist</h3>
+<p><strong>Paths:</strong> Weaving (spellcasting), Shaping
+(manipulation), Runecraft (inscriptions and devices).</p>
+<table>
+<thead>
+<tr class="header">
+<th>Tier</th>
+<th><strong>Weaving</strong></th>
+<th><strong>Shaping</strong></th>
+<th><strong>Runecraft</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>I</td>
+<td><strong>Steady Weave</strong> — Improve your ability to maintain
+spellcasting when under pressure.</td>
+<td><strong>Elemental Guard</strong> — Gain brief protection against a
+minor elemental threat.</td>
+<td><strong>Script Sense</strong> — Interpret common arcane symbols and
+magical inscriptions.</td>
+</tr>
+<tr class="even">
+<td>II</td>
+<td><strong>Arcane Frugality</strong> — Occasionally reduce the resource
+cost of a minor spell.</td>
+<td><strong>Arc Bend</strong> — Curve a spell's trajectory to partially
+bypass an obstacle or cover.</td>
+<td><strong>Glyphmaker</strong> — Create simple temporary magical
+signals or detection marks.</td>
+</tr>
+<tr class="odd">
+<td>III</td>
+<td><strong>Spellthread</strong> — Add a small secondary utility effect
+to an existing spell.</td>
+<td><strong>Safe Burst</strong> — Exclude one chosen nearby ally from
+the harmful effects of your Sigilburst.</td>
+<td><strong>Counterglyph</strong> — Attempt to weaken an incoming spell
+by disrupting its magical structure.</td>
+</tr>
+<tr class="even">
+<td>IV</td>
+<td><strong>Perfect Channel</strong> — Briefly amplify the accuracy or
+strength of a spell.</td>
+<td><strong>Cascade Sigil</strong> — Combine two modest magical effects
+in a single controlled area.</td>
+<td><strong>Runic Network</strong> — Link nearby magical inscriptions to
+transmit a signal or minor magical effect.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Constraint:</strong> Universal Arcanist skills do not lock in
+elemental schools; that differentiation comes from specializations.</p>
+<h3 id="56-resonant">5.6 Resonant</h3>
+<p><strong>Paths:</strong> Harmony (allied buffs), Dissonance (enemy
+disruption), Echo (perception and communication).</p>
+<table>
+<thead>
+<tr class="header">
+<th>Tier</th>
+<th><strong>Harmony</strong></th>
+<th><strong>Dissonance</strong></th>
+<th><strong>Echo</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>I</td>
+<td><strong>Stable Tempo</strong> — Maintain a beneficial resonance
+through minor disruptions.</td>
+<td><strong>Needle Note</strong> — Distract an enemy and weaken the
+effectiveness of its next action.</td>
+<td><strong>Empathic Ear</strong> — Recognize emotional shifts in a
+conversation or gathering.</td>
+</tr>
+<tr class="even">
+<td>II</td>
+<td><strong>Tandem Beat</strong> — Help two allies coordinate a short
+repositioning maneuver.</td>
+<td><strong>Broken Measure</strong> — Attempt to interrupt an enemy
+preparing an action.</td>
+<td><strong>Carrying Voice</strong> — Project speech or music clearly
+through noise or across a limited distance.</td>
+</tr>
+<tr class="odd">
+<td>III</td>
+<td><strong>Rising Chorus</strong> — Extend a small benefit from one
+empowered ally to another nearby ally.</td>
+<td><strong>Feedback Loop</strong> — Create a brief disruptive response
+when an enemy interferes with an ally.</td>
+<td><strong>Echo Trace</strong> — Recover faint fragments of recent
+sound from a suitable environment.</td>
+</tr>
+<tr class="even">
+<td>IV</td>
+<td><strong>Anthem of Unity</strong> — Empower several nearby allies for
+their next coordinated actions.</td>
+<td><strong>Dissonant Wave</strong> — Briefly disrupt the coordination
+of several nearby enemies.</td>
+<td><strong>Captivating Presence</strong> — Hold a group's attention,
+reduce panic, or enhance an important social performance.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Constraint:</strong> Resonance can come through song, speech,
+movement, or other creative expression; an instrument is not
+required.</p>
+<hr />
+<h2 id="6-advanced-specialization-system-approved-names-draft-rules">6.
+Advanced specialization system <span class="badge approved">APPROVED
+NAMES</span> <span class="badge draft">DRAFT RULES</span></h2>
+<p>A specialization is an advanced discipline of an existing class; it
+is <strong>not</strong> a new starting class. Everbound has
+<strong>three specializations per class</strong>, each with:</p>
+<ol type="1">
+<li><strong>One automatic Discipline Trait</strong> (free upon unlocking
+that specialization).</li>
+<li><strong>Four trainable specialization skills</strong>, Tiers I–IV,
+unlocked sequentially for <strong>1 SP each</strong>.</li>
+</ol>
+<p>That is <strong>18 specializations</strong>, <strong>18 Discipline
+Traits</strong>, and <strong>72 trainable advanced skills</strong>.</p>
+<h3 id="proposed-unlock-and-training-flow">Proposed unlock and training
+flow</h3>
+<ol type="1">
+<li>Register as one of the six official starting classes.</li>
+<li>Invest <strong>at least 5 SP in the generic class
+tree</strong>.</li>
+<li>Complete a suitable <strong>Guild specialization trial</strong>,
+mentor training, or quest achievement.</li>
+<li>Select <strong>one primary active specialization</strong> and
+receive its Discipline Trait.</li>
+<li>Spend SP to learn that specialization's Tier I, then II, III, and IV
+skills in order.</li>
+<li>Continue acquiring generic class skills independently.</li>
+</ol>
+<p><strong>Playtest restriction:</strong> One <strong>active
+specialization</strong> at a time. Retraining/switching occurs
+<strong>between adventures</strong> through a Guild trainer, not in the
+middle of an encounter or quest. The precise cost and handling of
+previously learned inactive-specialization skills are not yet finalized.
+Cross-specialization training may be an advanced future option.</p>
+<p><strong>Tier IV abilities:</strong> Usually useable <strong>once per
+encounter</strong> or under a similarly restrictive resource cost; exact
+action/resource types will be assigned after the core mechanics are
+finalized.</p>
+<h3 id="specialization-overview">Specialization overview</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Class</th>
+<th>Specialization A</th>
+<th>Specialization B</th>
+<th>Specialization C</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Vanguard</td>
+<td><strong>Guardian</strong> — The Last Wall</td>
+<td><strong>Berserker</strong> — The Untamed Fury</td>
+<td><strong>Warlord</strong> — The Battlefield Commander</td>
+</tr>
+<tr class="even">
+<td>Wildstrider</td>
+<td><strong>Beastwarden</strong> — The Bonded Fang</td>
+<td><strong>Deadeye</strong> — The Perfect Shot</td>
+<td><strong>Trailblazer</strong> — The Roadmaker</td>
+</tr>
+<tr class="odd">
+<td>Shadowblade</td>
+<td><strong>Assassin</strong> — The Final Whisper</td>
+<td><strong>Trickster</strong> — The False Promise</td>
+<td><strong>Phantom</strong> — The Unseen Presence</td>
+</tr>
+<tr class="even">
+<td>Luminary</td>
+<td><strong>Dawnbringer</strong> — The First Light</td>
+<td><strong>Sanctifier</strong> — The Pure Flame</td>
+<td><strong>Spiritkeeper</strong> — The Veil's Guardian</td>
+</tr>
+<tr class="odd">
+<td>Arcanist</td>
+<td><strong>Elementalist</strong> — The Primal Weaver</td>
+<td><strong>Runecaster</strong> — The Architect of Sigils</td>
+<td><strong>Spellbinder</strong> — The Arcane Sovereign</td>
+</tr>
+<tr class="even">
+<td>Resonant</td>
+<td><strong>Warcaller</strong> — The Voice of Victory</td>
+<td><strong>Echo Sage</strong> — The Keeper of Reverberations</td>
+<td><strong>Harmonist</strong> — The Heart of the Company</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="7-specialization-trees--all-18-draft">7. Specialization trees —
+all 18 <span class="badge draft">DRAFT</span></h2>
+<h3 id="71-vanguard-specializations">7.1 Vanguard specializations</h3>
+<p><strong>Guardian — The Last Wall:</strong> A defensive protector who
+gives up mobility and offensive opportunities to prevent allies from
+falling. Built around interception and sacrifice.</p>
+<p><strong>Berserker — The Untamed Fury:</strong> An aggressive melee
+fighter who turns pain and fury into momentum, deliberately risking
+personal safety for overwhelming pressure.</p>
+<p><strong>Warlord — The Battlefield Commander:</strong> A nonmagical
+tactical leader who coordinates willing allies, maneuvers, and timing
+without controlling other players' decisions.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Level</th>
+<th><strong>Guardian</strong></th>
+<th><strong>Berserker</strong></th>
+<th><strong>Warlord</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Trait</strong></td>
+<td><strong>Protector's Oath</strong> — Gain a small defensive advantage
+while deliberately guarding a nearby ally.</td>
+<td><strong>Fierce Resolve</strong> — Resist fear and hesitation more
+effectively while wounded.</td>
+<td><strong>Battle Reader</strong> — Identify enemy formations and their
+most obvious tactical weaknesses.</td>
+</tr>
+<tr class="even">
+<td><strong>Tier I</strong></td>
+<td><strong>Covering Presence</strong> — Offer partial protection
+against ranged attacks to an adjacent ally while holding position.</td>
+<td><strong>Reckless Surge</strong> — Empower a melee strike, but leave
+your defenses temporarily exposed.</td>
+<td><strong>Order to Advance</strong> — Allow a willing ally to
+reposition a short distance when you successfully engage an enemy.</td>
+</tr>
+<tr class="odd">
+<td><strong>Tier II</strong></td>
+<td><strong>Bastion Step</strong> — When using Stand Before Me, guide
+the protected ally out of immediate danger.</td>
+<td><strong>Bloodied Drive</strong> — Gain a burst of movement toward a
+threat when badly injured.</td>
+<td><strong>Focused Assault</strong> — Improve a nearby ally's attack
+against an enemy you have marked.</td>
+</tr>
+<tr class="even">
+<td><strong>Tier III</strong></td>
+<td><strong>Last Wall</strong> — Once per encounter, intercept a
+potentially incapacitating attack against an ally, absorbing its danger
+at personal cost.</td>
+<td><strong>Crushing Momentum</strong> — Follow a successful heavy
+strike with a limited additional blow against a staggered enemy.</td>
+<td><strong>Pincer Call</strong> — Coordinate two willing allies to
+pressure an enemy from different positions.</td>
+</tr>
+<tr class="odd">
+<td><strong>Tier IV</strong></td>
+<td><strong>Citadel's Stand</strong> — Establish a brief protective
+perimeter, greatly strengthening your defense of allies inside it while
+restricting your movement.</td>
+<td><strong>Redline</strong> — Unleash a sequence of devastating
+attacks, leaving yourself especially vulnerable afterward.</td>
+<td><strong>Turn the Tide</strong> — Rally nearby companions, allowing a
+coordinated repositioning and helping them overcome fear or
+disruption.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Design boundaries:</strong> Guardian prioritizes damage
+interception; Berserker has genuine vulnerability costs; Warlord grants
+opportunities to <em>willing</em> allies and should not create free,
+unlimited full actions.</p>
+<h3 id="72-wildstrider-specializations">7.2 Wildstrider
+specializations</h3>
+<p><strong>Beastwarden — The Bonded Fang:</strong> A Wildstrider with a
+persistent animal companion, using cooperative scouting, coordinated
+strikes, and mutual protection.</p>
+<p><strong>Deadeye — The Perfect Shot:</strong> A patient ranged
+specialist who studies weaknesses and lands high-impact attacks rather
+than relying on attack volume.</p>
+<p><strong>Trailblazer — The Roadmaker:</strong> A survival and mobility
+expert who identifies safe routes, improvises solutions, and leads
+parties through dangerous environments.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Level</th>
+<th><strong>Beastwarden</strong></th>
+<th><strong>Deadeye</strong></th>
+<th><strong>Trailblazer</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Trait</strong></td>
+<td><strong>Bonded Companion</strong> — Gain one trained animal
+companion that can assist with limited scouting and coordinated
+actions.</td>
+<td><strong>Measured Breath</strong> — Gain improved control over ranged
+attacks made from a stable position.</td>
+<td><strong>Route Memory</strong> — Remember traveled routes and
+recognize familiar terrain features more accurately.</td>
+</tr>
+<tr class="even">
+<td><strong>Tier I</strong></td>
+<td><strong>Coordinated Pounce</strong> — Direct your companion to
+distract an enemy as you strike, creating an opening for an ally.</td>
+<td><strong>Patient Shot</strong> — Spend extra time aiming to
+strengthen your next ranged attack.</td>
+<td><strong>Rolling Route</strong> — Guide allies through difficult
+terrain you have just traversed.</td>
+</tr>
+<tr class="odd">
+<td><strong>Tier II</strong></td>
+<td><strong>Scent Memory</strong> — Train your companion to recognize a
+unique scent or trace and pursue it later.</td>
+<td><strong>Pinpoint Break</strong> — Target an enemy's held equipment
+or exposed mechanism to interfere with its use.</td>
+<td><strong>Trail Cache</strong> — Identify useful nearby materials or
+establish a hidden supply point using carried resources.</td>
+</tr>
+<tr class="even">
+<td><strong>Tier III</strong></td>
+<td><strong>Protective Recall</strong> — Command your companion to
+divert a threat from a nearby ally, forcing the companion to retreat
+until recovered.</td>
+<td><strong>Weakpoint Study</strong> — After observing a target,
+identify a vulnerable point that increases the effectiveness of a
+subsequent precision attack.</td>
+<td><strong>Hazard Runner</strong> — Lead allies through a dangerous
+area while reducing the impact of one identified hazard.</td>
+</tr>
+<tr class="odd">
+<td><strong>Tier IV</strong></td>
+<td><strong>Pack Instinct</strong> — Execute a powerful coordinated
+maneuver with your companion, creating an attack opening and
+repositioning an ally.</td>
+<td><strong>Heartbeat Shot</strong> — Deliver a devastating
+single-target attack against a studied enemy, reducing its benefit from
+ordinary defensive cover.</td>
+<td><strong>Safe Passage</strong> — Establish a temporary escape or
+traversal corridor that improves the party's ability to withdraw or
+cross hostile ground.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Special Beastwarden rule:</strong> The companion is a
+persistent character asset recorded in the player's profile. It does
+<strong>not</strong> gain an unrestricted independent combat turn.
+Significant companion abilities consume the Beastwarden's actions or
+another defined resource. Companion species, appearance, and behavior
+may vary while core mechanical benefits remain standardized. A routine
+combat defeat should incapacitate/withdraw the companion pending
+recovery, not permanently remove it.</p>
+<h3 id="73-shadowblade-specializations">7.3 Shadowblade
+specializations</h3>
+<p><strong>Assassin — The Final Whisper:</strong> An expert at
+preparing, studying, and isolating priority targets before dealing
+exceptional precision damage.</p>
+<p><strong>Trickster — The False Promise:</strong> A master of decoys,
+distractions, manipulation, and tactical misdirection.</p>
+<p><strong>Phantom — The Unseen Presence:</strong> A supernatural shadow
+specialist who improves concealment, evasive movement, and
+repositioning.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Level</th>
+<th><strong>Assassin</strong></th>
+<th><strong>Trickster</strong></th>
+<th><strong>Phantom</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Trait</strong></td>
+<td><strong>Target Study</strong> — Gain an advantage identifying the
+habits and vulnerabilities of a target you have observed.</td>
+<td><strong>Misdirection</strong> — Become more effective at creating
+convincing nonmagical distractions.</td>
+<td><strong>Shadow Affinity</strong> — Improve concealment and awareness
+while occupying darkness or deep shadow.</td>
+</tr>
+<tr class="even">
+<td><strong>Tier I</strong></td>
+<td><strong>Silent Mark</strong> — Prepare an attack against an unaware
+or distracted target, improving the precision of your opening
+strike.</td>
+<td><strong>Baited Step</strong> — Create a false opening that
+encourages an enemy to move or attack an unfavorable position.</td>
+<td><strong>Smokeslip</strong> — Move between nearby areas of cover with
+reduced risk of detection.</td>
+</tr>
+<tr class="odd">
+<td><strong>Tier II</strong></td>
+<td><strong>Vital Angle</strong> — Strike a vulnerable location to
+temporarily impair an enemy's mobility or accuracy.</td>
+<td><strong>Hidden Hand</strong> — Manipulate a small item or piece of
+scenery while diverting nearby attention.</td>
+<td><strong>Shade Double</strong> — Generate a brief shadowy silhouette
+that confuses an enemy about your precise position.</td>
+</tr>
+<tr class="even">
+<td><strong>Tier III</strong></td>
+<td><strong>Execution Window</strong> — Exploit a target recently
+exposed by an ally, delivering additional precision damage.</td>
+<td><strong>False Opening</strong> — When an enemy misses an attack
+against you, create an immediate tactical opening for an ally.</td>
+<td><strong>Shadow Passage</strong> — Traverse a short gap between
+connected areas of substantial shadow, provided the route is
+unobstructed.</td>
+</tr>
+<tr class="odd">
+<td><strong>Tier IV</strong></td>
+<td><strong>Final Whisper</strong> — Deliver an exceptionally powerful
+strike against a studied and exposed target.</td>
+<td><strong>Grand Deception</strong> — Create a coordinated series of
+decoys and distractions that disrupts multiple enemies' positioning and
+target selection.</td>
+<td><strong>Hollow Presence</strong> — Become temporarily extremely
+difficult to perceive while moving through shadow, enabling an
+exceptional escape or repositioning.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Design boundaries:</strong> Assassin techniques are enhanced
+damage, <strong>not automatic instant kills</strong>. Phantom techniques
+are <strong>not unrestricted teleportation or invisibility</strong>;
+cover, connected shadow, range, and magical interference remain
+relevant.</p>
+<h3 id="74-luminary-specializations">7.4 Luminary specializations</h3>
+<p><strong>Dawnbringer — The First Light:</strong> A more offensive
+Luminary, combining radiant attacks with light-based protection and
+inspiration.</p>
+<p><strong>Sanctifier — The Pure Flame:</strong> A specialist in
+purifying curses, limiting magical contamination, and containing
+supernatural threats.</p>
+<p><strong>Spiritkeeper — The Veil's Guardian:</strong> A guardian of
+spiritual boundaries who communicates with echoes, protects souls, and
+investigates hauntings.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Level</th>
+<th><strong>Dawnbringer</strong></th>
+<th><strong>Sanctifier</strong></th>
+<th><strong>Spiritkeeper</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Trait</strong></td>
+<td><strong>Radiant Conviction</strong> — Improve resistance against
+supernatural fear when acting to protect another creature.</td>
+<td><strong>Purity Sense</strong> — More accurately identify the nature
+of curses, magical contamination, and harmful enchantments.</td>
+<td><strong>Veil Listener</strong> — Sense the nearby presence of
+lingering spiritual energy.</td>
+</tr>
+<tr class="even">
+<td><strong>Tier I</strong></td>
+<td><strong>Dawnbrand</strong> — Strike an enemy with radiant energy,
+briefly illuminating it and making magical concealment harder.</td>
+<td><strong>Cleansing Rite</strong> — Attempt to remove a minor magical
+affliction from a creature or object through a short ritual.</td>
+<td><strong>Whisper Beyond</strong> — Perceive limited impressions from
+a nearby willing or lingering spirit.</td>
+</tr>
+<tr class="odd">
+<td><strong>Tier II</strong></td>
+<td><strong>Morning Ward</strong> — Transform part of a protective
+ward's remaining energy into a retaliatory flash of light.</td>
+<td><strong>Warding Script</strong> — Inscribe a temporary seal that
+reduces the likelihood of a minor curse spreading.</td>
+<td><strong>Passage Ward</strong> — Protect an ally against spiritual
+fear, haunting, or supernatural intrusion.</td>
+</tr>
+<tr class="even">
+<td><strong>Tier III</strong></td>
+<td><strong>Sunflare</strong> — Release a burst of light that disrupts
+creatures relying on darkness or visual concealment.</td>
+<td><strong>Containment Circle</strong> — Temporarily contain a harmful
+magical effect within a defined area.</td>
+<td><strong>Soul Anchor</strong> — Stabilize an incapacitated ally or a
+distressed spirit, preventing further deterioration for a brief
+period.</td>
+</tr>
+<tr class="odd">
+<td><strong>Tier IV</strong></td>
+<td><strong>First Light</strong> — Unleash a powerful radiant attack
+against multiple enemies while granting nearby allies brief
+protection.</td>
+<td><strong>Great Purification</strong> — Attempt to suppress a powerful
+curse or corrupted magical source long enough for the party to resolve
+it.</td>
+<td><strong>Concordance</strong> — Call upon willing nearby spirits to
+provide limited guidance, protection, or assistance during an important
+encounter.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>World rules:</strong> Luminary magic is not necessarily
+religious. Spirit communication can reveal clues but spirits may be
+unwilling, unable to remember, or limited in what they know. Major
+curses and world events should require quests rather than being
+trivialized by one purification skill.</p>
+<h3 id="75-arcanist-specializations">7.5 Arcanist specializations</h3>
+<p><strong>Elementalist — The Primal Weaver:</strong> A master of
+flexible elemental magic and the interactions between elements and
+surroundings.</p>
+<p><strong>Runecaster — The Architect of Sigils:</strong> A magical
+engineer who prepares, links, and triggers inscriptions to protect areas
+or set traps.</p>
+<p><strong>Spellbinder — The Arcane Sovereign:</strong> A counter-mage
+who reads magical structures and weakens or modifies enemy spells.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Level</th>
+<th><strong>Elementalist</strong></th>
+<th><strong>Runecaster</strong></th>
+<th><strong>Spellbinder</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Trait</strong></td>
+<td><strong>Elemental Attunement</strong> — Select a preferred element
+during preparation, gaining enhanced understanding and minor utility
+involving that element.</td>
+<td><strong>Runic Kit</strong> — Prepare and carry a limited supply of
+magical inscription materials for specialized rune abilities.</td>
+<td><strong>Pattern Reader</strong> — Improve your ability to recognize
+the structure and likely purpose of spells you witness.</td>
+</tr>
+<tr class="even">
+<td><strong>Tier I</strong></td>
+<td><strong>Elemental Infusion</strong> — Add a minor fire, frost,
+lightning, or wind effect to a qualifying magical attack.</td>
+<td><strong>Warding Sigil</strong> — Prepare a small protective
+inscription that activates when a defined condition occurs.</td>
+<td><strong>Threadsnare</strong> — Attempt to interfere with the
+delivery of a spell, weakening its immediate effectiveness.</td>
+</tr>
+<tr class="odd">
+<td><strong>Tier II</strong></td>
+<td><strong>Adaptive Ward</strong> — Gain temporary resistance against
+an elemental effect you have identified.</td>
+<td><strong>Trigger Rune</strong> — Place a temporary rune that releases
+a disruptive magical effect when triggered.</td>
+<td><strong>Seal of Stillness</strong> — Temporarily weaken a magical
+creature's active enhancement or a maintained spell effect.</td>
+</tr>
+<tr class="even">
+<td><strong>Tier III</strong></td>
+<td><strong>Chain Reaction</strong> — Use environmental materials to
+extend an elemental effect, such as spreading heat through flammable
+objects or lightning through conductive surfaces.</td>
+<td><strong>Paired Script</strong> — Link two compatible inscriptions to
+relay a warning or activate a connected effect.</td>
+<td><strong>Borrowed Shape</strong> — Briefly reproduce a minor magical
+effect you have directly observed, subject to normal casting
+limits.</td>
+</tr>
+<tr class="odd">
+<td><strong>Tier IV</strong></td>
+<td><strong>Elemental Convergence</strong> — Combine two elemental
+effects into a powerful, controlled magical event.</td>
+<td><strong>Master Matrix</strong> — Establish an interconnected group
+of runes that controls and protects a limited battlefield area.</td>
+<td><strong>Arcane Dominion</strong> — Briefly impose a localized
+magical restriction that weakens enemy spellcasting within its
+area.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Elementalist's flexible affinities:</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th>Element</th>
+<th>Possible tactical identity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Fire</td>
+<td>Burning, ignition</td>
+</tr>
+<tr class="even">
+<td>Frost</td>
+<td>Slowing, freezing</td>
+</tr>
+<tr class="odd">
+<td>Lightning</td>
+<td>Shocks, disruption</td>
+</tr>
+<tr class="even">
+<td>Wind</td>
+<td>Movement, pushing</td>
+</tr>
+</tbody>
+</table>
+<p>Instead of creating four separate elemental trees immediately,
+Elementalists use skills that vary according to element. More advanced
+elemental mastery can be added later. <strong>Runecasters</strong>
+require preparation and should have a limited number of active runes.
+<strong>Spellbinders</strong> must not automatically negate every spell
+or boss ability.</p>
+<h3 id="76-resonant-specializations">7.6 Resonant specializations</h3>
+<p><strong>Warcaller — The Voice of Victory:</strong> A combat
+coordinator whose signals, rhythms, and commands improve group
+maneuvering.</p>
+<p><strong>Echo Sage — The Keeper of Reverberations:</strong> A sound
+investigator and illusionist who can interpret echoes and misdirect
+through resonance.</p>
+<p><strong>Harmonist — The Heart of the Company:</strong> A cooperative
+support specialist who creates lasting magical links between allies and
+reinforces resilience.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Level</th>
+<th><strong>Warcaller</strong></th>
+<th><strong>Echo Sage</strong></th>
+<th><strong>Harmonist</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Trait</strong></td>
+<td><strong>Commanding Cadence</strong> — Allies find your clear
+tactical signals easier to follow amid battle noise and confusion.</td>
+<td><strong>Acoustic Awareness</strong> — Identify unusual
+reverberations, sound distortions, and concealed spaces more
+effectively.</td>
+<td><strong>Matching Pulse</strong> — Establish a gentle magical
+connection that improves coordination with one willing ally.</td>
+</tr>
+<tr class="even">
+<td><strong>Tier I</strong></td>
+<td><strong>Opening Cadence</strong> — Grant a nearby ally a short burst
+of repositioning when combat begins.</td>
+<td><strong>Resonant Listening</strong> — Isolate a meaningful sound
+from a noisy environment or identify its approximate direction.</td>
+<td><strong>Paired Pulse</strong> — Give two willing allies a modest
+defensive or concentration benefit through synchronized resonance.</td>
+</tr>
+<tr class="odd">
+<td><strong>Tier II</strong></td>
+<td><strong>Call and Response</strong> — Coordinate an ally's action
+with your own, granting a limited timing or positioning benefit.</td>
+<td><strong>Echo Decoy</strong> — Create a temporary false sound source
+that distracts an opponent or redirects its attention.</td>
+<td><strong>Gentle Refrain</strong> — Reduce an ally's fear, distress,
+or minor concentration disruption.</td>
+</tr>
+<tr class="even">
+<td><strong>Tier III</strong></td>
+<td><strong>Rallying Verse</strong> — Help multiple companions overcome
+fear and regain composure after a setback.</td>
+<td><strong>Memory Chamber</strong> — Preserve a short, authentic sound
+sequence within a magical resonance for later playback.</td>
+<td><strong>Shared Motif</strong> — When you empower an ally, allow
+another nearby ally to receive a smaller complementary benefit.</td>
+</tr>
+<tr class="odd">
+<td><strong>Tier IV</strong></td>
+<td><strong>Battle Hymn</strong> — Lead a powerful coordinated maneuver
+that allows nearby allies to reposition and improve their next offensive
+actions.</td>
+<td><strong>Chorus of Yesterday</strong> — Reconstruct a limited
+impression of sounds lingering within a location or reveal nearby hidden
+creatures through reverberation.</td>
+<td><strong>Heartbeat Chorus</strong> — Connect several willing allies
+in a temporary harmonic field that strengthens their resilience and
+coordination.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>World rules:</strong> Resonants can channel power via voice,
+movement, instruments, or other expressive forms. Echo Sage sound
+remnants are <strong>imperfect clues</strong>, not guaranteed complete
+recordings. A Resonant's buffs should improve allied choices without
+overriding player agency.</p>
+<hr />
+<h2 id="8-rules-party-balance-and-gm-consistency-draft">8. Rules, party
+balance, and GM consistency <span class="badge draft">DRAFT</span></h2>
+<p>The game is intended to operate with multiple GMs across a shared
+persistent world. Ability terminology and encounter limits need
+standardized definitions.</p>
+<h3 id="81-proposed-rules-for-first-playtests">8.1 Proposed rules for
+first playtests</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Mechanic</th>
+<th>Working rule</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Starting class</td>
+<td>Select <strong>exactly one</strong> of six official classes; no
+player-created classes.</td>
+</tr>
+<tr class="even">
+<td>Class foundation</td>
+<td>Receive the class's <strong>four</strong> starter abilities
+automatically.</td>
+</tr>
+<tr class="odd">
+<td>Universal skill price</td>
+<td><strong>1 SP</strong> per generic skill.</td>
+</tr>
+<tr class="even">
+<td>Generic paths</td>
+<td>All three generic paths are available to every character of that
+class.</td>
+</tr>
+<tr class="odd">
+<td>Generic prerequisites</td>
+<td>Previous tier in the same path and cumulative generic class SP
+threshold.</td>
+</tr>
+<tr class="even">
+<td>Specialization entry</td>
+<td><strong>5 generic class-tree SP</strong>, plus Guild specialization
+trial or equivalent training.</td>
+</tr>
+<tr class="odd">
+<td>Primary specialization</td>
+<td>One active specialization during the first playtest.</td>
+</tr>
+<tr class="even">
+<td>Specialization trait</td>
+<td>Automatically acquired on activating/unlocking the
+specialization.</td>
+</tr>
+<tr class="odd">
+<td>Specialization skill price</td>
+<td><strong>1 SP</strong> per tier, purchased in order I → IV.</td>
+</tr>
+<tr class="even">
+<td>Tier IV / mastery</td>
+<td>Usually once per encounter, pending final resource mechanics.</td>
+</tr>
+<tr class="odd">
+<td>Retraining</td>
+<td>Between adventures through a Guild trainer; exact price
+pending.</td>
+</tr>
+<tr class="even">
+<td>Guild rank</td>
+<td><strong>F–SS</strong>, based on Guild reputation and
+accomplishments; separate from class skill progression.</td>
+</tr>
+<tr class="odd">
+<td>Race restrictions</td>
+<td><strong>No race restrictions</strong> on generic class skills.
+Future race skills remain separate and compatible.</td>
+</tr>
+<tr class="even">
+<td>Duplicate benefits</td>
+<td>Normally do <strong>not stack</strong> unless the rule explicitly
+says they do.</td>
+</tr>
+<tr class="odd">
+<td>Encounter boundaries</td>
+<td>Determined by narrative combat state, not GM handoffs or changing
+tables.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="82-ability-classification-vocabulary">8.2 Ability classification
+vocabulary</h3>
+<p>Record one or more of the following classifications in the character
+website and GM reference:</p>
+<ul>
+<li><strong>Passive:</strong> An always-available conditional
+effect.</li>
+<li><strong>Action:</strong> Uses the adventurer's normal action or an
+equivalent turn opportunity.</li>
+<li><strong>Reaction:</strong> Responds to an event, consuming the
+standard reaction opportunity.</li>
+<li><strong>Field:</strong> Used outside combat in travel,
+investigation, social scenes, or preparation; may still require an
+appropriate check.</li>
+<li><strong>Mastery:</strong> A high-tier effect with a strict encounter
+or resource limit.</li>
+</ul>
+<blockquote>
+<p><strong>Not yet assigned:</strong> Individual skill action types,
+detailed durations, ranges, area dimensions, resource costs, exact
+bonuses, healing amounts, attack dice, damage, and conditions. These are
+deliberately left qualitative until the core engine is defined.</p>
+</blockquote>
+<h3 id="83-shared-table-balance-safeguards">8.3 Shared-table balance
+safeguards</h3>
+<ol type="1">
+<li><strong>No infinite reaction chains.</strong> All reaction-style
+effects use a shared defined reaction limit, even if several skills
+could trigger.</li>
+<li><strong>No unrestricted extra turns.</strong> Ally repositioning and
+coordinated attacks cannot create infinite full actions or recursive
+turn-granting combos.</li>
+<li><strong>No automatic campaign bypass.</strong> Stealth,
+teleport-like abilities, social influence, spirit conversations, rune
+tools, and purification must have obstacles and consequences.</li>
+<li><strong>No arbitrary instant kills.</strong> Precision attacks can
+be exceptionally strong without automatically destroying a boss or major
+foe.</li>
+<li><strong>No unrestricted summons.</strong> Companion creatures do not
+add an unconstrained combat turn.</li>
+<li><strong>No boundless preparation stacks.</strong> Trap/rune
+quantities, simultaneous magical effects, and duration limits must be
+capped.</li>
+<li><strong>No mandatory class combinations.</strong> Groups without a
+designated healer, defender, or spellcaster must have workable quest
+options.</li>
+<li><strong>No free resource refresh on table changes.</strong>
+Quest/encounter state follows the character across GM handoffs.</li>
+<li><strong>Respect other players' agency.</strong> Command, charm-like
+effects, coordinated abilities, and social buffs cannot force willing
+allies or NPCs to behave outside the rule's stated reach.</li>
+<li><strong>Preserve world consequences.</strong> Skills may help
+identify and resolve world problems but do not erase major story arcs
+for free.</li>
+</ol>
+<h3 id="84-cooperation-and-specialization-examples">8.4 Cooperation and
+specialization examples</h3>
+<p><strong>Example A — Two Vanguards:</strong></p>
+<ul>
+<li>A Bulwark + Guardian character protects companions, absorbs danger,
+and defends objectives.</li>
+<li>A Breaker + Berserker character pushes enemies, attacks
+aggressively, and accepts exposure for more damage.</li>
+</ul>
+<p><strong>Example B — Different Wildstriders:</strong></p>
+<ul>
+<li>A Sharpshot + Deadeye character invests in prepared precision
+attacks.</li>
+<li>A Wayfinding + Trailblazer character helps parties survive difficult
+journeys and find escape routes.</li>
+<li>A Fieldcraft + Beastwarden character supports reconnaissance and
+coordinated creature tactics.</li>
+</ul>
+<p><strong>Example C — Two Arcanists:</strong></p>
+<ul>
+<li>A Runecraft + Runecaster character prepares defensive traps and
+magical mechanisms.</li>
+<li>A Shaping + Spellbinder character interferes with enemy magic and
+adapts battlefield spells.</li>
+</ul>
+<h2 id="9-persistent-character-records-and-examples-draft">9. Persistent
+character records and examples
+<span class="badge draft">DRAFT</span></h2>
+<p>The web-based player account and physical Guild card should point to
+the same persistent character data. Every GM should be able to see the
+relevant progression and verify that an ability is unlocked and
+currently usable.</p>
+<h3 id="91-suggested-character-data-model">9.1 Suggested character data
+model</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>character_id</code></td>
+<td>Unique persistent identifier, usable with the adventurer card QR
+code</td>
+</tr>
+<tr class="even">
+<td><code>display_name</code></td>
+<td>In-world character name</td>
+</tr>
+<tr class="odd">
+<td><code>race_id</code></td>
+<td>Selected race; eventual racial skill tree reference</td>
+</tr>
+<tr class="even">
+<td><code>class_id</code></td>
+<td>One of <code>vanguard</code>, <code>wildstrider</code>,
+<code>shadowblade</code>, <code>luminary</code>, <code>arcanist</code>,
+<code>resonant</code></td>
+</tr>
+<tr class="odd">
+<td><code>guild_rank</code></td>
+<td>F, E, D, C, B, A, S, or SS, depending on finalized rank
+definitions</td>
+</tr>
+<tr class="even">
+<td><code>character_level</code></td>
+<td>Independent numerical progression, once defined</td>
+</tr>
+<tr class="odd">
+<td><code>skill_points_earned</code></td>
+<td>Total earned SP</td>
+</tr>
+<tr class="even">
+<td><code>skill_points_spent</code></td>
+<td>Total spent SP</td>
+</tr>
+<tr class="odd">
+<td><code>generic_skill_ids</code></td>
+<td>Array/list of unlocked generic skill IDs</td>
+</tr>
+<tr class="even">
+<td><code>primary_specialization_id</code></td>
+<td>One of three specialization options for the selected class, or
+null</td>
+</tr>
+<tr class="odd">
+<td><code>specialization_trial_status</code></td>
+<td>Not started / in progress / complete</td>
+</tr>
+<tr class="even">
+<td><code>specialization_skill_ids</code></td>
+<td>Array/list of learned specialization skill IDs</td>
+</tr>
+<tr class="odd">
+<td><code>race_skill_ids</code></td>
+<td>Future racial progression choices</td>
+</tr>
+<tr class="even">
+<td><code>active_resources</code></td>
+<td>Uses remaining, conditions, spell resources, etc., as defined
+later</td>
+</tr>
+<tr class="odd">
+<td><code>companion_record</code></td>
+<td>Optional persistent bonded companion for Beastwardens</td>
+</tr>
+<tr class="even">
+<td><code>inventory</code></td>
+<td>Persistent carried/stored assets</td>
+</tr>
+<tr class="odd">
+<td><code>adventure_log</code></td>
+<td>Completed quests, discoveries, faction changes, world impacts</td>
+</tr>
+<tr class="even">
+<td><code>last_gm_or_session</code></td>
+<td>Continuity and conflict-resolution reference</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Suggested canonical skill entry fields:</strong>
+<code>skill_id</code>, <code>name</code>, <code>class_id</code>,
+<code>tree_type</code>, <code>path_or_specialization_id</code>,
+<code>tier</code>, <code>effect_text</code>, <code>prerequisites</code>,
+<code>sp_cost</code>, <code>action_type</code>,
+<code>resource_cost</code>, <code>use_limit</code>, <code>range</code>,
+<code>duration</code>, <code>status</code>, and
+<code>version</code>.</p>
+<p>Use immutable skill IDs so that changes to display names or
+descriptions do not break player records. For example,
+<code>vanguard.bulwark.brace</code> or
+<code>arcanist.elementalist.elemental_convergence</code> are
+<strong>suggested</strong> conventions, not previously approved database
+identifiers.</p>
+<h3 id="92-illustrative-adventurer">9.2 Illustrative adventurer</h3>
+<p><strong>Kaelen Ashford</strong><br />
+Race: Human<br />
+Class: Vanguard<br />
+Primary specialization: Guardian<br />
+Guild rank: D (example only; no required D-rank threshold)</p>
+<table>
+<thead>
+<tr class="header">
+<th>Progression</th>
+<th>Unlocked</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Bulwark (3)</td>
+<td>Brace, Holdfast, Extended Guard</td>
+</tr>
+<tr class="even">
+<td>Breaker (1)</td>
+<td>Driving Blow</td>
+</tr>
+<tr class="odd">
+<td>Command (1)</td>
+<td>Mark the Threat</td>
+</tr>
+<tr class="even">
+<td>Universal class SP spent</td>
+<td><strong>5</strong></td>
+</tr>
+<tr class="odd">
+<td>Specialization trait</td>
+<td>Protector's Oath</td>
+</tr>
+<tr class="even">
+<td>Guardian Tier I</td>
+<td>Covering Presence</td>
+</tr>
+<tr class="odd">
+<td>Guardian Tier II</td>
+<td>Bastion Step</td>
+</tr>
+<tr class="even">
+<td>Guardian Tier III</td>
+<td>Last Wall — locked</td>
+</tr>
+<tr class="odd">
+<td>Guardian Tier IV</td>
+<td>Citadel's Stand — locked</td>
+</tr>
+<tr class="even">
+<td>Specialization SP spent</td>
+<td><strong>2</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Next suggested upgrade: <strong>Last Wall</strong>, costing 1 SP,
+requiring Bastion Step.</p>
+<h3 id="93-persistent-world-integration">9.3 Persistent-world
+integration</h3>
+<ul>
+<li>Record learned skills and their versions so each GM applies the same
+effects.</li>
+<li>Keep skill-use resources consistent through multi-GM quests and
+table transitions.</li>
+<li>Let Guild rank and reputation progress independently from character
+combat capability.</li>
+<li>Preserve discoveries and consequences (e.g., Spiritkeeper
+conversations, Echo Sage recordings, Runecaster devices, and Trailblazer
+routes) in a campaign journal.</li>
+<li>Avoid sharing secret knowledge between characters merely because a
+different GM or player knows it.</li>
+<li>Keep temporary effects linked to the relevant encounter, scene, and
+expiry rule.</li>
+</ul>
+<h2 id="10-future-racial-skills-and-open-decisions-draft">10. Future
+racial skills and open decisions
+<span class="badge draft">DRAFT</span></h2>
+<h3 id="101-race-skills--next-design-phase">10.1 Race skills — next
+design phase</h3>
+<p>Race progression has <strong>not</strong> been developed in this
+compendium. It should be a third progression layer, accessible
+independently of the universal class tree:</p>
+<pre><code>Character Registration
+  ├─ Choose one race
+  └─ Choose one of six fixed classes
+            │
+            └─ Four free starter abilities
+                 │
+                 ├─ Generic class tree: 3 paths × 4 tiers
+                 │       └─ Specialization trial
+                 │            └─ Active specialization: 1 trait + 4 tiers
+                 │
+                 └─ Racial skill tree (future design)</code></pre>
+<p><strong>Race design principles:</strong></p>
+<ul>
+<li>Racial abilities should complement a class, not make one class-race
+pairing universally optimal.</li>
+<li>Every race should retain meaningful strengths regardless of
+class.</li>
+<li>Race selection should not lock generic class skills.</li>
+<li>Avoid creating a huge custom skill catalogue for every race × class
+× specialization combination at the outset.</li>
+<li>Later race-specialization interactions may add situational synergies
+without replacing the base system.</li>
+<li>Keep racial appearance and class playstyle independent; gender and
+race need not prescribe equipment, personality, or combat role.</li>
+</ul>
+<h3 id="102-open-mechanical-decisions-not-yet-approved">10.2 Open
+mechanical decisions (not yet approved)</h3>
+<ul>
+<li>What dice or check resolution system does Everbound use?</li>
+<li>How many skill points are earned and at which character
+milestones?</li>
+<li>How do attack rolls, damage, healing, defense, and conditions
+scale?</li>
+<li>What is the action economy (main action, movement, reactions,
+off-turn support)?</li>
+<li>What are the exact range, duration, area, resource, and usage limits
+on every ability?</li>
+<li>How are encounter boundaries defined during multi-GM and drop-in
+play?</li>
+<li>What is the cost and persistence behavior of specialization
+retraining?</li>
+<li>Are all specialization skills permanently learned but only one
+specialization active, or does retraining refund/reassign skills?</li>
+<li>When, if ever, can a veteran adventurer train across two
+specializations?</li>
+<li>What are the companion command, injury, recovery, and progression
+rules for Beastwarden?</li>
+<li>How many simultaneous runes and maintained spells are allowed?</li>
+<li>How will environmental elemental interactions be standardized for
+GMs?</li>
+<li>How will racial progression unlock relative to class
+progression?</li>
+<li>What automated checks will the character portal enforce when buying
+a skill?</li>
+</ul>
+<p><strong>Recommended sequencing:</strong> Finalize core
+dice/action/resource rules → translate all qualitative abilities into
+testable values → playtest the six generic trees and 18 specializations
+→ create the racial skill trees → test race/class/specialization
+interactions → publish revised balance edition.</p>
+<h2 id="12-content-inventory-approved">12. Content inventory
+<span class="badge approved">APPROVED</span></h2>
+<table>
+<thead>
+<tr class="header">
+<th>Content group</th>
+<th style="text-align: right;">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Official fixed starting classes</td>
+<td style="text-align: right;"><strong>6</strong></td>
+</tr>
+<tr class="even">
+<td>Automatic beginner abilities (4 × 6)</td>
+<td style="text-align: right;"><strong>24</strong></td>
+</tr>
+<tr class="odd">
+<td>Generic paths (3 × 6)</td>
+<td style="text-align: right;"><strong>18</strong></td>
+</tr>
+<tr class="even">
+<td>Trainable generic skills (4 × 18)</td>
+<td style="text-align: right;"><strong>72</strong></td>
+</tr>
+<tr class="odd">
+<td>Advanced specializations (3 × 6)</td>
+<td style="text-align: right;"><strong>18</strong></td>
+</tr>
+<tr class="even">
+<td>Free discipline traits (1 × 18)</td>
+<td style="text-align: right;"><strong>18</strong></td>
+</tr>
+<tr class="odd">
+<td>Trainable specialization skills (4 × 18)</td>
+<td style="text-align: right;"><strong>72</strong></td>
+</tr>
+<tr class="even">
+<td><strong>Total defined abilities and discipline traits</strong></td>
+<td style="text-align: right;"><strong>186</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Status of this file:</strong> A consolidated, faithful design
+snapshot of the Everbound classes, generic trees, and specializations
+developed through November 23, 2026. The <strong>class names</strong>
+are confirmed official. Advancement rules and ability effects are the
+current design proposals, intended to be balanced and formalized in
+subsequent revisions.</p>
+<hr />
+<p><em>End of Everbound Class &amp; Specialization Compendium
+v1.1.</em></p>
+<hr />
+</body></html>

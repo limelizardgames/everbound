@@ -1,0 +1,4687 @@
+<!doctype html><html><head><meta charset='utf-8'><title>EB-04 Racial Skill Trees</title><style>@page { margin: 16mm 14mm 16mm 14mm; }
+:root { --ink: #231a2b; --muted: #6a6170; --line: #d9d2c7; --plum: #4a1d3f; --gold: #9a7420; }
+* { box-sizing: border-box; }
+body { font-family: "Liberation Serif", "DejaVu Serif", Georgia, serif; color: var(--ink); font-size: 10pt; line-height: 1.42; margin: 0; background: #fff; }
+h1, h2, h3, h4 { font-family: "Liberation Sans", "DejaVu Sans", Arial, sans-serif; color: var(--plum); line-height: 1.2; break-after: avoid; }
+h1 { font-size: 20pt; margin: 18pt 0 8pt; }
+h2 { font-size: 14pt; margin: 18pt 0 6pt; padding-bottom: 3pt; border-bottom: 1px solid var(--line); }
+h3 { font-size: 11.5pt; margin: 12pt 0 4pt; }
+h4 { font-size: 10.5pt; margin: 10pt 0 4pt; }
+p, ul, ol { margin: 4pt 0 6pt; }
+li { margin: 1.5pt 0; }
+a { color: var(--plum); text-decoration: none; }
+code { font-size: 9pt; background: #f4f0ea; padding: 0 2pt; }
+pre { background: #f6f2ec; padding: 6pt 8pt; font-size: 8.5pt; white-space: pre-wrap; border: 1px solid var(--line); break-inside: avoid; }
+blockquote { margin: 6pt 0; padding: 4pt 10pt; border-left: 3px solid var(--gold); background: #fbf8f2; color: #3b3040; }
+table { width: 100%; border-collapse: collapse; margin: 6pt 0 10pt; font-size: 8.6pt; line-height: 1.32; font-family: "Liberation Sans", "DejaVu Sans", Arial, sans-serif; }
+th, td { border: 1px solid var(--line); padding: 3pt 5pt; vertical-align: top; text-align: left; }
+th { background: #efe8df; color: var(--plum); }
+tr { break-inside: avoid; }
+thead { display: table-header-group; }
+hr { border: 0; border-top: 1px solid var(--line); margin: 12pt 0; }
+.badge { display: inline-block; font-family: "Liberation Sans", "DejaVu Sans", Arial, sans-serif; font-size: 7.5pt; font-weight: 700; letter-spacing: .08em; padding: 1.5pt 5pt; border-radius: 3pt; vertical-align: middle; border: 1px solid; }
+.badge.approved { color: #1d6b3a; background: #e3f4e8; border-color: #8cc9a2; }
+.badge.draft { color: #8a5a00; background: #fff3d4; border-color: #e7c46a; }
+h2 .badge, h3 .badge { margin-left: 6pt; }
+.cover { border: 1px solid var(--line); border-radius: 6pt; padding: 18pt 20pt; margin-bottom: 16pt; background: #fbf8f2; break-inside: avoid; }
+.cover .brand { font-family: "Liberation Sans", Arial, sans-serif; font-size: 8pt; letter-spacing: .25em; color: var(--gold); text-transform: uppercase; }
+.cover .docid { font-family: "Liberation Sans", Arial, sans-serif; font-size: 11pt; font-weight: 700; color: var(--muted); margin-top: 10pt; }
+.cover h1.title { font-size: 26pt; margin: 2pt 0 6pt; border: 0; }
+.cover .meta { font-family: "Liberation Sans", Arial, sans-serif; color: var(--muted); font-size: 9.5pt; }
+.cover .purpose { font-size: 11.5pt; margin: 10pt 0; }
+.cover .legend { font-family: "Liberation Sans", Arial, sans-serif; font-size: 8.5pt; color: var(--muted); margin-top: 8pt; }
+.cover .related { margin-top: 10pt; font-family: "Liberation Sans", Arial, sans-serif; font-size: 9pt; }
+.cover .related ul { margin: 3pt 0 0; padding-left: 16pt; columns: 2; }
+.art { margin: 8pt 0 14pt; text-align: center; break-inside: avoid; }
+.art img { max-width: 100%; max-height: 98mm; border: 1px solid var(--line); }
+.art .cap { font-size: 8.5pt; color: var(--muted); margin-top: 3pt; font-style: italic; }
+
+.pb { break-before: page; }
+</style></head><body class='land'><div class="cover">
+<div class="brand">EVERBOUND · The Living Adventurers Guild</div>
+<div class="docid">EB-04</div>
+<h1 class="title">Racial Skill Trees</h1>
+<div class="meta">Version 1.1 · November 23, 2026 · <span class="badge draft">DRAFT</span></div>
+<p class="purpose">Traits, two branches and a capstone for each of the 60 lineages.</p>
+<div class="legend"><span class="badge approved">APPROVED</span> decided by the founders &nbsp; <span class="badge draft">DRAFT</span> proposed, expect changes after playtesting</div>
+<div class="related"><b>Related documents</b><ul><li><b>EB-01</b> Core Rules</li><li><b>EB-03</b> Races and Lineages</li><li><b>EB-05</b> Lineage × Specialization Synergies</li></ul></div>
+</div>
+
+<p><strong>Version:</strong> 1.1 — proposed playtest design ·
+<strong>Date:</strong> November 23, 2026<br />
+<strong>Source of approved roster:</strong> Everbound Racial Lineage
+Compendium v1.0<br />
+<strong>Companion documents:</strong> Everbound Class &amp;
+Specialization Compendium v1.1; Lineage × Class Specialization Affinity
+Atlas v1.1</p>
+<blockquote>
+<p><strong>Status:</strong> The 12 races and their 60 exact lineage
+names are approved. The skills and costs below are <strong>new proposed
+mechanics</strong>, not previously approved rules. Nothing here replaces
+the six class foundations, existing class skill trees, or class
+specializations.</p>
+</blockquote>
+<h2 id="rules-and-separation-of-powers">Rules and separation of
+powers</h2>
+<ul>
+<li><strong>Choose freely:</strong> Select one of 12 base races, its
+five lineages, and any of the six fixed classes. No lineage dictates
+class, morality, personality, religion, or specialization.</li>
+<li><strong>Innate / learned trait:</strong> Each lineage has one
+<strong>proposed</strong> free starting trait. For Human heritages it
+represents training, culture, and upbringing rather than inherited
+biological superiority. A lineage specialty in the approved roster did
+<strong>not</strong> previously grant an automatic power; activating
+these traits requires adoption of this proposal.</li>
+<li><strong>Two racial branches:</strong> Each lineage has two
+independent branches, each with Tier I, II and III unlocks. They are
+<strong>not</strong> new class specializations.</li>
+<li><strong>Racial Points (RP):</strong> Suggested separate currency
+from class Skill Points (SP). Spend 1 RP on each racial skill, including
+the capstone. RP award cadence is <strong>not yet fixed</strong>; award
+through character progression, never according to whether a player
+happens to visit a favored biome.</li>
+<li><strong>Prerequisites:</strong> Unlock Tier I freely with 1 RP; Tier
+II needs that branch's Tier I, Tier III needs Tier II. A capstone
+requires a Tier III in either branch and <strong>four racial skills
+bought</strong> in total.</li>
+<li><strong>Scale:</strong> Tier I is a minor option; Tier II is a
+conditional improvement; Tier III is a strong situational action
+(normally once per encounter if combat-relevant); capstone is once per
+encounter or a comparable GM-defined major expenditure. No additional
+combat actions or infinite uses.</li>
+<li><strong>Action economy:</strong> Skills consume the normal action,
+movement or reaction appropriate to the effect. The final combat rules
+will specify which. A successful description does not imply an automatic
+success when a meaningful hazard/defense calls for a roll.</li>
+<li><strong>Terrain and accessibility:</strong> Terrain-themed skills
+have meaningful land, city, ruin, and dungeon applications. No free
+unrestricted flight, underwater superiority on dry land, instant-kill
+attacks, immunities, self-repair, or bypassing all locks/wards.</li>
+<li><strong>Cross-GM:</strong> The same character's RP purchases,
+capstone uses, and resource state persist across sessions. Guild rank
+(F–SS) remains separate.</li>
+</ul>
+<p><strong>Tree diagram</strong></p>
+<pre class="text"><code>                       [Lineage Trait — proposed, no RP]
+                                      |
+                    +-----------------+-----------------+
+                    |                                   |
+                 Branch A                            Branch B
+                    |                                   |
+                 Tier I (1 RP)                       Tier I (1 RP)
+                    |                                   |
+                 Tier II (1 RP)                      Tier II (1 RP)
+                    |                                   |
+                 Tier III (1 RP)                     Tier III (1 RP)
+                    +-----------------+-----------------+
+                                      |
+                          Lineage Capstone (1 RP)
+                          requires 4 racial unlocks
+                          and at least one Tier III</code></pre>
+<h2 id="how-to-read-a-skill-new-in-v11">How to read a skill (new in
+v1.1)</h2>
+<p>Every trait, skill and capstone has two lines that players see:</p>
+<ul>
+<li><strong>Effect:</strong> what the skill lets you do, written
+positively.</li>
+<li><strong>Limits:</strong> its boundaries and cost. Specific limits
+come first, then the standard limits for its tier.</li>
+</ul>
+<p>GM notes hold only how to adjudicate. Standard limits by tier:
+<strong>Trait</strong> — free, always on, gives a clue, never an
+automatic success. <strong>Tier I</strong> — 1 RP, minor effect.
+<strong>Tier II</strong> — 1 RP, needs that branch's Tier I, only in the
+stated situation. <strong>Tier III</strong> — 1 RP, needs Tier II, once
+per encounter in combat. <strong>Capstone</strong> — 1 RP, needs 4
+racial skills including a Tier III, once per encounter.</p>
+<p><strong>Renamed in v1.1:</strong> Crystalforged Tier II <em>Resonant
+Brace</em> → <strong>Lattice Brace</strong> (Cicada Sylph keeps
+<em>Resonant Brace</em>). Frost Orc capstone <em>Frostmarch</em> →
+<strong>Icefang Trek</strong> (Frostmarch stays a region name).</p>
+<h2 id="complete-trees--12-races--60-lineages">Complete trees — 12 races
+· 60 lineages</h2>
+<h2 id="human">Human</h2>
+<h3 id="highlander">Highlander</h3>
+<p><strong>Core expression:</strong> Ridgeline.</p>
+<p><strong>Free trait — Mountainwise</strong><br />
+Effect: Recognize reliable climbing holds and safe anchoring materials
+from regional training.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ascentcraft</td>
+<td>I</td>
+<td><strong>Sure Grip</strong></td>
+<td>Negate one minor slippery-hold difficulty when equipped for
+climbing.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Ascentcraft</td>
+<td>II</td>
+<td><strong>Lead Rope</strong></td>
+<td>Install a secure line that helps the next climber.</td>
+<td>You don't advance yourself · 1 RP · needs this branch's Tier I ·
+only in the stated situation</td>
+</tr>
+<tr class="odd">
+<td>Ascentcraft</td>
+<td>III</td>
+<td><strong>Hidden Switchback</strong></td>
+<td>Survey a longer but safer route around a sheer ascent.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Highland Endurance</td>
+<td>I</td>
+<td><strong>Thin Air Pace</strong></td>
+<td>Organize rest and effort during long climbs.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Highland Endurance</td>
+<td>II</td>
+<td><strong>Shoulder the Load</strong></td>
+<td>Redistribute a companion's burden during hazardous crossings.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Highland Endurance</td>
+<td>III</td>
+<td><strong>Hold the Pass</strong></td>
+<td>Brace and stabilize an ally against a nonmagical fall or shove.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Summit Passage</strong></td>
+<td>After preparation, guide the party past one major climbing obstacle
+while accepting extra travel time.</td>
+<td>1 RP · needs 4 racial skills including a Tier III · once per
+encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="coastlander">Coastlander</h3>
+<p><strong>Core expression:</strong> Tidechart.</p>
+<p><strong>Free trait — Harborwise</strong><br />
+Effect: Recognize nautical signals, tides and basic vessel hazards
+through learned coastal practice.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Seamanship</td>
+<td>I</td>
+<td><strong>Deck Feet</strong></td>
+<td>Keep steady footing on a shifting platform.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Seamanship</td>
+<td>II</td>
+<td><strong>Current Read</strong></td>
+<td>Predict a local tide or current transition after observing the
+water.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Seamanship</td>
+<td>III</td>
+<td><strong>Safe Mooring</strong></td>
+<td>Secure a vessel or floating platform against a foreseeable
+hazard.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Shorecraft</td>
+<td>I</td>
+<td><strong>Saltwater Signs</strong></td>
+<td>Locate landmarks and changing shore access.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Shorecraft</td>
+<td>II</td>
+<td><strong>Working Knot</strong></td>
+<td>Quickly secure a rope or release a prepared knot under strain.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Shorecraft</td>
+<td>III</td>
+<td><strong>Port Passage</strong></td>
+<td>Plan a discreet or safe crossing through crowded waterfront
+infrastructure.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Harbor Passage</strong></td>
+<td>Lead companions through a difficult maritime crossing using
+preparation, equipment and observed conditions.</td>
+<td>1 RP · needs 4 racial skills including a Tier III · once per
+encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="plainsfolk">Plainsfolk</h3>
+<p><strong>Core expression:</strong> Horizon.</p>
+<p><strong>Free trait — Caravanwise</strong><br />
+Effect: Recognize navigational landmarks and practical signs of travel
+across open country.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Open Routes</td>
+<td>I</td>
+<td><strong>Horizon Bearing</strong></td>
+<td>Stay oriented when distant landmarks remain visible.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Open Routes</td>
+<td>II</td>
+<td><strong>Relay Pace</strong></td>
+<td>Synchronize group travel to avoid losing slower companions.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Open Routes</td>
+<td>III</td>
+<td><strong>Long View</strong></td>
+<td>Spot an approaching obstruction before reaching its immediate
+danger.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Caravancraft</td>
+<td>I</td>
+<td><strong>Dust Reading</strong></td>
+<td>Identify recent passage from disturbed dry ground.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Caravancraft</td>
+<td>II</td>
+<td><strong>Escort Position</strong></td>
+<td>Choose a safer place for a vulnerable traveler in an exposed
+formation.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Caravancraft</td>
+<td>III</td>
+<td><strong>Waypost Plan</strong></td>
+<td>Establish a temporary rendezvous route for a dispersed group.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Open Road Covenant</strong></td>
+<td>Safely reorganize a dispersed party around a prepared landmark.</td>
+<td>Needs a prepared landmark · no extra travel speed · 1 RP · needs 4
+racial skills including a Tier III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dune-dweller">Dune Dweller</h3>
+<p><strong>Core expression:</strong> Sunveil.</p>
+<p><strong>Free trait — Desertwise</strong><br />
+Effect: Judge shade, heat exposure and basic water requirements from
+learned desert practice.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Dune Navigation</td>
+<td>I</td>
+<td><strong>Sandstep</strong></td>
+<td>Find stable footing on shifting sand or grit.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Dune Navigation</td>
+<td>II</td>
+<td><strong>Mirageline</strong></td>
+<td>Distinguish a real distant landmark from a heat-distorted one.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Dune Navigation</td>
+<td>III</td>
+<td><strong>Shelter Angle</strong></td>
+<td>Position temporary cover against sun and blowing debris.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Resourcecraft</td>
+<td>I</td>
+<td><strong>Water Reckoning</strong></td>
+<td>Estimate practical water needs before travel.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Resourcecraft</td>
+<td>II</td>
+<td><strong>Cool Pack</strong></td>
+<td>Protect one vulnerable supply from exposure during an
+excursion.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Resourcecraft</td>
+<td>III</td>
+<td><strong>Oasis Memory</strong></td>
+<td>Recognize signs of recent moisture or hidden water
+infrastructure.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Desert Haven</strong></td>
+<td>Prepare a short-lived expedition shelter that lessens one heat or
+dehydration hazard.</td>
+<td>Costs supplies · one hazard · 1 RP · needs 4 racial skills including
+a Tier III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="frostlander">Frostlander</h3>
+<p><strong>Core expression:</strong> Rimepath.</p>
+<p><strong>Free trait — Winterwise</strong><br />
+Effect: Recognize ice stability, weather shifts and cold-weather
+preparation through regional training.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Winter Routes</td>
+<td>I</td>
+<td><strong>Ice Test</strong></td>
+<td>Identify unreliable ice before committing weight.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Winter Routes</td>
+<td>II</td>
+<td><strong>Snow Blind</strong></td>
+<td>Select a low-exposure route during blowing snow.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Winter Routes</td>
+<td>III</td>
+<td><strong>Whiteout Beacon</strong></td>
+<td>Create a visible guidance point for nearby allies in poor
+weather.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Steadfastness</td>
+<td>I</td>
+<td><strong>Shared Warmth</strong></td>
+<td>Organize an effective short rest using available shelter.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Steadfastness</td>
+<td>II</td>
+<td><strong>Winter Grip</strong></td>
+<td>Maintain a stable hold on a slick equipped surface.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Steadfastness</td>
+<td>III</td>
+<td><strong>Cold Vigil</strong></td>
+<td>Help an exhausted ally maintain alertness through a difficult
+watch.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Winter Refuge</strong></td>
+<td>Establish a prepared fallback site that protects the party from one
+severe weather setback.</td>
+<td>1 RP · needs 4 racial skills including a Tier III · once per
+encounter</td>
+</tr>
+</tbody>
+</table>
+<h2 id="elf">Elf</h2>
+<h3 id="high-elf">High Elf</h3>
+<p><strong>Core expression:</strong> Starlore.</p>
+<p><strong>Free trait — Arcane Ear</strong><br />
+Effect: Notice a faint magical disturbance when focusing on an
+unfamiliar enchantment.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Spell Sense</td>
+<td>I</td>
+<td><strong>Aether Glimmer</strong></td>
+<td>Recognize whether a visible object bears active magical work.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Spell Sense</td>
+<td>II</td>
+<td><strong>Pattern Memory</strong></td>
+<td>Recall a previously studied arcane configuration.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Spell Sense</td>
+<td>III</td>
+<td><strong>Dispel Clue</strong></td>
+<td>Identify one likely point of instability in a simple ward.</td>
+<td>Simple wards only · doesn't remove the ward · 1 RP · needs this
+branch's Tier II · once per encounter in combat</td>
+</tr>
+<tr class="even">
+<td>Ancient Lore</td>
+<td>I</td>
+<td><strong>Archive Hand</strong></td>
+<td>Interpret conventional formal magical notation with study.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Ancient Lore</td>
+<td>II</td>
+<td><strong>Ritual Etiquette</strong></td>
+<td>Recognize signs that a ritual space has recently been used.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Ancient Lore</td>
+<td>III</td>
+<td><strong>Harmonized Study</strong></td>
+<td>Assist another researcher to compare two magical traces.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Astral Concordance</strong></td>
+<td>Correlate several magical traces to a likely source.</td>
+<td>Needs preparation · doesn't defeat the source · 1 RP · needs 4
+racial skills including a Tier III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="wood-elf">Wood Elf</h3>
+<p><strong>Core expression:</strong> Greenveil.</p>
+<p><strong>Free trait — Woodland Eye</strong><br />
+Effect: Distinguish ordinary forest movement from an unusual
+disturbance.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Forest Passage</td>
+<td>I</td>
+<td><strong>Rootstep</strong></td>
+<td>Move steadily across roots and uneven woodland ground.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Forest Passage</td>
+<td>II</td>
+<td><strong>Leafblind</strong></td>
+<td>Blend with existing natural cover.</td>
+<td>Uses cover that is already there · creates no new concealment · 1 RP
+· needs this branch's Tier I · only in the stated situation</td>
+</tr>
+<tr class="odd">
+<td>Forest Passage</td>
+<td>III</td>
+<td><strong>Canopy Route</strong></td>
+<td>Find a climbable alternate course through branches or old
+platforms.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Living Signs</td>
+<td>I</td>
+<td><strong>Barkscript</strong></td>
+<td>Recognize recent damage or markings on living trees.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Living Signs</td>
+<td>II</td>
+<td><strong>Trail Whisper</strong></td>
+<td>Indicate a safe silent route to one nearby ally.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Living Signs</td>
+<td>III</td>
+<td><strong>Shelter Grove</strong></td>
+<td>Identify a defensible woodland resting place.</td>
+<td>Doesn't change the land · 1 RP · needs this branch's Tier II · once
+per encounter in combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Greenwood Crossing</strong></td>
+<td>Guide the party around an obstructed forest passage by reading
+natural routes and accepting setup time.</td>
+<td>1 RP · needs 4 racial skills including a Tier III · once per
+encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="moon-elf">Moon Elf</h3>
+<p><strong>Core expression:</strong> Moonmirror.</p>
+<p><strong>Free trait — Dimlight Eyes</strong><br />
+Effect: Notice nearby motion in low natural light.<br />
+Limits: Not total darkness · Free · always on · gives a clue, never an
+automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Nightcraft</td>
+<td>I</td>
+<td><strong>Silver Focus</strong></td>
+<td>Distinguish a moving outline against a dim background.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Nightcraft</td>
+<td>II</td>
+<td><strong>Crescent Step</strong></td>
+<td>Cross a short shadowed area without losing your bearings.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Nightcraft</td>
+<td>III</td>
+<td><strong>Night Watch</strong></td>
+<td>Warn one companion of a visible nocturnal approach before it
+closes.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Hidden Signs</td>
+<td>I</td>
+<td><strong>Gleam Trace</strong></td>
+<td>Find a faint reflective clue on an object.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Hidden Signs</td>
+<td>II</td>
+<td><strong>Twilight Read</strong></td>
+<td>Identify an ill-fitting silhouette or ordinary disguise in dim
+light.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Hidden Signs</td>
+<td>III</td>
+<td><strong>Eclipse Compass</strong></td>
+<td>Maintain a chosen direction across an unfamiliar darkened
+passage.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Moonward Vigil</strong></td>
+<td>Reveal a safe route and warn companions of one low-light ambush
+opportunity after careful observation.</td>
+<td>1 RP · needs 4 racial skills including a Tier III · once per
+encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="deep-elf">Deep Elf</h3>
+<p><strong>Core expression:</strong> Gloamwalk.</p>
+<p><strong>Free trait — Hollow Eyes</strong><br />
+Effect: Recognize nearby shapes and edges in dim underground
+light.<br />
+Limits: Not absolute darkness · Free · always on · gives a clue, never
+an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Gloom Routes</td>
+<td>I</td>
+<td><strong>Stone Margin</strong></td>
+<td>Maintain footing along a narrow rocky edge.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Gloom Routes</td>
+<td>II</td>
+<td><strong>Unlit Turning</strong></td>
+<td>Mark an underground junction for a return trip.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Gloom Routes</td>
+<td>III</td>
+<td><strong>Chasm Sense</strong></td>
+<td>Recognize a likely steep drop from air movement and sound.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Underground Focus</td>
+<td>I</td>
+<td><strong>Cave Murmur</strong></td>
+<td>Identify whether a sound comes from an open shaft or enclosed
+nook.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Underground Focus</td>
+<td>II</td>
+<td><strong>Dark Patience</strong></td>
+<td>Remain composed during a prolonged low-light search.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Underground Focus</td>
+<td>III</td>
+<td><strong>Exit Pattern</strong></td>
+<td>Reconstruct an underground route from recurring architectural
+features.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Deepway Thread</strong></td>
+<td>Trace a viable retreat through a confusing tunnel network once key
+junctions have been surveyed.</td>
+<td>1 RP · needs 4 racial skills including a Tier III · once per
+encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="frost-elf">Frost Elf</h3>
+<p><strong>Core expression:</strong> Glacialine.</p>
+<p><strong>Free trait — Winter Sensitivity</strong><br />
+Effect: Recognize fast-forming frost and changing cold exposure before
+companions notice.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Snow Paths</td>
+<td>I</td>
+<td><strong>Crustwalk</strong></td>
+<td>Test and traverse fragile snow crust with care.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Snow Paths</td>
+<td>II</td>
+<td><strong>Frozen Step</strong></td>
+<td>Reposition reliably on ordinary slippery ice.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Snow Paths</td>
+<td>III</td>
+<td><strong>Icebound Route</strong></td>
+<td>Locate a safer approach around a cold-weather obstruction.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Frost Composure</td>
+<td>I</td>
+<td><strong>Still Breath</strong></td>
+<td>Maintain concentration through a brief cold shock.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Frost Composure</td>
+<td>II</td>
+<td><strong>Quiet Shelter</strong></td>
+<td>Identify a place shielded from cold wind.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Frost Composure</td>
+<td>III</td>
+<td><strong>Frost Warning</strong></td>
+<td>Signal a companion before a visible ice fracture spreads.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Rime Harmony</strong></td>
+<td>Temporarily stabilize a small group's passage through hazardous
+ice.</td>
+<td>Creates no ice · not cold immunity · 1 RP · needs 4 racial skills
+including a Tier III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h2 id="dwarf">Dwarf</h2>
+<h3 id="mountain-dwarf">Mountain Dwarf</h3>
+<p><strong>Core expression:</strong> Craghold.</p>
+<p><strong>Free trait — Stoneburden</strong><br />
+Effect: Recognize safe load-bearing rock and practical lifting
+positions.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Quarry Strength</td>
+<td>I</td>
+<td><strong>Firm Grip</strong></td>
+<td>Maintain control of a carried heavy object.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Quarry Strength</td>
+<td>II</td>
+<td><strong>Shoulder Brace</strong></td>
+<td>Help an adjacent ally shift a load.</td>
+<td>You don't move it yourself · 1 RP · needs this branch's Tier I ·
+only in the stated situation</td>
+</tr>
+<tr class="odd">
+<td>Quarry Strength</td>
+<td>III</td>
+<td><strong>Crack the Weight</strong></td>
+<td>Find the safest leverage point for a heavy barrier.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Mountain Stance</td>
+<td>I</td>
+<td><strong>Rockset Feet</strong></td>
+<td>Reduce minor footing penalties on stone.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Mountain Stance</td>
+<td>II</td>
+<td><strong>Wallward</strong></td>
+<td>Brace an adjacent ally against a shove near a rocky edge.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Mountain Stance</td>
+<td>III</td>
+<td><strong>Stoneline Hold</strong></td>
+<td>Secure a narrow chokepoint against a small nonmagical
+displacement.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Mountainfast</strong></td>
+<td>Anchor a party's evacuation or defense around one load-bearing
+position after careful setup.</td>
+<td>1 RP · needs 4 racial skills including a Tier III · once per
+encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="hill-dwarf">Hill Dwarf</h3>
+<p><strong>Core expression:</strong> Hillstone.</p>
+<p><strong>Free trait — Groundwise</strong><br />
+Effect: Recognize the stability of soil, slopes and compacted
+pathways.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Surefooted Way</td>
+<td>I</td>
+<td><strong>Rooted Heel</strong></td>
+<td>Resist one minor slip on uneven ground.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Surefooted Way</td>
+<td>II</td>
+<td><strong>Balanced Burden</strong></td>
+<td>Keep an unstable load from tipping while stationary.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Surefooted Way</td>
+<td>III</td>
+<td><strong>Uphill Relay</strong></td>
+<td>Help the next ally traverse the same rough rise.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Long Stamina</td>
+<td>I</td>
+<td><strong>Sturdy Pace</strong></td>
+<td>Travel at an even speed on mild inclines.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Long Stamina</td>
+<td>II</td>
+<td><strong>Recover Breath</strong></td>
+<td>Use a rest to alleviate ordinary exertion for a willing
+companion.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Long Stamina</td>
+<td>III</td>
+<td><strong>Holdcourse</strong></td>
+<td>Maintain focus while a slow physical task is interrupted.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Steady Horizon</strong></td>
+<td>Keep a small group stable across a difficult shifting slope through
+coordinated pacing.</td>
+<td>1 RP · needs 4 racial skills including a Tier III · once per
+encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="deep-dwarf">Deep Dwarf</h3>
+<p><strong>Core expression:</strong> Understone.</p>
+<p><strong>Free trait — Stone Whisper</strong><br />
+Effect: Notice suspicious echoes from nearby walls and cavities.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Tunnelcraft</td>
+<td>I</td>
+<td><strong>Cavern Step</strong></td>
+<td>Move carefully through tight underground footing.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Tunnelcraft</td>
+<td>II</td>
+<td><strong>Fault Trace</strong></td>
+<td>Find signs of an unstable ceiling or seam.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Tunnelcraft</td>
+<td>III</td>
+<td><strong>Miner's Return</strong></td>
+<td>Place practical route markers for a safe underground return.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Earth Listening</td>
+<td>I</td>
+<td><strong>Wall Echo</strong></td>
+<td>Compare echoes to estimate nearby room size.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Earth Listening</td>
+<td>II</td>
+<td><strong>Pressure Knell</strong></td>
+<td>Notice fresh settling or vibration in a worked tunnel.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Earth Listening</td>
+<td>III</td>
+<td><strong>Buried Passage</strong></td>
+<td>Identify a possible blocked entrance by its distinct acoustic
+response.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Underhall Map</strong></td>
+<td>Reconstruct likely connections between surveyed chambers.</td>
+<td>Chambers must be surveyed · can't see through rock · 1 RP · needs 4
+racial skills including a Tier III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ember-dwarf">Ember Dwarf</h3>
+<p><strong>Core expression:</strong> Forgeheat.</p>
+<p><strong>Free trait — Kilnwise</strong><br />
+Effect: Judge safe working temperatures and identify dangerous hot
+surfaces.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Hearth Travel</td>
+<td>I</td>
+<td><strong>Ash Tread</strong></td>
+<td>Keep footing on ordinary cooled ash or loose forge debris.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Hearth Travel</td>
+<td>II</td>
+<td><strong>Radiant Gap</strong></td>
+<td>Find a safer position near a hot device.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Hearth Travel</td>
+<td>III</td>
+<td><strong>Cinder Crossing</strong></td>
+<td>Plan a route past a heated obstacle with appropriate
+protection.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Forgecraft</td>
+<td>I</td>
+<td><strong>Temper Read</strong></td>
+<td>Identify whether worked metal is under dangerous stress.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Forgecraft</td>
+<td>II</td>
+<td><strong>Heat Shielding</strong></td>
+<td>Arrange improvised protective equipment against a short thermal
+exposure.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Forgecraft</td>
+<td>III</td>
+<td><strong>Vent Sense</strong></td>
+<td>Detect the likely direction of a hot draft or active furnace
+vent.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Master of the Kiln</strong></td>
+<td>Guide allies through a hot industrial hazard by coordinating vents,
+shielding and timing.</td>
+<td>Not fire immunity · 1 RP · needs 4 racial skills including a Tier
+III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="crystal-dwarf">Crystal Dwarf</h3>
+<p><strong>Core expression:</strong> Facetstone.</p>
+<p><strong>Free trait — Mineral Hum</strong><br />
+Effect: Recognize an unusual vibration in nearby stone or crystal when
+still.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Facet Reading</td>
+<td>I</td>
+<td><strong>Clear Flaw</strong></td>
+<td>Spot a visible fracture in a mineral object.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Facet Reading</td>
+<td>II</td>
+<td><strong>Harmonic Tap</strong></td>
+<td>Use deliberate tapping to compare resonance in two surfaces.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Facet Reading</td>
+<td>III</td>
+<td><strong>Seam Trace</strong></td>
+<td>Identify a likely mineral seam from accessible acoustic signs.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Vibration Lore</td>
+<td>I</td>
+<td><strong>Pulse Listen</strong></td>
+<td>Notice a nearby repeated mechanical vibration.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Vibration Lore</td>
+<td>II</td>
+<td><strong>Reflection Angle</strong></td>
+<td>Position a reflective surface to inspect an otherwise difficult line
+of sight.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Vibration Lore</td>
+<td>III</td>
+<td><strong>Crystal Register</strong></td>
+<td>Recall a distinctive acoustic signature from a previous
+location.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Faceted Chorus</strong></td>
+<td>With prepared samples, compare a network of mineral vibrations to
+locate a possible structural disturbance.</td>
+<td>1 RP · needs 4 racial skills including a Tier III · once per
+encounter</td>
+</tr>
+</tbody>
+</table>
+<h2 id="halfling">Halfling</h2>
+<h3 id="hillfoot">Hillfoot</h3>
+<p><strong>Core expression:</strong> Heatherstep.</p>
+<p><strong>Free trait — Hill Balance</strong><br />
+Effect: Maintain natural poise on ordinary uneven trail surfaces.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Small Paths</td>
+<td>I</td>
+<td><strong>Low Traverse</strong></td>
+<td>Pass through a narrow safe gap that fits your body.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Small Paths</td>
+<td>II</td>
+<td><strong>Stable Heel</strong></td>
+<td>Avoid one minor slip when stopping suddenly.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Small Paths</td>
+<td>III</td>
+<td><strong>Hidden Bank</strong></td>
+<td>Locate a shallow protected approach across a hillside.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Persistent Steps</td>
+<td>I</td>
+<td><strong>Long Shuffle</strong></td>
+<td>Keep steady pace across uneven ground.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Persistent Steps</td>
+<td>II</td>
+<td><strong>Friend's Footing</strong></td>
+<td>Show an ally a stable route across a short rough patch.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Persistent Steps</td>
+<td>III</td>
+<td><strong>Restful Nook</strong></td>
+<td>Identify a sheltered resting spot under nearby natural cover.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Hillfoot Guide</strong></td>
+<td>Lead a larger companion group through a narrow uneven passage by
+scouting viable footholds.</td>
+<td>1 RP · needs 4 racial skills including a Tier III · once per
+encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="woodfoot">Woodfoot</h3>
+<p><strong>Core expression:</strong> Fernstep.</p>
+<p><strong>Free trait — Woodland Nimble</strong><br />
+Effect: Recognize handholds and quiet paths suitable for a small
+climber.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Brushcraft</td>
+<td>I</td>
+<td><strong>Twigskip</strong></td>
+<td>Cross a small patch of noisy undergrowth with care.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Brushcraft</td>
+<td>II</td>
+<td><strong>Soft Branch</strong></td>
+<td>Use a stable natural hold for a brief climb.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Brushcraft</td>
+<td>III</td>
+<td><strong>Leaf Hollow</strong></td>
+<td>Locate concealment provided by existing foliage.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Climber's Hands</td>
+<td>I</td>
+<td><strong>Rope Catch</strong></td>
+<td>Catch or secure a reachable climbing rope.</td>
+<td>You don't advance yourself · 1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Climber's Hands</td>
+<td>II</td>
+<td><strong>Branchline</strong></td>
+<td>Rig a short simple traversal aid using carried rope.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Climber's Hands</td>
+<td>III</td>
+<td><strong>Treetop Return</strong></td>
+<td>Find a safe descent route after climbing.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Greenstep Circuit</strong></td>
+<td>Chart a compact loop through woodland cover that allows allies to
+approach without crossing a known hazard.</td>
+<td>1 RP · needs 4 racial skills including a Tier III · once per
+encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="riverfoot">Riverfoot</h3>
+<p><strong>Core expression:</strong> Ripplefoot.</p>
+<p><strong>Free trait — Stream Poise</strong><br />
+Effect: Estimate shallow current and slippery waterside footing.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Water Agility</td>
+<td>I</td>
+<td><strong>Fordskip</strong></td>
+<td>Find stable steps across a shallow crossing.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Water Agility</td>
+<td>II</td>
+<td><strong>Streamturn</strong></td>
+<td>Reposition in moving water without losing direction.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Water Agility</td>
+<td>III</td>
+<td><strong>Bank Reach</strong></td>
+<td>Identify the easiest nearby exit from a current.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Quick Movement</td>
+<td>I</td>
+<td><strong>Pebble Dodge</strong></td>
+<td>Shift away from a minor footing hazard with timely movement.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Quick Movement</td>
+<td>II</td>
+<td><strong>Slippery Hold</strong></td>
+<td>Maintain grip while entering or leaving water.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Quick Movement</td>
+<td>III</td>
+<td><strong>Shore Relay</strong></td>
+<td>Help a willing ally follow a safe riverbank route.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Silver Ford</strong></td>
+<td>Guide a group through one dangerous shallow-water crossing using
+timing and visible banks.</td>
+<td>Shallow water only · no underwater breathing · 1 RP · needs 4 racial
+skills including a Tier III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="marshfoot">Marshfoot</h3>
+<p><strong>Core expression:</strong> Reedstep.</p>
+<p><strong>Free trait — Bogwise</strong><br />
+Effect: Recognize soft ground, reeds and unstable patches before
+stepping on them.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mire Travel</td>
+<td>I</td>
+<td><strong>Wide Step</strong></td>
+<td>Reduce one penalty from soft mud while walking cautiously.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Mire Travel</td>
+<td>II</td>
+<td><strong>Root Bridge</strong></td>
+<td>Spot a stable natural crossing over a short bog patch.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Mire Travel</td>
+<td>III</td>
+<td><strong>Reedlane</strong></td>
+<td>Trace a safer corridor through a marshy obstacle.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Marsh Awareness</td>
+<td>I</td>
+<td><strong>Waterline</strong></td>
+<td>Notice a dangerous shift in shallow wetland depth.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Marsh Awareness</td>
+<td>II</td>
+<td><strong>Still Reed</strong></td>
+<td>Find existing reeds that mask your movement.</td>
+<td>Doesn't make you stealthy by itself · 1 RP · needs this branch's
+Tier I · only in the stated situation</td>
+</tr>
+<tr class="even">
+<td>Marsh Awareness</td>
+<td>III</td>
+<td><strong>Mud Marker</strong></td>
+<td>Leave a recoverable landmark for an ally crossing wet ground.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Fen Passage</strong></td>
+<td>Prepare a safe passage through an unstable bog, taking extra time
+and material for crossing supports.</td>
+<td>1 RP · needs 4 racial skills including a Tier III · once per
+encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cavefoot">Cavefoot</h3>
+<p><strong>Core expression:</strong> Lanternshade.</p>
+<p><strong>Free trait — Burrow Memory</strong><br />
+Effect: Recognize the layout of narrow paths and underground
+landmarks.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Tunnel Travel</td>
+<td>I</td>
+<td><strong>Gapfinder</strong></td>
+<td>Spot passable small spaces.</td>
+<td>Larger allies may not fit · 1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Tunnel Travel</td>
+<td>II</td>
+<td><strong>Corner Hold</strong></td>
+<td>Keep balance while moving through a tight turn.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Tunnel Travel</td>
+<td>III</td>
+<td><strong>Burrow Route</strong></td>
+<td>Map a short alternative tunnel in a known cave system.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Cave Senses</td>
+<td>I</td>
+<td><strong>Small Echo</strong></td>
+<td>Determine whether a nearby cavity is open or blocked.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Cave Senses</td>
+<td>II</td>
+<td><strong>Dust Print</strong></td>
+<td>Distinguish fresh movement from disturbed cave dust.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Cave Senses</td>
+<td>III</td>
+<td><strong>Blind Turn</strong></td>
+<td>Warn companions when an underground route hides a sudden drop.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Hidden Burrow</strong></td>
+<td>Find a reliable concealed retreat route through a surveyed narrow
+cave.</td>
+<td>Cave must be surveyed · no passing through walls · 1 RP · needs 4
+racial skills including a Tier III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h2 id="orcborn">Orcborn</h2>
+<h3 id="mountain-orc">Mountain Orc</h3>
+<p><strong>Core expression:</strong> Stonefang.</p>
+<p><strong>Free trait — Mountain Frame</strong><br />
+Effect: Recognize advantageous bracing positions and safe leverage
+points for powerful effort.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Heavy Exertion</td>
+<td>I</td>
+<td><strong>Heave Line</strong></td>
+<td>Move a stubborn weight with appropriate leverage.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Heavy Exertion</td>
+<td>II</td>
+<td><strong>Stone Drive</strong></td>
+<td>Push through an ordinary physical obstruction.</td>
+<td>Costs stamina · ordinary obstructions only · 1 RP · needs this
+branch's Tier I · only in the stated situation</td>
+</tr>
+<tr class="odd">
+<td>Heavy Exertion</td>
+<td>III</td>
+<td><strong>Battering Route</strong></td>
+<td>Identify a workable breach point in a nonmagical barrier.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Enduring Guard</td>
+<td>I</td>
+<td><strong>Iron Stance</strong></td>
+<td>Remain steady under a minor nonmagical shove.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Enduring Guard</td>
+<td>II</td>
+<td><strong>Shelter Shoulder</strong></td>
+<td>Brace a nearby ally during a falling-debris hazard.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Enduring Guard</td>
+<td>III</td>
+<td><strong>Crag Sentinel</strong></td>
+<td>Hold a constrained position against a single forced movement
+attempt.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Mountain Bulwark</strong></td>
+<td>Create a short defensive opening through a difficult rocky passage
+at a substantial expenditure of effort.</td>
+<td>1 RP · needs 4 racial skills including a Tier III · once per
+encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="steppe-orc">Steppe Orc</h3>
+<p><strong>Core expression:</strong> Windstride.</p>
+<p><strong>Free trait — Long Run</strong><br />
+Effect: Recognize practical pacing and landmark strategies for
+open-country pursuit.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Pursuit</td>
+<td>I</td>
+<td><strong>Stretch Step</strong></td>
+<td>Keep speed across a brief straight unobstructed run.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Pursuit</td>
+<td>II</td>
+<td><strong>Chase Signs</strong></td>
+<td>Read a fleeing creature's recent directional changes.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Pursuit</td>
+<td>III</td>
+<td><strong>Intercept Line</strong></td>
+<td>Find a short route toward a visible runner.</td>
+<td>Normal travel distance · 1 RP · needs this branch's Tier II · once
+per encounter in combat</td>
+</tr>
+<tr class="even">
+<td>Endurance</td>
+<td>I</td>
+<td><strong>Breath Cadence</strong></td>
+<td>Stabilize ordinary breathing during prolonged travel.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Endurance</td>
+<td>II</td>
+<td><strong>Burden Shift</strong></td>
+<td>Maintain pace while exchanging a carried item with a companion.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Endurance</td>
+<td>III</td>
+<td><strong>Longwatch</strong></td>
+<td>Resist ordinary fatigue during a demanding watch when supplied with
+rest afterward.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Steppe Relay</strong></td>
+<td>Lead a group pursuit through one complex open-terrain obstacle using
+coordinated turns and reasonable rest.</td>
+<td>1 RP · needs 4 racial skills including a Tier III · once per
+encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ash-orc">Ash Orc</h3>
+<p><strong>Core expression:</strong> Ashwalker.</p>
+<p><strong>Free trait — Hazardwise</strong><br />
+Effect: Notice heat shimmer and damaged ground in a hazardous
+region.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Hazard Travel</td>
+<td>I</td>
+<td><strong>Slagstep</strong></td>
+<td>Choose stable ground across cooled slag and ash.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Hazard Travel</td>
+<td>II</td>
+<td><strong>Smoke Gap</strong></td>
+<td>Identify the direction of a safer airflow.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Hazard Travel</td>
+<td>III</td>
+<td><strong>Cinder Path</strong></td>
+<td>Survey a route around a harmful thermal obstacle.</td>
+<td>Avoids the heat · doesn't resist it · 1 RP · needs this branch's
+Tier II · once per encounter in combat</td>
+</tr>
+<tr class="even">
+<td>Physical Persistence</td>
+<td>I</td>
+<td><strong>Scorched Grip</strong></td>
+<td>Retain control of equipment through a brief hot-surface exposure
+when protected.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Physical Persistence</td>
+<td>II</td>
+<td><strong>Effort Reserve</strong></td>
+<td>Complete a strenuous short task under uncomfortable weather.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Physical Persistence</td>
+<td>III</td>
+<td><strong>Rough Recovery</strong></td>
+<td>Use available shelter to restore composure after a hazardous
+crossing.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Blackened Road</strong></td>
+<td>Coordinate allies through a hot or smoky industrial obstacle using
+protection and planned timing.</td>
+<td>1 RP · needs 4 racial skills including a Tier III · once per
+encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="marsh-orc">Marsh Orc</h3>
+<p><strong>Core expression:</strong> Mudfang.</p>
+<p><strong>Free trait — Wetland Frame</strong><br />
+Effect: Recognize stable reeds, submerged edges and safe entries to
+water.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mire Strength</td>
+<td>I</td>
+<td><strong>Silt Anchor</strong></td>
+<td>Brace an object against slow-moving mud.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Mire Strength</td>
+<td>II</td>
+<td><strong>Reedhaul</strong></td>
+<td>Pull an ally onto firm wetland ground.</td>
+<td>You don't advance yourself · 1 RP · needs this branch's Tier I ·
+only in the stated situation</td>
+</tr>
+<tr class="odd">
+<td>Mire Strength</td>
+<td>III</td>
+<td><strong>Bog Breach</strong></td>
+<td>Clear a temporary opening through an obstructed marsh route using
+strength and equipment.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Water Endurance</td>
+<td>I</td>
+<td><strong>Bankhold</strong></td>
+<td>Keep a reliable grip while fighting a current.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Water Endurance</td>
+<td>II</td>
+<td><strong>Wet Breath</strong></td>
+<td>Keep your composure during a brief shallow-water submersion.</td>
+<td>No extra breathing time · 1 RP · needs this branch's Tier I · only
+in the stated situation</td>
+</tr>
+<tr class="even">
+<td>Water Endurance</td>
+<td>III</td>
+<td><strong>Marsh Vigil</strong></td>
+<td>Remain alert when moisture and insects complicate a watch.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Mireguard Crossing</strong></td>
+<td>Stabilize and guide companions through an unstable marsh
+barrier.</td>
+<td>No extra swim speed · 1 RP · needs 4 racial skills including a Tier
+III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="frost-orc">Frost Orc</h3>
+<p><strong>Core expression:</strong> Icefang.</p>
+<p><strong>Free trait — Winter Frame</strong><br />
+Effect: Recognize frost hazards and safe cold-weather equipment
+use.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Winter Force</td>
+<td>I</td>
+<td><strong>Snow Drive</strong></td>
+<td>Push a carried object through manageable packed snow.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Winter Force</td>
+<td>II</td>
+<td><strong>Ice Brace</strong></td>
+<td>Support a colleague while they cross a frozen edge.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Winter Force</td>
+<td>III</td>
+<td><strong>Frost Breach</strong></td>
+<td>Clear a short snow or ice obstacle using deliberate force.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Cold Endurance</td>
+<td>I</td>
+<td><strong>Still Blood</strong></td>
+<td>Maintain steady work briefly in ordinary cold with protective
+gear.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Cold Endurance</td>
+<td>II</td>
+<td><strong>White Breath</strong></td>
+<td>Signal companions through a blizzard using deliberate visible
+cues.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Cold Endurance</td>
+<td>III</td>
+<td><strong>Winter Stand</strong></td>
+<td>Maintain footing and vigilance during a severe cold-weather
+watch.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Icefang Trek</strong></td>
+<td>Lead allies across one serious snowy obstacle through coordinated
+labor and prepared shelter.</td>
+<td>Not cold immunity · 1 RP · needs 4 racial skills including a Tier
+III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h2 id="beastkin">Beastkin</h2>
+<h3 id="wolfkin">Wolfkin</h3>
+<p><strong>Core expression:</strong> Packtrail.</p>
+<p><strong>Free trait — Keen Scent</strong><br />
+Effect: Notice a nearby strong and distinctive scent under suitable wind
+and surface conditions.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Scent Trail</td>
+<td>I</td>
+<td><strong>Trail Nose</strong></td>
+<td>Follow a fresh exposed scent for a short distance.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Scent Trail</td>
+<td>II</td>
+<td><strong>Scent Ledger</strong></td>
+<td>Recognize a previously sampled scent among recent traces.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Scent Trail</td>
+<td>III</td>
+<td><strong>Lost Quarry</strong></td>
+<td>Find the likely departure direction of a tracked target after losing
+sight.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Pack Sense</td>
+<td>I</td>
+<td><strong>Shared Warning</strong></td>
+<td>Signal one ally about an obvious approaching threat.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Pack Sense</td>
+<td>II</td>
+<td><strong>Flanking Read</strong></td>
+<td>Read an ally's direction of movement to avoid obstructing them.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Pack Sense</td>
+<td>III</td>
+<td><strong>Pack Rally</strong></td>
+<td>Coordinate a willing partner's retreat from a dangerous
+position.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Full Pack Accord</strong></td>
+<td>Use scent and signals to guide allies around a tracked threat.</td>
+<td>No extra attacks or turns · 1 RP · needs 4 racial skills including a
+Tier III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="foxkin">Foxkin</h3>
+<p><strong>Core expression:</strong> Emberwit.</p>
+<p><strong>Free trait — Foxread</strong><br />
+Effect: Recognize ordinary signs of deception or a hurriedly hidden
+movement with careful observation.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Misdirection</td>
+<td>I</td>
+<td><strong>Tail Feint</strong></td>
+<td>Draw one observer's glance.</td>
+<td>Doesn't change their will · 1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Misdirection</td>
+<td>II</td>
+<td><strong>False Route</strong></td>
+<td>Leave plausible mundane traces pointing toward a wrong turn.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Misdirection</td>
+<td>III</td>
+<td><strong>Clever Diversion</strong></td>
+<td>Use a prepared decoy to open a momentary escape opportunity.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Agile Travel</td>
+<td>I</td>
+<td><strong>Quick Pivot</strong></td>
+<td>Reverse direction through a narrow safe gap.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Agile Travel</td>
+<td>II</td>
+<td><strong>Light Landing</strong></td>
+<td>Reduce a minor setback from a prepared short drop.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Agile Travel</td>
+<td>III</td>
+<td><strong>Hidden Exit</strong></td>
+<td>Identify a small alternate opening after surveying an
+enclosure.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Foxfire Ruse</strong></td>
+<td>Stage a physical distraction that briefly redirects one guarded
+group's attention.</td>
+<td>Brief · not magical compulsion · 1 RP · needs 4 racial skills
+including a Tier III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="catkin">Catkin</h3>
+<p><strong>Core expression:</strong> Softpaw.</p>
+<p><strong>Free trait — Feline Poise</strong><br />
+Effect: Maintain unusually good balance on ordinary narrow
+surfaces.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Precision Step</td>
+<td>I</td>
+<td><strong>Silent Pad</strong></td>
+<td>Cross a prepared hard floor with less incidental noise.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Precision Step</td>
+<td>II</td>
+<td><strong>Railwalk</strong></td>
+<td>Hold footing along a narrow stable ledge.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Precision Step</td>
+<td>III</td>
+<td><strong>Landing Line</strong></td>
+<td>Choose a safer angle for a controlled fall within normal
+limits.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Reflexcraft</td>
+<td>I</td>
+<td><strong>Ear Twitch</strong></td>
+<td>Notice a sudden nearby movement when alert.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Reflexcraft</td>
+<td>II</td>
+<td><strong>Twist Clear</strong></td>
+<td>Shift your body to avoid a minor grappling snag.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Reflexcraft</td>
+<td>III</td>
+<td><strong>Needle Turn</strong></td>
+<td>Reposition through a small open gap.</td>
+<td>Can't pass solid obstacles · 1 RP · needs this branch's Tier II ·
+once per encounter in combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Ninefold Footing</strong></td>
+<td>Cross one hazardous narrow route using practiced balance while
+sacrificing speed and remaining exposed to direct attacks.</td>
+<td>1 RP · needs 4 racial skills including a Tier III · once per
+encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="rabbitkin">Rabbitkin</h3>
+<p><strong>Core expression:</strong> Springstep.</p>
+<p><strong>Free trait — Watchful Ears</strong><br />
+Effect: Notice a nearby sharp or unusual sound while attentive.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Leaping</td>
+<td>I</td>
+<td><strong>Short Hop</strong></td>
+<td>Clear a minor low obstacle without climbing.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Leaping</td>
+<td>II</td>
+<td><strong>Long Bound</strong></td>
+<td>Cross a narrow safe gap using a running start.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Leaping</td>
+<td>III</td>
+<td><strong>Escape Arc</strong></td>
+<td>Leap out of a crowded space when there is a valid landing
+point.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Alertness</td>
+<td>I</td>
+<td><strong>Early Flinch</strong></td>
+<td>Recognize a clearly approaching physical threat sooner.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Alertness</td>
+<td>II</td>
+<td><strong>Warning Thump</strong></td>
+<td>Alert one nearby ally with a quick ground or voice signal.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Alertness</td>
+<td>III</td>
+<td><strong>Danger Sense</strong></td>
+<td>Predict the most likely route of a visible pursuing foe.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Moonleap Passage</strong></td>
+<td>Make one exceptional controlled leap across a suitable gap.</td>
+<td>Landing and height limits apply · not flight · 1 RP · needs 4 racial
+skills including a Tier III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="bearkin">Bearkin</h3>
+<p><strong>Core expression:</strong> Hearthpaw.</p>
+<p><strong>Free trait — Bear's Build</strong><br />
+Effect: Recognize stable ways to shelter or support a vulnerable
+companion using your sturdy frame.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Strength</td>
+<td>I</td>
+<td><strong>Heavy Hold</strong></td>
+<td>Maintain grip on a weighty object briefly.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Strength</td>
+<td>II</td>
+<td><strong>Broad Lift</strong></td>
+<td>Assist another creature in shifting a large obstruction.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Strength</td>
+<td>III</td>
+<td><strong>Den Break</strong></td>
+<td>Create an opening through a weak nonmagical barrier with tools and
+effort.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Protection</td>
+<td>I</td>
+<td><strong>Sheltering Arm</strong></td>
+<td>Offer momentary cover to an adjacent willing ally.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Protection</td>
+<td>II</td>
+<td><strong>Steady Pulse</strong></td>
+<td>Resist a minor nonmagical knockback while protecting someone.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Protection</td>
+<td>III</td>
+<td><strong>Denwatch</strong></td>
+<td>Remain grounded while holding a narrow defensible position.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Hearthwall</strong></td>
+<td>Create a temporary protective fallback spot for allies through
+bracing and placement.</td>
+<td>Not damage immunity · 1 RP · needs 4 racial skills including a Tier
+III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h2 id="drakari">Drakari</h2>
+<h3 id="wyrmkin">Wyrmkin</h3>
+<p><strong>Core expression:</strong> Wyrmstone.</p>
+<p><strong>Free trait — Dense Scales</strong><br />
+Effect: Notice a vulnerable seam in your own scales and adjust your
+protection.<br />
+Limits: Not armor immunity · Free · always on · gives a clue, never an
+automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Heavy Force</td>
+<td>I</td>
+<td><strong>Scale Brace</strong></td>
+<td>Hold a braced position against minor pressure.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Heavy Force</td>
+<td>II</td>
+<td><strong>Horn Leverage</strong></td>
+<td>Shift a heavy nearby object with proper contact and footing.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Heavy Force</td>
+<td>III</td>
+<td><strong>Wyrm Ram</strong></td>
+<td>Force a short opening through a fragile physical obstacle, risking
+fatigue.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Hardy Body</td>
+<td>I</td>
+<td><strong>Stone Breath</strong></td>
+<td>Keep composure after an ordinary impact.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Hardy Body</td>
+<td>II</td>
+<td><strong>Shielded Turn</strong></td>
+<td>Position your scale-covered side toward a foreseeable hazard.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Hardy Body</td>
+<td>III</td>
+<td><strong>Lasting Stance</strong></td>
+<td>Continue a slow physical task despite a brief shove.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Wyrmhold</strong></td>
+<td>Anchor one defensive crossing for companions.</td>
+<td>Costs mobility and effort · no elemental breath · 1 RP · needs 4
+racial skills including a Tier III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="serpentkin">Serpentkin</h3>
+<p><strong>Core expression:</strong> Coilstep.</p>
+<p><strong>Free trait — Flexible Reach</strong><br />
+Effect: Navigate tight bends and ordinary narrow openings with
+controlled body movement.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Flowing Steps</td>
+<td>I</td>
+<td><strong>Slipcurve</strong></td>
+<td>Change direction in a crowded reachable lane.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Flowing Steps</td>
+<td>II</td>
+<td><strong>Coil Balance</strong></td>
+<td>Hold a narrow stance while twisting to see behind.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Flowing Steps</td>
+<td>III</td>
+<td><strong>Thread Passage</strong></td>
+<td>Find a safe path through a winding but unobstructed course.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Evasive Form</td>
+<td>I</td>
+<td><strong>Narrow Bend</strong></td>
+<td>Release a shallow nonmagical snag through flexibility.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Evasive Form</td>
+<td>II</td>
+<td><strong>Glancing Turn</strong></td>
+<td>Reduce the force of an ordinary sidelong collision through timely
+positioning.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Evasive Form</td>
+<td>III</td>
+<td><strong>Flexible Escape</strong></td>
+<td>Withdraw from a constrained space when there is a physical
+opening.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Serpent Flow</strong></td>
+<td>Traverse a complex series of bends without wasting steps.</td>
+<td>Normal movement and action limits · 1 RP · needs 4 racial skills
+including a Tier III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="drakekin">Drakekin</h3>
+<p><strong>Core expression:</strong> Ironhide.</p>
+<p><strong>Free trait — Combat Scales</strong><br />
+Effect: Recognize when sturdy scale placement makes a defensive posture
+practical.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Close Pressure</td>
+<td>I</td>
+<td><strong>Driving Contact</strong></td>
+<td>Maintain a strong stance during an adjacent melee exchange.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Close Pressure</td>
+<td>II</td>
+<td><strong>Brow Guard</strong></td>
+<td>Angle a scale-covered brow against a visible minor hazard.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Close Pressure</td>
+<td>III</td>
+<td><strong>Short Rush</strong></td>
+<td>Close a brief gap over clear ground while keeping footing.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Defensive Weight</td>
+<td>I</td>
+<td><strong>Scale Set</strong></td>
+<td>Brace against a routine shove.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Defensive Weight</td>
+<td>II</td>
+<td><strong>Measured Blow</strong></td>
+<td>Keep an off-balance target from forcing you backward through
+controlled posture.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Defensive Weight</td>
+<td>III</td>
+<td><strong>Guarded Reach</strong></td>
+<td>Protect a nearby narrow approach during a brief encounter.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Drakeguard</strong></td>
+<td>Hold a close-quarters chokepoint against one forced displacement
+attempt by committing all immediate movement.</td>
+<td>1 RP · needs 4 racial skills including a Tier III · once per
+encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="crystaldrake">Crystaldrake</h3>
+<p><strong>Core expression:</strong> Prismhorn.</p>
+<p><strong>Free trait — Crystal Hearing</strong><br />
+Effect: Notice a nearby concentrated magical hum under still
+conditions.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Magic Resonance</td>
+<td>I</td>
+<td><strong>Facet Focus</strong></td>
+<td>Distinguish an active enchantment from an inert reflective
+crystal.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Magic Resonance</td>
+<td>II</td>
+<td><strong>Pulse Match</strong></td>
+<td>Recognize a familiar arcane vibration.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Magic Resonance</td>
+<td>III</td>
+<td><strong>Shard Warning</strong></td>
+<td>Warn one nearby ally that an accessible magical device is
+fluctuating.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Perceptive Scales</td>
+<td>I</td>
+<td><strong>Lightcatch</strong></td>
+<td>Use reflective facets to inspect a difficult visible angle.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Perceptive Scales</td>
+<td>II</td>
+<td><strong>Harmonic Edge</strong></td>
+<td>Recognize whether two magical signals share a likely origin.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Perceptive Scales</td>
+<td>III</td>
+<td><strong>Resonant Step</strong></td>
+<td>Avoid a spot where a visible crystal anomaly is pulsing.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Prism Concordance</strong></td>
+<td>Compare several accessible arcane vibrations to identify a possible
+common source.</td>
+<td>Doesn't dispel it · 1 RP · needs 4 racial skills including a Tier
+III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="thornscale">Thornscale</h3>
+<p><strong>Core expression:</strong> Thornwall.</p>
+<p><strong>Free trait — Raised Scales</strong><br />
+Effect: Angle your natural ridges against simple contact.<br />
+Limits: No automatic thorn damage · Free · always on · gives a clue,
+never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Braced Defense</td>
+<td>I</td>
+<td><strong>Ridge Guard</strong></td>
+<td>Use a protected stance against minor abrasion.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Braced Defense</td>
+<td>II</td>
+<td><strong>Counterweight</strong></td>
+<td>Keep footing when a visible opponent attempts a push.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Braced Defense</td>
+<td>III</td>
+<td><strong>Barbed Line</strong></td>
+<td>Discourage movement through a narrow approach with a careful
+stance.</td>
+<td>No automatic injury · 1 RP · needs this branch's Tier II · once per
+encounter in combat</td>
+</tr>
+<tr class="even">
+<td>Reactive Timing</td>
+<td>I</td>
+<td><strong>Contact Read</strong></td>
+<td>Recognize the direction of a nearby physical impact.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Reactive Timing</td>
+<td>II</td>
+<td><strong>Turnback</strong></td>
+<td>Reposition out of a collision line after holding ground.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Reactive Timing</td>
+<td>III</td>
+<td><strong>Guard Pivot</strong></td>
+<td>Exchange defensive position with a consenting ally nearby.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Thornhold</strong></td>
+<td>Control one chokepoint for a brief moment using position and
+counterforce.</td>
+<td>Brief · doesn't reflect damage · 1 RP · needs 4 racial skills
+including a Tier III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h2 id="ashborn">Ashborn</h2>
+<h3 id="cinderborn">Cinderborn</h3>
+<p><strong>Core expression:</strong> Emberveil.</p>
+<p><strong>Free trait — Warmblood Sense</strong><br />
+Effect: Recognize a nearby dangerous heat source before touching
+it.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Heat Path</td>
+<td>I</td>
+<td><strong>Emberstep</strong></td>
+<td>Choose safe footholds around minor hot debris.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Heat Path</td>
+<td>II</td>
+<td><strong>Flame Margin</strong></td>
+<td>Identify a safer distance from an active furnace or fire.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Heat Path</td>
+<td>III</td>
+<td><strong>Heated Crossing</strong></td>
+<td>Survey a limited route around a thermal hazard with the right
+protection.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Ember Endurance</td>
+<td>I</td>
+<td><strong>Ash Shelter</strong></td>
+<td>Construct practical shade against nearby heat exposure.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Ember Endurance</td>
+<td>II</td>
+<td><strong>Warm Grip</strong></td>
+<td>Handle heated equipment briefly with appropriate tools.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Ember Endurance</td>
+<td>III</td>
+<td><strong>Cinder Vigil</strong></td>
+<td>Maintain alertness around a fluctuating hot worksite.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Cinder Haven</strong></td>
+<td>Create a temporary protected corridor through one heat hazard.</td>
+<td>Needs equipment and time · not fire immunity · 1 RP · needs 4 racial
+skills including a Tier III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="duskhorn">Duskhorn</h3>
+<p><strong>Core expression:</strong> Duskveil.</p>
+<p><strong>Free trait — Shade Sight</strong><br />
+Effect: Recognize faint outlines in low light.<br />
+Limits: Not perfect night vision · Free · always on · gives a clue,
+never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Dusk Movement</td>
+<td>I</td>
+<td><strong>Shadow Edge</strong></td>
+<td>Locate a usable route between adjoining pools of shade.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Dusk Movement</td>
+<td>II</td>
+<td><strong>Quiet Turn</strong></td>
+<td>Change direction without a loud scrape on ordinary ground.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Dusk Movement</td>
+<td>III</td>
+<td><strong>Gloam Path</strong></td>
+<td>Mark a retreat through a dark but traversable hall.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Hidden Awareness</td>
+<td>I</td>
+<td><strong>Faint Outline</strong></td>
+<td>Detect an obvious moving silhouette against dim light.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Hidden Awareness</td>
+<td>II</td>
+<td><strong>Shadow Trace</strong></td>
+<td>Notice a recently disturbed source of concealment.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Hidden Awareness</td>
+<td>III</td>
+<td><strong>Watcher's Warning</strong></td>
+<td>Signal one companion to a hidden approach you have actually
+perceived.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Duskhorn Watch</strong></td>
+<td>Keep a group oriented during a dark encounter through observations
+and signals.</td>
+<td>No invisibility · 1 RP · needs 4 racial skills including a Tier III
+· once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="paleash">Paleash</h3>
+<p><strong>Core expression:</strong> Pallid Arc.</p>
+<p><strong>Free trait — Aether Tingle</strong><br />
+Effect: Recognize a nearby active magical disturbance when focusing on
+it.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Spell Awareness</td>
+<td>I</td>
+<td><strong>Ashglow</strong></td>
+<td>Detect a visible magical flicker at close range.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Spell Awareness</td>
+<td>II</td>
+<td><strong>Arcane Contrast</strong></td>
+<td>Tell whether two sensed spell residues differ.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Spell Awareness</td>
+<td>III</td>
+<td><strong>Disruption Read</strong></td>
+<td>Warn an ally that a visible effect is intensifying.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Arcane Study</td>
+<td>I</td>
+<td><strong>Ward Trace</strong></td>
+<td>Identify the likely boundary of an exposed minor magical seal.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Arcane Study</td>
+<td>II</td>
+<td><strong>Quiet Inspection</strong></td>
+<td>Inspect an unstable item without activating it through rough
+handling.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Arcane Study</td>
+<td>III</td>
+<td><strong>Aether Record</strong></td>
+<td>Remember a distinct magical disturbance for comparison later.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Pale Signal</strong></td>
+<td>Coordinate a party's response to a sensed magical instability.</td>
+<td>Not a counterspell · 1 RP · needs 4 racial skills including a Tier
+III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="thornhorn">Thornhorn</h3>
+<p><strong>Core expression:</strong> Briarhorn.</p>
+<p><strong>Free trait — Defensive Angle</strong><br />
+Effect: Find the most stable way to position your horns and
+stance.<br />
+Limits: No contact damage unless provoked · Free · always on · gives a
+clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Thorn Guard</td>
+<td>I</td>
+<td><strong>Horn Brace</strong></td>
+<td>Use posture to discourage minor physical intrusion.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Thorn Guard</td>
+<td>II</td>
+<td><strong>Firm Root</strong></td>
+<td>Keep footing through one small push.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Thorn Guard</td>
+<td>III</td>
+<td><strong>Guarded Turn</strong></td>
+<td>Protect an adjacent ally's retreat through controlled body
+placement.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Contact Reflex</td>
+<td>I</td>
+<td><strong>First Touch</strong></td>
+<td>Feel the direction of a nearby collision.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Contact Reflex</td>
+<td>II</td>
+<td><strong>Quick Recoil</strong></td>
+<td>Pull clear of a brief snag before it worsens.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Contact Reflex</td>
+<td>III</td>
+<td><strong>Defensive Pivot</strong></td>
+<td>Change stance to face a new approaching opponent.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Thornwall Response</strong></td>
+<td>Hold a narrow physical retreat route against a single shove while
+foregoing offensive pressure.</td>
+<td>1 RP · needs 4 racial skills including a Tier III · once per
+encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="smokeborn">Smokeborn</h3>
+<p><strong>Core expression:</strong> Ashmist.</p>
+<p><strong>Free trait — Obscured Eye</strong><br />
+Effect: Distinguish nearby movement in light smoke while still affected
+by its dangers.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Covercraft</td>
+<td>I</td>
+<td><strong>Smoke Line</strong></td>
+<td>Follow a visible boundary in thin smoke.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Covercraft</td>
+<td>II</td>
+<td><strong>Coalstep</strong></td>
+<td>Move quietly over scattered cooled debris.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Covercraft</td>
+<td>III</td>
+<td><strong>Haze Route</strong></td>
+<td>Choose a short safe passage through partial obscurity.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Hazard Sense</td>
+<td>I</td>
+<td><strong>Draft Ear</strong></td>
+<td>Recognize the direction of air flow in an enclosed space.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Hazard Sense</td>
+<td>II</td>
+<td><strong>Breath Warning</strong></td>
+<td>Alert an ally to a visibly thickening smoke hazard.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Hazard Sense</td>
+<td>III</td>
+<td><strong>Ember Vein</strong></td>
+<td>Trace a likely hidden heat source from smoke motion.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Smokeway</strong></td>
+<td>Guide allies out of one obscured hazard zone using airflow and
+signs.</td>
+<td>Not smoke immunity · 1 RP · needs 4 racial skills including a Tier
+III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h2 id="sylph">Sylph</h2>
+<h3 id="butterfly-sylph">Butterfly Sylph</h3>
+<p><strong>Core expression:</strong> Prismwing.</p>
+<p><strong>Free trait — Patterned Wings</strong><br />
+Effect: Recognize how wing displays and surrounding color contrast
+affect ordinary visual attention.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Gliding Grace</td>
+<td>I</td>
+<td><strong>Gentle Drift</strong></td>
+<td>Control a short safe glide from an elevated position.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Gliding Grace</td>
+<td>II</td>
+<td><strong>Soft Landing</strong></td>
+<td>Reduce a minor landing setback after a permitted glide.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Gliding Grace</td>
+<td>III</td>
+<td><strong>Curve Descent</strong></td>
+<td>Adjust a glide's approach angle.</td>
+<td>No extra range · 1 RP · needs this branch's Tier II · once per
+encounter in combat</td>
+</tr>
+<tr class="even">
+<td>Visual Misdirection</td>
+<td>I</td>
+<td><strong>Wing Flash</strong></td>
+<td>Briefly draw a nearby observer's attention toward your wing
+pattern.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Visual Misdirection</td>
+<td>II</td>
+<td><strong>Painted Cover</strong></td>
+<td>Choose existing colorful cover for concealment.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Visual Misdirection</td>
+<td>III</td>
+<td><strong>Distraction Bloom</strong></td>
+<td>Use a prepared wing display to interrupt a line of sight for a
+moment.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Kaleidoscope Passage</strong></td>
+<td>Guide a controlled descent through a visually complex area, with one
+patterned-wing distraction.</td>
+<td>One distraction · not sustained flight · 1 RP · needs 4 racial
+skills including a Tier III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="moth-sylph">Moth Sylph</h3>
+<p><strong>Core expression:</strong> Moonwing.</p>
+<p><strong>Free trait — Dusk Antennae</strong><br />
+Effect: Recognize nearby gentle motion and faint light changes in dim
+surroundings.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Quiet Glide</td>
+<td>I</td>
+<td><strong>Velvet Drift</strong></td>
+<td>Glide briefly with reduced incidental wing noise.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Quiet Glide</td>
+<td>II</td>
+<td><strong>Low Arc</strong></td>
+<td>Choose a shallow landing approach from valid elevation.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Quiet Glide</td>
+<td>III</td>
+<td><strong>Cloaked Descent</strong></td>
+<td>Use available darkness to obscure a controlled glide's
+endpoint.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Night Perception</td>
+<td>I</td>
+<td><strong>Faint Lamp</strong></td>
+<td>Identify the nearest ordinary light source through dim
+obstruction.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Night Perception</td>
+<td>II</td>
+<td><strong>Wing Shiver</strong></td>
+<td>Notice an approaching air current while still.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Night Perception</td>
+<td>III</td>
+<td><strong>Quiet Watch</strong></td>
+<td>Warn allies of a perceived low-light moving shape.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Mothveil Crossing</strong></td>
+<td>Guide a silent descending passage through dim cover.</td>
+<td>No invisibility · no upward flight · 1 RP · needs 4 racial skills
+including a Tier III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dragonfly-sylph">Dragonfly Sylph</h3>
+<p><strong>Core expression:</strong> Quickwing.</p>
+<p><strong>Free trait — Four-Wing Balance</strong><br />
+Effect: Recognize safe rapid direction changes during a brief
+glide.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Rapid Glide</td>
+<td>I</td>
+<td><strong>Snap Angle</strong></td>
+<td>Alter heading once during a controlled descent.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Rapid Glide</td>
+<td>II</td>
+<td><strong>Swift Descent</strong></td>
+<td>Reach a lower landing point promptly within normal glide
+distance.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Rapid Glide</td>
+<td>III</td>
+<td><strong>Brake Wing</strong></td>
+<td>Slow a permitted glide to land on a narrow safe platform.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Reflex Wing</td>
+<td>I</td>
+<td><strong>Air Shift</strong></td>
+<td>Sense a nearby wind change before gliding.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Reflex Wing</td>
+<td>II</td>
+<td><strong>Flash Turn</strong></td>
+<td>Reorient quickly on foot after touching down.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Reflex Wing</td>
+<td>III</td>
+<td><strong>Landing Cue</strong></td>
+<td>Warn an ally of a dangerous downwind landing zone.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Needleflight</strong></td>
+<td>Make a highly controlled complex descent between visible
+obstacles.</td>
+<td>No hovering or gaining height · 1 RP · needs 4 racial skills
+including a Tier III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cicada-sylph">Cicada Sylph</h3>
+<p><strong>Core expression:</strong> Songwing.</p>
+<p><strong>Free trait — Vibration Ear</strong><br />
+Effect: Recognize a nearby strong repetitive sound or tremor.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Resonance</td>
+<td>I</td>
+<td><strong>Root Hum</strong></td>
+<td>Identify the general direction of a rhythmic vibration.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Resonance</td>
+<td>II</td>
+<td><strong>Pulse Count</strong></td>
+<td>Recognize whether a repeated beat is slowing or accelerating.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Resonance</td>
+<td>III</td>
+<td><strong>Chorus Map</strong></td>
+<td>Locate an accessible hollow space through comparative echoes.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Wing Movement</td>
+<td>I</td>
+<td><strong>Buzz Signal</strong></td>
+<td>Send a brief audible warning using wing vibrations.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Wing Movement</td>
+<td>II</td>
+<td><strong>Timed Glide</strong></td>
+<td>Choose a descent moment between recurring environmental pulses.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Wing Movement</td>
+<td>III</td>
+<td><strong>Resonant Brace</strong></td>
+<td>Maintain footing during a predictable vibration.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Cicada Chorus</strong></td>
+<td>Coordinate allies around one repeating environmental hazard using
+rhythm and sound.</td>
+<td>No sonic damage · 1 RP · needs 4 racial skills including a Tier III
+· once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="lacewing-sylph">Lacewing Sylph</h3>
+<p><strong>Core expression:</strong> Glasswing.</p>
+<p><strong>Free trait — Delicate Control</strong><br />
+Effect: Estimate safe landing spots suited to fragile transparent
+wings.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Precision Glide</td>
+<td>I</td>
+<td><strong>Narrow Sweep</strong></td>
+<td>Make a gentle turn on a short descent.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Precision Glide</td>
+<td>II</td>
+<td><strong>Featherlight Landing</strong></td>
+<td>Reach a carefully chosen lower platform with reduced landing
+noise.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Precision Glide</td>
+<td>III</td>
+<td><strong>Threaded Gap</strong></td>
+<td>Guide a permitted glide through a visible wide-enough opening.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Fine Coordination</td>
+<td>I</td>
+<td><strong>Steady Hand</strong></td>
+<td>Handle a fragile object without scraping wings or limbs.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Fine Coordination</td>
+<td>II</td>
+<td><strong>Soft Reach</strong></td>
+<td>Maintain fine hand position after a short descent.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Fine Coordination</td>
+<td>III</td>
+<td><strong>Landing Marker</strong></td>
+<td>Indicate a safe landing point for a following ally.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Laceway</strong></td>
+<td>Make a precise complex descent into a confined landing zone.</td>
+<td>Costs glide distance · never sustained flight · 1 RP · needs 4
+racial skills including a Tier III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tidekin">Tidekin</h2>
+<h3 id="riverkin">Riverkin</h3>
+<p><strong>Core expression:</strong> Streamline.</p>
+<p><strong>Free trait — Current Feel</strong><br />
+Effect: Recognize a nearby stream's surface flow and likely shallow
+obstructions.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Current Paths</td>
+<td>I</td>
+<td><strong>Stream Step</strong></td>
+<td>Find a stable shallow-water footing.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Current Paths</td>
+<td>II</td>
+<td><strong>Crossflow</strong></td>
+<td>Angle your body across a mild current.</td>
+<td>No extra swim speed · 1 RP · needs this branch's Tier I · only in
+the stated situation</td>
+</tr>
+<tr class="odd">
+<td>Current Paths</td>
+<td>III</td>
+<td><strong>Eddy Route</strong></td>
+<td>Locate a sheltered line through a visible water obstacle.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Land Navigation</td>
+<td>I</td>
+<td><strong>Drain Sign</strong></td>
+<td>Recognize where runoff has crossed a street or tunnel.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Land Navigation</td>
+<td>II</td>
+<td><strong>Watershed Read</strong></td>
+<td>Infer nearby low ground from damp surfaces.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Land Navigation</td>
+<td>III</td>
+<td><strong>Flow Warning</strong></td>
+<td>Alert a companion that a wet surface is becoming unstable.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>River Passage</strong></td>
+<td>Chart and support one difficult crossing using current knowledge and
+prepared anchors.</td>
+<td>Not water breathing · 1 RP · needs 4 racial skills including a Tier
+III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sharkkin">Sharkkin</h3>
+<p><strong>Core expression:</strong> Tidefang.</p>
+<p><strong>Free trait — Motion Sense</strong><br />
+Effect: Notice strong nearby motion transmitted through water or a
+vibrating surface.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Pursuit Sense</td>
+<td>I</td>
+<td><strong>Wake Reading</strong></td>
+<td>Track a moving wake across visible water.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Pursuit Sense</td>
+<td>II</td>
+<td><strong>Pressure Turn</strong></td>
+<td>Maintain orientation during a sudden strong water movement.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Pursuit Sense</td>
+<td>III</td>
+<td><strong>Passing Trace</strong></td>
+<td>Recognize where a large submerged object recently passed.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Close Strength</td>
+<td>I</td>
+<td><strong>Firm Tow</strong></td>
+<td>Assist a nearby swimmer against manageable current.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Close Strength</td>
+<td>II</td>
+<td><strong>Braced Reach</strong></td>
+<td>Hold footing during a forceful wet-ground encounter.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Close Strength</td>
+<td>III</td>
+<td><strong>Predatory Vigil</strong></td>
+<td>Keep watch for movement around a shared waterway.</td>
+<td>Only what you can perceive · 1 RP · needs this branch's Tier II ·
+once per encounter in combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Hunter's Crossing</strong></td>
+<td>Coordinate a pursuit across mixed wet and dry terrain using observed
+motion.</td>
+<td>No extra combat damage · 1 RP · needs 4 racial skills including a
+Tier III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="reefkin">Reefkin</h3>
+<p><strong>Core expression:</strong> Reefglass.</p>
+<p><strong>Free trait — Pattern Eye</strong><br />
+Effect: Recognize how strong color and texture patterns conceal ordinary
+objects.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Concealment</td>
+<td>I</td>
+<td><strong>Coral Blend</strong></td>
+<td>Use existing multicolored cover to reduce visibility.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Concealment</td>
+<td>II</td>
+<td><strong>Broken Outline</strong></td>
+<td>Find a hiding place that breaks your silhouette.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Concealment</td>
+<td>III</td>
+<td><strong>Reef Shadow</strong></td>
+<td>Navigate a short obscured path.</td>
+<td>No invisibility · 1 RP · needs this branch's Tier II · once per
+encounter in combat</td>
+</tr>
+<tr class="even">
+<td>Shore Awareness</td>
+<td>I</td>
+<td><strong>Shoal Sign</strong></td>
+<td>Recognize a dangerous shallow-water drop or reef edge.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Shore Awareness</td>
+<td>II</td>
+<td><strong>Surface Texture</strong></td>
+<td>Distinguish fresh damage from natural roughness.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Shore Awareness</td>
+<td>III</td>
+<td><strong>Shelter Fan</strong></td>
+<td>Locate a protected nook along a rugged wall or shoreline.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Reef Passage</strong></td>
+<td>Help allies approach through complex natural cover with clear
+directions.</td>
+<td>Not magical camouflage · 1 RP · needs 4 racial skills including a
+Tier III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="raykin">Raykin</h3>
+<p><strong>Core expression:</strong> Flowfin.</p>
+<p><strong>Free trait — Smooth Turning</strong><br />
+Effect: Maintain balance when shifting direction through shallow water
+or on slick ground.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Fluid Movement</td>
+<td>I</td>
+<td><strong>Curve Swim</strong></td>
+<td>Turn smoothly during a short swim.</td>
+<td>No extra distance · 1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Fluid Movement</td>
+<td>II</td>
+<td><strong>Low Sweep</strong></td>
+<td>Reposition around a reachable obstacle on wet ground.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Fluid Movement</td>
+<td>III</td>
+<td><strong>Eddy Pivot</strong></td>
+<td>Avoid becoming pinned by a manageable current through body
+rotation.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Guarding Flow</td>
+<td>I</td>
+<td><strong>Wide Brace</strong></td>
+<td>Keep steady while helping someone enter water.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Guarding Flow</td>
+<td>II</td>
+<td><strong>Deflect Line</strong></td>
+<td>Angle around a foreseeable shove.</td>
+<td>Doesn't resist all impacts · 1 RP · needs this branch's Tier I ·
+only in the stated situation</td>
+</tr>
+<tr class="even">
+<td>Guarding Flow</td>
+<td>III</td>
+<td><strong>Shelter Turn</strong></td>
+<td>Guide an ally around a nearby obstacle while preserving both
+characters' normal actions.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Manta Passage</strong></td>
+<td>Make one coordinated evasive crossing for yourself and a willing
+ally.</td>
+<td>No extra total movement · 1 RP · needs 4 racial skills including a
+Tier III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="deepkin">Deepkin</h3>
+<p><strong>Core expression:</strong> Abyssglow.</p>
+<p><strong>Free trait — Deepwater Focus</strong><br />
+Effect: Notice weak light and nearby depth changes in dark water.<br />
+Limits: Not perfect vision in total darkness · Free · always on · gives
+a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Dark Water</td>
+<td>I</td>
+<td><strong>Faint Beacon</strong></td>
+<td>Recognize a weak underwater light source.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Dark Water</td>
+<td>II</td>
+<td><strong>Pressure Read</strong></td>
+<td>Notice a significant change in water pressure before entering
+it.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Dark Water</td>
+<td>III</td>
+<td><strong>Deep Route</strong></td>
+<td>Locate a safer lit or navigable course in low-visibility water.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Land Dusk</td>
+<td>I</td>
+<td><strong>Lowlight Marker</strong></td>
+<td>Recognize a dim outline in caves or ruins.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Land Dusk</td>
+<td>II</td>
+<td><strong>Glow Control</strong></td>
+<td>Use your faint body markings as a short visual signal.</td>
+<td>Too dim to light a room · 1 RP · needs this branch's Tier I · only
+in the stated situation</td>
+</tr>
+<tr class="even">
+<td>Land Dusk</td>
+<td>III</td>
+<td><strong>Still Depth</strong></td>
+<td>Remain oriented in a dark confined room by tracking nearby
+surfaces.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Abyssal Guide</strong></td>
+<td>Lead a group through one low-light aquatic or enclosed hazard using
+observed landmarks.</td>
+<td>Not unlimited pressure resistance · 1 RP · needs 4 racial skills
+including a Tier III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h2 id="skyborn">Skyborn</h2>
+<h3 id="hawkin">Hawkin</h3>
+<p><strong>Core expression:</strong> Ridgewatch.</p>
+<p><strong>Free trait — Hawk Eyes</strong><br />
+Effect: Notice broad movement along a distant clear sightline.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>High Lookout</td>
+<td>I</td>
+<td><strong>Long Scan</strong></td>
+<td>Identify a conspicuous distant landmark.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>High Lookout</td>
+<td>II</td>
+<td><strong>Perch Study</strong></td>
+<td>Assess whether an elevated position can bear you.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>High Lookout</td>
+<td>III</td>
+<td><strong>Overwatch Route</strong></td>
+<td>Relay a safe visible approach from a reached lookout.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Wing Control</td>
+<td>I</td>
+<td><strong>Brake Descent</strong></td>
+<td>Shorten a controlled downhill glide for a safe landing.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Wing Control</td>
+<td>II</td>
+<td><strong>Feather Turn</strong></td>
+<td>Adjust a wing-assisted drop by one safe direction.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Wing Control</td>
+<td>III</td>
+<td><strong>Landing Guide</strong></td>
+<td>Signal a nearby ally toward a valid landing place.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Hawkward</strong></td>
+<td>Guide a party's approach using linked lookouts and controlled
+descents.</td>
+<td>No free flight · 1 RP · needs 4 racial skills including a Tier III ·
+once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="eaglekin">Eaglekin</h3>
+<p><strong>Core expression:</strong> Broadwing.</p>
+<p><strong>Free trait — Long Sight</strong><br />
+Effect: Recognize distant large outlines across clear open
+terrain.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Great Perches</td>
+<td>I</td>
+<td><strong>Far Marker</strong></td>
+<td>Identify a prominent landmark at distance.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Great Perches</td>
+<td>II</td>
+<td><strong>Strong Landing</strong></td>
+<td>Stabilize after a controlled wing-assisted descent.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Great Perches</td>
+<td>III</td>
+<td><strong>Elevated Survey</strong></td>
+<td>Assess a likely ground approach from a legal high vantage
+point.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Powerful Position</td>
+<td>I</td>
+<td><strong>Wingbrace</strong></td>
+<td>Stabilize a load with partially opened wings in safe space.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Powerful Position</td>
+<td>II</td>
+<td><strong>Cliff Guard</strong></td>
+<td>Hold firm against a minor shove near a broad ledge.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Powerful Position</td>
+<td>III</td>
+<td><strong>Sweeping Cue</strong></td>
+<td>Warn a nearby ally of a visible movement from above.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Eagle Passage</strong></td>
+<td>Lead allies from a high observation point across a dangerous open
+approach through warnings and planned positions.</td>
+<td>1 RP · needs 4 racial skills including a Tier III · once per
+encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="falconkin">Falconkin</h3>
+<p><strong>Core expression:</strong> Swiftcrest.</p>
+<p><strong>Free trait — Falcon Focus</strong><br />
+Effect: Track an obvious fast-moving object across a clear
+sightline.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Rapid Descent</td>
+<td>I</td>
+<td><strong>Quick Fold</strong></td>
+<td>Complete a controlled descent promptly on a legal glide path.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Rapid Descent</td>
+<td>II</td>
+<td><strong>Air Brake</strong></td>
+<td>Reduce landing overshoot after a fast wing-assisted drop.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Rapid Descent</td>
+<td>III</td>
+<td><strong>Swoop Line</strong></td>
+<td>Choose a safe descending angle toward a reachable ledge.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Reflex Eye</td>
+<td>I</td>
+<td><strong>Flicker Track</strong></td>
+<td>Follow a rapidly turning visible target with your gaze.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Reflex Eye</td>
+<td>II</td>
+<td><strong>Timing Cue</strong></td>
+<td>Warn an ally of a predictable brief opening in moving terrain.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Reflex Eye</td>
+<td>III</td>
+<td><strong>Swift Reorient</strong></td>
+<td>Turn to face a new nearby hazard promptly after landing.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Falcon Drop</strong></td>
+<td>Make an exceptionally precise downhill glide with a narrow landing
+window.</td>
+<td>Normal movement limits · 1 RP · needs 4 racial skills including a
+Tier III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="owlkin">Owlkin</h3>
+<p><strong>Core expression:</strong> Nightplume.</p>
+<p><strong>Free trait — Nocturnal Eyes</strong><br />
+Effect: Recognize shapes in dim light and distinguish faint nocturnal
+movement.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Silent Wings</td>
+<td>I</td>
+<td><strong>Muffled Drift</strong></td>
+<td>Make a quieter brief glide from an existing elevation.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Silent Wings</td>
+<td>II</td>
+<td><strong>Dark Perch</strong></td>
+<td>Identify a stable lookout without bright lighting.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Silent Wings</td>
+<td>III</td>
+<td><strong>Velvet Descent</strong></td>
+<td>Choose a landing zone using faint light.</td>
+<td>No hovering · 1 RP · needs this branch's Tier II · once per
+encounter in combat</td>
+</tr>
+<tr class="even">
+<td>Night Watch</td>
+<td>I</td>
+<td><strong>Whisper Motion</strong></td>
+<td>Notice nearby movement behind faint cover.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Night Watch</td>
+<td>II</td>
+<td><strong>Sound Landmark</strong></td>
+<td>Orient using a distinctive sound source in darkness.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Night Watch</td>
+<td>III</td>
+<td><strong>Night Signal</strong></td>
+<td>Warn an ally of a threat you can actually perceive.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Owl's Passage</strong></td>
+<td>Guide one silent group repositioning through a dark but passable
+route.</td>
+<td>No true invisibility · 1 RP · needs 4 racial skills including a Tier
+III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ravenkin">Ravenkin</h3>
+<p><strong>Core expression:</strong> Inkmemory.</p>
+<p><strong>Free trait — Keen Recall</strong><br />
+Effect: Recall a recently observed landmark or distinctive object
+accurately.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Clever Observation</td>
+<td>I</td>
+<td><strong>Pattern Study</strong></td>
+<td>Recognize recurring behavior in a watched routine.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Clever Observation</td>
+<td>II</td>
+<td><strong>Tool Sign</strong></td>
+<td>Notice evidence that a device was recently operated.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Clever Observation</td>
+<td>III</td>
+<td><strong>Clever Approach</strong></td>
+<td>Identify a practical mundane distraction using the environment.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Memory Routes</td>
+<td>I</td>
+<td><strong>Waystone Recall</strong></td>
+<td>Reconstruct a short traveled path using landmarks.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Memory Routes</td>
+<td>II</td>
+<td><strong>Echo Phrase</strong></td>
+<td>Accurately repeat a short sentence you recently heard.</td>
+<td>Only speech you heard yourself · 1 RP · needs this branch's Tier I ·
+only in the stated situation</td>
+</tr>
+<tr class="even">
+<td>Memory Routes</td>
+<td>III</td>
+<td><strong>Witness Chain</strong></td>
+<td>Help allies compare two firsthand observations for
+inconsistencies.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Raven's Record</strong></td>
+<td>Produce a reliable summary of a studied location's routines, paths
+and clues.</td>
+<td>Only what was observed · 1 RP · needs 4 racial skills including a
+Tier III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h2 id="forgeborn">Forgeborn</h2>
+<h3 id="stoneforged">Stoneforged</h3>
+<p><strong>Core expression:</strong> Quarrycore.</p>
+<p><strong>Free trait — Stonework Body</strong><br />
+Effect: Recognize how stone joint angles affect safe movement and
+strain.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Heavy Balance</td>
+<td>I</td>
+<td><strong>Plinth Step</strong></td>
+<td>Keep footing on rough masonry under ordinary conditions.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Heavy Balance</td>
+<td>II</td>
+<td><strong>Load Line</strong></td>
+<td>Estimate whether a worked stone platform can support a burden.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Heavy Balance</td>
+<td>III</td>
+<td><strong>Keystone Brace</strong></td>
+<td>Stabilize a nearby physical structure briefly at personal
+effort.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Structural Reading</td>
+<td>I</td>
+<td><strong>Mortar Eye</strong></td>
+<td>Spot an accessible crumbling joint in old stone.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Structural Reading</td>
+<td>II</td>
+<td><strong>Echo Joint</strong></td>
+<td>Recognize a hollow behind reachable stone from tapping.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Structural Reading</td>
+<td>III</td>
+<td><strong>Broken Mason</strong></td>
+<td>Identify a safe point for a deliberate structural breach using
+tools.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Quarry Bastion</strong></td>
+<td>Anchor a temporary defensive route through threatened masonry.</td>
+<td>Not indestructible · 1 RP · needs 4 racial skills including a Tier
+III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ironforged">Ironforged</h3>
+<p><strong>Core expression:</strong> Rivetcore.</p>
+<p><strong>Free trait — Reinforced Frame</strong><br />
+Effect: Recognize useful bracing positions for plated joints and
+load-bearing mechanisms.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Iron Defense</td>
+<td>I</td>
+<td><strong>Plate Set</strong></td>
+<td>Align body plates to resist a minor ordinary scrape.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Iron Defense</td>
+<td>II</td>
+<td><strong>Joint Brace</strong></td>
+<td>Keep stance against a brief shove using a fixed position.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Iron Defense</td>
+<td>III</td>
+<td><strong>Riveted Hold</strong></td>
+<td>Remain grounded while supporting one consenting ally against
+physical displacement.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Mechanism Craft</td>
+<td>I</td>
+<td><strong>Hinge Read</strong></td>
+<td>Assess a visible iron hinge or linkage for stress.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Mechanism Craft</td>
+<td>II</td>
+<td><strong>Controlled Torque</strong></td>
+<td>Apply gradual pressure to a stuck mechanism without breaking it
+recklessly.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Mechanism Craft</td>
+<td>III</td>
+<td><strong>Mechanic's Route</strong></td>
+<td>Open a safe passage around a damaged machine with tools and
+time.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Iron Passage</strong></td>
+<td>Protect an ally during one hazardous mechanical crossing by bracing
+a real support.</td>
+<td>Not damage immunity · 1 RP · needs 4 racial skills including a Tier
+III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="bronzeforged">Bronzeforged</h3>
+<p><strong>Core expression:</strong> Clockwork.</p>
+<p><strong>Free trait — Fine Assembly</strong><br />
+Effect: Recognize fine mechanical tolerances in familiar crafted
+mechanisms.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Precision Hands</td>
+<td>I</td>
+<td><strong>Quiet Click</strong></td>
+<td>Operate a simple known mechanism without unnecessary noise.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Precision Hands</td>
+<td>II</td>
+<td><strong>Exact Alignment</strong></td>
+<td>Place a fragile object accurately under ordinary strain.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Precision Hands</td>
+<td>III</td>
+<td><strong>Timing Pin</strong></td>
+<td>Synchronize two separate accessible mechanical steps with careful
+timing.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Flexible Mechanism</td>
+<td>I</td>
+<td><strong>Adaptive Joint</strong></td>
+<td>Rotate safely through a cramped mechanical passage.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Flexible Mechanism</td>
+<td>II</td>
+<td><strong>Spring Read</strong></td>
+<td>Predict the direction of a visible simple moving linkage.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Flexible Mechanism</td>
+<td>III</td>
+<td><strong>Calibrated Assist</strong></td>
+<td>Help an ally manipulate a device using measured joint
+placement.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Bronze Sequence</strong></td>
+<td>Complete a prepared multi-part mechanical operation under pressure
+while risking ordinary failure and tool consumption.</td>
+<td>1 RP · needs 4 racial skills including a Tier III · once per
+encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="woodforged">Woodforged</h3>
+<p><strong>Core expression:</strong> Heartwood.</p>
+<p><strong>Free trait — Living Timber</strong><br />
+Effect: Recognize how moisture and grain affect the integrity of your
+own crafted wood body.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Livingwood Care</td>
+<td>I</td>
+<td><strong>Grain Sense</strong></td>
+<td>Identify rot or splitting in accessible wood.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Livingwood Care</td>
+<td>II</td>
+<td><strong>Sap Binding</strong></td>
+<td>Use prepared binding materials to temporarily support a cracked
+wooden object.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Livingwood Care</td>
+<td>III</td>
+<td><strong>Green Join</strong></td>
+<td>Repair a simple nonliving wooden structure with tools and ordinary
+resources.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Woodland Connection</td>
+<td>I</td>
+<td><strong>Root Familiarity</strong></td>
+<td>Recognize healthy growth near soil disturbances.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Woodland Connection</td>
+<td>II</td>
+<td><strong>Soft Bark</strong></td>
+<td>Move quietly across an existing woodland path by following
+cover.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Woodland Connection</td>
+<td>III</td>
+<td><strong>Living Shelter</strong></td>
+<td>Find a safe, naturally sheltered wooden enclosure.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Grove Restoration</strong></td>
+<td>Restore a damaged small wooden structure using materials and
+time.</td>
+<td>No self-healing or regrowing wounds · 1 RP · needs 4 racial skills
+including a Tier III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="crystalforged">Crystalforged</h3>
+<p><strong>Core expression:</strong> Lumicore.</p>
+<p><strong>Free trait — Facet Sensor</strong><br />
+Effect: Recognize weak arcane or vibrational shifts through your core
+while stationary.<br />
+Limits: Free · always on · gives a clue, never an automatic success</p>
+<table>
+<thead>
+<tr class="header">
+<th>Branch</th>
+<th>Tier</th>
+<th>Skill</th>
+<th>Effect</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Energy Perception</td>
+<td>I</td>
+<td><strong>Prism Ping</strong></td>
+<td>Distinguish an active nearby magical source from an inert
+crystal.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="even">
+<td>Energy Perception</td>
+<td>II</td>
+<td><strong>Facet Memory</strong></td>
+<td>Remember a distinctive resonance in a magical object.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="odd">
+<td>Energy Perception</td>
+<td>III</td>
+<td><strong>Conduit Read</strong></td>
+<td>Identify a likely energy flow along an exposed enchanted
+mechanism.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="even">
+<td>Core Regulation</td>
+<td>I</td>
+<td><strong>Measured Pulse</strong></td>
+<td>Moderate a minor visible light emission from your core.</td>
+<td>1 RP · minor effect</td>
+</tr>
+<tr class="odd">
+<td>Core Regulation</td>
+<td>II</td>
+<td><strong>Lattice Brace</strong></td>
+<td>Avoid a predictable vibration-related loss of balance.</td>
+<td>1 RP · needs this branch's Tier I · only in the stated
+situation</td>
+</tr>
+<tr class="even">
+<td>Core Regulation</td>
+<td>III</td>
+<td><strong>Feedback Warning</strong></td>
+<td>Warn an ally when an accessible energy device begins to pulse
+irregularly.</td>
+<td>1 RP · needs this branch's Tier II · once per encounter in
+combat</td>
+</tr>
+<tr class="odd">
+<td>Capstone</td>
+<td>—</td>
+<td><strong>Crystal Accord</strong></td>
+<td>Compare an exposed magical mechanism's resonance with a recorded
+pattern to reveal one probable instability.</td>
+<td>Doesn't store energy · 1 RP · needs 4 racial skills including a Tier
+III · once per encounter</td>
+</tr>
+</tbody>
+</table>
+<h2 id="implementation-notes">Implementation notes</h2>
+<ol type="1">
+<li>Store each skill as a versioned <code>lineage_skill_id</code>, tier,
+branch, description, RP cost, prerequisites, use category, and remaining
+uses. Store free traits separately.</li>
+<li>Do not require players to prove an ancestral stereotype, disclose
+biological identity, or roleplay a particular personality to use their
+lineage's existing skills.</li>
+<li>Physical identities stay as approved: Beastkin humanoid with one
+species-appropriate tail; Drakari no automatic wings/breath; Sylph
+insect wings and glide rather than full flight; Tidekin bipedal and
+land-viable; Skyborn avian wings and limited wing-assisted movement;
+Forgeborn visible core gem and constructed body but no unapproved
+healing/immunity rule.</li>
+<li>Record exact source/version for future rules changes so cross-GM
+adjudication is consistent.</li>
+<li>Numerical bonuses, character-level gates, check DCs, RP cadence,
+duration and ranges require a separate combat-system playtest. All
+wording above is <strong>proposed</strong> until approved.</li>
+</ol>
+<h2 id="coverage-audit">Coverage audit</h2>
+<ul>
+<li>12 races and exactly five approved lineages per race = <strong>60
+lineages</strong>.</li>
+<li>60 proposed starting traits; 2 branches × 3 purchaseable skills =
+<strong>360 branch skills</strong>; 60 capstones = <strong>420 racial
+unlocks</strong> (plus 60 traits).</li>
+<li>No class or specialization restrictions.</li>
+</ul>
+<hr />
+<p><em>EVERBOUND — The Living Adventurers Guild · Racial Skill Trees
+v1.1</em></p>
+</body></html>

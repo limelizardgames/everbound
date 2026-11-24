@@ -1,0 +1,93 @@
+[
+ {
+  "html": "/home/user/everbound/presentation/pdf_src/EB-00_Index.html",
+  "pdf": "/home/user/everbound/presentation/pdf/Everbound_EB-00_Index.pdf",
+  "land": false,
+  "footer": "EVERBOUND \u00b7 EB-00 \u00b7 Index and Status Guide \u00b7 v1.0",
+  "status": "APPROVED"
+ },
+ {
+  "html": "/home/user/everbound/presentation/pdf_src/EB-01_Core_Rules.html",
+  "pdf": "/home/user/everbound/presentation/pdf/Everbound_EB-01_Core_Rules.pdf",
+  "land": false,
+  "footer": "EVERBOUND \u00b7 EB-01 \u00b7 Core Rules \u00b7 v0.1",
+  "status": "DRAFT"
+ },
+ {
+  "html": "/home/user/everbound/presentation/pdf_src/EB-02_Classes_and_Specializations.html",
+  "pdf": "/home/user/everbound/presentation/pdf/Everbound_EB-02_Classes_and_Specializations.pdf",
+  "land": false,
+  "footer": "EVERBOUND \u00b7 EB-02 \u00b7 Classes and Specializations \u00b7 v1.1",
+  "status": "MIXED"
+ },
+ {
+  "html": "/home/user/everbound/presentation/pdf_src/EB-03_Races_and_Lineages.html",
+  "pdf": "/home/user/everbound/presentation/pdf/Everbound_EB-03_Races_and_Lineages.pdf",
+  "land": true,
+  "footer": "EVERBOUND \u00b7 EB-03 \u00b7 Races and Lineages \u00b7 v1.0",
+  "status": "APPROVED"
+ },
+ {
+  "html": "/home/user/everbound/presentation/pdf_src/EB-04_Racial_Skill_Trees.html",
+  "pdf": "/home/user/everbound/presentation/pdf/Everbound_EB-04_Racial_Skill_Trees.pdf",
+  "land": true,
+  "footer": "EVERBOUND \u00b7 EB-04 \u00b7 Racial Skill Trees \u00b7 v1.1",
+  "status": "DRAFT"
+ },
+ {
+  "html": "/home/user/everbound/presentation/pdf_src/EB-05_Lineage_Specialization_Synergies.html",
+  "pdf": "/home/user/everbound/presentation/pdf/Everbound_EB-05_Lineage_Specialization_Synergies.pdf",
+  "land": true,
+  "footer": "EVERBOUND \u00b7 EB-05 \u00b7 Lineage \u00d7 Specialization Synergies \u00b7 v1.1",
+  "status": "DRAFT"
+ },
+ {
+  "html": "/home/user/everbound/presentation/pdf_src/EB-06_Guild_Trials.html",
+  "pdf": "/home/user/everbound/presentation/pdf/Everbound_EB-06_Guild_Trials.pdf",
+  "land": false,
+  "footer": "EVERBOUND \u00b7 EB-06 \u00b7 Guild Trials \u00b7 v1.0",
+  "status": "DRAFT"
+ },
+ {
+  "html": "/home/user/everbound/presentation/pdf_src/EB-07_Allegiances_and_PvP.html",
+  "pdf": "/home/user/everbound/presentation/pdf/Everbound_EB-07_Allegiances_and_PvP.pdf",
+  "land": false,
+  "footer": "EVERBOUND \u00b7 EB-07 \u00b7 Allegiances and PvP \u00b7 v1.0",
+  "status": "DRAFT"
+ },
+ {
+  "html": "/home/user/everbound/presentation/pdf_src/EB-08_Code_of_Conduct.html",
+  "pdf": "/home/user/everbound/presentation/pdf/Everbound_EB-08_Code_of_Conduct.pdf",
+  "land": false,
+  "footer": "EVERBOUND \u00b7 EB-08 \u00b7 Code of Conduct and the Ten Oaths \u00b7 v1.0",
+  "status": "DRAFT"
+ },
+ {
+  "html": "/home/user/everbound/presentation/pdf_src/EB-09_World_and_Lore.html",
+  "pdf": "/home/user/everbound/presentation/pdf/Everbound_EB-09_World_and_Lore.pdf",
+  "land": false,
+  "footer": "EVERBOUND \u00b7 EB-09 \u00b7 World and Lore \u00b7 v1.0",
+  "status": "DRAFT"
+ },
+ {
+  "html": "/home/user/everbound/presentation/pdf_src/EB-10_Business_and_Operations.html",
+  "pdf": "/home/user/everbound/presentation/pdf/Everbound_EB-10_Business_and_Operations.pdf",
+  "land": false,
+  "footer": "EVERBOUND \u00b7 EB-10 \u00b7 Business and Operations Plan \u00b7 v1.0",
+  "status": "DRAFT"
+ },
+ {
+  "html": "/home/user/everbound/presentation/pdf_src/EB-11_Platform_and_GM_Handbook.html",
+  "pdf": "/home/user/everbound/presentation/pdf/Everbound_EB-11_Platform_and_GM_Handbook.pdf",
+  "land": false,
+  "footer": "EVERBOUND \u00b7 EB-11 \u00b7 Platform and GM Handbook \u00b7 v1.0",
+  "status": "APPROVED"
+ },
+ {
+  "html": "/home/user/everbound/presentation/pdf_src/EB-12_Decisions_Log.html",
+  "pdf": "/home/user/everbound/presentation/pdf/Everbound_EB-12_Decisions_Log.pdf",
+  "land": false,
+  "footer": "EVERBOUND \u00b7 EB-12 \u00b7 Decisions Log \u00b7 v1.0",
+  "status": "APPROVED"
+ }
+]

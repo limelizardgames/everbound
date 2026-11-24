@@ -1,0 +1,889 @@
+<!doctype html><html><head><meta charset='utf-8'><title>EB-01 Core Rules</title><style>@page { margin: 16mm 14mm 16mm 14mm; }
+:root { --ink: #231a2b; --muted: #6a6170; --line: #d9d2c7; --plum: #4a1d3f; --gold: #9a7420; }
+* { box-sizing: border-box; }
+body { font-family: "Liberation Serif", "DejaVu Serif", Georgia, serif; color: var(--ink); font-size: 10pt; line-height: 1.42; margin: 0; background: #fff; }
+h1, h2, h3, h4 { font-family: "Liberation Sans", "DejaVu Sans", Arial, sans-serif; color: var(--plum); line-height: 1.2; break-after: avoid; }
+h1 { font-size: 20pt; margin: 18pt 0 8pt; }
+h2 { font-size: 14pt; margin: 18pt 0 6pt; padding-bottom: 3pt; border-bottom: 1px solid var(--line); }
+h3 { font-size: 11.5pt; margin: 12pt 0 4pt; }
+h4 { font-size: 10.5pt; margin: 10pt 0 4pt; }
+p, ul, ol { margin: 4pt 0 6pt; }
+li { margin: 1.5pt 0; }
+a { color: var(--plum); text-decoration: none; }
+code { font-size: 9pt; background: #f4f0ea; padding: 0 2pt; }
+pre { background: #f6f2ec; padding: 6pt 8pt; font-size: 8.5pt; white-space: pre-wrap; border: 1px solid var(--line); break-inside: avoid; }
+blockquote { margin: 6pt 0; padding: 4pt 10pt; border-left: 3px solid var(--gold); background: #fbf8f2; color: #3b3040; }
+table { width: 100%; border-collapse: collapse; margin: 6pt 0 10pt; font-size: 8.6pt; line-height: 1.32; font-family: "Liberation Sans", "DejaVu Sans", Arial, sans-serif; }
+th, td { border: 1px solid var(--line); padding: 3pt 5pt; vertical-align: top; text-align: left; }
+th { background: #efe8df; color: var(--plum); }
+tr { break-inside: avoid; }
+thead { display: table-header-group; }
+hr { border: 0; border-top: 1px solid var(--line); margin: 12pt 0; }
+.badge { display: inline-block; font-family: "Liberation Sans", "DejaVu Sans", Arial, sans-serif; font-size: 7.5pt; font-weight: 700; letter-spacing: .08em; padding: 1.5pt 5pt; border-radius: 3pt; vertical-align: middle; border: 1px solid; }
+.badge.approved { color: #1d6b3a; background: #e3f4e8; border-color: #8cc9a2; }
+.badge.draft { color: #8a5a00; background: #fff3d4; border-color: #e7c46a; }
+h2 .badge, h3 .badge { margin-left: 6pt; }
+.cover { border: 1px solid var(--line); border-radius: 6pt; padding: 18pt 20pt; margin-bottom: 16pt; background: #fbf8f2; break-inside: avoid; }
+.cover .brand { font-family: "Liberation Sans", Arial, sans-serif; font-size: 8pt; letter-spacing: .25em; color: var(--gold); text-transform: uppercase; }
+.cover .docid { font-family: "Liberation Sans", Arial, sans-serif; font-size: 11pt; font-weight: 700; color: var(--muted); margin-top: 10pt; }
+.cover h1.title { font-size: 26pt; margin: 2pt 0 6pt; border: 0; }
+.cover .meta { font-family: "Liberation Sans", Arial, sans-serif; color: var(--muted); font-size: 9.5pt; }
+.cover .purpose { font-size: 11.5pt; margin: 10pt 0; }
+.cover .legend { font-family: "Liberation Sans", Arial, sans-serif; font-size: 8.5pt; color: var(--muted); margin-top: 8pt; }
+.cover .related { margin-top: 10pt; font-family: "Liberation Sans", Arial, sans-serif; font-size: 9pt; }
+.cover .related ul { margin: 3pt 0 0; padding-left: 16pt; columns: 2; }
+.art { margin: 8pt 0 14pt; text-align: center; break-inside: avoid; }
+.art img { max-width: 100%; max-height: 98mm; border: 1px solid var(--line); }
+.art .cap { font-size: 8.5pt; color: var(--muted); margin-top: 3pt; font-style: italic; }
+
+.pb { break-before: page; }
+</style></head><body class='port'><div class="cover">
+<div class="brand">EVERBOUND · The Living Adventurers Guild</div>
+<div class="docid">EB-01</div>
+<h1 class="title">Core Rules</h1>
+<div class="meta">Version 0.1 · November 23, 2026 · <span class="badge draft">DRAFT</span></div>
+<p class="purpose">Dice, attributes, skills, health, combat, levels and the session workflow.</p>
+<div class="legend"><span class="badge approved">APPROVED</span> decided by the founders &nbsp; <span class="badge draft">DRAFT</span> proposed, expect changes after playtesting</div>
+<div class="related"><b>Related documents</b><ul><li><b>EB-02</b> Classes and Specializations</li><li><b>EB-03</b> Races and Lineages</li><li><b>EB-04</b> Racial Skill Trees</li><li><b>EB-06</b> Guild Trials</li></ul></div>
+</div>
+
+<p><strong>Version:</strong> 0.1 — first playable draft ·
+<strong>Date:</strong> November 23, 2026 <strong>Status:</strong>
+Proposed for playtesting. Every number here is a starting guess.
+<strong>Builds on:</strong> Complete Character Progression Compendium
+v1.3 (classes, specializations, racial trees, synergies) and Guild
+Trials v1.0.</p>
+<blockquote>
+<p><strong>One rule to remember:</strong> roll <strong>d20 + attribute +
+training</strong>, and meet or beat the number.</p>
+</blockquote>
+<h2 id="1-the-six-attributes">1. The six attributes</h2>
+<p>Each attribute is a modifier from <strong>−1 to +5</strong> that you
+add to rolls. There are no separate 3–18 scores.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Attribute</th>
+<th>What it measures</th>
+<th>Skills</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Might</strong></td>
+<td>Strength, lifting, breaking, heavy weapons</td>
+<td>Athletics, Force</td>
+</tr>
+<tr class="even">
+<td><strong>Grace</strong></td>
+<td>Agility, balance, aim, light weapons, Guard</td>
+<td>Acrobatics, Stealth, Finesse</td>
+</tr>
+<tr class="odd">
+<td><strong>Vigor</strong></td>
+<td>Toughness, stamina, extra HP each level</td>
+<td>Endurance</td>
+</tr>
+<tr class="even">
+<td><strong>Wits</strong></td>
+<td>Reasoning, memory, study; Arcanist power</td>
+<td>Arcana, Lore, Investigation, Craft</td>
+</tr>
+<tr class="odd">
+<td><strong>Insight</strong></td>
+<td>Awareness, intuition, care; Luminary power</td>
+<td>Perception, Empathy, Survival, Medicine</td>
+</tr>
+<tr class="even">
+<td><strong>Presence</strong></td>
+<td>Force of personality; Resonant power</td>
+<td>Persuasion, Deception, Performance, Command</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-the-18-skills">2. The 18 skills</h2>
+<p>You are <strong>trained</strong> in a skill or not. Trained skills
+add your <strong>Training bonus</strong> (+2 at level 1, see the level
+table).</p>
+<table>
+<thead>
+<tr class="header">
+<th>Skill</th>
+<th>Attribute</th>
+<th>Used for</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Athletics</strong></td>
+<td>Might</td>
+<td>Climb, swim, jump, run, grapple</td>
+</tr>
+<tr class="even">
+<td><strong>Force</strong></td>
+<td>Might</td>
+<td>Lift, push, break, hold a door</td>
+</tr>
+<tr class="odd">
+<td><strong>Acrobatics</strong></td>
+<td>Grace</td>
+<td>Balance, tumble, land, slip free</td>
+</tr>
+<tr class="even">
+<td><strong>Stealth</strong></td>
+<td>Grace</td>
+<td>Move unseen and unheard</td>
+</tr>
+<tr class="odd">
+<td><strong>Finesse</strong></td>
+<td>Grace</td>
+<td>Locks, traps, sleight of hand, fine tools</td>
+</tr>
+<tr class="even">
+<td><strong>Endurance</strong></td>
+<td>Vigor</td>
+<td>Resist fatigue, heat, cold, poison, hard travel</td>
+</tr>
+<tr class="odd">
+<td><strong>Arcana</strong></td>
+<td>Wits</td>
+<td>Magic, runes, magical devices</td>
+</tr>
+<tr class="even">
+<td><strong>Lore</strong></td>
+<td>Wits</td>
+<td>History, legends, religions, the world</td>
+</tr>
+<tr class="odd">
+<td><strong>Investigation</strong></td>
+<td>Wits</td>
+<td>Search, deduce, piece clues together</td>
+</tr>
+<tr class="even">
+<td><strong>Craft</strong></td>
+<td>Wits</td>
+<td>Make, repair and appraise (ties to professions)</td>
+</tr>
+<tr class="odd">
+<td><strong>Perception</strong></td>
+<td>Insight</td>
+<td>Notice, spot, listen</td>
+</tr>
+<tr class="even">
+<td><strong>Empathy</strong></td>
+<td>Insight</td>
+<td>Read people and moods, spot lies</td>
+</tr>
+<tr class="odd">
+<td><strong>Survival</strong></td>
+<td>Insight</td>
+<td>Track, navigate, forage, read nature and animals</td>
+</tr>
+<tr class="even">
+<td><strong>Medicine</strong></td>
+<td>Insight</td>
+<td>Treat wounds, stabilize, diagnose</td>
+</tr>
+<tr class="odd">
+<td><strong>Persuasion</strong></td>
+<td>Presence</td>
+<td>Convince, negotiate, befriend</td>
+</tr>
+<tr class="even">
+<td><strong>Deception</strong></td>
+<td>Presence</td>
+<td>Bluff, disguise, mislead</td>
+</tr>
+<tr class="odd">
+<td><strong>Performance</strong></td>
+<td>Presence</td>
+<td>Music, speech, storytelling, distraction</td>
+</tr>
+<tr class="even">
+<td><strong>Command</strong></td>
+<td>Presence</td>
+<td>Lead, rally, intimidate</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-building-a-character">3. Building a character</h2>
+<ol type="1">
+<li><strong>Choose a race.</strong> Gain its HP bonus, <strong>+1 to one
+attribute</strong> and its movement.</li>
+<li><strong>Choose a lineage.</strong> Gain the free lineage trait and
+<strong>one trained skill</strong> (table in section 5).</li>
+<li><strong>Choose a class.</strong> Gain its HP, Guard, <strong>+1 to
+its primary attribute</strong>, two trained Resists, its trained skills
+and its four starting abilities.</li>
+<li><strong>Spend 6 attribute points.</strong> Every attribute starts at
+0. Each point adds +1, up to +3 before race and class bonuses. You may
+lower one attribute to −1 for one extra point. Highest possible at level
+1: +4.</li>
+<li><strong>Work out HP and Guard</strong> (section 6).</li>
+<li><strong>Pick starting gear:</strong> your class weapons, armor if
+your class uses it, an adventurer's pack and 50 gold.</li>
+</ol>
+<h2 id="4-races">4. Races</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Race</th>
+<th>HP bonus</th>
+<th>+1 attribute</th>
+<th>Move (squares)</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Human</strong></td>
+<td>+2</td>
+<td>+1 any</td>
+<td>6</td>
+<td>Adaptable: one extra trained skill</td>
+</tr>
+<tr class="even">
+<td><strong>Elf</strong></td>
+<td>+1</td>
+<td>Grace</td>
+<td>6</td>
+<td>Dim-light sight per lineage</td>
+</tr>
+<tr class="odd">
+<td><strong>Dwarf</strong></td>
+<td>+4</td>
+<td>Vigor</td>
+<td>5</td>
+<td>Stout: Edge to resist being knocked down</td>
+</tr>
+<tr class="even">
+<td><strong>Halfling</strong></td>
+<td>+2</td>
+<td>Grace</td>
+<td>5</td>
+<td>Small: moves through larger creatures' spaces</td>
+</tr>
+<tr class="odd">
+<td><strong>Orcborn</strong></td>
+<td>+4</td>
+<td>Might</td>
+<td>6</td>
+<td>Powerful build: carries heavy loads</td>
+</tr>
+<tr class="even">
+<td><strong>Beastkin</strong></td>
+<td>+2</td>
+<td>Grace</td>
+<td>6</td>
+<td>Keen senses per lineage</td>
+</tr>
+<tr class="odd">
+<td><strong>Drakari</strong></td>
+<td>+3</td>
+<td>Might</td>
+<td>6</td>
+<td>No wings or breath weapon</td>
+</tr>
+<tr class="even">
+<td><strong>Ashborn</strong></td>
+<td>+2</td>
+<td>Presence</td>
+<td>6</td>
+<td>Ember-bright eyes: see in dim light</td>
+</tr>
+<tr class="odd">
+<td><strong>Sylph</strong></td>
+<td>+0</td>
+<td>Insight</td>
+<td>6</td>
+<td>Glide: fall slowly, glide 2 squares per square dropped; no
+flight</td>
+</tr>
+<tr class="even">
+<td><strong>Tidekin</strong></td>
+<td>+2</td>
+<td>Vigor</td>
+<td>6</td>
+<td>Hold breath 10 minutes; swim at full move</td>
+</tr>
+<tr class="odd">
+<td><strong>Skyborn</strong></td>
+<td>+1</td>
+<td>Insight</td>
+<td>6</td>
+<td>Wing-assisted jump and glide; no flight</td>
+</tr>
+<tr class="even">
+<td><strong>Forgeborn</strong></td>
+<td>+3</td>
+<td>Vigor</td>
+<td>6</td>
+<td>Standard healing and recovery; no immunities</td>
+</tr>
+</tbody>
+</table>
+<p>One square is about 5 feet. Lower HP bonuses are balanced by mobility
+or senses, never by weaker skills.</p>
+<h2 id="5-lineage-trained-skills">5. Lineage trained skills</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Race</th>
+<th>Lineages and trained skill</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Human</strong></td>
+<td>Highlander: Athletics · Coastlander: Acrobatics · Plainsfolk:
+Perception · Dune Dweller: Survival · Frostlander: Endurance</td>
+</tr>
+<tr class="even">
+<td><strong>Elf</strong></td>
+<td>High Elf: Arcana · Wood Elf: Survival · Moon Elf: Perception · Deep
+Elf: Stealth · Frost Elf: Endurance</td>
+</tr>
+<tr class="odd">
+<td><strong>Dwarf</strong></td>
+<td>Mountain Dwarf: Force · Hill Dwarf: Endurance · Deep Dwarf:
+Perception · Ember Dwarf: Craft · Crystal Dwarf: Arcana</td>
+</tr>
+<tr class="even">
+<td><strong>Halfling</strong></td>
+<td>Hillfoot: Endurance · Woodfoot: Stealth · Riverfoot: Acrobatics ·
+Marshfoot: Survival · Cavefoot: Perception</td>
+</tr>
+<tr class="odd">
+<td><strong>Orcborn</strong></td>
+<td>Mountain Orc: Force · Steppe Orc: Athletics · Ash Orc: Perception ·
+Marsh Orc: Survival · Frost Orc: Endurance</td>
+</tr>
+<tr class="even">
+<td><strong>Beastkin</strong></td>
+<td>Wolfkin: Survival · Foxkin: Deception · Catkin: Acrobatics ·
+Rabbitkin: Perception · Bearkin: Force</td>
+</tr>
+<tr class="odd">
+<td><strong>Drakari</strong></td>
+<td>Wyrmkin: Force · Serpentkin: Acrobatics · Drakekin: Athletics ·
+Crystaldrake: Arcana · Thornscale: Endurance</td>
+</tr>
+<tr class="even">
+<td><strong>Ashborn</strong></td>
+<td>Cinderborn: Endurance · Duskhorn: Perception · Paleash: Arcana ·
+Thornhorn: Force · Smokeborn: Stealth</td>
+</tr>
+<tr class="odd">
+<td><strong>Sylph</strong></td>
+<td>Butterfly Sylph: Performance · Moth Sylph: Stealth · Dragonfly
+Sylph: Acrobatics · Cicada Sylph: Perception · Lacewing Sylph:
+Finesse</td>
+</tr>
+<tr class="even">
+<td><strong>Tidekin</strong></td>
+<td>Riverkin: Survival · Sharkkin: Athletics · Reefkin: Stealth ·
+Raykin: Acrobatics · Deepkin: Perception</td>
+</tr>
+<tr class="odd">
+<td><strong>Skyborn</strong></td>
+<td>Hawkin: Perception · Eaglekin: Athletics · Falconkin: Acrobatics ·
+Owlkin: Stealth · Ravenkin: Investigation</td>
+</tr>
+<tr class="even">
+<td><strong>Forgeborn</strong></td>
+<td>Stoneforged: Endurance · Ironforged: Force · Bronzeforged: Finesse ·
+Woodforged: Survival · Crystalforged: Arcana</td>
+</tr>
+</tbody>
+</table>
+<p>If the lineage skill is one you already have from your class, pick
+any other skill instead.</p>
+<h2 id="6-classes-and-core-numbers">6. Classes and core numbers</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Class</th>
+<th>Starting HP</th>
+<th>HP per level</th>
+<th>Guard</th>
+<th>Primary (+1)</th>
+<th>Trained Resists</th>
+<th>Trained skills</th>
+<th>Recovery die</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Vanguard</strong></td>
+<td>12</td>
+<td>+7</td>
+<td>14 + Grace (max +1)</td>
+<td>Might</td>
+<td>Might, Vigor</td>
+<td>Pick 3: Athletics, Force, Endurance, Command, Perception,
+Survival</td>
+<td>d10</td>
+</tr>
+<tr class="even">
+<td><strong>Wildstrider</strong></td>
+<td>9</td>
+<td>+5</td>
+<td>12 + Grace</td>
+<td>Grace</td>
+<td>Grace, Insight</td>
+<td>Pick 3: Survival, Perception, Stealth, Athletics, Acrobatics,
+Medicine</td>
+<td>d8</td>
+</tr>
+<tr class="odd">
+<td><strong>Shadowblade</strong></td>
+<td>8</td>
+<td>+5</td>
+<td>12 + Grace</td>
+<td>Grace</td>
+<td>Grace, Wits</td>
+<td>Pick 4: Stealth, Finesse, Acrobatics, Deception, Investigation,
+Perception</td>
+<td>d8</td>
+</tr>
+<tr class="even">
+<td><strong>Luminary</strong></td>
+<td>8</td>
+<td>+5</td>
+<td>13 + Grace (max +2)</td>
+<td>Insight</td>
+<td>Insight, Presence</td>
+<td>Pick 3: Medicine, Empathy, Lore, Arcana, Persuasion, Endurance</td>
+<td>d8</td>
+</tr>
+<tr class="odd">
+<td><strong>Arcanist</strong></td>
+<td>6</td>
+<td>+4</td>
+<td>11 + Grace</td>
+<td>Wits</td>
+<td>Wits, Insight</td>
+<td>Pick 3: Arcana, Lore, Investigation, Craft, Perception,
+Medicine</td>
+<td>d6</td>
+</tr>
+<tr class="even">
+<td><strong>Resonant</strong></td>
+<td>7</td>
+<td>+4</td>
+<td>11 + Grace</td>
+<td>Presence</td>
+<td>Presence, Grace</td>
+<td>Pick 3: Performance, Persuasion, Empathy, Deception, Command,
+Lore</td>
+<td>d6</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Health (HP)</strong> at level 1 = <strong>10 + race bonus +
+class HP + Vigor</strong>. Each new level adds <strong>class HP per
+level + Vigor</strong> (minimum +1).
+<ul>
+<li>Example: Dwarf Vanguard with Vigor +2 → 10 + 4 + 12 + 2 = <strong>28
+HP</strong>. Sylph Arcanist with Vigor 0 → 10 + 0 + 6 + 0 = <strong>16
+HP</strong>.</li>
+</ul></li>
+<li><strong>Guard</strong> is how hard you are to hit (like armor
+class). A shield adds +1.</li>
+<li><strong>Ability DC</strong> (what enemies roll against for your
+abilities) = <strong>8 + Training + your power attribute</strong>
+(Arcanist: Wits · Luminary: Insight · Resonant: Presence · everyone
+else: their primary).</li>
+<li><strong>Weapons:</strong> Light <strong>d6</strong> (dagger, sling,
+hand axe) · Standard <strong>d8</strong> (sword, spear, bow, staff) ·
+Heavy <strong>d10</strong> (two-handed: greataxe, warhammer, longbow).
+Add Might for heavy and most melee weapons, Grace for light and ranged
+ones.</li>
+</ul>
+<h2 id="7-rolling">7. Rolling</h2>
+<p><strong>Check:</strong> d20 + attribute + Training (if trained) vs a
+<strong>Difficulty</strong>.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Difficulty</th>
+<th>Number</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Easy</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td>Standard</td>
+<td>12</td>
+</tr>
+<tr class="odd">
+<td>Hard</td>
+<td>15</td>
+</tr>
+<tr class="even">
+<td>Heroic</td>
+<td>18</td>
+</tr>
+<tr class="odd">
+<td>Legendary</td>
+<td>21</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Edge:</strong> roll two d20s, keep the higher.
+<strong>Strain:</strong> keep the lower. Edge and Strain cancel; they
+never stack.</li>
+<li><strong>Help:</strong> one ally with a good reason gives you
+Edge.</li>
+<li><strong>Group check:</strong> everyone rolls; the group succeeds if
+at least half succeed.</li>
+<li><strong>Resist</strong> (like a saving throw): d20 + attribute (+
+Training if your class is trained in that Resist) vs the effect's
+DC.</li>
+<li><strong>Natural 20</strong> on a check: a great success with an
+extra benefit. <strong>Natural 1</strong>: a complication. You still
+succeed if the total beats the Difficulty, but something goes
+wrong.</li>
+<li><strong>Passive Perception</strong> = 10 + Perception total; the GM
+uses it for things you'd notice without trying.</li>
+</ul>
+<h2 id="8-combat">8. Combat</h2>
+<p><strong>Initiative:</strong> d20 + Grace, highest first; on a tie,
+players go first.</p>
+<p><strong>On your turn:</strong></p>
+<ul>
+<li><strong>Move:</strong> up to your move in squares.</li>
+<li><strong>Action:</strong> one of Attack, use an ability, Dash (move
+again), Help, Defend (+2 Guard and Edge on Resists until your next
+turn), use an item, or make a check.</li>
+<li><strong>Reaction:</strong> once per round, on anyone's turn: an
+Opportunity Strike when an enemy leaves your reach, or a reaction
+ability.</li>
+<li>Talking, drawing a weapon and dropping an item are free.</li>
+</ul>
+<p><strong>Attack:</strong> d20 + attribute + Training vs the target's
+Guard. <strong>Damage:</strong> weapon or ability dice + attribute.</p>
+<ul>
+<li><strong>Natural 20:</strong> critical hit, roll the damage dice
+twice. <strong>Natural 1:</strong> miss.</li>
+</ul>
+<p><strong>Ability uses:</strong> Core Techniques are unlimited.
+"1/encounter" abilities, Signature abilities and racial Tier III skills
+come back when the encounter ends.</p>
+<p><strong>Conditions:</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th>Condition</th>
+<th>Effect</th>
+<th>Ends</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Exposed</strong></td>
+<td>Attacks against you have Edge</td>
+<td>End of your next turn</td>
+</tr>
+<tr class="even">
+<td><strong>Staggered</strong></td>
+<td>No reactions; Strain on your next attack</td>
+<td>End of your next turn</td>
+</tr>
+<tr class="odd">
+<td><strong>Pinned</strong></td>
+<td>Move is 0</td>
+<td>End of your next turn, or escape (Athletics/Acrobatics vs DC)</td>
+</tr>
+<tr class="even">
+<td><strong>Prone</strong></td>
+<td>Melee attacks against you have Edge; standing costs half your
+move</td>
+<td>You stand up</td>
+</tr>
+<tr class="odd">
+<td><strong>Frightened</strong></td>
+<td>Strain on checks and attacks while the source is in sight</td>
+<td>Resist (Insight) at end of each turn</td>
+</tr>
+<tr class="even">
+<td><strong>Hidden</strong></td>
+<td>Unseen: your next attack has Edge</td>
+<td>You attack, make noise, or are found</td>
+</tr>
+<tr class="odd">
+<td><strong>Poisoned</strong></td>
+<td>Strain on attacks and checks</td>
+<td>Resist (Vigor) at end of each turn, or Medicine</td>
+</tr>
+<tr class="even">
+<td><strong>Shielded</strong></td>
+<td>+2 Guard</td>
+<td>Start of the shielder's next turn</td>
+</tr>
+<tr class="odd">
+<td><strong>Downed</strong></td>
+<td>At 0 HP: prone, can't act; make Last Breath rolls</td>
+<td>Any healing, or stabilized</td>
+</tr>
+</tbody>
+</table>
+<h3 id="downed-and-last-breath">Downed and Last Breath</h3>
+<p>At <strong>0 HP</strong> you are <strong>Downed</strong>. At the
+start of each of your turns, roll a d20: <strong>10 or more</strong> is
+a success, <strong>9 or less</strong> is a failure. Taking damage while
+Downed counts as one failure.</p>
+<ul>
+<li><strong>3 successes:</strong> you are stable at 0 HP.</li>
+<li><strong>Any healing</strong>, or an ally stabilizing you (Medicine
+vs Standard 12, or Rite of Clarity), brings you back.</li>
+<li><strong>3 failures:</strong> you have <strong>Fallen</strong>. You
+are out for the rest of the encounter and wake at 1 HP afterwards with a
+<strong>Lingering Wound</strong>: a story tag the GM uses until your
+next session.</li>
+<li><strong>No permanent death</strong> unless the player chooses a
+Heroic Sacrifice.</li>
+</ul>
+<h2 id="9-recovery">9. Recovery</h2>
+<ul>
+<li><strong>Recovery Dice:</strong> you have one per level, of your
+class's Recovery die.</li>
+<li><strong>Breather</strong> (about 10 minutes in the story; up to two
+per session): spend any number of Recovery Dice, rolling each and adding
+Vigor, and heal that much.</li>
+<li><strong>Between sessions:</strong> HP, Recovery Dice and all uses
+reset when you next check in.</li>
+</ul>
+<h2 id="10-levels-and-progression">10. Levels and progression</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Level</th>
+<th>XP</th>
+<th>Training</th>
+<th>Skill Points (total)</th>
+<th>Racial Points (total)</th>
+<th>Also</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>0</td>
+<td>+2</td>
+<td>2</td>
+<td>1</td>
+<td>Starting abilities, lineage trait</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>300</td>
+<td>+2</td>
+<td>3</td>
+<td>1</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>900</td>
+<td>+2</td>
+<td>4</td>
+<td>2</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>1,800</td>
+<td>+2</td>
+<td>5</td>
+<td>2</td>
+<td>+1 attribute · eligible for a Guild Trial</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>3,000</td>
+<td>+3</td>
+<td>6</td>
+<td>3</td>
+<td>Scaling abilities grow</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>4,500</td>
+<td>+3</td>
+<td>7</td>
+<td>3</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>6,500</td>
+<td>+3</td>
+<td>8</td>
+<td>4</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>9,000</td>
+<td>+3</td>
+<td>9</td>
+<td>4</td>
+<td>+1 attribute</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>12,000</td>
+<td>+4</td>
+<td>10</td>
+<td>5</td>
+<td>Scaling abilities grow</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>16,000</td>
+<td>+4</td>
+<td>11</td>
+<td>5</td>
+<td>Capstone reachable</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>SP</strong> buy class-tree and specialization skills (1
+each). Reaching 5 SP in the class tree (level 4) makes you eligible for
+a <strong>Guild Trial</strong>. Passing a trial also awards <strong>+1
+bonus SP</strong>.</li>
+<li><strong>RP</strong> buy racial skills (1 each). Five RP is exactly
+enough for a capstone by level 9.</li>
+<li><strong>Attribute increases</strong> at levels 4 and 8: +1 to one
+attribute (maximum +5).</li>
+<li>XP thresholds match the website's current level curve.</li>
+</ul>
+<h2 id="11-starting-abilities-with-numbers-first-pass">11. Starting
+abilities with numbers (first pass)</h2>
+<p>These add numbers to the 24 starting abilities from the Class
+Compendium. Effects at L5 and L9 grow as noted.</p>
+<h3 id="vanguard">Vanguard</h3>
+<ul>
+<li>Iron Resolve — Edge on Resists against being pushed or knocked
+prone.</li>
+<li>Shieldbreak — Weapon attack; on a hit, push the target 1 square OR
+it has Strain on attacks against anyone but you until your next
+turn.</li>
+<li>Stand Before Me (reaction, 1/encounter) — When an ally within 1
+square is hit, take the hit instead and reduce its damage by 1d8 +
+Vigor.</li>
+<li>Siegeborn — Edge on checks to find structural weak points,
+defensible positions or ways through barriers.</li>
+</ul>
+<h3 id="wildstrider">Wildstrider</h3>
+<ul>
+<li>Keen Instinct — +2 Perception to notice tracks, ambushes and
+hazards; you can't be surprised while conscious.</li>
+<li>Skirmisher's Strike — Weapon attack, then move up to 2 squares
+without provoking.</li>
+<li>Predator's Snare (1/encounter) — Target Resists (Grace) vs your
+ability DC or is Pinned; allies have Edge against it until your next
+turn.</li>
+<li>Pathfinder — Edge on Survival to find routes, trails and safer
+paths.</li>
+</ul>
+<h3 id="shadowblade">Shadowblade</h3>
+<ul>
+<li>Exploit Weakness — Once per turn, +1d6 damage against a target that
+is Exposed, unaware, or next to one of your allies (+2d6 at L5, +3d6 at
+L9).</li>
+<li>Feint &amp; Slip — Weapon attack, then move up to 2 squares to cover
+without provoking.</li>
+<li>Veilstep (1/encounter) — Move up to 3 squares to a spot out of an
+enemy's sight; you are Hidden.</li>
+<li>Underhand — Edge on Finesse with locks, traps and hidden
+compartments.</li>
+</ul>
+<h3 id="luminary">Luminary</h3>
+<ul>
+<li>Guiding Flame — Edge on Medicine to diagnose and on Perception to
+sense spirits or corruption.</li>
+<li>Radiant Hand — Give an ally within 6 squares Shielded (+2 Guard), OR
+spell attack (Insight) for 1d8 radiant (2d8 at L5, 3d8 at L9).</li>
+<li>Wellspring (1/encounter) — An ally within 6 squares heals 1d8 +
+Insight (+1d8 at L5 and L9) OR ends one minor condition.</li>
+<li>Rite of Clarity — Stabilize a Downed ally without a check; purify a
+small tainted object; Edge on Medicine checks.</li>
+</ul>
+<h3 id="arcanist">Arcanist</h3>
+<ul>
+<li>Arcane Sense — Sense active magic within 6 squares.</li>
+<li>Weavebolt — Spell attack (Wits), range 12, 1d8 (2d8 at L5, 3d8 at
+L9). Pick: fire (ignites), frost (target moves 1 less), lightning (no
+reactions), force (push 1).</li>
+<li>Sigilburst (1/encounter) — 2-square radius within 8 squares; each
+creature Resists (Grace) vs your DC: 2d6 damage, half on a success (+1d6
+at L5 and L9).</li>
+<li>Runic Insight — Edge on Arcana to read runes, symbols and magical
+devices.</li>
+</ul>
+<h3 id="resonant">Resonant</h3>
+<ul>
+<li>Attunement — Edge on Empathy to read a group's mood; sense
+supernatural sounds.</li>
+<li>Harmonic Cue — An ally within 6 squares adds 1d4 to their next roll,
+OR a target Resists (Presence) vs your DC or takes 1d6 sonic and has
+Strain on its next attack.</li>
+<li>Grand Refrain (reaction, 1/encounter) — An ally within 6 squares
+rerolls a failed roll and adds +2.</li>
+<li>Echo of Words — Edge on Performance; make your voice carry; recall
+faint sounds you heard.</li>
+</ul>
+<h2 id="12-the-session-workflow">12. The session workflow</h2>
+<ol type="1">
+<li><strong>Check in</strong> — Scan your guild card. The GM tablet
+loads your sheet; HP and uses reset.</li>
+<li><strong>Session zero</strong> — Safety tools, quest briefing, who's
+playing what.</li>
+<li><strong>Frame a scene</strong> — The GM sets the scene: explore,
+talk, solve or fight.</li>
+<li><strong>Act and roll</strong> — Say what you do. If it's risky, roll
+d20 + attribute + training vs the Difficulty.</li>
+<li><strong>Encounter</strong> — Initiative, then rounds: Move, Action,
+Reaction. Ends on defeat, retreat, surrender or objective.</li>
+<li><strong>Breather</strong> — Between scenes: spend Recovery Dice to
+heal; plan the next move.</li>
+<li><strong>Finale</strong> — The big choice that can change the
+world.</li>
+<li><strong>Wrap-up</strong> — The GM records XP, gold, loot, renown and
+world changes; a second GM approves.</li>
+</ol>
+<p>A three-hour session usually has 4–6 scenes and 2–3 encounters.
+Between sessions players level up (SP, RP, attributes), run errands,
+craft, trade at the Auction Hall and book Guild Trials.</p>
+<h2 id="13-what-the-website-will-track">13. What the website will
+track</h2>
+<p>Attributes · trained skills and Resists · HP, max HP, Guard, move ·
+Recovery Dice · ability uses · conditions · level, XP, SP and RP spent ·
+specialization and trial status · racial skills · synergy slot ·
+inventory · Lingering Wounds.</p>
+<h2 id="14-decisions-for-you">14. Decisions for you</h2>
+<ul>
+<li><strong>Dice:</strong> d20 + attribute + training vs a target number
+(closest to D&amp;D).</li>
+<li><strong>Attributes:</strong> Six attributes. The website currently
+has four (Might, Grace, Wits, Spirit) and switches with one ruleset
+edit.</li>
+<li><strong>Death:</strong> No permanent death without the player's
+consent; falling in battle means a lasting wound in the story.</li>
+<li><strong>HP between sessions:</strong> Full reset at the start of
+each session; injuries carry over only as story.</li>
+<li><strong>Numbers:</strong> Starting HP, Guard and damage here are
+first guesses to playtest.</li>
+</ul>
+<hr />
+<p><em>EVERBOUND — The Living Adventurers Guild · Core Rules
+v0.1</em></p>
+</body></html>

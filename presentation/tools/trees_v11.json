@@ -1,0 +1,2882 @@
+{
+ "Highlander": {
+  "race": "Human",
+  "core": "Ridgeline",
+  "trait": [
+   "Mountainwise",
+   "Recognize reliable climbing holds and safe anchoring materials from regional training."
+  ],
+  "branches": [
+   "Ascentcraft",
+   "Highland Endurance"
+  ],
+  "tiers": [
+   [
+    [
+     "Sure Grip",
+     "Negate one minor slippery-hold difficulty when equipped for climbing."
+    ],
+    [
+     "Thin Air Pace",
+     "Organize rest and effort during long climbs."
+    ]
+   ],
+   [
+    [
+     "Lead Rope",
+     "Install a secure line that helps the next climber instead of advancing yourself."
+    ],
+    [
+     "Shoulder the Load",
+     "Redistribute a companion's burden during hazardous crossings."
+    ]
+   ],
+   [
+    [
+     "Hidden Switchback",
+     "Survey a longer but safer route around a sheer ascent."
+    ],
+    [
+     "Hold the Pass",
+     "Brace and stabilize an ally against a nonmagical fall or shove."
+    ]
+   ]
+  ],
+  "cap": [
+   "Summit Passage",
+   "After preparation, guide the party past one major climbing obstacle while accepting extra travel time."
+  ]
+ },
+ "Coastlander": {
+  "race": "Human",
+  "core": "Tidechart",
+  "trait": [
+   "Harborwise",
+   "Recognize nautical signals, tides and basic vessel hazards through learned coastal practice."
+  ],
+  "branches": [
+   "Seamanship",
+   "Shorecraft"
+  ],
+  "tiers": [
+   [
+    [
+     "Deck Feet",
+     "Keep steady footing on a shifting platform."
+    ],
+    [
+     "Saltwater Signs",
+     "Locate landmarks and changing shore access."
+    ]
+   ],
+   [
+    [
+     "Current Read",
+     "Predict a local tide or current transition after observing the water."
+    ],
+    [
+     "Working Knot",
+     "Quickly secure a rope or release a prepared knot under strain."
+    ]
+   ],
+   [
+    [
+     "Safe Mooring",
+     "Secure a vessel or floating platform against a foreseeable hazard."
+    ],
+    [
+     "Port Passage",
+     "Plan a discreet or safe crossing through crowded waterfront infrastructure."
+    ]
+   ]
+  ],
+  "cap": [
+   "Harbor Passage",
+   "Lead companions through a difficult maritime crossing using preparation, equipment and observed conditions."
+  ]
+ },
+ "Plainsfolk": {
+  "race": "Human",
+  "core": "Horizon",
+  "trait": [
+   "Caravanwise",
+   "Recognize navigational landmarks and practical signs of travel across open country."
+  ],
+  "branches": [
+   "Open Routes",
+   "Caravancraft"
+  ],
+  "tiers": [
+   [
+    [
+     "Horizon Bearing",
+     "Stay oriented when distant landmarks remain visible."
+    ],
+    [
+     "Dust Reading",
+     "Identify recent passage from disturbed dry ground."
+    ]
+   ],
+   [
+    [
+     "Relay Pace",
+     "Synchronize group travel to avoid losing slower companions."
+    ],
+    [
+     "Escort Position",
+     "Choose a safer place for a vulnerable traveler in an exposed formation."
+    ]
+   ],
+   [
+    [
+     "Long View",
+     "Spot an approaching obstruction before reaching its immediate danger."
+    ],
+    [
+     "Waypost Plan",
+     "Establish a temporary rendezvous route for a dispersed group."
+    ]
+   ]
+  ],
+  "cap": [
+   "Open Road Covenant",
+   "Safely reorganize a dispersed party around a prepared landmark without granting extra travel speed."
+  ]
+ },
+ "Dune Dweller": {
+  "race": "Human",
+  "core": "Sunveil",
+  "trait": [
+   "Desertwise",
+   "Judge shade, heat exposure and basic water requirements from learned desert practice."
+  ],
+  "branches": [
+   "Dune Navigation",
+   "Resourcecraft"
+  ],
+  "tiers": [
+   [
+    [
+     "Sandstep",
+     "Find stable footing on shifting sand or grit."
+    ],
+    [
+     "Water Reckoning",
+     "Estimate practical water needs before travel."
+    ]
+   ],
+   [
+    [
+     "Mirageline",
+     "Distinguish a real distant landmark from a heat-distorted one."
+    ],
+    [
+     "Cool Pack",
+     "Protect one vulnerable supply from exposure during an excursion."
+    ]
+   ],
+   [
+    [
+     "Shelter Angle",
+     "Position temporary cover against sun and blowing debris."
+    ],
+    [
+     "Oasis Memory",
+     "Recognize signs of recent moisture or hidden water infrastructure."
+    ]
+   ]
+  ],
+  "cap": [
+   "Desert Haven",
+   "Prepare a short-lived expedition shelter that lessens one heat or dehydration hazard at a cost in supplies."
+  ]
+ },
+ "Frostlander": {
+  "race": "Human",
+  "core": "Rimepath",
+  "trait": [
+   "Winterwise",
+   "Recognize ice stability, weather shifts and cold-weather preparation through regional training."
+  ],
+  "branches": [
+   "Winter Routes",
+   "Steadfastness"
+  ],
+  "tiers": [
+   [
+    [
+     "Ice Test",
+     "Identify unreliable ice before committing weight."
+    ],
+    [
+     "Shared Warmth",
+     "Organize an effective short rest using available shelter."
+    ]
+   ],
+   [
+    [
+     "Snow Blind",
+     "Select a low-exposure route during blowing snow."
+    ],
+    [
+     "Winter Grip",
+     "Maintain a stable hold on a slick equipped surface."
+    ]
+   ],
+   [
+    [
+     "Whiteout Beacon",
+     "Create a visible guidance point for nearby allies in poor weather."
+    ],
+    [
+     "Cold Vigil",
+     "Help an exhausted ally maintain alertness through a difficult watch."
+    ]
+   ]
+  ],
+  "cap": [
+   "Winter Refuge",
+   "Establish a prepared fallback site that protects the party from one severe weather setback."
+  ]
+ },
+ "High Elf": {
+  "race": "Elf",
+  "core": "Starlore",
+  "trait": [
+   "Arcane Ear",
+   "Notice a faint magical disturbance when focusing on an unfamiliar enchantment."
+  ],
+  "branches": [
+   "Spell Sense",
+   "Ancient Lore"
+  ],
+  "tiers": [
+   [
+    [
+     "Aether Glimmer",
+     "Recognize whether a visible object bears active magical work."
+    ],
+    [
+     "Archive Hand",
+     "Interpret conventional formal magical notation with study."
+    ]
+   ],
+   [
+    [
+     "Pattern Memory",
+     "Recall a previously studied arcane configuration."
+    ],
+    [
+     "Ritual Etiquette",
+     "Recognize signs that a ritual space has recently been used."
+    ]
+   ],
+   [
+    [
+     "Dispel Clue",
+     "Identify one likely point of instability in a simple ward without removing it."
+    ],
+    [
+     "Harmonized Study",
+     "Assist another researcher to compare two magical traces."
+    ]
+   ]
+  ],
+  "cap": [
+   "Astral Concordance",
+   "With preparation, correlate several magical traces to a likely source without automatically defeating the source."
+  ]
+ },
+ "Wood Elf": {
+  "race": "Elf",
+  "core": "Greenveil",
+  "trait": [
+   "Woodland Eye",
+   "Distinguish ordinary forest movement from an unusual disturbance."
+  ],
+  "branches": [
+   "Forest Passage",
+   "Living Signs"
+  ],
+  "tiers": [
+   [
+    [
+     "Rootstep",
+     "Move steadily across roots and uneven woodland ground."
+    ],
+    [
+     "Barkscript",
+     "Recognize recent damage or markings on living trees."
+    ]
+   ],
+   [
+    [
+     "Leafblind",
+     "Blend with existing natural cover without creating concealment."
+    ],
+    [
+     "Trail Whisper",
+     "Indicate a safe silent route to one nearby ally."
+    ]
+   ],
+   [
+    [
+     "Canopy Route",
+     "Find a climbable alternate course through branches or old platforms."
+    ],
+    [
+     "Shelter Grove",
+     "Identify a defensible woodland resting place without changing the land."
+    ]
+   ]
+  ],
+  "cap": [
+   "Greenwood Crossing",
+   "Guide the party around an obstructed forest passage by reading natural routes and accepting setup time."
+  ]
+ },
+ "Moon Elf": {
+  "race": "Elf",
+  "core": "Moonmirror",
+  "trait": [
+   "Dimlight Eyes",
+   "Notice nearby motion in low natural light without seeing through total darkness."
+  ],
+  "branches": [
+   "Nightcraft",
+   "Hidden Signs"
+  ],
+  "tiers": [
+   [
+    [
+     "Silver Focus",
+     "Distinguish a moving outline against a dim background."
+    ],
+    [
+     "Gleam Trace",
+     "Find a faint reflective clue on an object."
+    ]
+   ],
+   [
+    [
+     "Crescent Step",
+     "Cross a short shadowed area without losing your bearings."
+    ],
+    [
+     "Twilight Read",
+     "Identify an ill-fitting silhouette or ordinary disguise in dim light."
+    ]
+   ],
+   [
+    [
+     "Night Watch",
+     "Warn one companion of a visible nocturnal approach before it closes."
+    ],
+    [
+     "Eclipse Compass",
+     "Maintain a chosen direction across an unfamiliar darkened passage."
+    ]
+   ]
+  ],
+  "cap": [
+   "Moonward Vigil",
+   "Reveal a safe route and warn companions of one low-light ambush opportunity after careful observation."
+  ]
+ },
+ "Deep Elf": {
+  "race": "Elf",
+  "core": "Gloamwalk",
+  "trait": [
+   "Hollow Eyes",
+   "Recognize nearby shapes and edges in dim subterranean light, not absolute darkness."
+  ],
+  "branches": [
+   "Gloom Routes",
+   "Underground Focus"
+  ],
+  "tiers": [
+   [
+    [
+     "Stone Margin",
+     "Maintain footing along a narrow rocky edge."
+    ],
+    [
+     "Cave Murmur",
+     "Identify whether a sound comes from an open shaft or enclosed nook."
+    ]
+   ],
+   [
+    [
+     "Unlit Turning",
+     "Mark an underground junction for a return trip."
+    ],
+    [
+     "Dark Patience",
+     "Remain composed during a prolonged low-light search."
+    ]
+   ],
+   [
+    [
+     "Chasm Sense",
+     "Recognize a likely steep drop from air movement and sound."
+    ],
+    [
+     "Exit Pattern",
+     "Reconstruct an underground route from recurring architectural features."
+    ]
+   ]
+  ],
+  "cap": [
+   "Deepway Thread",
+   "Trace a viable retreat through a confusing tunnel network once key junctions have been surveyed."
+  ]
+ },
+ "Frost Elf": {
+  "race": "Elf",
+  "core": "Glacialine",
+  "trait": [
+   "Winter Sensitivity",
+   "Recognize fast-forming frost and changing cold exposure before companions notice."
+  ],
+  "branches": [
+   "Snow Paths",
+   "Frost Composure"
+  ],
+  "tiers": [
+   [
+    [
+     "Crustwalk",
+     "Test and traverse fragile snow crust with care."
+    ],
+    [
+     "Still Breath",
+     "Maintain concentration through a brief cold shock."
+    ]
+   ],
+   [
+    [
+     "Frozen Step",
+     "Reposition reliably on ordinary slippery ice."
+    ],
+    [
+     "Quiet Shelter",
+     "Identify a place shielded from cold wind."
+    ]
+   ],
+   [
+    [
+     "Icebound Route",
+     "Locate a safer approach around a cold-weather obstruction."
+    ],
+    [
+     "Frost Warning",
+     "Signal a companion before a visible ice fracture spreads."
+    ]
+   ]
+  ],
+  "cap": [
+   "Rime Harmony",
+   "Temporarily stabilize a small group's passage through hazardous ice without creating ice or resisting all cold."
+  ]
+ },
+ "Mountain Dwarf": {
+  "race": "Dwarf",
+  "core": "Craghold",
+  "trait": [
+   "Stoneburden",
+   "Recognize safe load-bearing rock and practical lifting positions."
+  ],
+  "branches": [
+   "Quarry Strength",
+   "Mountain Stance"
+  ],
+  "tiers": [
+   [
+    [
+     "Firm Grip",
+     "Maintain control of a carried heavy object."
+    ],
+    [
+     "Rockset Feet",
+     "Reduce minor footing penalties on stone."
+    ]
+   ],
+   [
+    [
+     "Shoulder Brace",
+     "Help an adjacent ally shift a load instead of moving it yourself."
+    ],
+    [
+     "Wallward",
+     "Brace an adjacent ally against a shove near a rocky edge."
+    ]
+   ],
+   [
+    [
+     "Crack the Weight",
+     "Find the safest leverage point for a heavy barrier."
+    ],
+    [
+     "Stoneline Hold",
+     "Secure a narrow chokepoint against a small nonmagical displacement."
+    ]
+   ]
+  ],
+  "cap": [
+   "Mountainfast",
+   "Anchor a party's evacuation or defense around one load-bearing position after careful setup."
+  ]
+ },
+ "Hill Dwarf": {
+  "race": "Dwarf",
+  "core": "Hillstone",
+  "trait": [
+   "Groundwise",
+   "Recognize the stability of soil, slopes and compacted pathways."
+  ],
+  "branches": [
+   "Surefooted Way",
+   "Long Stamina"
+  ],
+  "tiers": [
+   [
+    [
+     "Rooted Heel",
+     "Resist one minor slip on uneven ground."
+    ],
+    [
+     "Sturdy Pace",
+     "Travel at an even speed on mild inclines."
+    ]
+   ],
+   [
+    [
+     "Balanced Burden",
+     "Keep an unstable load from tipping while stationary."
+    ],
+    [
+     "Recover Breath",
+     "Use a rest to alleviate ordinary exertion for a willing companion."
+    ]
+   ],
+   [
+    [
+     "Uphill Relay",
+     "Help the next ally traverse the same rough rise."
+    ],
+    [
+     "Holdcourse",
+     "Maintain focus while a slow physical task is interrupted."
+    ]
+   ]
+  ],
+  "cap": [
+   "Steady Horizon",
+   "Keep a small group stable across a difficult shifting slope through coordinated pacing."
+  ]
+ },
+ "Deep Dwarf": {
+  "race": "Dwarf",
+  "core": "Understone",
+  "trait": [
+   "Stone Whisper",
+   "Notice suspicious echoes from nearby walls and cavities."
+  ],
+  "branches": [
+   "Tunnelcraft",
+   "Earth Listening"
+  ],
+  "tiers": [
+   [
+    [
+     "Cavern Step",
+     "Move carefully through tight underground footing."
+    ],
+    [
+     "Wall Echo",
+     "Compare echoes to estimate nearby room size."
+    ]
+   ],
+   [
+    [
+     "Fault Trace",
+     "Find signs of an unstable ceiling or seam."
+    ],
+    [
+     "Pressure Knell",
+     "Notice fresh settling or vibration in a worked tunnel."
+    ]
+   ],
+   [
+    [
+     "Miner's Return",
+     "Place practical route markers for a safe underground return."
+    ],
+    [
+     "Buried Passage",
+     "Identify a possible blocked entrance by its distinct acoustic response."
+    ]
+   ]
+  ],
+  "cap": [
+   "Underhall Map",
+   "Reconstruct likely connections between surveyed chambers without seeing through solid rock."
+  ]
+ },
+ "Ember Dwarf": {
+  "race": "Dwarf",
+  "core": "Forgeheat",
+  "trait": [
+   "Kilnwise",
+   "Judge safe working temperatures and identify dangerous hot surfaces."
+  ],
+  "branches": [
+   "Hearth Travel",
+   "Forgecraft"
+  ],
+  "tiers": [
+   [
+    [
+     "Ash Tread",
+     "Keep footing on ordinary cooled ash or loose forge debris."
+    ],
+    [
+     "Temper Read",
+     "Identify whether worked metal is under dangerous stress."
+    ]
+   ],
+   [
+    [
+     "Radiant Gap",
+     "Find a safer position near a hot device."
+    ],
+    [
+     "Heat Shielding",
+     "Arrange improvised protective equipment against a short thermal exposure."
+    ]
+   ],
+   [
+    [
+     "Cinder Crossing",
+     "Plan a route past a heated obstacle with appropriate protection."
+    ],
+    [
+     "Vent Sense",
+     "Detect the likely direction of a hot draft or active furnace vent."
+    ]
+   ]
+  ],
+  "cap": [
+   "Master of the Kiln",
+   "Guide allies through a hot industrial hazard by coordinating vents, shielding and timing rather than becoming fire immune."
+  ]
+ },
+ "Crystal Dwarf": {
+  "race": "Dwarf",
+  "core": "Facetstone",
+  "trait": [
+   "Mineral Hum",
+   "Recognize an unusual vibration in nearby stone or crystal when still."
+  ],
+  "branches": [
+   "Facet Reading",
+   "Vibration Lore"
+  ],
+  "tiers": [
+   [
+    [
+     "Clear Flaw",
+     "Spot a visible fracture in a mineral object."
+    ],
+    [
+     "Pulse Listen",
+     "Notice a nearby repeated mechanical vibration."
+    ]
+   ],
+   [
+    [
+     "Harmonic Tap",
+     "Use deliberate tapping to compare resonance in two surfaces."
+    ],
+    [
+     "Reflection Angle",
+     "Position a reflective surface to inspect an otherwise difficult line of sight."
+    ]
+   ],
+   [
+    [
+     "Seam Trace",
+     "Identify a likely mineral seam from accessible acoustic signs."
+    ],
+    [
+     "Crystal Register",
+     "Recall a distinctive acoustic signature from a previous location."
+    ]
+   ]
+  ],
+  "cap": [
+   "Faceted Chorus",
+   "With prepared samples, compare a network of mineral vibrations to locate a possible structural disturbance."
+  ]
+ },
+ "Hillfoot": {
+  "race": "Halfling",
+  "core": "Heatherstep",
+  "trait": [
+   "Hill Balance",
+   "Maintain natural poise on ordinary uneven trail surfaces."
+  ],
+  "branches": [
+   "Small Paths",
+   "Persistent Steps"
+  ],
+  "tiers": [
+   [
+    [
+     "Low Traverse",
+     "Pass through a narrow safe gap that fits your body."
+    ],
+    [
+     "Long Shuffle",
+     "Keep steady pace across uneven ground."
+    ]
+   ],
+   [
+    [
+     "Stable Heel",
+     "Avoid one minor slip when stopping suddenly."
+    ],
+    [
+     "Friend's Footing",
+     "Show an ally a stable route across a short rough patch."
+    ]
+   ],
+   [
+    [
+     "Hidden Bank",
+     "Locate a shallow protected approach across a hillside."
+    ],
+    [
+     "Restful Nook",
+     "Identify a sheltered resting spot under nearby natural cover."
+    ]
+   ]
+  ],
+  "cap": [
+   "Hillfoot Guide",
+   "Lead a larger companion group through a narrow uneven passage by scouting viable footholds."
+  ]
+ },
+ "Woodfoot": {
+  "race": "Halfling",
+  "core": "Fernstep",
+  "trait": [
+   "Woodland Nimble",
+   "Recognize handholds and quiet paths suitable for a small climber."
+  ],
+  "branches": [
+   "Brushcraft",
+   "Climber's Hands"
+  ],
+  "tiers": [
+   [
+    [
+     "Twigskip",
+     "Cross a small patch of noisy undergrowth with care."
+    ],
+    [
+     "Rope Catch",
+     "Catch or secure a reachable climbing rope without advancing yourself."
+    ]
+   ],
+   [
+    [
+     "Soft Branch",
+     "Use a stable natural hold for a brief climb."
+    ],
+    [
+     "Branchline",
+     "Rig a short simple traversal aid using carried rope."
+    ]
+   ],
+   [
+    [
+     "Leaf Hollow",
+     "Locate concealment provided by existing foliage."
+    ],
+    [
+     "Treetop Return",
+     "Find a safe descent route after climbing."
+    ]
+   ]
+  ],
+  "cap": [
+   "Greenstep Circuit",
+   "Chart a compact loop through woodland cover that allows allies to approach without crossing a known hazard."
+  ]
+ },
+ "Riverfoot": {
+  "race": "Halfling",
+  "core": "Ripplefoot",
+  "trait": [
+   "Stream Poise",
+   "Estimate shallow current and slippery waterside footing."
+  ],
+  "branches": [
+   "Water Agility",
+   "Quick Movement"
+  ],
+  "tiers": [
+   [
+    [
+     "Fordskip",
+     "Find stable steps across a shallow crossing."
+    ],
+    [
+     "Pebble Dodge",
+     "Shift away from a minor footing hazard with timely movement."
+    ]
+   ],
+   [
+    [
+     "Streamturn",
+     "Reposition in moving water without losing direction."
+    ],
+    [
+     "Slippery Hold",
+     "Maintain grip while entering or leaving water."
+    ]
+   ],
+   [
+    [
+     "Bank Reach",
+     "Identify the easiest nearby exit from a current."
+    ],
+    [
+     "Shore Relay",
+     "Help a willing ally follow a safe riverbank route."
+    ]
+   ]
+  ],
+  "cap": [
+   "Silver Ford",
+   "Guide a group through one dangerous shallow-water crossing using timing and visible banks; no underwater breathing."
+  ]
+ },
+ "Marshfoot": {
+  "race": "Halfling",
+  "core": "Reedstep",
+  "trait": [
+   "Bogwise",
+   "Recognize soft ground, reeds and unstable patches before stepping on them."
+  ],
+  "branches": [
+   "Mire Travel",
+   "Marsh Awareness"
+  ],
+  "tiers": [
+   [
+    [
+     "Wide Step",
+     "Reduce one penalty from soft mud while walking cautiously."
+    ],
+    [
+     "Waterline",
+     "Notice a dangerous shift in shallow wetland depth."
+    ]
+   ],
+   [
+    [
+     "Root Bridge",
+     "Spot a stable natural crossing over a short bog patch."
+    ],
+    [
+     "Still Reed",
+     "Find existing reeds that mask movement without creating stealth."
+    ]
+   ],
+   [
+    [
+     "Reedlane",
+     "Trace a safer corridor through a marshy obstacle."
+    ],
+    [
+     "Mud Marker",
+     "Leave a recoverable landmark for an ally crossing wet ground."
+    ]
+   ]
+  ],
+  "cap": [
+   "Fen Passage",
+   "Prepare a safe passage through an unstable bog, taking extra time and material for crossing supports."
+  ]
+ },
+ "Cavefoot": {
+  "race": "Halfling",
+  "core": "Lanternshade",
+  "trait": [
+   "Burrow Memory",
+   "Recognize the layout of narrow paths and underground landmarks."
+  ],
+  "branches": [
+   "Tunnel Travel",
+   "Cave Senses"
+  ],
+  "tiers": [
+   [
+    [
+     "Gapfinder",
+     "Spot passable small spaces without forcing larger allies through."
+    ],
+    [
+     "Small Echo",
+     "Determine whether a nearby cavity is open or blocked."
+    ]
+   ],
+   [
+    [
+     "Corner Hold",
+     "Keep balance while moving through a tight turn."
+    ],
+    [
+     "Dust Print",
+     "Distinguish fresh movement from disturbed cave dust."
+    ]
+   ],
+   [
+    [
+     "Burrow Route",
+     "Map a short alternative tunnel in a known cave system."
+    ],
+    [
+     "Blind Turn",
+     "Warn companions when an underground route hides a sudden drop."
+    ]
+   ]
+  ],
+  "cap": [
+   "Hidden Burrow",
+   "Find a reliable concealed retreat route through a surveyed narrow cave without phasing through walls."
+  ]
+ },
+ "Mountain Orc": {
+  "race": "Orcborn",
+  "core": "Stonefang",
+  "trait": [
+   "Mountain Frame",
+   "Recognize advantageous bracing positions and safe leverage points for powerful effort."
+  ],
+  "branches": [
+   "Heavy Exertion",
+   "Enduring Guard"
+  ],
+  "tiers": [
+   [
+    [
+     "Heave Line",
+     "Move a stubborn weight with appropriate leverage."
+    ],
+    [
+     "Iron Stance",
+     "Remain steady under a minor nonmagical shove."
+    ]
+   ],
+   [
+    [
+     "Stone Drive",
+     "Push through an ordinary physical obstruction at a stamina cost."
+    ],
+    [
+     "Shelter Shoulder",
+     "Brace a nearby ally during a falling-debris hazard."
+    ]
+   ],
+   [
+    [
+     "Battering Route",
+     "Identify a workable breach point in a nonmagical barrier."
+    ],
+    [
+     "Crag Sentinel",
+     "Hold a constrained position against a single forced movement attempt."
+    ]
+   ]
+  ],
+  "cap": [
+   "Mountain Bulwark",
+   "Create a short defensive opening through a difficult rocky passage at a substantial expenditure of effort."
+  ]
+ },
+ "Steppe Orc": {
+  "race": "Orcborn",
+  "core": "Windstride",
+  "trait": [
+   "Long Run",
+   "Recognize practical pacing and landmark strategies for open-country pursuit."
+  ],
+  "branches": [
+   "Pursuit",
+   "Endurance"
+  ],
+  "tiers": [
+   [
+    [
+     "Stretch Step",
+     "Keep speed across a brief straight unobstructed run."
+    ],
+    [
+     "Breath Cadence",
+     "Stabilize ordinary breathing during prolonged travel."
+    ]
+   ],
+   [
+    [
+     "Chase Signs",
+     "Read a fleeing creature's recent directional changes."
+    ],
+    [
+     "Burden Shift",
+     "Maintain pace while exchanging a carried item with a companion."
+    ]
+   ],
+   [
+    [
+     "Intercept Line",
+     "Find a short route toward a visible runner without exceeding normal travel distance."
+    ],
+    [
+     "Longwatch",
+     "Resist ordinary fatigue during a demanding watch when supplied with rest afterward."
+    ]
+   ]
+  ],
+  "cap": [
+   "Steppe Relay",
+   "Lead a group pursuit through one complex open-terrain obstacle using coordinated turns and reasonable rest."
+  ]
+ },
+ "Ash Orc": {
+  "race": "Orcborn",
+  "core": "Ashwalker",
+  "trait": [
+   "Hazardwise",
+   "Notice heat shimmer and damaged ground in a hazardous region."
+  ],
+  "branches": [
+   "Hazard Travel",
+   "Physical Persistence"
+  ],
+  "tiers": [
+   [
+    [
+     "Slagstep",
+     "Choose stable ground across cooled slag and ash."
+    ],
+    [
+     "Scorched Grip",
+     "Retain control of equipment through a brief hot-surface exposure when protected."
+    ]
+   ],
+   [
+    [
+     "Smoke Gap",
+     "Identify the direction of a safer airflow."
+    ],
+    [
+     "Effort Reserve",
+     "Complete a strenuous short task under uncomfortable weather."
+    ]
+   ],
+   [
+    [
+     "Cinder Path",
+     "Survey a route around a harmful thermal obstacle without resisting it directly."
+    ],
+    [
+     "Rough Recovery",
+     "Use available shelter to restore composure after a hazardous crossing."
+    ]
+   ]
+  ],
+  "cap": [
+   "Blackened Road",
+   "Coordinate allies through a hot or smoky industrial obstacle using protection and planned timing."
+  ]
+ },
+ "Marsh Orc": {
+  "race": "Orcborn",
+  "core": "Mudfang",
+  "trait": [
+   "Wetland Frame",
+   "Recognize stable reeds, submerged edges and safe entries to water."
+  ],
+  "branches": [
+   "Mire Strength",
+   "Water Endurance"
+  ],
+  "tiers": [
+   [
+    [
+     "Silt Anchor",
+     "Brace an object against slow-moving mud."
+    ],
+    [
+     "Bankhold",
+     "Keep a reliable grip while fighting a current."
+    ]
+   ],
+   [
+    [
+     "Reedhaul",
+     "Pull an ally onto firm wetland ground instead of advancing yourself."
+    ],
+    [
+     "Wet Breath",
+     "Maintain composure during a brief shallow-water submersion without gaining extra breathing time."
+    ]
+   ],
+   [
+    [
+     "Bog Breach",
+     "Clear a temporary opening through an obstructed marsh route using strength and equipment."
+    ],
+    [
+     "Marsh Vigil",
+     "Remain alert when moisture and insects complicate a watch."
+    ]
+   ]
+  ],
+  "cap": [
+   "Mireguard Crossing",
+   "Stabilize and guide companions through an unstable marsh barrier without increasing swim speed elsewhere."
+  ]
+ },
+ "Frost Orc": {
+  "race": "Orcborn",
+  "core": "Icefang",
+  "trait": [
+   "Winter Frame",
+   "Recognize frost hazards and safe cold-weather equipment use."
+  ],
+  "branches": [
+   "Winter Force",
+   "Cold Endurance"
+  ],
+  "tiers": [
+   [
+    [
+     "Snow Drive",
+     "Push a carried object through manageable packed snow."
+    ],
+    [
+     "Still Blood",
+     "Maintain steady work briefly in ordinary cold with protective gear."
+    ]
+   ],
+   [
+    [
+     "Ice Brace",
+     "Support a colleague while they cross a frozen edge."
+    ],
+    [
+     "White Breath",
+     "Signal companions through a blizzard using deliberate visible cues."
+    ]
+   ],
+   [
+    [
+     "Frost Breach",
+     "Clear a short snow or ice obstacle using deliberate force."
+    ],
+    [
+     "Winter Stand",
+     "Maintain footing and vigilance during a severe cold-weather watch."
+    ]
+   ]
+  ],
+  "cap": [
+   "Icefang Trek",
+   "Lead allies across one serious snowy obstacle through coordinated labor and prepared shelter, not cold immunity."
+  ]
+ },
+ "Wolfkin": {
+  "race": "Beastkin",
+  "core": "Packtrail",
+  "trait": [
+   "Keen Scent",
+   "Notice a nearby strong and distinctive scent under suitable wind and surface conditions."
+  ],
+  "branches": [
+   "Scent Trail",
+   "Pack Sense"
+  ],
+  "tiers": [
+   [
+    [
+     "Trail Nose",
+     "Follow a fresh exposed scent for a short distance."
+    ],
+    [
+     "Shared Warning",
+     "Signal one ally about an obvious approaching threat."
+    ]
+   ],
+   [
+    [
+     "Scent Ledger",
+     "Recognize a previously sampled scent among recent traces."
+    ],
+    [
+     "Flanking Read",
+     "Read an ally's direction of movement to avoid obstructing them."
+    ]
+   ],
+   [
+    [
+     "Lost Quarry",
+     "Find the likely departure direction of a tracked target after losing sight."
+    ],
+    [
+     "Pack Rally",
+     "Coordinate a willing partner's retreat from a dangerous position."
+    ]
+   ]
+  ],
+  "cap": [
+   "Full Pack Accord",
+   "Use scent and signals to guide allies around a tracked threat without granting additional attacks or independent turns."
+  ]
+ },
+ "Foxkin": {
+  "race": "Beastkin",
+  "core": "Emberwit",
+  "trait": [
+   "Foxread",
+   "Recognize ordinary signs of deception or a hurriedly hidden movement with careful observation."
+  ],
+  "branches": [
+   "Misdirection",
+   "Agile Travel"
+  ],
+  "tiers": [
+   [
+    [
+     "Tail Feint",
+     "Draw one observer's glance without changing their will."
+    ],
+    [
+     "Quick Pivot",
+     "Reverse direction through a narrow safe gap."
+    ]
+   ],
+   [
+    [
+     "False Route",
+     "Leave plausible mundane traces pointing toward a wrong turn."
+    ],
+    [
+     "Light Landing",
+     "Reduce a minor setback from a prepared short drop."
+    ]
+   ],
+   [
+    [
+     "Clever Diversion",
+     "Use a prepared decoy to open a momentary escape opportunity."
+    ],
+    [
+     "Hidden Exit",
+     "Identify a small alternate opening after surveying an enclosure."
+    ]
+   ]
+  ],
+  "cap": [
+   "Foxfire Ruse",
+   "Stage a coordinated physical distraction that redirects one guarded group's attention briefly without magical compulsion."
+  ]
+ },
+ "Catkin": {
+  "race": "Beastkin",
+  "core": "Softpaw",
+  "trait": [
+   "Feline Poise",
+   "Maintain unusually good balance on ordinary narrow surfaces."
+  ],
+  "branches": [
+   "Precision Step",
+   "Reflexcraft"
+  ],
+  "tiers": [
+   [
+    [
+     "Silent Pad",
+     "Cross a prepared hard floor with less incidental noise."
+    ],
+    [
+     "Ear Twitch",
+     "Notice a sudden nearby movement when alert."
+    ]
+   ],
+   [
+    [
+     "Railwalk",
+     "Hold footing along a narrow stable ledge."
+    ],
+    [
+     "Twist Clear",
+     "Shift your body to avoid a minor grappling snag."
+    ]
+   ],
+   [
+    [
+     "Landing Line",
+     "Choose a safer angle for a controlled fall within normal limits."
+    ],
+    [
+     "Needle Turn",
+     "Reposition through a small open gap without passing solid obstacles."
+    ]
+   ]
+  ],
+  "cap": [
+   "Ninefold Footing",
+   "Cross one hazardous narrow route using practiced balance while sacrificing speed and remaining exposed to direct attacks."
+  ]
+ },
+ "Rabbitkin": {
+  "race": "Beastkin",
+  "core": "Springstep",
+  "trait": [
+   "Watchful Ears",
+   "Notice a nearby sharp or unusual sound while attentive."
+  ],
+  "branches": [
+   "Leaping",
+   "Alertness"
+  ],
+  "tiers": [
+   [
+    [
+     "Short Hop",
+     "Clear a minor low obstacle without climbing."
+    ],
+    [
+     "Early Flinch",
+     "Recognize a clearly approaching physical threat sooner."
+    ]
+   ],
+   [
+    [
+     "Long Bound",
+     "Cross a narrow safe gap using a running start."
+    ],
+    [
+     "Warning Thump",
+     "Alert one nearby ally with a quick ground or voice signal."
+    ]
+   ],
+   [
+    [
+     "Escape Arc",
+     "Leap out of a crowded space when there is a valid landing point."
+    ],
+    [
+     "Danger Sense",
+     "Predict the most likely route of a visible pursuing foe."
+    ]
+   ]
+  ],
+  "cap": [
+   "Moonleap Passage",
+   "Execute one exceptional controlled leap across a suitable gap, subject to landing and height constraints and without flight."
+  ]
+ },
+ "Bearkin": {
+  "race": "Beastkin",
+  "core": "Hearthpaw",
+  "trait": [
+   "Bear's Build",
+   "Recognize stable ways to shelter or support a vulnerable companion using your sturdy frame."
+  ],
+  "branches": [
+   "Strength",
+   "Protection"
+  ],
+  "tiers": [
+   [
+    [
+     "Heavy Hold",
+     "Maintain grip on a weighty object briefly."
+    ],
+    [
+     "Sheltering Arm",
+     "Offer momentary cover to an adjacent willing ally."
+    ]
+   ],
+   [
+    [
+     "Broad Lift",
+     "Assist another creature in shifting a large obstruction."
+    ],
+    [
+     "Steady Pulse",
+     "Resist a minor nonmagical knockback while protecting someone."
+    ]
+   ],
+   [
+    [
+     "Den Break",
+     "Create an opening through a weak nonmagical barrier with tools and effort."
+    ],
+    [
+     "Denwatch",
+     "Remain grounded while holding a narrow defensible position."
+    ]
+   ]
+  ],
+  "cap": [
+   "Hearthwall",
+   "Create a temporary protective fallback spot for allies through bracing and placement, not damage immunity."
+  ]
+ },
+ "Wyrmkin": {
+  "race": "Drakari",
+  "core": "Wyrmstone",
+  "trait": [
+   "Dense Scales",
+   "Notice a vulnerable seam in your own scale coverage and adjust protection without becoming armor immune."
+  ],
+  "branches": [
+   "Heavy Force",
+   "Hardy Body"
+  ],
+  "tiers": [
+   [
+    [
+     "Scale Brace",
+     "Hold a braced position against minor pressure."
+    ],
+    [
+     "Stone Breath",
+     "Keep composure after an ordinary impact."
+    ]
+   ],
+   [
+    [
+     "Horn Leverage",
+     "Shift a heavy nearby object with proper contact and footing."
+    ],
+    [
+     "Shielded Turn",
+     "Position your scale-covered side toward a foreseeable hazard."
+    ]
+   ],
+   [
+    [
+     "Wyrm Ram",
+     "Force a short opening through a fragile physical obstacle, risking fatigue."
+    ],
+    [
+     "Lasting Stance",
+     "Continue a slow physical task despite a brief shove."
+    ]
+   ]
+  ],
+  "cap": [
+   "Wyrmhold",
+   "Anchor one defensive crossing for companions at the cost of mobility and effort; grants no elemental breath."
+  ]
+ },
+ "Serpentkin": {
+  "race": "Drakari",
+  "core": "Coilstep",
+  "trait": [
+   "Flexible Reach",
+   "Navigate tight bends and ordinary narrow openings with controlled body movement."
+  ],
+  "branches": [
+   "Flowing Steps",
+   "Evasive Form"
+  ],
+  "tiers": [
+   [
+    [
+     "Slipcurve",
+     "Change direction in a crowded reachable lane."
+    ],
+    [
+     "Narrow Bend",
+     "Release a shallow nonmagical snag through flexibility."
+    ]
+   ],
+   [
+    [
+     "Coil Balance",
+     "Hold a narrow stance while twisting to see behind."
+    ],
+    [
+     "Glancing Turn",
+     "Reduce the force of an ordinary sidelong collision through timely positioning."
+    ]
+   ],
+   [
+    [
+     "Thread Passage",
+     "Find a safe path through a winding but unobstructed course."
+    ],
+    [
+     "Flexible Escape",
+     "Withdraw from a constrained space when there is a physical opening."
+    ]
+   ]
+  ],
+  "cap": [
+   "Serpent Flow",
+   "Traverse a complex series of bends without wasting steps, subject to full movement and action limits."
+  ]
+ },
+ "Drakekin": {
+  "race": "Drakari",
+  "core": "Ironhide",
+  "trait": [
+   "Combat Scales",
+   "Recognize when sturdy scale placement makes a defensive posture practical."
+  ],
+  "branches": [
+   "Close Pressure",
+   "Defensive Weight"
+  ],
+  "tiers": [
+   [
+    [
+     "Driving Contact",
+     "Maintain a strong stance during an adjacent melee exchange."
+    ],
+    [
+     "Scale Set",
+     "Brace against a routine shove."
+    ]
+   ],
+   [
+    [
+     "Brow Guard",
+     "Angle a scale-covered brow against a visible minor hazard."
+    ],
+    [
+     "Measured Blow",
+     "Keep an off-balance target from forcing you backward through controlled posture."
+    ]
+   ],
+   [
+    [
+     "Short Rush",
+     "Close a brief gap over clear ground while keeping footing."
+    ],
+    [
+     "Guarded Reach",
+     "Protect a nearby narrow approach during a brief encounter."
+    ]
+   ]
+  ],
+  "cap": [
+   "Drakeguard",
+   "Hold a close-quarters chokepoint against one forced displacement attempt by committing all immediate movement."
+  ]
+ },
+ "Crystaldrake": {
+  "race": "Drakari",
+  "core": "Prismhorn",
+  "trait": [
+   "Crystal Hearing",
+   "Notice a nearby concentrated magical hum under still conditions."
+  ],
+  "branches": [
+   "Magic Resonance",
+   "Perceptive Scales"
+  ],
+  "tiers": [
+   [
+    [
+     "Facet Focus",
+     "Distinguish an active enchantment from an inert reflective crystal."
+    ],
+    [
+     "Lightcatch",
+     "Use reflective facets to inspect a difficult visible angle."
+    ]
+   ],
+   [
+    [
+     "Pulse Match",
+     "Recognize a familiar arcane vibration."
+    ],
+    [
+     "Harmonic Edge",
+     "Recognize whether two magical signals share a likely origin."
+    ]
+   ],
+   [
+    [
+     "Shard Warning",
+     "Warn one nearby ally that an accessible magical device is fluctuating."
+    ],
+    [
+     "Resonant Step",
+     "Avoid a spot where a visible crystal anomaly is pulsing."
+    ]
+   ]
+  ],
+  "cap": [
+   "Prism Concordance",
+   "Compare several accessible arcane vibrations to identify a possible common source, not dispel it."
+  ]
+ },
+ "Thornscale": {
+  "race": "Drakari",
+  "core": "Thornwall",
+  "trait": [
+   "Raised Scales",
+   "Recognize how to angle natural ridges against simple contact without causing automatic thorn damage."
+  ],
+  "branches": [
+   "Braced Defense",
+   "Reactive Timing"
+  ],
+  "tiers": [
+   [
+    [
+     "Ridge Guard",
+     "Use a protected stance against minor abrasion."
+    ],
+    [
+     "Contact Read",
+     "Recognize the direction of a nearby physical impact."
+    ]
+   ],
+   [
+    [
+     "Counterweight",
+     "Keep footing when a visible opponent attempts a push."
+    ],
+    [
+     "Turnback",
+     "Reposition out of a collision line after holding ground."
+    ]
+   ],
+   [
+    [
+     "Barbed Line",
+     "Discourage movement through a narrow approach by careful stance, not automatic injury."
+    ],
+    [
+     "Guard Pivot",
+     "Exchange defensive position with a consenting ally nearby."
+    ]
+   ]
+  ],
+  "cap": [
+   "Thornhold",
+   "Control one chokepoint for a brief moment using position and counterforce, without reflecting damage automatically."
+  ]
+ },
+ "Cinderborn": {
+  "race": "Ashborn",
+  "core": "Emberveil",
+  "trait": [
+   "Warmblood Sense",
+   "Recognize a nearby dangerous heat source before touching it."
+  ],
+  "branches": [
+   "Heat Path",
+   "Ember Endurance"
+  ],
+  "tiers": [
+   [
+    [
+     "Emberstep",
+     "Choose safe footholds around minor hot debris."
+    ],
+    [
+     "Ash Shelter",
+     "Construct practical shade against nearby heat exposure."
+    ]
+   ],
+   [
+    [
+     "Flame Margin",
+     "Identify a safer distance from an active furnace or fire."
+    ],
+    [
+     "Warm Grip",
+     "Handle heated equipment briefly with appropriate tools."
+    ]
+   ],
+   [
+    [
+     "Heated Crossing",
+     "Survey a limited route around a thermal hazard with the right protection."
+    ],
+    [
+     "Cinder Vigil",
+     "Maintain alertness around a fluctuating hot worksite."
+    ]
+   ]
+  ],
+  "cap": [
+   "Cinder Haven",
+   "Create a temporary protected corridor through one heat hazard with equipment and time, not fire immunity."
+  ]
+ },
+ "Duskhorn": {
+  "race": "Ashborn",
+  "core": "Duskveil",
+  "trait": [
+   "Shade Sight",
+   "Recognize faint outlines in low light, not perfect night vision."
+  ],
+  "branches": [
+   "Dusk Movement",
+   "Hidden Awareness"
+  ],
+  "tiers": [
+   [
+    [
+     "Shadow Edge",
+     "Locate a usable route between adjoining pools of shade."
+    ],
+    [
+     "Faint Outline",
+     "Detect an obvious moving silhouette against dim light."
+    ]
+   ],
+   [
+    [
+     "Quiet Turn",
+     "Change direction without a loud scrape on ordinary ground."
+    ],
+    [
+     "Shadow Trace",
+     "Notice a recently disturbed source of concealment."
+    ]
+   ],
+   [
+    [
+     "Gloam Path",
+     "Mark a retreat through a dark but traversable hall."
+    ],
+    [
+     "Watcher's Warning",
+     "Signal one companion to a hidden approach you have actually perceived."
+    ]
+   ]
+  ],
+  "cap": [
+   "Duskhorn Watch",
+   "Keep a group oriented during a dark encounter through observations and signals, without granting invisibility."
+  ]
+ },
+ "Paleash": {
+  "race": "Ashborn",
+  "core": "Pallid Arc",
+  "trait": [
+   "Aether Tingle",
+   "Recognize a nearby active magical disturbance when focusing on it."
+  ],
+  "branches": [
+   "Spell Awareness",
+   "Arcane Study"
+  ],
+  "tiers": [
+   [
+    [
+     "Ashglow",
+     "Detect a visible magical flicker at close range."
+    ],
+    [
+     "Ward Trace",
+     "Identify the likely boundary of an exposed minor magical seal."
+    ]
+   ],
+   [
+    [
+     "Arcane Contrast",
+     "Tell whether two sensed spell residues differ."
+    ],
+    [
+     "Quiet Inspection",
+     "Inspect an unstable item without activating it through rough handling."
+    ]
+   ],
+   [
+    [
+     "Disruption Read",
+     "Warn an ally that a visible effect is intensifying."
+    ],
+    [
+     "Aether Record",
+     "Remember a distinct magical disturbance for comparison later."
+    ]
+   ]
+  ],
+  "cap": [
+   "Pale Signal",
+   "Coordinate a party's response to a sensed magical instability without automatically counterspelling."
+  ]
+ },
+ "Thornhorn": {
+  "race": "Ashborn",
+  "core": "Briarhorn",
+  "trait": [
+   "Defensive Angle",
+   "Recognize the most stable way to position horns and stance without inflicting unprovoked contact damage."
+  ],
+  "branches": [
+   "Thorn Guard",
+   "Contact Reflex"
+  ],
+  "tiers": [
+   [
+    [
+     "Horn Brace",
+     "Use posture to discourage minor physical intrusion."
+    ],
+    [
+     "First Touch",
+     "Feel the direction of a nearby collision."
+    ]
+   ],
+   [
+    [
+     "Firm Root",
+     "Keep footing through one small push."
+    ],
+    [
+     "Quick Recoil",
+     "Pull clear of a brief snag before it worsens."
+    ]
+   ],
+   [
+    [
+     "Guarded Turn",
+     "Protect an adjacent ally's retreat through controlled body placement."
+    ],
+    [
+     "Defensive Pivot",
+     "Change stance to face a new approaching opponent."
+    ]
+   ]
+  ],
+  "cap": [
+   "Thornwall Response",
+   "Hold a narrow physical retreat route against a single shove while foregoing offensive pressure."
+  ]
+ },
+ "Smokeborn": {
+  "race": "Ashborn",
+  "core": "Ashmist",
+  "trait": [
+   "Obscured Eye",
+   "Distinguish nearby movement in light smoke while still affected by its dangers."
+  ],
+  "branches": [
+   "Covercraft",
+   "Hazard Sense"
+  ],
+  "tiers": [
+   [
+    [
+     "Smoke Line",
+     "Follow a visible boundary in thin smoke."
+    ],
+    [
+     "Draft Ear",
+     "Recognize the direction of air flow in an enclosed space."
+    ]
+   ],
+   [
+    [
+     "Coalstep",
+     "Move quietly over scattered cooled debris."
+    ],
+    [
+     "Breath Warning",
+     "Alert an ally to a visibly thickening smoke hazard."
+    ]
+   ],
+   [
+    [
+     "Haze Route",
+     "Choose a short safe passage through partial obscurity."
+    ],
+    [
+     "Ember Vein",
+     "Trace a likely hidden heat source from smoke motion."
+    ]
+   ]
+  ],
+  "cap": [
+   "Smokeway",
+   "Guide allies out of one obscured hazard zone through airflow and signs, without gaining smoke immunity."
+  ]
+ },
+ "Butterfly Sylph": {
+  "race": "Sylph",
+  "core": "Prismwing",
+  "trait": [
+   "Patterned Wings",
+   "Recognize how wing displays and surrounding color contrast affect ordinary visual attention."
+  ],
+  "branches": [
+   "Gliding Grace",
+   "Visual Misdirection"
+  ],
+  "tiers": [
+   [
+    [
+     "Gentle Drift",
+     "Control a short safe glide from an elevated position."
+    ],
+    [
+     "Wing Flash",
+     "Briefly draw a nearby observer's attention toward your wing pattern."
+    ]
+   ],
+   [
+    [
+     "Soft Landing",
+     "Reduce a minor landing setback after a permitted glide."
+    ],
+    [
+     "Painted Cover",
+     "Choose existing colorful cover for concealment."
+    ]
+   ],
+   [
+    [
+     "Curve Descent",
+     "Adjust a glide's approach angle without increasing range."
+    ],
+    [
+     "Distraction Bloom",
+     "Use a prepared wing display to interrupt a line of sight for a moment."
+    ]
+   ]
+  ],
+  "cap": [
+   "Kaleidoscope Passage",
+   "Guide a controlled descent through a visually complex area while using patterned displays for a single distraction, not sustained flight."
+  ]
+ },
+ "Moth Sylph": {
+  "race": "Sylph",
+  "core": "Moonwing",
+  "trait": [
+   "Dusk Antennae",
+   "Recognize nearby gentle motion and faint light changes in dim surroundings."
+  ],
+  "branches": [
+   "Quiet Glide",
+   "Night Perception"
+  ],
+  "tiers": [
+   [
+    [
+     "Velvet Drift",
+     "Glide briefly with reduced incidental wing noise."
+    ],
+    [
+     "Faint Lamp",
+     "Identify the nearest ordinary light source through dim obstruction."
+    ]
+   ],
+   [
+    [
+     "Low Arc",
+     "Choose a shallow landing approach from valid elevation."
+    ],
+    [
+     "Wing Shiver",
+     "Notice an approaching air current while still."
+    ]
+   ],
+   [
+    [
+     "Cloaked Descent",
+     "Use available darkness to obscure a controlled glide's endpoint."
+    ],
+    [
+     "Quiet Watch",
+     "Warn allies of a perceived low-light moving shape."
+    ]
+   ]
+  ],
+  "cap": [
+   "Mothveil Crossing",
+   "Guide a silent, descending passage through dim cover, with no invisibility or upward flight."
+  ]
+ },
+ "Dragonfly Sylph": {
+  "race": "Sylph",
+  "core": "Quickwing",
+  "trait": [
+   "Four-Wing Balance",
+   "Recognize safe rapid direction changes during a brief glide."
+  ],
+  "branches": [
+   "Rapid Glide",
+   "Reflex Wing"
+  ],
+  "tiers": [
+   [
+    [
+     "Snap Angle",
+     "Alter heading once during a controlled descent."
+    ],
+    [
+     "Air Shift",
+     "Sense a nearby wind change before gliding."
+    ]
+   ],
+   [
+    [
+     "Swift Descent",
+     "Reach a lower landing point promptly within normal glide distance."
+    ],
+    [
+     "Flash Turn",
+     "Reorient quickly on foot after touching down."
+    ]
+   ],
+   [
+    [
+     "Brake Wing",
+     "Slow a permitted glide to land on a narrow safe platform."
+    ],
+    [
+     "Landing Cue",
+     "Warn an ally of a dangerous downwind landing zone."
+    ]
+   ]
+  ],
+  "cap": [
+   "Needleflight",
+   "Perform a highly controlled complex descent between visible obstacles without hovering or gaining height."
+  ]
+ },
+ "Cicada Sylph": {
+  "race": "Sylph",
+  "core": "Songwing",
+  "trait": [
+   "Vibration Ear",
+   "Recognize a nearby strong repetitive sound or tremor."
+  ],
+  "branches": [
+   "Resonance",
+   "Wing Movement"
+  ],
+  "tiers": [
+   [
+    [
+     "Root Hum",
+     "Identify the general direction of a rhythmic vibration."
+    ],
+    [
+     "Buzz Signal",
+     "Send a brief audible warning using wing vibrations."
+    ]
+   ],
+   [
+    [
+     "Pulse Count",
+     "Recognize whether a repeated beat is slowing or accelerating."
+    ],
+    [
+     "Timed Glide",
+     "Choose a descent moment between recurring environmental pulses."
+    ]
+   ],
+   [
+    [
+     "Chorus Map",
+     "Locate an accessible hollow space through comparative echoes."
+    ],
+    [
+     "Resonant Brace",
+     "Maintain footing during a predictable vibration."
+    ]
+   ]
+  ],
+  "cap": [
+   "Cicada Chorus",
+   "Coordinate allies around one repeating environmental hazard using rhythm and sound without inflicting sonic damage."
+  ]
+ },
+ "Lacewing Sylph": {
+  "race": "Sylph",
+  "core": "Glasswing",
+  "trait": [
+   "Delicate Control",
+   "Estimate safe landing spots suited to fragile transparent wings."
+  ],
+  "branches": [
+   "Precision Glide",
+   "Fine Coordination"
+  ],
+  "tiers": [
+   [
+    [
+     "Narrow Sweep",
+     "Make a gentle turn on a short descent."
+    ],
+    [
+     "Steady Hand",
+     "Handle a fragile object without scraping wings or limbs."
+    ]
+   ],
+   [
+    [
+     "Featherlight Landing",
+     "Reach a carefully chosen lower platform with reduced landing noise."
+    ],
+    [
+     "Soft Reach",
+     "Maintain fine hand position after a short descent."
+    ]
+   ],
+   [
+    [
+     "Threaded Gap",
+     "Guide a permitted glide through a visible wide-enough opening."
+    ],
+    [
+     "Landing Marker",
+     "Indicate a safe landing point for a following ally."
+    ]
+   ]
+  ],
+  "cap": [
+   "Laceway",
+   "Execute a precise complex descent into a confined valid landing zone at the cost of glide distance, never sustained flight."
+  ]
+ },
+ "Riverkin": {
+  "race": "Tidekin",
+  "core": "Streamline",
+  "trait": [
+   "Current Feel",
+   "Recognize a nearby stream's surface flow and likely shallow obstructions."
+  ],
+  "branches": [
+   "Current Paths",
+   "Land Navigation"
+  ],
+  "tiers": [
+   [
+    [
+     "Stream Step",
+     "Find a stable shallow-water footing."
+    ],
+    [
+     "Drain Sign",
+     "Recognize where runoff has crossed a street or tunnel."
+    ]
+   ],
+   [
+    [
+     "Crossflow",
+     "Angle your body across a mild current without extra swim speed."
+    ],
+    [
+     "Watershed Read",
+     "Infer nearby low ground from damp surfaces."
+    ]
+   ],
+   [
+    [
+     "Eddy Route",
+     "Locate a sheltered line through a visible water obstacle."
+    ],
+    [
+     "Flow Warning",
+     "Alert a companion that a wet surface is becoming unstable."
+    ]
+   ]
+  ],
+  "cap": [
+   "River Passage",
+   "Chart and support one difficult crossing using current knowledge and prepared anchors, not water breathing."
+  ]
+ },
+ "Sharkkin": {
+  "race": "Tidekin",
+  "core": "Tidefang",
+  "trait": [
+   "Motion Sense",
+   "Notice strong nearby motion transmitted through water or a vibrating surface."
+  ],
+  "branches": [
+   "Pursuit Sense",
+   "Close Strength"
+  ],
+  "tiers": [
+   [
+    [
+     "Wake Reading",
+     "Track a moving wake across visible water."
+    ],
+    [
+     "Firm Tow",
+     "Assist a nearby swimmer against manageable current."
+    ]
+   ],
+   [
+    [
+     "Pressure Turn",
+     "Maintain orientation during a sudden strong water movement."
+    ],
+    [
+     "Braced Reach",
+     "Hold footing during a forceful wet-ground encounter."
+    ]
+   ],
+   [
+    [
+     "Passing Trace",
+     "Recognize where a large submerged object recently passed."
+    ],
+    [
+     "Predatory Vigil",
+     "Maintain watch for movement around a shared waterway without omniscience."
+    ]
+   ]
+  ],
+  "cap": [
+   "Hunter's Crossing",
+   "Coordinate pursuit across mixed wet and dry terrain using observed motion rather than increased combat damage."
+  ]
+ },
+ "Reefkin": {
+  "race": "Tidekin",
+  "core": "Reefglass",
+  "trait": [
+   "Pattern Eye",
+   "Recognize how strong color and texture patterns conceal ordinary objects."
+  ],
+  "branches": [
+   "Concealment",
+   "Shore Awareness"
+  ],
+  "tiers": [
+   [
+    [
+     "Coral Blend",
+     "Use existing multicolored cover to reduce visibility."
+    ],
+    [
+     "Shoal Sign",
+     "Recognize a dangerous shallow-water drop or reef edge."
+    ]
+   ],
+   [
+    [
+     "Broken Outline",
+     "Find a hiding place that breaks your silhouette."
+    ],
+    [
+     "Surface Texture",
+     "Distinguish fresh damage from natural roughness."
+    ]
+   ],
+   [
+    [
+     "Reef Shadow",
+     "Navigate a short obscured path without becoming invisible."
+    ],
+    [
+     "Shelter Fan",
+     "Locate a protected nook along a rugged wall or shoreline."
+    ]
+   ]
+  ],
+  "cap": [
+   "Reef Passage",
+   "Help allies approach through complex natural cover by preparing clear directions, not creating magical camouflage."
+  ]
+ },
+ "Raykin": {
+  "race": "Tidekin",
+  "core": "Flowfin",
+  "trait": [
+   "Smooth Turning",
+   "Maintain balance when shifting direction through shallow water or on slick ground."
+  ],
+  "branches": [
+   "Fluid Movement",
+   "Guarding Flow"
+  ],
+  "tiers": [
+   [
+    [
+     "Curve Swim",
+     "Turn smoothly in a short swim without extra distance."
+    ],
+    [
+     "Wide Brace",
+     "Keep steady while helping someone enter water."
+    ]
+   ],
+   [
+    [
+     "Low Sweep",
+     "Reposition around a reachable obstacle on wet ground."
+    ],
+    [
+     "Deflect Line",
+     "Angle around a foreseeable shove instead of resisting all impacts."
+    ]
+   ],
+   [
+    [
+     "Eddy Pivot",
+     "Avoid becoming pinned by a manageable current through body rotation."
+    ],
+    [
+     "Shelter Turn",
+     "Guide an ally around a nearby obstacle while preserving both characters' normal actions."
+    ]
+   ]
+  ],
+  "cap": [
+   "Manta Passage",
+   "Execute one coordinated evasive crossing for yourself and a willing ally without extra total movement."
+  ]
+ },
+ "Deepkin": {
+  "race": "Tidekin",
+  "core": "Abyssglow",
+  "trait": [
+   "Deepwater Focus",
+   "Notice weak light and nearby depth changes in dark water without seeing perfectly in absolute darkness."
+  ],
+  "branches": [
+   "Dark Water",
+   "Land Dusk"
+  ],
+  "tiers": [
+   [
+    [
+     "Faint Beacon",
+     "Recognize a weak underwater light source."
+    ],
+    [
+     "Lowlight Marker",
+     "Recognize a dim outline in caves or ruins."
+    ]
+   ],
+   [
+    [
+     "Pressure Read",
+     "Notice a significant change in water pressure before entering it."
+    ],
+    [
+     "Glow Control",
+     "Use existing faint body markings as a short visual signal without providing room lighting."
+    ]
+   ],
+   [
+    [
+     "Deep Route",
+     "Locate a safer lit or navigable course in low-visibility water."
+    ],
+    [
+     "Still Depth",
+     "Remain oriented in a dark confined room by tracking nearby surfaces."
+    ]
+   ]
+  ],
+  "cap": [
+   "Abyssal Guide",
+   "Lead a group through one low-light aquatic or enclosed hazard with observed landmarks, not limitless pressure resistance."
+  ]
+ },
+ "Hawkin": {
+  "race": "Skyborn",
+  "core": "Ridgewatch",
+  "trait": [
+   "Hawk Eyes",
+   "Notice broad movement along a distant clear sightline."
+  ],
+  "branches": [
+   "High Lookout",
+   "Wing Control"
+  ],
+  "tiers": [
+   [
+    [
+     "Long Scan",
+     "Identify a conspicuous distant landmark."
+    ],
+    [
+     "Brake Descent",
+     "Shorten a controlled downhill glide for a safe landing."
+    ]
+   ],
+   [
+    [
+     "Perch Study",
+     "Assess whether an elevated position can bear you."
+    ],
+    [
+     "Feather Turn",
+     "Adjust a wing-assisted drop by one safe direction."
+    ]
+   ],
+   [
+    [
+     "Overwatch Route",
+     "Relay a safe visible approach from a reached lookout."
+    ],
+    [
+     "Landing Guide",
+     "Signal a nearby ally toward a valid landing place."
+    ]
+   ]
+  ],
+  "cap": [
+   "Hawkward",
+   "Guide a party's approach using linked line-of-sight lookouts and controlled descents, without gaining free flight."
+  ]
+ },
+ "Eaglekin": {
+  "race": "Skyborn",
+  "core": "Broadwing",
+  "trait": [
+   "Long Sight",
+   "Recognize distant large outlines across clear open terrain."
+  ],
+  "branches": [
+   "Great Perches",
+   "Powerful Position"
+  ],
+  "tiers": [
+   [
+    [
+     "Far Marker",
+     "Identify a prominent landmark at distance."
+    ],
+    [
+     "Wingbrace",
+     "Stabilize a load with partially opened wings in safe space."
+    ]
+   ],
+   [
+    [
+     "Strong Landing",
+     "Stabilize after a controlled wing-assisted descent."
+    ],
+    [
+     "Cliff Guard",
+     "Hold firm against a minor shove near a broad ledge."
+    ]
+   ],
+   [
+    [
+     "Elevated Survey",
+     "Assess a likely ground approach from a legal high vantage point."
+    ],
+    [
+     "Sweeping Cue",
+     "Warn a nearby ally of a visible movement from above."
+    ]
+   ]
+  ],
+  "cap": [
+   "Eagle Passage",
+   "Lead allies from a high observation point across a dangerous open approach through warnings and planned positions."
+  ]
+ },
+ "Falconkin": {
+  "race": "Skyborn",
+  "core": "Swiftcrest",
+  "trait": [
+   "Falcon Focus",
+   "Track an obvious fast-moving object across a clear sightline."
+  ],
+  "branches": [
+   "Rapid Descent",
+   "Reflex Eye"
+  ],
+  "tiers": [
+   [
+    [
+     "Quick Fold",
+     "Complete a controlled descent promptly on a legal glide path."
+    ],
+    [
+     "Flicker Track",
+     "Follow a rapidly turning visible target with your gaze."
+    ]
+   ],
+   [
+    [
+     "Air Brake",
+     "Reduce landing overshoot after a fast wing-assisted drop."
+    ],
+    [
+     "Timing Cue",
+     "Warn an ally of a predictable brief opening in moving terrain."
+    ]
+   ],
+   [
+    [
+     "Swoop Line",
+     "Choose a safe descending angle toward a reachable ledge."
+    ],
+    [
+     "Swift Reorient",
+     "Turn to face a new nearby hazard promptly after landing."
+    ]
+   ]
+  ],
+  "cap": [
+   "Falcon Drop",
+   "Perform an exceptionally precise downhill glide with a narrow landing window, without increased movement beyond established limits."
+  ]
+ },
+ "Owlkin": {
+  "race": "Skyborn",
+  "core": "Nightplume",
+  "trait": [
+   "Nocturnal Eyes",
+   "Recognize shapes in dim light and distinguish faint nocturnal movement."
+  ],
+  "branches": [
+   "Silent Wings",
+   "Night Watch"
+  ],
+  "tiers": [
+   [
+    [
+     "Muffled Drift",
+     "Make a quieter brief glide from an existing elevation."
+    ],
+    [
+     "Whisper Motion",
+     "Notice nearby movement behind faint cover."
+    ]
+   ],
+   [
+    [
+     "Dark Perch",
+     "Identify a stable lookout without bright lighting."
+    ],
+    [
+     "Sound Landmark",
+     "Orient using a distinctive sound source in darkness."
+    ]
+   ],
+   [
+    [
+     "Velvet Descent",
+     "Choose a landing zone using faint light without hovering."
+    ],
+    [
+     "Night Signal",
+     "Warn an ally of a threat you can actually perceive."
+    ]
+   ]
+  ],
+  "cap": [
+   "Owl's Passage",
+   "Guide one silent group reposition through a dark but physically passable route, no true invisibility."
+  ]
+ },
+ "Ravenkin": {
+  "race": "Skyborn",
+  "core": "Inkmemory",
+  "trait": [
+   "Keen Recall",
+   "Recall a recently observed landmark or distinctive object accurately."
+  ],
+  "branches": [
+   "Clever Observation",
+   "Memory Routes"
+  ],
+  "tiers": [
+   [
+    [
+     "Pattern Study",
+     "Recognize recurring behavior in a watched routine."
+    ],
+    [
+     "Waystone Recall",
+     "Reconstruct a short traveled path using landmarks."
+    ]
+   ],
+   [
+    [
+     "Tool Sign",
+     "Notice evidence that a device was recently operated."
+    ],
+    [
+     "Echo Phrase",
+     "Accurately repeat a short sentence recently heard, not distant secret speech."
+    ]
+   ],
+   [
+    [
+     "Clever Approach",
+     "Identify a practical mundane distraction using the environment."
+    ],
+    [
+     "Witness Chain",
+     "Help allies compare two firsthand observations for inconsistencies."
+    ]
+   ]
+  ],
+  "cap": [
+   "Raven's Record",
+   "Produce a reliable summary of a studied location's routines, paths and clues without learning unobserved secrets."
+  ]
+ },
+ "Stoneforged": {
+  "race": "Forgeborn",
+  "core": "Quarrycore",
+  "trait": [
+   "Stonework Body",
+   "Recognize how stone joint angles affect safe movement and strain."
+  ],
+  "branches": [
+   "Heavy Balance",
+   "Structural Reading"
+  ],
+  "tiers": [
+   [
+    [
+     "Plinth Step",
+     "Keep footing on rough masonry under ordinary conditions."
+    ],
+    [
+     "Mortar Eye",
+     "Spot an accessible crumbling joint in old stone."
+    ]
+   ],
+   [
+    [
+     "Load Line",
+     "Estimate whether a worked stone platform can support a burden."
+    ],
+    [
+     "Echo Joint",
+     "Recognize a hollow behind reachable stone from tapping."
+    ]
+   ],
+   [
+    [
+     "Keystone Brace",
+     "Stabilize a nearby physical structure briefly at personal effort."
+    ],
+    [
+     "Broken Mason",
+     "Identify a safe point for a deliberate structural breach using tools."
+    ]
+   ]
+  ],
+  "cap": [
+   "Quarry Bastion",
+   "Anchor a temporary defensive route through threatened masonry without becoming indestructible."
+  ]
+ },
+ "Ironforged": {
+  "race": "Forgeborn",
+  "core": "Rivetcore",
+  "trait": [
+   "Reinforced Frame",
+   "Recognize useful bracing positions for plated joints and load-bearing mechanisms."
+  ],
+  "branches": [
+   "Iron Defense",
+   "Mechanism Craft"
+  ],
+  "tiers": [
+   [
+    [
+     "Plate Set",
+     "Align body plates to resist a minor ordinary scrape."
+    ],
+    [
+     "Hinge Read",
+     "Assess a visible iron hinge or linkage for stress."
+    ]
+   ],
+   [
+    [
+     "Joint Brace",
+     "Keep stance against a brief shove using a fixed position."
+    ],
+    [
+     "Controlled Torque",
+     "Apply gradual pressure to a stuck mechanism without breaking it recklessly."
+    ]
+   ],
+   [
+    [
+     "Riveted Hold",
+     "Remain grounded while supporting one consenting ally against physical displacement."
+    ],
+    [
+     "Mechanic's Route",
+     "Open a safe passage around a damaged machine with tools and time."
+    ]
+   ]
+  ],
+  "cap": [
+   "Iron Passage",
+   "Protect an ally during one hazardous mechanical crossing by bracing a real support, not granting damage immunity."
+  ]
+ },
+ "Bronzeforged": {
+  "race": "Forgeborn",
+  "core": "Clockwork",
+  "trait": [
+   "Fine Assembly",
+   "Recognize fine mechanical tolerances in familiar crafted mechanisms."
+  ],
+  "branches": [
+   "Precision Hands",
+   "Flexible Mechanism"
+  ],
+  "tiers": [
+   [
+    [
+     "Quiet Click",
+     "Operate a simple known mechanism without unnecessary noise."
+    ],
+    [
+     "Adaptive Joint",
+     "Rotate safely through a cramped mechanical passage."
+    ]
+   ],
+   [
+    [
+     "Exact Alignment",
+     "Place a fragile object accurately under ordinary strain."
+    ],
+    [
+     "Spring Read",
+     "Predict the direction of a visible simple moving linkage."
+    ]
+   ],
+   [
+    [
+     "Timing Pin",
+     "Synchronize two separate accessible mechanical steps with careful timing."
+    ],
+    [
+     "Calibrated Assist",
+     "Help an ally manipulate a device using measured joint placement."
+    ]
+   ]
+  ],
+  "cap": [
+   "Bronze Sequence",
+   "Complete a prepared multi-part mechanical operation under pressure while risking ordinary failure and tool consumption."
+  ]
+ },
+ "Woodforged": {
+  "race": "Forgeborn",
+  "core": "Heartwood",
+  "trait": [
+   "Living Timber",
+   "Recognize how moisture and grain affect the integrity of your own crafted wood body."
+  ],
+  "branches": [
+   "Livingwood Care",
+   "Woodland Connection"
+  ],
+  "tiers": [
+   [
+    [
+     "Grain Sense",
+     "Identify rot or splitting in accessible wood."
+    ],
+    [
+     "Root Familiarity",
+     "Recognize healthy growth near soil disturbances."
+    ]
+   ],
+   [
+    [
+     "Sap Binding",
+     "Use prepared binding materials to temporarily support a cracked wooden object."
+    ],
+    [
+     "Soft Bark",
+     "Move quietly across an existing woodland path by following cover."
+    ]
+   ],
+   [
+    [
+     "Green Join",
+     "Repair a simple nonliving wooden structure with tools and ordinary resources."
+    ],
+    [
+     "Living Shelter",
+     "Find a safe, naturally sheltered wooden enclosure."
+    ]
+   ]
+  ],
+  "cap": [
+   "Grove Restoration",
+   "Restore a damaged small wooden structure using materials and time, not automatic self-healing or regrowth of wounds."
+  ]
+ },
+ "Crystalforged": {
+  "race": "Forgeborn",
+  "core": "Lumicore",
+  "trait": [
+   "Facet Sensor",
+   "Recognize weak arcane or vibrational shifts through your core while stationary."
+  ],
+  "branches": [
+   "Energy Perception",
+   "Core Regulation"
+  ],
+  "tiers": [
+   [
+    [
+     "Prism Ping",
+     "Distinguish an active nearby magical source from an inert crystal."
+    ],
+    [
+     "Measured Pulse",
+     "Moderate a minor visible light emission from your core."
+    ]
+   ],
+   [
+    [
+     "Facet Memory",
+     "Remember a distinctive resonance in a magical object."
+    ],
+    [
+     "Lattice Brace",
+     "Avoid a predictable vibration-related loss of balance."
+    ]
+   ],
+   [
+    [
+     "Conduit Read",
+     "Identify a likely energy flow along an exposed enchanted mechanism."
+    ],
+    [
+     "Feedback Warning",
+     "Warn an ally when an accessible energy device begins to pulse irregularly."
+    ]
+   ]
+  ],
+  "cap": [
+   "Crystal Accord",
+   "Compare an exposed magical mechanism's resonance with a recorded pattern to reveal one probable instability, without storing free energy."
+  ]
+ }
+}
